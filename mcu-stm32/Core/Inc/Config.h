@@ -148,7 +148,7 @@ extern "C" {
 
 /** Control-loop period used by the inverter task [ms].  Keep in sync
  *  with INVERTERS_TASK_PERIOD_MS in inverters_manage.c.              */
-#define CONTROL_LOOP_PERIOD_MS      5U
+#define CONTROL_LOOP_PERIOD_MS      10U
 
 /* =========================================================
  * Inverter bench configuration
@@ -211,11 +211,11 @@ extern "C" {
         #define REGEN_DC_BUS_NOMINAL_V      600U     /**< DC bus nominal voltage [0.1V] = 600V */
         
         /* Pedal threshold: below this %, regeneration is active */
-        #define REGEN_PEDAL_THRESHOLD_PCT   20U      /**< Regen active when pedal < 20% */
+        #define REGEN_PEDAL_THRESHOLD_PCT   40U      /**< Regen active when pedal < 20% */
         
         /* Motor speed thresholds */
-        #define REGEN_SPEED_MIN_RPM         1000U      /**< Below this: fade-out regen */
-        #define REGEN_SPEED_CRITICAL_RPM    400U      /**< Below this: NO regen */
+        #define REGEN_SPEED_MIN_RPM         6000U      /**< Below this: fade-out regen */
+        #define REGEN_SPEED_CRITICAL_RPM    2000U      /**< Below this: NO regen */
         
         /* Logging */
         #define REGEN_LOG_ENABLED           1U       /**< Log regen events to serial */
