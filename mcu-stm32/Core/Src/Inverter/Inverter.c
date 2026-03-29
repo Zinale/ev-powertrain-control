@@ -10,17 +10,15 @@
 #include "Can.h"
 #include "BaseControlMotor.h"
 
-#define NUM_INVERTERS 2
-
 Inverter_t g_inverter_left = {0};
 Inverter_t g_inverter_right = {0};
-Inverter_t *g_inverters[] = {&g_inverter_right, &g_inverter_left};
 
 void Inverters_Init(){
-    for (uint8_t i = 0; i < NUM_INVERTERS;i++){
-        Inverter_Init(g_inverters[i], i+1);
-        CAN_Inverter_Register(g_inverters[i]);
-    }
+    Inverter_Init(&g_inverter_right, INVERTER_RIGHT_NODE_ID);
+    CAN_Inverter_Register(&g_inverter_right);
+
+    Inverter_Init(&g_inverter_left, INVERTER_LEFT_NODE_ID);
+    CAN_Inverter_Register(&g_inverter_left);
 }
 
 

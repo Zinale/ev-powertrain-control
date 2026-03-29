@@ -8,9 +8,16 @@
 #include "Communication/Can.h"
 #include "Communication/Serial.h"
 #include "APP/APPS.h"
+#include "Config.h"
 #include <math.h>
 #include <stdlib.h>
 #include <string.h>
+
+#if defined(DATA_COLLECT_MODE) && (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
+    #define MOTOR_ERR_LOG_CHANNEL  LOG_CH_UART3
+#else
+    #define MOTOR_ERR_LOG_CHANNEL  LOG_CH_BOTH
+#endif
 
 /* CAN transmission diagnostics (global variables) */
 uint32_t g_can_tx_ok_count = 0;
@@ -26,6 +33,47 @@ uint32_t g_can_rx_count = 0;  // Messages received from inverter
 int16_t torque_request;
 int16_t torque_limit_dyn;
 int16_t torque_raw;
+
+#if defined(REGEN_ENABLED) && REGEN_ENABLED
+/* Latch regen selection per node_id to avoid mode chattering near pedal threshold. */
+static bool s_regen_latch[3] = {false, false, false};
+
+static bool Motor_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent)
+{
+    if (inv == NULL || inv->node_id == 0U || inv->node_id >= 3U) {
+        return false;
+    }
+
+    if (inv->state != INV_STATE_RUNNING || inv->speed_rpm <= (int16_t)REGEN_SPEED_CRITICAL_RPM) {
+        s_regen_latch[inv->node_id] = false;
+        return false;
+    }
+
+    const uint8_t threshold = REGEN_PEDAL_THRESHOLD_PCT;
+    const uint8_t hysteresis = REGEN_PEDAL_HYST_PCT;
+    const uint8_t enter_thr = (threshold > hysteresis) ? (threshold - hysteresis) : 0U;
+    const uint8_t exit_thr = ((uint16_t)threshold + (uint16_t)hysteresis <= 100U)
+        ? (uint8_t)(threshold + hysteresis)
+        : 100U;
+
+    if (s_regen_latch[inv->node_id]) {
+        if (pedal_percent >= exit_thr) {
+            s_regen_latch[inv->node_id] = false;
+        }
+    } else {
+        /* Enter regen only if pedal is low AND speed is high enough.
+         * This creates speed hysteresis: enter at SPEED_MIN (3000),
+         * exit at SPEED_CRITICAL (2000) — avoids entering regen at
+         * marginal speeds where k_vel fade-out makes it near-zero. */
+        if (pedal_percent <= enter_thr &&
+            inv->speed_rpm > (int16_t)REGEN_SPEED_MIN_RPM) {
+            s_regen_latch[inv->node_id] = true;
+        }
+    }
+
+    return s_regen_latch[inv->node_id];
+}
+#endif
 
 extern uint32_t s_error_l_timestamp;
 extern uint16_t s_error_l_dc_voltage;
@@ -108,6 +156,9 @@ int16_t Motor_CalculateRegenerativeBraking(int16_t speed_rpm,
     }
     
     float speed = (float)abs(speed_rpm);
+    if (speed< 10.0f){
+        speed = 10.0f;
+    }
     
     /*  STAGE 1: Pedal-dependent linear ramping */
     /* T_req = -T_max_regen * (1 - pedal_pct / threshold)  [NEGATIVE = braking] */
@@ -131,7 +182,25 @@ int16_t Motor_CalculateRegenerativeBraking(int16_t speed_rpm,
     if (torque_stage2_nm < -torque_power_limit_nm) {
         torque_stage2_nm = -torque_power_limit_nm;
     }
+
+    /* STAGE 4: DC Bus Voltage Derating (Soft-clipping) */
+    /* Reduce regen from VCU before inverter hardware intervention */
+    float voltage_factor = 1.0f;
     
+    if (dc_voltage >= REGEN_DC_DERATE_END_V) {
+        voltage_factor = 0.0f; /* Voltage too high, turn off regen */
+    } else if (dc_voltage > REGEN_DC_DERATE_START_V) {
+        /* Calculate the percentage of linear reduction */
+        voltage_factor = 1.0f - (float)(dc_voltage - REGEN_DC_DERATE_START_V) / 
+                                (float)(REGEN_DC_DERATE_END_V - REGEN_DC_DERATE_START_V);
+    }
+    
+    /* Apply voltage reduction to the torque calculated so far */
+    torque_stage2_nm *= voltage_factor;
+    
+
+
+
     /* CAN_unit = (Nm / MOTOR_NOMINAL_TORQUE_NM) * 1000 */
     int16_t torque_can_units = (int16_t)((torque_stage2_nm / MOTOR_NOMINAL_TORQUE_NM) * 1000.0f);
     
@@ -183,7 +252,7 @@ typedef struct {
     uint32_t log_last_ms;
 } InverterErrorRecovery_t;
 
-/* Index by node_id (1..2 used, 0 unused). */
+/* Index by node_id (1 and 2 used, 0 unused). */
 static InverterErrorRecovery_t s_error_recovery_ctx[3] = {0};
 
 static InverterErrorRecovery_t *Motor_GetErrorRecoveryCtx(const Inverter_t *inv)
@@ -223,11 +292,11 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
                 error_sp = s_error_r_speed;
             }
 
-            Serial_Log(LOG_CH_BOTH, "[ERROR] Code: %d | Entered at t=%lu (+%lu ms ago)\r\n",
+            Serial_Log(MOTOR_ERR_LOG_CHANNEL, "[ERROR] Code: %d | Entered at t=%lu (+%lu ms ago)\r\n",
                 inv->error_code,
                 error_ts,
                 now_ms - error_ts);
-            Serial_Log(LOG_CH_BOTH, "[CONDs]  Conditions: DC=%u.%uV | Torque=%d | Speed=%d RPM%s\r\n",
+            Serial_Log(MOTOR_ERR_LOG_CHANNEL, "[CONDs]  Conditions: DC=%u.%uV | Torque=%d | Speed=%d RPM%s\r\n",
                 error_dc / 10, error_dc % 10,
                 error_tq,
                 error_sp,
@@ -277,7 +346,7 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
         
         /* Calculate torque requested from pedal (or regen if enabled and in regen zone) */
         #if defined(REGEN_ENABLED) && REGEN_ENABLED
-            if (pedal_percent < REGEN_PEDAL_THRESHOLD_PCT && inv->speed_rpm > REGEN_SPEED_CRITICAL_RPM) {
+            if (Motor_ShouldUseRegen(inv, pedal_percent)) {
                 /* Pedal released: regenerative braking torque (negative) */
                 torque_raw = Motor_CalculateRegenerativeBraking(
                     inv->speed_rpm,
@@ -303,6 +372,12 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
         /* Saturation to limits */
         if (torque_request > TORQUE_LIMIT_POS) torque_request = TORQUE_LIMIT_POS;
         if (torque_request < TORQUE_LIMIT_NEG) torque_request = TORQUE_LIMIT_NEG;
+        if (inv->speed_rpm > MOTOR_MAX_SPEED_RPM){
+            torque_request = 0;
+        }
+        if(inv->speed_rpm < 10.0f && torque_request < 0){
+            torque_request = 0;
+        }
 
         inv->torque_request = torque_request;
         if (state != INV_STATE_RUNNING) {

@@ -38,7 +38,7 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
 #define TORQUE_LIMIT_NEG           (-2100)  /**< Negative limit (regen braking) */
 
 /* Torque rate limiter */
-#define TORQUE_RATE_LIMIT_PER_MS    10U     /**< Max variation per ms [0.1% Mn] */
+#define TORQUE_RATE_LIMIT_PER_MS    20U     /**< Max variation per ms [0.1% Mn] */
 #define TORQUE_RATE_LIMIT_PER_CYCLE (TORQUE_RATE_LIMIT_PER_MS * CONTROL_LOOP_PERIOD_MS) /**< Scaled for actual task period */
 
 /* AMK motor physical parameters */
@@ -47,6 +47,8 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
 #define MOTOR_KE_V_PER_KRPM         18.8f   /**< Back-EMF constant [V/kRPM] */
 #define MOTOR_MAX_CURRENT_A         105.0f  /**< Maximum current [A] */
 #define MOTOR_EFFICIENCY            0.98f   /**< Estimated efficiency ~95% */
+
+#define MOTOR_MAX_SPEED_RPM         16000U  /**< Maximum speed [RPM] */
 
 /* 
  * REGENERATIVE BRAKING PARAMETERS 

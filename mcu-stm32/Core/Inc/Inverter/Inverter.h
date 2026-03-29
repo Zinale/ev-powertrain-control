@@ -103,6 +103,10 @@ typedef struct {
     uint32_t rx5_can_id;     /**< Status Message 5: 0x290 + node_id */
 } Inverter_t;
 
+/* Canonical node IDs used across CAN RX/TX and task mutex mapping. */
+#define INVERTER_RIGHT_NODE_ID 1U
+#define INVERTER_LEFT_NODE_ID  2U
+
 
 extern Inverter_t g_inverter_left;   /**< Left inverter  - node_id=2 */
 extern Inverter_t g_inverter_right;  /**< Right inverter - node_id=1 */

@@ -68,8 +68,8 @@ void CAN_Car_Init(CAN_HandleTypeDef *hcan) {
  * @brief Register an inverter in the CAN module for message handling.
  *
  * Saves the pointer to the inverter in a static array indexed by node_id:
- *   - node_id = 1 -> s_inverter[0] (left inverter)
- *   - node_id = 2 -> s_inverter[1] (right inverter)
+ *   - node_id = 1 -> s_inverter[0] (right inverter)
+ *   - node_id = 2 -> s_inverter[1] (left inverter)
  *
  * After registration, the CAN module can directly update the inverter state
  * when it receives messages on the CAN bus.
@@ -236,10 +236,10 @@ static void process_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc
     g_can_rx_count++;
 
     /* Lock the appropriate inverter mutex before updating shared state */
-    if (inv->node_id == 1)
-        Mutex_INVERTER_L_Lock();
-    else if (inv->node_id == 2)
+    if (inv->node_id == INVERTER_RIGHT_NODE_ID)
         Mutex_INVERTER_R_Lock();
+    else if (inv->node_id == INVERTER_LEFT_NODE_ID)
+        Mutex_INVERTER_L_Lock();
 
     Inverter_UpdateStatusMessage(inv, msg_id, data);
 
@@ -248,10 +248,10 @@ static void process_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc
     }
 
     /* Unlock inverter mutex */
-    if (inv->node_id == 1)
-        Mutex_INVERTER_L_Unlock();
-    else if (inv->node_id == 2)
+    if (inv->node_id == INVERTER_RIGHT_NODE_ID)
         Mutex_INVERTER_R_Unlock();
+    else if (inv->node_id == INVERTER_LEFT_NODE_ID)
+        Mutex_INVERTER_L_Unlock();
 }
 
 

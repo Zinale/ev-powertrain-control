@@ -24,8 +24,8 @@ def main():
             writer = csv.writer(file)
             
             #HEADERS
-            writer.writerow(['TempMotor','TempInverter','TempIGBT','Voltage','Speed','Id','Iq','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3',"Time_s"])
-            #writer.writerow(['c','NTC1', 'NTC2', 'NTC3', 'Time_s'])
+            writer.writerow(["Time_ms",'TempMotor','TempInverter','TempIGBT','Voltage','Speed','Iq','Id','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3'])
+            #writer.writerow(['c','NTC1', 'NTC2', 'NTC3'])
 
             buffer = ""
             start_time = datetime.datetime.now()
@@ -57,7 +57,7 @@ def main():
                             row = [val.strip() for val in line.split(',')]
                             
                             delta_time = (datetime.datetime.now() - start_time).total_seconds()
-                            row.append(delta_time)
+                            #row.append(delta_time)
                             
                             writer.writerow(row)
                             file.flush()

@@ -47,6 +47,19 @@ extern "C" {
 /** Sampling period [ms] when DATA_COLLECT_MODE is active */
 #define DATA_COLLECT_PERIOD_MS      1000U
 
+/* Data collection backend selection:
+ * - ESP32_REMOTE  : STM32 keeps normal CSV/debug stream over UART5
+ * - FEATHER_LOCAL : STM32 drives Feather logging protocol ([START]/[STOP])
+ */
+#define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
+#define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
+
+#if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
+     (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
+    #error "Invalid DATA_COLLECT_BACKEND value"
+#endif
+
 
 
 
@@ -194,7 +207,7 @@ extern "C" {
     #error "Invalid DATA_COLLECT_INV_SIDE value"
 #endif
 
-#define REGEN_ENABLED               0U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED               1U     /**< 1 = enabled, 0 = disabled */
 
 /* Regenerative braking strategy */
 #ifdef REGEN_ENABLED
@@ -206,15 +219,23 @@ extern "C" {
         
         #define REGEN_CURRENT_MODE         REGEN_MODE_CONSERVATIVE
         
-        /* Battery safety limits (80 kW  600V) */
-        #define REGEN_PBATT_MAX_W           80000U   /**< Battery max regen power [W] */
-        #define REGEN_DC_BUS_NOMINAL_V      600U     /**< DC bus nominal voltage [0.1V] = 600V */
-        
-        /* Pedal threshold: below this %, regeneration is active */
-        #define REGEN_PEDAL_THRESHOLD_PCT   40U      /**< Regen active when pedal < 20% */
+        /* Battery safety limits — adapt to bench DC bus voltage!
+         * Race config (540V:  REGEN_PBATT_MAX_W = 54000, NOMINAL_V = 540
+         * Bench  (350V):      REGEN_PBATT_MAX_W = 35000, NOMINAL_V = 350  */
+        #define REGEN_PBATT_MAX_W           35000U   /**< Battery max regen power [W] (350V × 100A) */
+        #define REGEN_DC_BUS_NOMINAL_V      350U     /**< DC bus nominal voltage [V] */
+        /* DC Bus Derating limits (to be kept slightly below AMK hard limits) */
+        /*View the configuration of AIPEX PRO files ID 32798-3 and 32798-7*/
+        #define REGEN_DC_DERATE_START_V     380U   /**< Above this: start reducing regen torque */
+        #define REGEN_DC_DERATE_END_V       395U   /**< Above this: NO regen torque */
+
+        /* Pedal threshold and hysteresis: below threshold regen can activate.
+         * Hysteresis avoids traction/regen toggling near the crossing point. */
+        #define REGEN_PEDAL_THRESHOLD_PCT   25U      /**< Regen candidate when pedal < 25% */
+        #define REGEN_PEDAL_HYST_PCT        3U       /**< +/- hysteresis band around threshold */
         
         /* Motor speed thresholds */
-        #define REGEN_SPEED_MIN_RPM         6000U      /**< Below this: fade-out regen */
+        #define REGEN_SPEED_MIN_RPM         3000U      /**< Below this: fade-out regen */
         #define REGEN_SPEED_CRITICAL_RPM    2000U      /**< Below this: NO regen */
         
         /* Logging */

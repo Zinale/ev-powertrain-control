@@ -38,8 +38,12 @@ extern CAN_HandleTypeDef hcan2;
  * Change to LOG_CH_UART3 or LOG_CH_BOTH to redirect / duplicate output.
  */
 #ifdef DATA_COLLECT_MODE
-    /* CSV mode: UART5 only, no verbose text */
-    #define LOGGER_CHANNEL          LOG_CH_BOTH
+    #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
+        /* Feather logger is connected on UART5: keep UART5 strictly data-only. */
+        #define LOGGER_CHANNEL      LOG_CH_UART5
+    #else
+        #define LOGGER_CHANNEL      LOG_CH_BOTH
+    #endif
     #define LOGGER_TASK_PERIOD_MS   DATA_COLLECT_PERIOD_MS  
 #else
     #define LOGGER_CHANNEL          LOG_CH_BOTH
@@ -53,6 +57,16 @@ extern CAN_HandleTypeDef hcan2;
 
 static uint32_t       cycle_counter = 0U;               /**< Incremented every task activation */
 static MotorDriveState_t s_motor_state = MOTOR_STATE_IDLE; /**< Last computed drive state         */
+
+#if defined(DATA_COLLECT_MODE) && (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
+static uint8_t  s_feather_logging_active = 0U;
+static uint32_t s_feather_start_tick_ms = 0U;
+#endif
+
+#if defined(DATA_COLLECT_MODE) && (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
+static uint8_t  s_esp32_logging_active = 0U;
+static uint32_t s_esp32_start_tick_ms = 0U;
+#endif
 
 MotorDriveState_t DataLogger_GetMotorState(void)
 {
@@ -112,69 +126,117 @@ void DataLoggerTask(void)
 
 #ifdef DATA_COLLECT_MODE
             const Inverter_t *dc_inv = &inv_r_copy;
-            const char *dc_inv_label = "INV_R";
+
+            #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
+                const char *dc_inv_label = "INV_R";
+            #endif
 
             #if (DATA_COLLECT_INV_SIDE == DATA_COLLECT_INV_SIDE_RIGHT)
                 dc_inv = &inv_r_copy;
-                dc_inv_label = "INV_R";
+                #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
+                    dc_inv_label = "INV_R";
+                #endif
             #elif (DATA_COLLECT_INV_SIDE == DATA_COLLECT_INV_SIDE_LEFT)
                 dc_inv = &inv_l_copy;
-                dc_inv_label = "INV_L";
+                #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
+                    dc_inv_label = "INV_L";
+                #endif
             #else
                 #if INVERTER_LEFT_TORQUE_CONTROL_ENABLED && !INVERTER_RIGHT_TORQUE_CONTROL_ENABLED
                     dc_inv = &inv_l_copy;
-                    dc_inv_label = "INV_L";
+                    #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
+                        dc_inv_label = "INV_L";
+                    #endif
                 #endif
             #endif
 
-            /* [APPS]: pedal position, raw ADC, filtered ADC, error state
-             * [selected inverter]: state, speed, torque, temperatures, DC voltage
-             */
-            Serial_Log(LOGGER_CHANNEL,
-                "[APPS]: pedal=%u%% | raw=%u filt=%u | err=0x%02X implaus=%d trq_ok=%d | "
-                "[%s]: %s | speed=%d RPM | torque=%.1f Nm | "
-                "Tmot=%.1fC Tinv=%.1fC Tigbt=%.1fC | DC=%.1fV | Err: %d Info: %d\r\n",
-                apps_copy.final_percent,
-                apps_copy.sensors[0].raw,
-                apps_copy.sensors[0].filtered,
-                apps_copy.error_code,
-                (int)apps_copy.implausibility_active,
-                (int)apps_copy.torque_allowed,
-                dc_inv_label,
-                Inverter_GetStateName(dc_inv->state),
-                dc_inv->speed_rpm,
-                (float)dc_inv->torque_value * (float)TORQUE_SCALE_FACTOR,
-                (float)dc_inv->motor_temp_degC    / 10.0f,
-                (float)dc_inv->inverter_temp_degC / 10.0f,
-                (float)dc_inv->igbt_temp_degC     / 10.0f,
-                (float)dc_inv->dc_bus_voltage     / 10.0f,
-                dc_inv->error_code, dc_inv->error_info_1);
+            #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
+                const uint8_t inverter_running = (dc_inv->state == INV_STATE_RUNNING) ? 1U : 0U;
+                const uint8_t inverter_error = (dc_inv->state == INV_STATE_ERROR) ? 1U : 0U;
 
-            /*
-             * CSV line — column order must match the Python script header:
-             *   TempMotor, TempInverter, TempIGBT, Voltage,
-             *   Speed, Iq, Id, TorqueMotor, PedalPerc
-             *
-             * Units:
-             *   Temperatures : °C  (raw field is 0.1°C → /10)
-             *   Voltage      : V   (raw field is 0.1V  → /10)
-             *   Speed        : RPM (direct)
-             *   Iq           : A   (raw_torque_current  × Iq_SCALE_FACTOR)
-             *   Id           : A   (raw_magnetizing_current × Id_SCALE_FACTOR)
-             *   TorqueMotor  : Nm  (torque_value × TORQUE_SCALE_FACTOR)
-             *   PedalPerc    : %   (0–100, direct)
-             */
-            Serial_Log(LOGGER_CHANNEL,
-                "%.1f,%.1f,%.1f,%.1f,%d,%.1f,%.1f,%.1f,%u\n",
-                (float)dc_inv->motor_temp_degC    / 10.0f,
-                (float)dc_inv->inverter_temp_degC / 10.0f,
-                (float)dc_inv->igbt_temp_degC     / 10.0f,
-				(float)dc_inv->dc_bus_voltage / 10.0f,
-                dc_inv->speed_rpm,
-                (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
-                (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
-                (float)dc_inv->torque_value * TORQUE_SCALE_FACTOR,
-                apps_copy.final_percent);
+                if (inverter_running && (s_feather_logging_active == 0U)) {
+                    Serial_Log(LOGGER_CHANNEL, "[START]\n");
+                    s_feather_logging_active = 1U;
+                    s_feather_start_tick_ms = HAL_GetTick();
+//writer.writerow(['TempMotor','TempInverter','TempIGBT','Voltage','Speed','Id','Iq','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3',"Time_s"])
+                    //Serial_Log(LOGGER_CHANNEL,"Time, TempMotor,TempInverter,TempIGBT,Voltage,Speed,Iq,Id,TorqueMotor,PedalPerc\n");
+                }
+
+                if (s_feather_logging_active != 0U) {
+                    if (inverter_error || !inverter_running) {
+                        Serial_Log(LOGGER_CHANNEL, "[STOP]\n");
+                        s_feather_logging_active = 0U;
+                    } else {
+                        const uint32_t elapsed_ms = HAL_GetTick() - s_feather_start_tick_ms;
+                        Serial_Log(LOGGER_CHANNEL,
+                            "%.1f,%.1f,%.1f,%.1f,%.1f,%d,%.1f,%.1f,%.1f,%u\n",
+                                elapsed_ms / 1000.0f,
+                            (float)dc_inv->motor_temp_degC    / 10.0f,
+                            (float)dc_inv->inverter_temp_degC / 10.0f,
+                            (float)dc_inv->igbt_temp_degC     / 10.0f,
+                            (float)dc_inv->dc_bus_voltage     / 10.0f,
+                            dc_inv->speed_rpm,
+                            (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
+                            (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
+                            (float)dc_inv->torque_value * TORQUE_SCALE_FACTOR,
+                            apps_copy.final_percent);
+                    }
+                }
+            #else
+                const uint8_t inverter_running = (dc_inv->state == INV_STATE_RUNNING) ? 1U : 0U;
+
+                if (inverter_running && (s_esp32_logging_active == 0U)) {
+                    s_esp32_logging_active = 1U;
+                    s_esp32_start_tick_ms = HAL_GetTick();
+                } else if (!inverter_running) {
+                    s_esp32_logging_active = 0U;
+                }
+
+                const uint32_t elapsed_ms = (s_esp32_logging_active != 0U)
+                                            ? (HAL_GetTick() - s_esp32_start_tick_ms)
+                                            : 0U;
+
+                /* [APPS]: pedal position, raw ADC, filtered ADC, error state
+                 * [selected inverter]: state, speed, torque, temperatures, DC voltage
+                 */
+                Serial_Log(LOGGER_CHANNEL,
+                    "[APPS]: pedal=%u%% | raw=%u filt=%u | err=0x%02X implaus=%d trq_ok=%d | "
+                    "[%s]: %s | speed=%d RPM | torque=%.1f Nm | "
+                    "Tmot=%.1fC Tinv=%.1fC Tigbt=%.1fC | DC=%.1fV | Err: %d Info: %d\r\n",
+                    apps_copy.final_percent,
+                    apps_copy.sensors[0].raw,
+                    apps_copy.sensors[0].filtered,
+                    apps_copy.error_code,
+                    (int)apps_copy.implausibility_active,
+                    (int)apps_copy.torque_allowed,
+                    dc_inv_label,
+                    Inverter_GetStateName(dc_inv->state),
+                    dc_inv->speed_rpm,
+                    (float)dc_inv->torque_value * (float)TORQUE_SCALE_FACTOR,
+                    (float)dc_inv->motor_temp_degC    / 10.0f,
+                    (float)dc_inv->inverter_temp_degC / 10.0f,
+                    (float)dc_inv->igbt_temp_degC     / 10.0f,
+                    (float)dc_inv->dc_bus_voltage     / 10.0f,
+                    dc_inv->error_code, dc_inv->error_info_1);
+
+                /*
+                 * CSV line — column order must match the Python script header:
+                 *   ElapsedMs, TempMotor, TempInverter, TempIGBT, Voltage,
+                 *   Speed, Iq, Id, TorqueMotor, PedalPerc
+                 */
+                Serial_Log(LOGGER_CHANNEL,
+                    "%lu,%.1f,%.1f,%.1f,%.1f,%d,%.1f,%.1f,%.1f,%u\n",
+                    (unsigned long)elapsed_ms,
+                    (float)dc_inv->motor_temp_degC    / 10.0f,
+                    (float)dc_inv->inverter_temp_degC / 10.0f,
+                    (float)dc_inv->igbt_temp_degC     / 10.0f,
+                    (float)dc_inv->dc_bus_voltage     / 10.0f,
+                    dc_inv->speed_rpm,
+                    (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
+                    (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
+                    (float)dc_inv->torque_value * TORQUE_SCALE_FACTOR,
+                    apps_copy.final_percent);
+            #endif
 #else
             Serial_Log(LOGGER_CHANNEL, "--------------------------------------------------------------\r\n");
 
