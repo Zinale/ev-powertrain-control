@@ -172,14 +172,14 @@ extern "C" {
  *
  * Typical setups:
  * - Single motor on RIGHT inverter:
- *     RIGHT_PRESENT=1, LEFT_PRESENT=1, RIGHT_CONTROL=1, LEFT_CONTROL=0
+ *     RIGHT_PRESENT=1, LEFT_PRESENT=0, RIGHT_CONTROL=1, LEFT_CONTROL=0
  * - Single motor on LEFT inverter:
- *     RIGHT_PRESENT=1, LEFT_PRESENT=1, RIGHT_CONTROL=0, LEFT_CONTROL=1
+ *     RIGHT_PRESENT=0, LEFT_PRESENT=1, RIGHT_CONTROL=0, LEFT_CONTROL=1
  * - Dual motor:
  *     RIGHT_PRESENT=1, LEFT_PRESENT=1, RIGHT_CONTROL=1, LEFT_CONTROL=1
  * ========================================================= */
 #define INVERTER_RIGHT_PRESENT                 1U
-#define INVERTER_LEFT_PRESENT                  1U
+#define INVERTER_LEFT_PRESENT                  0U
 #define INVERTER_RIGHT_TORQUE_CONTROL_ENABLED  1U
 #define INVERTER_LEFT_TORQUE_CONTROL_ENABLED   0U
 
@@ -207,7 +207,7 @@ extern "C" {
     #error "Invalid DATA_COLLECT_INV_SIDE value"
 #endif
 
-#define REGEN_ENABLED               1U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED               0U     /**< 1 = enabled, 0 = disabled */
 
 /* Regenerative braking strategy */
 #ifdef REGEN_ENABLED

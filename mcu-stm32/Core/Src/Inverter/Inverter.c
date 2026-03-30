@@ -8,17 +8,33 @@
 #include <string.h>
 #include "stm32f7xx_hal.h"
 #include "Can.h"
+#include "Config.h"
 #include "BaseControlMotor.h"
 
 Inverter_t g_inverter_left = {0};
 Inverter_t g_inverter_right = {0};
 
 void Inverters_Init(){
+    /* Initialize/register only physically present inverter nodes. */
+#if INVERTER_RIGHT_PRESENT
     Inverter_Init(&g_inverter_right, INVERTER_RIGHT_NODE_ID);
     CAN_Inverter_Register(&g_inverter_right);
+#else
+    memset(&g_inverter_right, 0, sizeof(g_inverter_right));
+    g_inverter_right.node_id = INVERTER_RIGHT_NODE_ID;
+    g_inverter_right.state = INV_STATE_OFF;
+    g_inverter_right.previous_state = INV_STATE_OFF;
+#endif
 
+#if INVERTER_LEFT_PRESENT
     Inverter_Init(&g_inverter_left, INVERTER_LEFT_NODE_ID);
     CAN_Inverter_Register(&g_inverter_left);
+#else
+    memset(&g_inverter_left, 0, sizeof(g_inverter_left));
+    g_inverter_left.node_id = INVERTER_LEFT_NODE_ID;
+    g_inverter_left.state = INV_STATE_OFF;
+    g_inverter_left.previous_state = INV_STATE_OFF;
+#endif
 }
 
 

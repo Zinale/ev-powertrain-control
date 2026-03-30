@@ -11,6 +11,7 @@
 #include "mutexes.h"
 #include <string.h>
 #include "Communication/Serial.h"
+#include "Config.h"
 
 extern CAN_HandleTypeDef hcan1;
 
@@ -54,6 +55,8 @@ void CAN_Inverter_Init(CAN_HandleTypeDef *hcan) {
     configure_can_filters(hcan);
     HAL_CAN_Start(hcan);
     HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
+    HAL_CAN_ActivateNotification(hcan,CAN_IT_ERROR_WARNING | CAN_IT_ERROR_PASSIVE );
+
 }
 
 void CAN_Car_Init(CAN_HandleTypeDef *hcan) {
@@ -62,6 +65,13 @@ void CAN_Car_Init(CAN_HandleTypeDef *hcan) {
     configure_can_filters(hcan);
     HAL_CAN_Start(hcan);
     HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO1_MSG_PENDING);
+}
+
+void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan) {
+    uint32_t esr = hcan->Instance->ESR;
+    uint8_t tec = (esr >> 24) & 0xFF;
+    uint8_t rec = (esr >> 16) & 0xFF;
+    Serial_Log(LOG_CH_UART3, "[CAN ERR] ESR=0x%08lX TEC=%d REC=%d\r\n", esr, tec, rec);
 }
 
 /**
@@ -199,6 +209,7 @@ const CarData_t* CAN_Car_GetData(void) {
 }
 
 
+
 // Executed by CAN interrupt for each message received on CAN Inverter-Motors
 void CAN_Inverter_ProcessRxMessages(CAN_HandleTypeDef *hcan) {
     if (hcan == NULL) return;
@@ -207,7 +218,7 @@ void CAN_Inverter_ProcessRxMessages(CAN_HandleTypeDef *hcan) {
     uint8_t rx_data[8];
     
     // Read all available messages in FIFO0
-    /*
+
     while (HAL_CAN_GetRxFifoFillLevel(hcan, CAN_RX_FIFO0) > 0) {
         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data) == HAL_OK) {
             process_rx_message(rx_header.StdId, rx_data, rx_header.DLC);
@@ -215,10 +226,12 @@ void CAN_Inverter_ProcessRxMessages(CAN_HandleTypeDef *hcan) {
             break;
         }
     }
-    */
+
+    /*
     if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data) == HAL_OK) {
     	process_rx_message(rx_header.StdId, rx_data, rx_header.DLC);
     }
+    */
 }
 
 
@@ -308,6 +321,13 @@ static bool transmit_can_message(CAN_HandleTypeDef *hcan, uint32_t can_id, const
 
 bool CAN_Inverter_TransmitCommand(CAN_HandleTypeDef *hcan, const Inverter_t *inv, const InverterCommandMsg1_t *cmd) {
     if (hcan == NULL || inv == NULL || cmd == NULL) return false;
+
+#if !INVERTER_RIGHT_PRESENT
+    if (inv->node_id == INVERTER_RIGHT_NODE_ID) return false;
+#endif
+#if !INVERTER_LEFT_PRESENT
+    if (inv->node_id == INVERTER_LEFT_NODE_ID) return false;
+#endif
 
     static uint32_t s_last_tx_tick[N_INVERTERS] = {0};
     uint8_t idx = (inv->node_id >= 1U && inv->node_id <= N_INVERTERS) ? (inv->node_id - 1U) : 0U;
