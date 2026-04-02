@@ -25,8 +25,9 @@ static const uint8_t PIN_NTC3 = A2;
 static const char* LOG_DIR = "/logs";
 
 // Flush policies to reduce data loss on power-off but keep write overhead low
-static const uint16_t FLUSH_EVERY_N_RECORDS = 10;
-static const uint32_t FLUSH_EVERY_MS = 1000;
+// Flush after every record and periodically every 2 seconds
+static const uint16_t FLUSH_EVERY_N_RECORDS = 1;
+static const uint32_t FLUSH_EVERY_MS = 2000;
 
 // ======================= Flash objects ========================
 Adafruit_FlashTransport_QSPI flashTransport;
@@ -404,9 +405,7 @@ void handleIncomingUartData() {
 
 void setup() {
   Serial.begin(USB_BAUD);
-  while (!Serial) {
-    delay(10);
-  }
+
 
   Serial.println("Feather M4 CAN - UART to Flash Logger");
 
