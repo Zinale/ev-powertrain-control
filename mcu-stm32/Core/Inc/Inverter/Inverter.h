@@ -50,6 +50,9 @@ typedef struct {
 /** Timeout with no CAN packet before the inverter is considered OFF [ms] */
 #define INV_TIMEOUT_OFF_MS   10000U
 
+/** Timeout in HV_ACTIVE state before forcing transition to READY [ms] — AMK DC pre-charge timeout */
+#define INV_TIMEOUT_HV_ACTIVE_MS  3000U
+
 /**
  * @brief Inverter state machine states
  */
@@ -71,6 +74,7 @@ typedef struct {
     InverterState_t state;                  
     InverterState_t previous_state;        
     int16_t torque_request;
+    uint32_t state_entry_time_ms;          /**< Timestamp when current state was entered [ms] */
 
     /* Real-time data extracted from CAN messages */
     uint16_t status_word;              /**< Status word (from SM1) */
@@ -202,6 +206,20 @@ bool Inverter_CheckTimeout(Inverter_t *inv, uint32_t current_time_ms, uint32_t t
  * @param inv Pointer to inverter structure
  */
 void Inverter_UpdateOffTimeout(Inverter_t *inv);
+
+/**
+ * @brief Force transition from HV_ACTIVE to READY after timeout.
+ *
+ * AMK inverters sometimes get stuck in HV_ACTIVE while waiting for
+ * internal DC bus pre-charge to complete. After INV_TIMEOUT_HV_ACTIVE_MS,
+ * if no error is present, force the transition to READY.
+ *
+ * Must be called every control cycle (inside the inverter mutex).
+ *
+ * @param inv Pointer to inverter structure
+ * @param current_time_ms Current system time [ms]
+ */
+void Inverter_UpdateHVTransitionTimeout(Inverter_t *inv, uint32_t current_time_ms);
 
 /**
  * @brief Get current state name (for debug)

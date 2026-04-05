@@ -84,7 +84,7 @@ static void decode_sm2(Inverter_t *inv, const uint8_t data[8]) {
  * @brief Decode Status Message 3 directly into inverter
  */
 static void decode_sm3(Inverter_t *inv, const uint8_t data[8]) {
-    inv->dc_bus_voltage = unpack_u16(data[0], data[1]);
+    inv->dc_bus_voltage = unpack_u16(data[0], data[1]) / 10U;
     inv->raw_magnetizing_current = unpack_u16(data[2], data[3]);
     inv->phase_u_current = (int32_t)unpack_u32(data[4], data[5], data[6], data[7]);
 }
@@ -156,6 +156,7 @@ void Inverter_Init(Inverter_t *inv, uint8_t node_id) {
     inv->node_id = node_id;
     inv->state = INV_STATE_OFF;
     inv->previous_state = INV_STATE_OFF;
+    inv->state_entry_time_ms = HAL_GetTick();
     
     // formula: BASE + node_id 
     inv->tx_can_id = 0x0183U + node_id;  // CAN_ID_BASE_ADDRESS_TX1 + node_id
@@ -172,7 +173,14 @@ void Inverter_UpdateState(Inverter_t *inv) {
     inv->previous_state = inv->state;
     inv->last_rx_timestamp_ms = HAL_GetTick();
     
-    inv->state = determine_state(inv->status_word);
+    InverterState_t new_state = determine_state(inv->status_word);
+    
+    /* Track state transitions with timestamp */
+    if (new_state != inv->state) {
+        inv->state_entry_time_ms = HAL_GetTick();
+    }
+    
+    inv->state = new_state;
 }
 
 void Inverter_UpdateStatusMessage(Inverter_t *inv, uint8_t msg_id, const uint8_t *data) {
@@ -310,6 +318,28 @@ void Inverter_UpdateOffTimeout(Inverter_t *inv)
     {
         inv->previous_state = inv->state;
         inv->state          = INV_STATE_OFF;
+    }
+}
+
+void Inverter_UpdateHVTransitionTimeout(Inverter_t *inv, uint32_t current_time_ms)
+{
+    if (inv == NULL) return;
+    
+    /* Only apply this timeout to HV_ACTIVE state */
+    if (inv->state != INV_STATE_HV_ACTIVE) {
+        return;
+    }
+    
+    /* If we have an error, don't force transition — let the error handler take control */
+    if (Inverter_HasError(inv)) {
+        return;
+    }
+    
+    /* Check if we've been stuck in HV_ACTIVE for too long */
+    if ((current_time_ms - inv->state_entry_time_ms) >= INV_TIMEOUT_HV_ACTIVE_MS) {
+        /* Force transition to READY — DC bus pre-charge timeout exceeded */
+        inv->previous_state = inv->state;
+        inv->state = INV_STATE_READY;
     }
 }
 

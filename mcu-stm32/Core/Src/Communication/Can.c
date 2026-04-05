@@ -12,6 +12,7 @@
 #include <string.h>
 #include "Communication/Serial.h"
 #include "Config.h"
+#include "cmsis_os.h"
 
 extern CAN_HandleTypeDef hcan1;
 
@@ -20,8 +21,27 @@ static Inverter_t *s_inverter[N_INVERTERS] = {NULL, NULL};
 
 static CarData_t car_data = {0};
 
+/* =============================================================================
+ *  CAN RX MESSAGE QUEUE (ISR-safe architecture)
+ * =============================================================================
+ *  Messages are enqueued by ISR (ISR-safe), dequeued by readings_manage task.
+ *  This avoids calling FreeRTOS Mutexes inside the ISR.
+ * ============================================================================= */
 
+/**
+ * @brief Structure to hold a single CAN RX message in the queue.
+ */
+typedef struct {
+    uint32_t can_id;        /**< Standard CAN ID (11-bit) */
+    uint8_t  data[8];       /**< CAN payload (8 bytes) */
+    uint8_t  dlc;           /**< Data Length Code */
+} CAN_RxMsg_t;
 
+#define CAN_RX_QUEUE_SIZE  32   /**< Number of messages that can be queued */
+
+static osMessageQueueId_t can_rx_queue = NULL;  /**< Queue handle */
+
+/* Forward declarations - must be before CAN_ProcessQueueDrain which calls them */
 static void configure_can_filters(CAN_HandleTypeDef *hcan);
 static bool transmit_can_message(CAN_HandleTypeDef *hcan, uint32_t can_id, const uint8_t *data, uint8_t dlc);
 static Inverter_t* find_inverter_by_rx_id(uint32_t can_id, uint8_t *msg_id_out);
@@ -29,6 +49,113 @@ static void process_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc
 static inline void pack_u16(uint8_t *dest, uint16_t value);
 static inline void pack_i16(uint8_t *dest, int16_t value);
 
+/**
+ * @brief Initialize the CAN RX message queue.
+ *        Call this once from main.c after FreeRTOS kernel starts.
+ */
+void CAN_ProcessQueue_Init(void) {
+    if (can_rx_queue == NULL) {
+        can_rx_queue = osMessageQueueNew(CAN_RX_QUEUE_SIZE, sizeof(CAN_RxMsg_t), NULL);
+    }
+}
+
+/**
+ * @brief Drain all pending CAN messages from the queue and process them.
+ *        Call this from readings_manage task (or any task context where Mutexes are allowed).
+ *        This is ISR-SAFE to call because it runs outside ISR context.
+ */
+void CAN_ProcessQueueDrain(void) {
+    if (can_rx_queue == NULL) return;
+    
+    CAN_RxMsg_t msg;
+    osStatus_t status;
+    
+    /* Non-blocking dequeue: process all available messages */
+    while ((status = osMessageQueueGet(can_rx_queue, &msg, NULL, 0)) == osOK) {
+        /* Process the message safely (inside task context, mutexes are OK) */
+        process_rx_message(msg.can_id, msg.data, msg.dlc);
+    }
+}
+
+/**
+ * @brief Enqueue a CAN message from ISR (ISR-safe).
+ *        Called by the CAN RX interrupt handler.
+ */
+static void CAN_EnqueueRxMessage(uint32_t can_id, const uint8_t *data, uint8_t dlc) {
+    if (can_rx_queue == NULL) return;
+    
+    CAN_RxMsg_t msg;
+    msg.can_id = can_id;
+    msg.dlc = (dlc <= 8U) ? dlc : 8U;
+    memset(msg.data, 0, sizeof(msg.data));
+    if (data != NULL && msg.dlc > 0U) {
+        memcpy(msg.data, data, msg.dlc);
+    }
+    
+    /* osMessageQueuePut is ISR-safe (uses internal ISR flag) */
+    osMessageQueuePut(can_rx_queue, &msg, 0, 0);
+}
+
+/* =============================================================================
+ *  CAN2 RX MESSAGE QUEUE (ISR-safe architecture)
+ * =============================================================================
+ *  Messages are enqueued by ISR (ISR-safe), dequeued by readings_manage task.
+ *  This avoids calling FreeRTOS Mutexes inside the ISR.
+ * ============================================================================= */
+
+#define CAN2_RX_QUEUE_SIZE  16   /**< CAN2 queue size (car data, lower frequency) */
+
+static osMessageQueueId_t can2_rx_queue = NULL;  /**< CAN2 Queue handle */
+
+/* Forward declaration */
+static void process_car_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc);
+
+/**
+ * @brief Initialize the CAN2 RX message queue.
+ *        Call this once from main.c after FreeRTOS kernel starts.
+ */
+void CAN_Car_ProcessQueue_Init(void) {
+    if (can2_rx_queue == NULL) {
+        can2_rx_queue = osMessageQueueNew(CAN2_RX_QUEUE_SIZE, sizeof(CAN_RxMsg_t), NULL);
+    }
+}
+
+/**
+ * @brief Enqueue a CAN2 message from ISR (ISR-safe).
+ *        Called by the CAN RX interrupt handler.
+ */
+static void CAN_Car_EnqueueRxMessage(uint32_t can_id, const uint8_t *data, uint8_t dlc) {
+    if (can2_rx_queue == NULL) return;
+    
+    CAN_RxMsg_t msg;
+    msg.can_id = can_id;
+    msg.dlc = (dlc <= 8U) ? dlc : 8U;
+    memset(msg.data, 0, sizeof(msg.data));
+    if (data != NULL && msg.dlc > 0U) {
+        memcpy(msg.data, data, msg.dlc);
+    }
+    
+    /* osMessageQueuePut is ISR-safe (uses internal ISR flag) */
+    osMessageQueuePut(can2_rx_queue, &msg, 0, 0);
+}
+
+/**
+ * @brief Drain all pending CAN2 messages from the queue and process them.
+ *        Call this from readings_manage task (or any task context where Mutexes are allowed).
+ *        This is ISR-SAFE to call because it runs outside ISR context.
+ */
+void CAN_Car_ProcessQueueDrain(void) {
+    if (can2_rx_queue == NULL) return;
+    
+    CAN_RxMsg_t msg;
+    osStatus_t status;
+    
+    /* Non-blocking dequeue: process all available messages */
+    while ((status = osMessageQueueGet(can2_rx_queue, &msg, NULL, 0)) == osOK) {
+        /* Process the message safely (inside task context, mutexes are OK) */
+        process_car_rx_message(msg.can_id, msg.data, msg.dlc);
+    }
+}
 
 
 /**
@@ -71,7 +198,11 @@ void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan) {
     uint32_t esr = hcan->Instance->ESR;
     uint8_t tec = (esr >> 24) & 0xFF;
     uint8_t rec = (esr >> 16) & 0xFF;
-    Serial_Log(LOG_CH_UART3, "[CAN ERR] ESR=0x%08lX TEC=%d REC=%d\r\n", esr, tec, rec);
+
+    /* This callback is IRQ context: avoid Serial_Log here (it uses mutexes/osDelay). */
+    (void)esr;
+    (void)tec;
+    (void)rec;
 }
 
 /**
@@ -162,83 +293,124 @@ void CAN_Car_ProcessRxMessages(CAN_HandleTypeDef *hcan) {
     CAN_RxHeaderTypeDef rx_header;
     uint8_t rx_data[8];
 
-    while (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO1, &rx_header, rx_data) == HAL_OK) {
-        switch (rx_header.StdId) {
-            case CAN_ID_IMU_ACC:
-                // Big Endian: byte[n]=MSB, byte[n+1]=LSB
-                car_data.imu_data.accel_x    = (int16_t)(((uint16_t)rx_data[0] << 8 | rx_data[1])* IMU_ACCEL_SCALE);
-                car_data.imu_data.accel_y    = (int16_t)(((uint16_t)rx_data[2] << 8 | rx_data[3] )* IMU_ACCEL_SCALE);
-                car_data.imu_data.accel_z    = (int16_t)(((uint16_t)rx_data[4] << 8 | rx_data[5])* IMU_ACCEL_SCALE);
-                car_data.imu_data.serial_num = (uint16_t)((uint16_t)rx_data[6] << 8 | rx_data[7]);
-                break;
-            case CAN_ID_IMU_GYRO:
-                car_data.imu_data.gyro_x        = (int16_t)(((uint16_t)rx_data[0] << 8 | rx_data[1]) * IMU_GYRO_SCALE);
-                car_data.imu_data.gyro_y        = (int16_t)(((uint16_t)rx_data[2] << 8 | rx_data[3]) * IMU_GYRO_SCALE);
-                car_data.imu_data.gyro_z        = (int16_t)(((uint16_t)rx_data[4] << 8 | rx_data[5]) * IMU_GYRO_SCALE);
-                car_data.imu_data.internal_temp = (int16_t)((uint16_t)rx_data[6] << 8 | rx_data[7]);
-                break;
-            case CAN_ID_IMU_MAG:
-                car_data.imu_data.mag_x = (int16_t)(((uint16_t)rx_data[0] << 8 | rx_data[1]) * IMU_MAG_SCALE);
-                car_data.imu_data.mag_y = (int16_t)(((uint16_t)rx_data[2] << 8 | rx_data[3]) * IMU_MAG_SCALE);
-                car_data.imu_data.mag_z = (int16_t)(((uint16_t)rx_data[4] << 8 | rx_data[5]) * IMU_MAG_SCALE);
-                break;
-            case CAN_ID_BMS:
-                car_data.bms_data.soc           = (int8_t)rx_data[0];
-                car_data.bms_data.soh           = (int8_t)rx_data[1];
-                car_data.bms_data.max_discharge = (uint16_t)((uint16_t)rx_data[2] << 8 | rx_data[3]);
-                car_data.bms_data.max_regen     = (uint16_t)((uint16_t)rx_data[4] << 8 | rx_data[5]);
-                break;
-            case CAN_ID_ECU_RPM:
-                car_data.fwheels_rpm_data.rpm_fr = (uint16_t)((uint16_t)rx_data[0] << 8 | rx_data[1]);
-                car_data.fwheels_rpm_data.rpm_fl = (uint16_t)((uint16_t)rx_data[2] << 8 | rx_data[3]);
-                break;
-            case CAN_ID_ECU_BRAKE:
-                car_data.brake_pressure = rx_data[0];
-                break;
-            case CAN_ID_DASH_R2D:
-                car_data.engine_map = (int8_t)rx_data[1];
-                break;
-            default:
-                break;
+    // Drain all available messages in FIFO1 and enqueue them
+    // (avoids overrun under burst traffic)
+    while (HAL_CAN_GetRxFifoFillLevel(hcan, CAN_RX_FIFO1) > 0) {
+        if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO1, &rx_header, rx_data) == HAL_OK) {
+            /* Enqueue message for processing in task context */
+            CAN_Car_EnqueueRxMessage(rx_header.StdId, rx_data, rx_header.DLC);
+        } else {
+            break;
         }
     }
 }
 
+/**
+ * @brief Process a single received CAN2 message (TASK-SAFE - called from CAN_Car_ProcessQueueDrain)
+ *        Mutexes are safe here (not in ISR context).
+ */
+static void process_car_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc) {
+    if (data == NULL) return;
+
+    /* Lock CAN2 data mutex BEFORE updating shared car_data */
+    /* SAFE HERE: We are in task context, NOT inside ISR */
+    Mutex_CAN2_Lock();
+
+    switch (can_id) {
+        case CAN_ID_IMU_ACC:
+            if (dlc < 8U) break;
+            // Big Endian: byte[n]=MSB, byte[n+1]=LSB
+            car_data.imu_data.accel_x    = (int16_t)(((uint16_t)data[0] << 8 | data[1])* IMU_ACCEL_SCALE);
+            car_data.imu_data.accel_y    = (int16_t)(((uint16_t)data[2] << 8 | data[3] )* IMU_ACCEL_SCALE);
+            car_data.imu_data.accel_z    = (int16_t)(((uint16_t)data[4] << 8 | data[5])* IMU_ACCEL_SCALE);
+            car_data.imu_data.serial_num = (uint16_t)((uint16_t)data[6] << 8 | data[7]);
+            break;
+        case CAN_ID_IMU_GYRO:
+            if (dlc < 8U) break;
+            car_data.imu_data.gyro_x        = (int16_t)(((uint16_t)data[0] << 8 | data[1]) * IMU_GYRO_SCALE);
+            car_data.imu_data.gyro_y        = (int16_t)(((uint16_t)data[2] << 8 | data[3]) * IMU_GYRO_SCALE);
+            car_data.imu_data.gyro_z        = (int16_t)(((uint16_t)data[4] << 8 | data[5]) * IMU_GYRO_SCALE);
+            car_data.imu_data.internal_temp = (int16_t)((uint16_t)data[6] << 8 | data[7]);
+            break;
+        case CAN_ID_IMU_MAG:
+            if (dlc < 6U) break;
+            car_data.imu_data.mag_x = (int16_t)(((uint16_t)data[0] << 8 | data[1]) * IMU_MAG_SCALE);
+            car_data.imu_data.mag_y = (int16_t)(((uint16_t)data[2] << 8 | data[3]) * IMU_MAG_SCALE);
+            car_data.imu_data.mag_z = (int16_t)(((uint16_t)data[4] << 8 | data[5]) * IMU_MAG_SCALE);
+            break;
+        case CAN_ID_BMS:
+            if (dlc < 6U) break;
+            car_data.bms_data.soc           = (int8_t)data[0];
+            car_data.bms_data.soh           = (int8_t)data[1];
+            car_data.bms_data.max_discharge = (uint16_t)((uint16_t)data[2] << 8 | data[3]);
+            car_data.bms_data.max_regen     = (uint16_t)((uint16_t)data[4] << 8 | data[5]);
+            break;
+        case CAN_ID_ECU_RPM:
+            if (dlc < 4U) break;
+            car_data.fwheels_rpm_data.rpm_fr = (uint16_t)((uint16_t)data[0] << 8 | data[1]);
+            car_data.fwheels_rpm_data.rpm_fl = (uint16_t)((uint16_t)data[2] << 8 | data[3]);
+            break;
+        case CAN_ID_ECU_BRAKE:
+            if (dlc < 1U) break;
+            car_data.brake_pressure = data[0];
+            break;
+        case CAN_ID_DASH_R2D:
+            if (dlc < 2U) break;
+            car_data.engine_map = (int8_t)data[1];
+            break;
+        default:
+            break;
+    }
+
+    /* Unlock CAN2 data mutex */
+    Mutex_CAN2_Unlock();
+}
+
+
 const CarData_t* CAN_Car_GetData(void) {
+    /* NOTE: Caller must ensure proper synchronization when reading this structure.
+     * The CAN2 data may be updated by ReadingsManageTask, so concurrent reads/writes
+     * are possible. Use Mutex_CAN2_Lock/Unlock around critical sections.
+     *
+     * For now, we return the pointer directly. Callers accessing this should:
+     *   - Acquire Mutex_CAN2_Lock()
+     *   - Access the data
+     *   - Call Mutex_CAN2_Unlock()
+     * OR use volatile reads if only reading primitives (no compound structures).
+     */
     return &car_data;
 }
 
 
 
 // Executed by CAN interrupt for each message received on CAN Inverter-Motors
+// ISR-SAFE: Extracts CAN messages and enqueues them. Processing happens in task context.
 void CAN_Inverter_ProcessRxMessages(CAN_HandleTypeDef *hcan) {
     if (hcan == NULL) return;
     
     CAN_RxHeaderTypeDef rx_header;
     uint8_t rx_data[8];
     
-    // Read all available messages in FIFO0
-
+    // Drain all available messages in FIFO0 and enqueue them
+    // (avoids overrun under burst traffic)
     while (HAL_CAN_GetRxFifoFillLevel(hcan, CAN_RX_FIFO0) > 0) {
         if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data) == HAL_OK) {
-            process_rx_message(rx_header.StdId, rx_data, rx_header.DLC);
+            /* Enqueue message for processing in task context */
+            CAN_EnqueueRxMessage(rx_header.StdId, rx_data, rx_header.DLC);
         } else {
             break;
         }
     }
-
-    /*
-    if (HAL_CAN_GetRxMessage(hcan, CAN_RX_FIFO0, &rx_header, rx_data) == HAL_OK) {
-    	process_rx_message(rx_header.StdId, rx_data, rx_header.DLC);
-    }
-    */
 }
 
 
 /**
- * @brief Process a single received CAN message
+ * @brief Process a single received CAN message (TASK-SAFE - called from CAN_ProcessTask)
+ *        Mutexes are safe here (not in ISR context).
  */
 static void process_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc) {
+    if (data == NULL || dlc < 8U) return;
+
     uint8_t msg_id;     // which Msg arrived (1-5)
     Inverter_t *inv = find_inverter_by_rx_id(can_id, &msg_id);
 
@@ -248,7 +420,8 @@ static void process_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc
     extern uint32_t g_can_rx_count;
     g_can_rx_count++;
 
-    /* Lock the appropriate inverter mutex before updating shared state */
+    /* Lock the appropriate inverter mutex BEFORE updating shared state */
+    /* SAFE HERE: We are in task context, NOT inside ISR */
     if (inv->node_id == INVERTER_RIGHT_NODE_ID)
         Mutex_INVERTER_R_Lock();
     else if (inv->node_id == INVERTER_LEFT_NODE_ID)
@@ -329,9 +502,6 @@ bool CAN_Inverter_TransmitCommand(CAN_HandleTypeDef *hcan, const Inverter_t *inv
     if (inv->node_id == INVERTER_LEFT_NODE_ID) return false;
 #endif
 
-    static uint32_t s_last_tx_tick[N_INVERTERS] = {0};
-    uint8_t idx = (inv->node_id >= 1U && inv->node_id <= N_INVERTERS) ? (inv->node_id - 1U) : 0U;
-
     uint8_t tx_data[8];
     pack_u16(&tx_data[0], cmd->control_word);
     pack_i16(&tx_data[2], cmd->torque_setpoint);
@@ -340,21 +510,13 @@ bool CAN_Inverter_TransmitCommand(CAN_HandleTypeDef *hcan, const Inverter_t *inv
 
     bool ok = transmit_can_message(hcan, inv->tx_can_id, tx_data, 8);
 
-    uint32_t now   = HAL_GetTick();
-    uint32_t delta = (s_last_tx_tick[idx] > 0U) ? (now - s_last_tx_tick[idx]) : 0U;
-    s_last_tx_tick[idx] = now;
-
-    Serial_Log(LOG_CH_UART3,
-        "[CAN1 TX] id=0x%03lX cw=0x%04X trq=%d lim+=%d lim-=%d t=%lu dt=%lu ms ok=%d\r\n",
-        (unsigned long)inv->tx_can_id,
-        cmd->control_word,
-        cmd->torque_setpoint,
-        cmd->torque_limit_pos,
-        cmd->torque_limit_neg,
-        (unsigned long)now,
-        (unsigned long)delta,
-        (int)ok);
-
+    /* NOTE: Serial_Log is intentionally NOT called here.
+     * This function is called under Mutex_CAN1 from InvertersManageTask.
+     * Calling Serial_Log (which acquires Mutex_UART3 + osDelay) inside
+     * a CAN mutex region would cause deadlock risk and add variable latency
+     * to the 10 ms control loop. TX diagnostics are available via
+     * g_can_tx_ok_count / g_can_tx_fail_count in the data logger.
+     */
     return ok;
 }
 

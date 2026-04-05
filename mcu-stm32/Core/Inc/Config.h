@@ -53,7 +53,7 @@ extern "C" {
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -96,7 +96,7 @@ extern "C" {
  * RELEASE_MODE:
 */
 #define TEST_MODE_SINGLE_ADC
-//define TEST_MODE_FULL        
+//#define TEST_MODE_FULL        
 //#define RELEASE_MODE
 
 
@@ -207,7 +207,7 @@ extern "C" {
     #error "Invalid DATA_COLLECT_INV_SIDE value"
 #endif
 
-#define REGEN_ENABLED               0U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED               1U     /**< 1 = enabled, 0 = disabled */
 
 /* Regenerative braking strategy */
 #ifdef REGEN_ENABLED

@@ -19,12 +19,8 @@ volatile uint8_t uart3_tx_busy = 0;
 extern UART_HandleTypeDef huart3;
 
 /* External variables from other modules */
-extern uint16_t s_apps_raw[2];              // From Tasks.c
-extern uint8_t pedal_percent_left;          // From Tasks.c
 extern int16_t torque_request;              // From BaseControlMotor.c
 extern int16_t torque_limit_dyn;            // From BaseControlMotor.c
-extern uint32_t task_fast_max_time_us;      // From Tasks.c
-extern uint32_t task_fast_warning_count;    // From Tasks.c
 extern uint32_t g_can_tx_ok_count;          // From BaseControlMotor.c
 extern uint32_t g_can_tx_fail_count;        // From BaseControlMotor.c
 extern uint32_t g_can_rx_count;             // From BaseControlMotor.c

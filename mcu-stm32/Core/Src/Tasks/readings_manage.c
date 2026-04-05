@@ -30,6 +30,7 @@
 #include "ADC/ADC_Manager.h"
 #include "APP/APPS.h"
 #include "SAS/SAS.h"
+#include "Communication/Can.h"
 
 extern APPS_Data_t g_apps;
 extern SAS_Data_t  g_sas;
@@ -37,7 +38,7 @@ extern SAS_Data_t  g_sas;
 #include <stdint.h>
 #include <string.h>
 
-#define READINGS_TASK_PERIOD_MS  2U   /**< Task period: 2 ms → 0.5 kHz        */
+#define READINGS_TASK_PERIOD_MS  4U   /**< Task period: 4 ms → 0.25 kHz        */
 
 /** Convert ms to RTOS ticks (portable, requires kernel already started) */
 #define MS_TO_TICKS(ms) ((uint32_t)((ms) * osKernelGetTickFreq() / 1000U))
@@ -85,6 +86,20 @@ void ReadingsManageTask(void)
         Mutex_SAS_Lock();
         SAS_Update(s_sas_raw);
         Mutex_SAS_Unlock();
+
+        /* 
+         *  4 - Drain CAN RX message queue and process all pending inverter messages
+         *      CAN_ProcessQueueDrain() is ISR-SAFE (runs in task context, not ISR)
+         *      and uses Mutexes internally to safely update inverter structures.
+         */
+        CAN_ProcessQueueDrain();
+
+        /* 
+         *  5 - Drain CAN2 RX message queue and process all pending car telemetry messages
+         *      CAN_Car_ProcessQueueDrain() is ISR-SAFE (runs in task context, not ISR)
+         *      and uses Mutexes internally to safely update car_data structure.
+         */
+        CAN_Car_ProcessQueueDrain();
 
         /* Deterministic timing - absolute tick prevents drift */
         next_wake += period_ticks;

@@ -61,6 +61,8 @@ static MotorDriveState_t s_motor_state = MOTOR_STATE_IDLE; /**< Last computed dr
 #if defined(DATA_COLLECT_MODE) && (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
 static uint8_t  s_feather_logging_active = 0U;
 static uint32_t s_feather_start_tick_ms = 0U;
+static InverterState_t s_last_inv_state_right = INV_STATE_OFF;  /**< Track state transitions for debug logging */
+static InverterState_t s_last_inv_state_left = INV_STATE_OFF;   /**< Track state transitions for debug logging */
 #endif
 
 #if defined(DATA_COLLECT_MODE) && (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
@@ -126,55 +128,80 @@ void DataLoggerTask(void)
 
 #ifdef DATA_COLLECT_MODE
             const Inverter_t *dc_inv = &inv_r_copy;
-
-            #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
-                const char *dc_inv_label = "INV_R";
-            #endif
+            const InvErrorSnapshot_t *dc_err_snap = &err_snap_r;
+            const char *dc_inv_label = "INV_R";
 
             #if (DATA_COLLECT_INV_SIDE == DATA_COLLECT_INV_SIDE_RIGHT)
                 dc_inv = &inv_r_copy;
-                #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
-                    dc_inv_label = "INV_R";
-                #endif
+                dc_err_snap = &err_snap_r;
+                dc_inv_label = "INV_R";
             #elif (DATA_COLLECT_INV_SIDE == DATA_COLLECT_INV_SIDE_LEFT)
                 dc_inv = &inv_l_copy;
-                #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
-                    dc_inv_label = "INV_L";
-                #endif
+                dc_err_snap = &err_snap_l;
+                dc_inv_label = "INV_L";
             #else
                 #if INVERTER_LEFT_TORQUE_CONTROL_ENABLED && !INVERTER_RIGHT_TORQUE_CONTROL_ENABLED
                     dc_inv = &inv_l_copy;
-                    #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_ESP32_REMOTE)
-                        dc_inv_label = "INV_L";
-                    #endif
+                    dc_err_snap = &err_snap_l;
+                    dc_inv_label = "INV_L";
                 #endif
             #endif
 
             #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
+                /**
+                 * Track inverter state transitions and log them for debugging.
+                 * Logging starts when inverter reaches LV_ACTIVE or higher.
+                 */
+                InverterState_t *p_last_state = (dc_inv == &inv_r_copy) ? &s_last_inv_state_right : &s_last_inv_state_left;
+                
+                /* Detect state transition */
+                if (dc_inv->state != *p_last_state) {
+                    Serial_Log(LOGGER_CHANNEL, "[STATE_TRANS] %s: %s -> %s (t=%lu ms)\n",
+                        dc_inv_label,
+                        Inverter_GetStateName(*p_last_state),
+                        Inverter_GetStateName(dc_inv->state),
+                        (unsigned long)HAL_GetTick());
+                    *p_last_state = dc_inv->state;
+                }
+                
+                /* Check if inverter is in active state (LV_ACTIVE or higher) */
+                const uint8_t inverter_active = (dc_inv->state >= INV_STATE_LV_ACTIVE && dc_inv->state != INV_STATE_ERROR) ? 1U : 0U;
                 const uint8_t inverter_running = (dc_inv->state == INV_STATE_RUNNING) ? 1U : 0U;
                 const uint8_t inverter_error = (dc_inv->state == INV_STATE_ERROR) ? 1U : 0U;
 
-                if (inverter_running && (s_feather_logging_active == 0U)) {
+                if (inverter_active && (s_feather_logging_active == 0U)) {
                     Serial_Log(LOGGER_CHANNEL, "[START]\n");
                     s_feather_logging_active = 1U;
                     s_feather_start_tick_ms = HAL_GetTick();
-//writer.writerow(['TempMotor','TempInverter','TempIGBT','Voltage','Speed','Id','Iq','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3',"Time_s"])
-                    //Serial_Log(LOGGER_CHANNEL,"Time, TempMotor,TempInverter,TempIGBT,Voltage,Speed,Iq,Id,TorqueMotor,PedalPerc\n");
                 }
 
                 if (s_feather_logging_active != 0U) {
-                    if (inverter_error || !inverter_running) {
+                    if (inverter_error || !inverter_active) {
+                        if (inverter_error) {
+                            const uint32_t now_ms = HAL_GetTick();
+                            Serial_Log(LOGGER_CHANNEL,
+                                "[ERROR] src=%s code=%u info1=%lu snap_t=%lu age=%lu dc=%u.%uV speed=%d torque=%d\n",
+                                dc_inv_label,
+                                dc_inv->error_code,
+                                (unsigned long)dc_inv->error_info_1,
+                                (unsigned long)dc_err_snap->timestamp_ms,
+                                (unsigned long)(now_ms - dc_err_snap->timestamp_ms),
+                                dc_err_snap->dc_voltage / 10U,
+                                dc_err_snap->dc_voltage % 10U,
+                                dc_err_snap->speed,
+                                dc_err_snap->torque);
+                        }
                         Serial_Log(LOGGER_CHANNEL, "[STOP]\n");
                         s_feather_logging_active = 0U;
                     } else {
                         const uint32_t elapsed_ms = HAL_GetTick() - s_feather_start_tick_ms;
                         Serial_Log(LOGGER_CHANNEL,
-                            "%.1f,%.1f,%.1f,%.1f,%.1f,%d,%.1f,%.1f,%.1f,%u\n",
+                            "%.1f,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u\n",
                                 elapsed_ms / 1000.0f,
                             (float)dc_inv->motor_temp_degC    / 10.0f,
                             (float)dc_inv->inverter_temp_degC / 10.0f,
                             (float)dc_inv->igbt_temp_degC     / 10.0f,
-                            (float)dc_inv->dc_bus_voltage     / 10.0f,
+                            dc_inv->dc_bus_voltage,
                             dc_inv->speed_rpm,
                             (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
                             (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
@@ -202,7 +229,7 @@ void DataLoggerTask(void)
                 Serial_Log(LOGGER_CHANNEL,
                     "[APPS]: pedal=%u%% | raw=%u filt=%u | err=0x%02X implaus=%d trq_ok=%d | "
                     "[%s]: %s | speed=%d RPM | torque=%.1f Nm | "
-                    "Tmot=%.1fC Tinv=%.1fC Tigbt=%.1fC | DC=%.1fV | Err: %d Info: %d\r\n",
+                    "Tmot=%.1fC Tinv=%.1fC Tigbt=%.1fC | DC=%dV | Err: %d Info: %d\r\n",
                     apps_copy.final_percent,
                     apps_copy.sensors[0].raw,
                     apps_copy.sensors[0].filtered,
@@ -216,7 +243,7 @@ void DataLoggerTask(void)
                     (float)dc_inv->motor_temp_degC    / 10.0f,
                     (float)dc_inv->inverter_temp_degC / 10.0f,
                     (float)dc_inv->igbt_temp_degC     / 10.0f,
-                    (float)dc_inv->dc_bus_voltage     / 10.0f,
+                    (float)dc_inv->dc_bus_voltage,
                     dc_inv->error_code, dc_inv->error_info_1);
 
                 /*
@@ -225,12 +252,12 @@ void DataLoggerTask(void)
                  *   Speed, Iq, Id, TorqueMotor, PedalPerc
                  */
                 Serial_Log(LOGGER_CHANNEL,
-                    "%lu,%.1f,%.1f,%.1f,%.1f,%d,%.1f,%.1f,%.1f,%u\n",
+                    "%lu,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u\n",
                     (unsigned long)elapsed_ms,
                     (float)dc_inv->motor_temp_degC    / 10.0f,
                     (float)dc_inv->inverter_temp_degC / 10.0f,
                     (float)dc_inv->igbt_temp_degC     / 10.0f,
-                    (float)dc_inv->dc_bus_voltage     / 10.0f,
+                    (float)dc_inv->dc_bus_voltage,
                     dc_inv->speed_rpm,
                     (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
                     (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
@@ -269,7 +296,7 @@ void DataLoggerTask(void)
 
             // -- Inverter LEFT -----------------------------------------------
             Serial_Log(LOGGER_CHANNEL,
-                "[INV_L] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%u.%uV pwr=%luW lastRx=%lu ms\r\n",
+                "[INV_L] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%dV pwr=%luW lastRx=%lu ms\r\n",
                 HAL_GetTick(),
                 Inverter_GetStateName(inv_l_copy.state),
                 inv_l_copy.status_word,
@@ -280,7 +307,7 @@ void DataLoggerTask(void)
                 (float)inv_l_copy.motor_temp_degC    / 10.0f,
                 (float)inv_l_copy.inverter_temp_degC / 10.0f,
                 (float)inv_l_copy.igbt_temp_degC     / 10.0f,
-                inv_l_copy.dc_bus_voltage / 10U, inv_l_copy.dc_bus_voltage % 10U,
+                inv_l_copy.dc_bus_voltage,
                 inv_l_copy.actual_power,
                 HAL_GetTick() - inv_l_copy.last_rx_timestamp_ms);
 
@@ -300,7 +327,7 @@ void DataLoggerTask(void)
 
             // -- Inverter RIGHT ----------------------------------------------
             Serial_Log(LOGGER_CHANNEL,
-                "[INV_R] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%u.%uV pwr=%luW lastRx=%lu ms\r\n",
+                "[INV_R] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%dV pwr=%luW lastRx=%lu ms\r\n",
                 HAL_GetTick(),
                 Inverter_GetStateName(inv_r_copy.state),
                 inv_r_copy.status_word,
@@ -311,7 +338,7 @@ void DataLoggerTask(void)
                 (float)inv_r_copy.motor_temp_degC    / 10.0f,
                 (float)inv_r_copy.inverter_temp_degC / 10.0f,
                 (float)inv_r_copy.igbt_temp_degC     / 10.0f,
-                inv_r_copy.dc_bus_voltage / 10U, inv_r_copy.dc_bus_voltage % 10U,
+                inv_r_copy.dc_bus_voltage,
                 inv_r_copy.actual_power,
                 HAL_GetTick() - inv_r_copy.last_rx_timestamp_ms);
 

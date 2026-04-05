@@ -118,12 +118,25 @@ void InvertersManageTask(void)
         Mutex_APPS_Unlock();
 
         /* 
-         *  2 - Update status LEDs  
+         *  2 - Snapshot inverter states under their respective mutexes,
+         *      then update LEDs outside any mutex (GPIO writes are fast).
+         *      Reading g_inverter_x.state without a mutex is a race condition
+         *      with the ReadingsManage task which updates state via CAN drain.
          */
+        InverterState_t snap_left_state, snap_right_state;
+
+        Mutex_INVERTER_L_Lock();
+        snap_left_state  = g_inverter_left.state;
+        Mutex_INVERTER_L_Unlock();
+
+        Mutex_INVERTER_R_Lock();
+        snap_right_state = g_inverter_right.state;
+        Mutex_INVERTER_R_Unlock();
+
         Motor_UpdateStatusLeds(
             apps_implausibility,
-            g_inverter_right.state,
-            g_inverter_left.state
+            snap_right_state,
+            snap_left_state
         );
 
 
@@ -178,6 +191,9 @@ void InvertersManageTask(void)
             /* Check 10 s CAN silence -> transition to INV_STATE_OFF */
             Inverter_UpdateOffTimeout(&g_inverter_left);
 
+            /* Check HV_ACTIVE timeout -> force transition to READY if stuck */
+            Inverter_UpdateHVTransitionTimeout(&g_inverter_left, HAL_GetTick());
+
             Mutex_INVERTER_L_Unlock();
         #else
             s_prev_inv_state_left = INV_STATE_OFF;
@@ -228,6 +244,9 @@ void InvertersManageTask(void)
 
             /* Check 10 s CAN silence -> transition to INV_STATE_OFF */
             Inverter_UpdateOffTimeout(&g_inverter_right);
+
+            /* Check HV_ACTIVE timeout -> force transition to READY if stuck */
+            Inverter_UpdateHVTransitionTimeout(&g_inverter_right, HAL_GetTick());
 
             Mutex_INVERTER_R_Unlock();
         #else

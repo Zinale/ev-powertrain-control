@@ -33,6 +33,7 @@ extern osMutexId_t mutex_INVERTER_RHandle;
 extern osMutexId_t mutex_UART5Handle;
 extern osMutexId_t mutex_UART3Handle;
 extern osMutexId_t mutex_CAN1Handle;
+extern osMutexId_t mutex_CAN2Handle;
 
 /* =============================================================================
  *  APPS MUTEX
@@ -147,6 +148,22 @@ void Mutex_CAN1_Unlock(void)
 }
 
 /* =============================================================================
+ *  CAN2 MUTEX
+ * ============================================================================= */
+
+void Mutex_CAN2_Lock(void)
+{
+    if (mutex_CAN2Handle != NULL)
+        osMutexAcquire(mutex_CAN2Handle, osWaitForever);
+}
+
+void Mutex_CAN2_Unlock(void)
+{
+    if (mutex_CAN2Handle != NULL)
+        osMutexRelease(mutex_CAN2Handle);
+}
+
+/* =============================================================================
  *  DIAGNOSTICS
  * ============================================================================= */
 
@@ -158,5 +175,6 @@ bool Mutex_IsInitialized(void)
            (mutex_INVERTER_RHandle != NULL) &&
            (mutex_UART5Handle      != NULL) &&
            (mutex_UART3Handle      != NULL) &&
-           (mutex_CAN1Handle       != NULL);
+           (mutex_CAN1Handle       != NULL) &&
+           (mutex_CAN2Handle       != NULL);
 }

@@ -120,6 +120,11 @@ osMutexId_t mutex_UART3Handle;
 const osMutexAttr_t mutex_UART3_attributes = {
   .name = "mutex_UART3"
 };
+/* Definitions for mutex_CAN2 */
+osMutexId_t mutex_CAN2Handle;
+const osMutexAttr_t mutex_CAN2_attributes = {
+  .name = "mutex_CAN2"
+};
 /* USER CODE BEGIN PV */
 
 
@@ -202,8 +207,6 @@ int main(void)
    */
   Watchdog_Refresh();
 
-  CAN_Inverter_Init(&hcan1);
-  CAN_Car_Init(&hcan2);
   Inverters_Init();
   Readings_Init();
   //SchedulerInitFct();
@@ -233,6 +236,9 @@ int main(void)
   /* creation of mutex_UART3 */
   mutex_UART3Handle = osMutexNew(&mutex_UART3_attributes);
 
+  /* creation of mutex_CAN2 */
+  mutex_CAN2Handle = osMutexNew(&mutex_CAN2_attributes);
+
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
@@ -246,7 +252,13 @@ int main(void)
   /* USER CODE END RTOS_TIMERS */
 
   /* USER CODE BEGIN RTOS_QUEUES */
-  /* add queues, ... */
+  /* CAN RX queues must be created after osKernelInitialize() and before CAN IRQ notifications. */
+  CAN_ProcessQueue_Init();      /* CAN1 RX queue */
+  CAN_Car_ProcessQueue_Init();  /* CAN2 RX queue */
+
+  /* Enable CAN after queue creation, so ISR can always enqueue safely. */
+  CAN_Inverter_Init(&hcan1);
+  CAN_Car_Init(&hcan2);
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */

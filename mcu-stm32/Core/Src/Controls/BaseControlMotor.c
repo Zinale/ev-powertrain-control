@@ -44,8 +44,30 @@ static bool Motor_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent)
         return false;
     }
 
-    if (inv->state != INV_STATE_RUNNING || inv->speed_rpm <= (int16_t)REGEN_SPEED_CRITICAL_RPM) {
+    if (inv->state != INV_STATE_RUNNING) {
         s_regen_latch[inv->node_id] = false;
+        return false;
+    }
+
+    /* Speed hysteresis on latch RESET:
+     *   - Latch CAN DEACTIVATE only when speed drops below REGEN_SPEED_CRITICAL_RPM
+     *     (already the intended exit threshold).
+     *   - We do NOT reset the latch here if speed flickers
+     *     around CRITICAL. The latch reset due to speed happens only when
+     *     speed is strictly below CRITICAL — the lower-guard prevents
+     *     re-triggering from noise.
+     * The check below uses a 10% lower guard band so noise around 2000 RPM
+     * does NOT cause repeated latch-reset -> regen-enter oscillations. */
+    const int16_t speed_latch_reset_thr = (int16_t)(REGEN_SPEED_CRITICAL_RPM * 9U / 10U); /* 90% of CRITICAL = 1800 RPM */
+    if (inv->speed_rpm <= speed_latch_reset_thr) {
+        s_regen_latch[inv->node_id] = false;
+        return false;
+    }
+
+    /* If latch is ON but speed fell below CRITICAL (but above the hard reset above),
+     * keep the latch alive but let k_vel fade-out smooth the torque to ~0. */
+    if (!s_regen_latch[inv->node_id] && inv->speed_rpm <= (int16_t)REGEN_SPEED_CRITICAL_RPM) {
+        /* Speed is in [speed_latch_reset_thr, CRITICAL]: cannot enter regen */
         return false;
     }
 
@@ -62,11 +84,10 @@ static bool Motor_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent)
         }
     } else {
         /* Enter regen only if pedal is low AND speed is high enough.
-         * This creates speed hysteresis: enter at SPEED_MIN (3000),
-         * exit at SPEED_CRITICAL (2000) — avoids entering regen at
+         * This creates speed hysteresis: enter at SPEED_MIN,
+         * exit at SPEED_CRITICAL — avoids entering regen at
          * marginal speeds where k_vel fade-out makes it near-zero. */
-        if (pedal_percent <= enter_thr &&
-            inv->speed_rpm > (int16_t)REGEN_SPEED_MIN_RPM) {
+        if (pedal_percent <= enter_thr && inv->speed_rpm > (int16_t)REGEN_SPEED_MIN_RPM) {
             s_regen_latch[inv->node_id] = true;
         }
     }
@@ -145,19 +166,23 @@ int16_t Motor_ApplyTorqueRateLimit(int16_t target, int16_t previous, int16_t max
 int16_t Motor_CalculateRegenerativeBraking(int16_t speed_rpm, 
                                             uint8_t pedal_percent, 
                                             uint16_t dc_voltage) {
-    /* Safety: if pedal above threshold, no regeneration */
     if (pedal_percent >= REGEN_PEDAL_THRESHOLD_PCT) {
-        return 0;  /* No braking torque */
+        return 0;
     }
-    
-    /* Safety: if motor stopped, no regeneration */
-    if (abs(speed_rpm) <= (int16_t)REGEN_SPEED_CRITICAL_RPM) {
+
+    /* Safety: if motor effectively stopped, no regeneration.
+     * Use the LOWER guard band (90% of CRITICAL), NOT
+     * REGEN_SPEED_CRITICAL_RPM, to stay CONSISTENT with the
+     * latch reset threshold in Motor_ShouldUseRegen().*/
+    const int16_t speed_hard_stop = (int16_t)(REGEN_SPEED_CRITICAL_RPM * 9U / 10U); 
+    if (abs(speed_rpm) <= speed_hard_stop) {
         return 0;
     }
     
-    float speed = (float)abs(speed_rpm);
+    float speed = (float)(speed_rpm);
     if (speed< 10.0f){
         speed = 10.0f;
+        return 0;
     }
     
     /*  STAGE 1: Pedal-dependent linear ramping */
@@ -300,7 +325,7 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
                 error_dc / 10, error_dc % 10,
                 error_tq,
                 error_sp,
-                (error_dc > 4000) ? " HIGH VOLTAGE!" : "");
+                (error_dc > 400) ? " HIGH VOLTAGE!" : "");
         }
 
         if (err_ctx->start_time_ms == 0U) {
@@ -375,7 +400,7 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
         if (inv->speed_rpm > MOTOR_MAX_SPEED_RPM){
             torque_request = 0;
         }
-        if(inv->speed_rpm < 10.0f && torque_request < 0){
+        if (abs(inv->speed_rpm) < 10 && torque_request < 0) {
             torque_request = 0;
         }
 

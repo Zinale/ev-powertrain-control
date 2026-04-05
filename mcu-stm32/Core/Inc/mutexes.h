@@ -40,6 +40,10 @@ void Mutex_UART3_Unlock(void);
 void Mutex_CAN1_Lock(void);
 void Mutex_CAN1_Unlock(void);
 
+/* ---- CAN2 ---------------------------------------------------------------- */
+void Mutex_CAN2_Lock(void);
+void Mutex_CAN2_Unlock(void);
+
 /* ---- Diagnostics --------------------------------------------------------- */
 bool Mutex_IsInitialized(void);
 

@@ -118,6 +118,27 @@ typedef struct {
 void CAN_Inverter_Init(CAN_HandleTypeDef *hcan);
 
 /**
+ * @brief Initialize CAN RX message queue.
+ *
+ * Creates a FreeRTOS Queue for CAN messages enqueued by ISR.
+ * Call this once after FreeRTOS kernel initializes but before CAN interrupts start.
+ *
+ * CRITICAL: This MUST be called before any CAN receipts.
+ */
+void CAN_ProcessQueue_Init(void);
+
+/**
+ * @brief Drain and process all pending CAN RX messages from the queue.
+ *
+ * Dequeues all available CAN messages and processes them (calling Inverter_UpdateStatusMessage, etc).
+ * This must be called from a task context (NOT ISR) where FreeRTOS Mutexes are safe.
+ * Typically call this from the readings_manage task in its main loop.
+ *
+ * Non-blocking: returns immediately if queue is empty.
+ */
+void CAN_ProcessQueueDrain(void);
+
+/**
  * @brief Register an inverter (max 2 inverters supported)
  * @param inv Pointer to inverter structure
  */
@@ -149,7 +170,31 @@ bool CAN_Inverter_TransmitCommand(CAN_HandleTypeDef *hcan, const Inverter_t *inv
 void CAN_Car_Init(CAN_HandleTypeDef *hcan);
 
 /**
+ * @brief Initialize CAN2 RX message queue.
+ *
+ * Creates a FreeRTOS Queue for CAN2 messages enqueued by ISR.
+ * Call this once after FreeRTOS kernel initializes but before CAN2 interrupts start.
+ *
+ * CRITICAL: This MUST be called before any CAN2 receipts.
+ */
+void CAN_Car_ProcessQueue_Init(void);
+
+/**
+ * @brief Drain and process all pending CAN2 RX messages from the queue.
+ *
+ * Dequeues all available CAN2 messages and processes them (updating car_data safely with mutex).
+ * This must be called from a task context (NOT ISR) where FreeRTOS Mutexes are safe.
+ * Typically call this from the readings_manage task in its main loop.
+ *
+ * Non-blocking: returns immediately if queue is empty.
+ */
+void CAN_Car_ProcessQueueDrain(void);
+
+/**
  * @brief Process car data messages from CAN2 FIFO1
+ * 
+ * Called from CAN2 interrupt. Drains FIFO and enqueues messages for task-based processing.
+ * ISR-safe: does not directly update car_data.
  * @param hcan CAN handle (hcan2)
  */
 void CAN_Car_ProcessRxMessages(CAN_HandleTypeDef *hcan);
