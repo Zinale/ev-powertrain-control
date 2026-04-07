@@ -391,7 +391,11 @@ void handleIncomingUartData() {
           stopLogging();
           Serial.println("OK: logging stopped");
         } else if (loggingEnabled) {
-          appendRecordToFlash(payload);
+          // Accetta solo righe CSV (iniziano con un numero, es. "0.0,25.0,...")
+          // Scarta righe diagnostiche come [STATE_TRANS], [ERROR], ecc.
+          if (payload.length() > 0 && isDigit(static_cast<unsigned char>(payload.charAt(0)))) {
+            appendRecordToFlash(payload);
+          }
         }
       }
     } else {
