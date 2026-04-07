@@ -1,4 +1,0 @@
-../Core/Src/Tasks/Tasks.c:35:6:TaskInit	0	static
-../Core/Src/Tasks/Tasks.c:41:6:TaskFast	0	static
-../Core/Src/Tasks/Tasks.c:47:6:TaskMed	0	static
-../Core/Src/Tasks/Tasks.c:52:6:TaskSlow	0	static
