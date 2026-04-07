@@ -16,13 +16,10 @@ RM := rm -rf
 -include Drivers/STM32F7xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
 -include Core/Src/Tasks/subdir.mk
+-include Core/Src/Sensors/subdir.mk
 -include Core/Src/Safety/subdir.mk
--include Core/Src/SAS/subdir.mk
--include Core/Src/Inverter/subdir.mk
--include Core/Src/Controls/subdir.mk
+-include Core/Src/Drive/subdir.mk
 -include Core/Src/Communication/subdir.mk
--include Core/Src/APP/subdir.mk
--include Core/Src/ADC/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 

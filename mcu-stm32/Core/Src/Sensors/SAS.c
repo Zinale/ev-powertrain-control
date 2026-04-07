@@ -7,7 +7,7 @@
  * All data is accessible through the global variable g_sas.
  */
 
-#include "SAS/SAS.h"
+#include "Sensors/SAS.h"
 #include <string.h>
 
 SAS_Data_t g_sas = {0};

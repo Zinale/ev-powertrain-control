@@ -15,7 +15,7 @@ extern "C" {
 #endif
 
 #include "main.h"
-#include "Inverter.h"
+#include "Drive/Inverter.h"
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -125,7 +125,8 @@ typedef struct {
     BMS_t         	bms_data;
     FWheels_RPM_t 	fwheels_rpm_data;
     uint8_t       	brake_pressure;
-    int8_t			engine_map;
+    uint8_t         r2d;            /**< Ready-to-Drive flag (byte 0 of 0x106) */
+    int8_t			engine_map;     /**< Engine map selection (byte 1 of 0x106) */
 } CarData_t;
 
 

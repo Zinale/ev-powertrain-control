@@ -4,10 +4,10 @@
  * @brief Implementation of basic engine & Inverter control functions
  */
 
-#include "Controls/BaseControlMotor.h"
+#include "Drive/BaseControlMotor.h"
 #include "Communication/Can.h"
 #include "Communication/Serial.h"
-#include "APP/APPS.h"
+#include "Sensors/APPS.h"
 #include "Config.h"
 #include <math.h>
 #include <stdlib.h>
@@ -248,23 +248,23 @@ void Motor_UpdateStatusLeds(bool apps_implausibility,
                             InverterState_t left_state) {
     /* LD1: APPS implausibility */
     if (apps_implausibility) {
-       // HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+       HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
     } else {
-       // HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
     }
 
     /* LD2: LEFT inverter (node 2 / inverter204) in error */
     if (left_state == INV_STATE_ERROR) {
-        //HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+       HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
     } else {
-        //HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+       HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
     }
 
     /* LD3: RIGHT inverter (node 1 / inverter104) in error */
     if (right_state == INV_STATE_ERROR) {
-       // HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+        HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
     } else {
-        //HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+        HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
     }
 }
 

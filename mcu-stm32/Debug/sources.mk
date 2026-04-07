@@ -22,13 +22,10 @@ C_DEPS :=
 
 # Every subdirectory with source files must be described here
 SUBDIRS := \
-Core/Src/ADC \
-Core/Src/APP \
 Core/Src/Communication \
-Core/Src/Controls \
-Core/Src/Inverter \
-Core/Src/SAS \
+Core/Src/Drive \
 Core/Src/Safety \
+Core/Src/Sensors \
 Core/Src/Tasks \
 Core/Src \
 Core/Startup \

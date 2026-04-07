@@ -7,7 +7,7 @@
 #include "Serial.h"
 #include "mutexes.h"
 #include "cmsis_os.h"
-#include "APP/APPS.h"
+#include "Sensors/APPS.h"
 #include "Config.h"
 
 char uart5_dma_buffer[UART5_DMA_BUFFER_SIZE];

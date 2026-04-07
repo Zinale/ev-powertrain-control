@@ -53,7 +53,7 @@ extern "C" {
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -242,6 +242,18 @@ extern "C" {
         #define REGEN_LOG_ENABLED           1U       /**< Log regen events to serial */
     #endif
 #endif
+
+/* =========================================================
+ * R2D BYPASS (test only)
+ *
+ * When defined, the MCU state machine treats r2d_active as always
+ * true, skipping the CAN2 Ready-to-Drive signal requirement.
+ * This lets you reach MCU_STATE_RUNNING on the bench without a
+ * dashboard connected.
+ *
+ * REMOVE or comment out for any real vehicle run.
+ * ========================================================= */
+#define R2D_BYPASS   /**< Comment out to require real R2D from CAN2 */
 
 #ifdef __cplusplus
 }

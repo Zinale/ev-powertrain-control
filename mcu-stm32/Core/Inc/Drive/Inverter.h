@@ -233,7 +233,7 @@ const char* Inverter_GetStateName(InverterState_t state);
 #endif
 
 /* BaseControlMotor uses InverterState_t / Inverter_t — include AFTER they are defined */
-#include "BaseControlMotor.h"
+#include "Drive/BaseControlMotor.h"
 
 #endif /* INVERTER_H */
 

@@ -4,7 +4,7 @@
  * @brief Centralized ADC management implementation with DMA
  */
 
-#include "ADC/ADC_Manager.h"
+#include "Sensors/ADC_Manager.h"
 #include "Config.h"
 #include <string.h>
 

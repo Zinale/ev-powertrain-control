@@ -464,6 +464,7 @@ static void process_car_rx_message(uint32_t can_id, const uint8_t *data, uint8_t
             break;
         case CAN_ID_DASH_R2D:
             if (dlc < 2U) break;
+            car_data.r2d        = data[0];
             car_data.engine_map = (int8_t)data[1];
             break;
         default:
@@ -648,14 +649,6 @@ bool CAN_Inverter_TransmitCommand(CAN_HandleTypeDef *hcan, const Inverter_t *inv
     pack_i16(&tx_data[6], cmd->torque_limit_neg);
 
     bool ok = transmit_can_message(hcan, inv->tx_can_id, tx_data, 8);
-
-    /* NOTE: Serial_Log is intentionally NOT called here.
-     * This function is called under Mutex_CAN1 from InvertersManageTask.
-     * Calling Serial_Log (which acquires Mutex_UART3 + osDelay) inside
-     * a CAN mutex region would cause deadlock risk and add variable latency
-     * to the 10 ms control loop. TX diagnostics are available via
-     * g_can_tx_ok_count / g_can_tx_fail_count in the data logger.
-     */
     return ok;
 }
 

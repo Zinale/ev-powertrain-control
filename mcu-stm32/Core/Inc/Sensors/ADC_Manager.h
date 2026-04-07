@@ -20,7 +20,7 @@ extern "C" {
 #endif
 
 #include "main.h"
-#include "APP/APPS.h"
+#include "Sensors/APPS.h"
 #include <stdbool.h>
 #include <stdint.h>
 

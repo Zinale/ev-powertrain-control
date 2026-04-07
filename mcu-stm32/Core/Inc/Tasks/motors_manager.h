@@ -29,7 +29,7 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include "Inverter/Inverter.h"  /* Inverter_t, INV_STATE_ERROR, InverterState_t */
+#include "Drive/Inverter.h"  /* Inverter_t, INV_STATE_ERROR, InverterState_t */
 
 /* =============================================================================
  *  PUBLIC TYPES

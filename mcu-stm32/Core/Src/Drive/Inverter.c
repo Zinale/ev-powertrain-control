@@ -4,12 +4,12 @@
  * @brief AMK inverter management module implementation
  */
 
-#include "Inverter.h"
+#include "Drive/Inverter.h"
 #include <string.h>
 #include "stm32f7xx_hal.h"
 #include "Can.h"
 #include "Config.h"
-#include "BaseControlMotor.h"
+#include "Drive/BaseControlMotor.h"
 
 Inverter_t g_inverter_left = {0};
 Inverter_t g_inverter_right = {0};

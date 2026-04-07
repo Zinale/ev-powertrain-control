@@ -31,10 +31,11 @@
 #include "cmsis_os.h"
 #include "stm32f7xx_hal.h"
 #include "watchdog.h"
-#include "APP/APPS.h"
-#include "Inverter/Inverter.h"
-#include "Controls/BaseControlMotor.h"
+#include "Sensors/APPS.h"
+#include "Drive/Inverter.h"
+#include "Drive/BaseControlMotor.h"
 #include "Communication/Can.h"
+#include "Safety/MCU_State.h"
 
 #include <stdint.h>
 #include <string.h>
@@ -113,7 +114,8 @@ void MotorsManagerTask(void)
          */
         Mutex_APPS_Lock();
         uint8_t pedal_percent = g_apps.torque_allowed ? g_apps.final_percent : 0U;
-        bool torque_allowed = g_apps.torque_allowed;
+        /* Double safety gate: APPS plausibility AND MCU state (R2D + CAN health) */
+        bool torque_allowed = g_apps.torque_allowed && MCU_IsTorqueAllowed();
         bool apps_implausibility = g_apps.implausibility_active;
         Mutex_APPS_Unlock();
 

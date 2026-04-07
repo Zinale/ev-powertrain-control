@@ -23,7 +23,7 @@ extern uint32_t g_can_tx_ok_count;     /**< Successful CAN transmissions */
 extern uint32_t g_can_tx_fail_count;   /**< Failed CAN transmissions (mailbox full) */
 extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter */
 
-#include "Inverter/Inverter.h"
+#include "Drive/Inverter.h"
 #include <stdint.h>
 
 /* Motor Configuration

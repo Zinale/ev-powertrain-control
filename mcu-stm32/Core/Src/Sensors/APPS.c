@@ -8,7 +8,7 @@
  * through the global variable g_apps.
  */
 
-#include "APP/APPS.h"
+#include "Sensors/APPS.h"
 #include <string.h>
 
 APPS_Data_t g_apps = {0};

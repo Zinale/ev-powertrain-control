@@ -25,8 +25,8 @@ extern "C" {
 #endif
 
 #include <stdint.h>
-#include "APP/APPS.h"   /* APPS_NUM_SENSORS, APPS_Data_t */
-#include "SAS/SAS.h"    /* SAS_Data_t */
+#include "Sensors/APPS.h"   /* APPS_NUM_SENSORS, APPS_Data_t */
+#include "Sensors/SAS.h"    /* SAS_Data_t */
 
 /* ─── Initialisation ────────────────────────────────────────────────────── */
 

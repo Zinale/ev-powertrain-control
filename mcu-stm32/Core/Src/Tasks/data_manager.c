@@ -27,11 +27,13 @@
 #include "cmsis_os.h"
 #include "stm32f7xx_hal.h"
 
-#include "ADC/ADC_Manager.h"
-#include "APP/APPS.h"
-#include "SAS/SAS.h"
+#include "Sensors/ADC_Manager.h"
+#include "Sensors/APPS.h"
+#include "Sensors/SAS.h"
 #include "Communication/Can.h"
-#include "Safety/device_state.h"
+#include "Safety/MCU_State.h"
+#include "Config.h"
+#include "Drive/Inverter.h"
 
 extern APPS_Data_t g_apps;
 extern SAS_Data_t  g_sas;
@@ -107,15 +109,38 @@ void DataManagerTask(void)
         /* Retry CAN init periodically if any bus is in failed state. */
         CAN_ServiceRecovery(&hcan1, &hcan2, HAL_GetTick());
 
-        if ((CAN_GetCan1State() == CAN_RUNTIME_INIT_FAILED) ||
-            (CAN_GetCan2State() == CAN_RUNTIME_INIT_FAILED))
+        /* Evaluate global MCU state.
+         * g_apps and g_sas were just updated by this task — reading them here
+         * (without re-taking the mutex) is safe: no other task writes them. */
+        MCU_StateInputs_t mcu_in;
+        mcu_in.can1_ok  = (CAN_GetCan1State() == CAN_RUNTIME_READY) && !g_can1_busoff;
+        mcu_in.can2_ok  = (CAN_GetCan2State() == CAN_RUNTIME_READY);
+        mcu_in.apps_ok  = !g_apps.implausibility_active && (g_apps.error_code == APPS_ERROR_NONE);
+        mcu_in.sas_ok   = g_sas.sensor_valid && (g_sas.error_code == SAS_ERROR_NONE);
+        Mutex_CAN2_Lock();
+#ifdef R2D_BYPASS
+        mcu_in.r2d_active = true;
+        Mutex_CAN2_Unlock();
+#else
+        mcu_in.r2d_active = (CAN_Car_GetData()->r2d != 0U);
+        Mutex_CAN2_Unlock();
+#endif
+        /* inv_ready: all present+control-enabled inverters must be in INV_STATE_RUNNING */
         {
-            DeviceState_Set(DEVICE_STATE_ERROR);
+            bool inv_ok = true;
+#if INVERTER_LEFT_PRESENT && INVERTER_LEFT_TORQUE_CONTROL_ENABLED
+            Mutex_INVERTER_L_Lock();
+            inv_ok = inv_ok && (g_inverter_left.state == INV_STATE_RUNNING);
+            Mutex_INVERTER_L_Unlock();
+#endif
+#if INVERTER_RIGHT_PRESENT && INVERTER_RIGHT_TORQUE_CONTROL_ENABLED
+            Mutex_INVERTER_R_Lock();
+            inv_ok = inv_ok && (g_inverter_right.state == INV_STATE_RUNNING);
+            Mutex_INVERTER_R_Unlock();
+#endif
+            mcu_in.inv_ready = inv_ok;
         }
-        else
-        {
-            DeviceState_Set(DEVICE_STATE_RUNNING);
-        }
+        MCU_State_Update(&mcu_in);
 
         /* Deterministic timing - absolute tick prevents drift */
         next_wake += period_ticks;
