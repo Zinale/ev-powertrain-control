@@ -30,9 +30,8 @@ uint32_t g_can_rx_count = 0;  // Messages received from inverter
 #define M_PI 3.14159265358979323846f
 #endif
 
-int16_t torque_request;
-int16_t torque_limit_dyn;
-int16_t torque_raw;
+volatile int16_t torque_request;    /**< Written by InvertersManageTask, read by DataLoggerTask — must be volatile */
+volatile int16_t torque_limit_dyn;  /**< Written by InvertersManageTask, read by DataLoggerTask — must be volatile */
 
 #if defined(REGEN_ENABLED) && REGEN_ENABLED
 /* Latch regen selection per node_id to avoid mode chattering near pedal threshold. */
@@ -249,23 +248,23 @@ void Motor_UpdateStatusLeds(bool apps_implausibility,
                             InverterState_t left_state) {
     /* LD1: APPS implausibility */
     if (apps_implausibility) {
-        HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
+       // HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_SET);
     } else {
-        HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
+       // HAL_GPIO_WritePin(LD1_GPIO_Port, LD1_Pin, GPIO_PIN_RESET);
     }
 
     /* LD2: LEFT inverter (node 2 / inverter204) in error */
     if (left_state == INV_STATE_ERROR) {
-        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
+        //HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_SET);
     } else {
-        HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
+        //HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, GPIO_PIN_RESET);
     }
 
     /* LD3: RIGHT inverter (node 1 / inverter104) in error */
     if (right_state == INV_STATE_ERROR) {
-        HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
+       // HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_SET);
     } else {
-        HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
+        //HAL_GPIO_WritePin(LD3_GPIO_Port, LD3_Pin, GPIO_PIN_RESET);
     }
 }
 
@@ -361,15 +360,22 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
     if (!torque_allowed) {
         inv->torque_request = 0;
         *torque_setpoint_prev = 0;
+        torque_request   = 0;
+        torque_limit_dyn = 0;
     }
     else
-    {/* Calculate dynamic torque limit */
+    {
+        /* Calculate dynamic torque limit */
         torque_limit_dyn = Motor_CalculateDynamicTorqueLimit(
             inv->speed_rpm,
             inv->actual_power
         );
-        
-        /* Calculate torque requested from pedal (or regen if enabled and in regen zone) */
+
+        /* Calculate torque requested from pedal (or regen if enabled and in regen zone).
+         * torque_raw is intentionally a local variable: it is only used within this
+         * function and must not be shared across tasks. */
+        int16_t torque_raw;
+
         #if defined(REGEN_ENABLED) && REGEN_ENABLED
             if (Motor_ShouldUseRegen(inv, pedal_percent)) {
                 /* Pedal released: regenerative braking torque (negative) */
@@ -382,22 +388,21 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
                 /* Pedal pressed: normal traction torque (positive) */
                 torque_raw = (int16_t)((pedal_percent * TORQUE_SETPOINT_MAX) / 100);
             }
-
         #else
             /* Regen disabled: traction only */
             torque_raw = (int16_t)((pedal_percent * TORQUE_SETPOINT_MAX) / 100);
         #endif
-        
+
         torque_request = Motor_ApplyTorqueRateLimit(
             torque_raw,
             *torque_setpoint_prev,
             TORQUE_RATE_LIMIT_PER_CYCLE
-            );
-        
+        );
+
         /* Saturation to limits */
         if (torque_request > TORQUE_LIMIT_POS) torque_request = TORQUE_LIMIT_POS;
         if (torque_request < TORQUE_LIMIT_NEG) torque_request = TORQUE_LIMIT_NEG;
-        if (inv->speed_rpm > MOTOR_MAX_SPEED_RPM){
+        if (inv->speed_rpm > MOTOR_MAX_SPEED_RPM) {
             torque_request = 0;
         }
         if (abs(inv->speed_rpm) < 10 && torque_request < 0) {
@@ -406,8 +411,8 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
 
         inv->torque_request = torque_request;
         if (state != INV_STATE_RUNNING) {
-        *torque_setpoint_prev = 0;
-            inv->torque_request = 0;
+            *torque_setpoint_prev = 0;
+            inv->torque_request   = 0;
         } else {
             *torque_setpoint_prev = torque_request;
         }

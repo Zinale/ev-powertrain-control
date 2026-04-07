@@ -21,6 +21,15 @@ static Inverter_t *s_inverter[N_INVERTERS] = {NULL, NULL};
 
 static CarData_t car_data = {0};
 
+volatile CAN_RuntimeState_t g_can1_runtime_state = CAN_RUNTIME_UNINITIALIZED;
+volatile CAN_RuntimeState_t g_can2_runtime_state = CAN_RUNTIME_UNINITIALIZED;
+volatile uint32_t g_can1_last_error = 0U;
+volatile uint32_t g_can2_last_error = 0U;
+
+static uint32_t s_can_recovery_period_ms = 2000U;
+static uint32_t s_can1_last_retry_ms = 0U;
+static uint32_t s_can2_last_retry_ms = 0U;
+
 /* =============================================================================
  *  CAN RX MESSAGE QUEUE (ISR-safe architecture)
  * =============================================================================
@@ -42,7 +51,7 @@ typedef struct {
 static osMessageQueueId_t can_rx_queue = NULL;  /**< Queue handle */
 
 /* Forward declarations - must be before CAN_ProcessQueueDrain which calls them */
-static void configure_can_filters(CAN_HandleTypeDef *hcan);
+static bool configure_can_filters(CAN_HandleTypeDef *hcan);
 static bool transmit_can_message(CAN_HandleTypeDef *hcan, uint32_t can_id, const uint8_t *data, uint8_t dlc);
 static Inverter_t* find_inverter_by_rx_id(uint32_t can_id, uint8_t *msg_id_out);
 static void process_rx_message(uint32_t can_id, const uint8_t *data, uint8_t dlc);
@@ -83,6 +92,7 @@ void CAN_ProcessQueueDrain(void) {
  */
 static void CAN_EnqueueRxMessage(uint32_t can_id, const uint8_t *data, uint8_t dlc) {
     if (can_rx_queue == NULL) return;
+    if (osKernelGetState() != osKernelRunning) return;
     
     CAN_RxMsg_t msg;
     msg.can_id = can_id;
@@ -120,12 +130,17 @@ void CAN_Car_ProcessQueue_Init(void) {
     }
 }
 
+bool CAN_QueuesReady(void) {
+    return (can_rx_queue != NULL) && (can2_rx_queue != NULL);
+}
+
 /**
  * @brief Enqueue a CAN2 message from ISR (ISR-safe).
  *        Called by the CAN RX interrupt handler.
  */
 static void CAN_Car_EnqueueRxMessage(uint32_t can_id, const uint8_t *data, uint8_t dlc) {
     if (can2_rx_queue == NULL) return;
+    if (osKernelGetState() != osKernelRunning) return;
     
     CAN_RxMsg_t msg;
     msg.can_id = can_id;
@@ -174,35 +189,120 @@ static inline void pack_i16(uint8_t *dest, int16_t value) {
 }
 
 
+/* =============================================================================
+ *  CAN1 SCE (Status Change Error) — ISR-safe diagnostics
+ * =============================================================================
+ Snapshot del registro ESR al momento dell'ultimo errore CAN1 */
+volatile uint32_t g_can1_sce_esr    = 0U;
+
+/** Transmit/Receive Error Counters al momento dell'errore */
+volatile uint8_t  g_can1_sce_tec    = 0U;   /**< Transmit Error Counter */
+volatile uint8_t  g_can1_sce_rec    = 0U;   /**< Receive  Error Counter */
+
+/** Flag bus-off: scritto a 1 dall'ISR, resettato dalla task dopo recovery */
+volatile uint8_t  g_can1_busoff     = 0U;
+
+/** Contatore totale eventi SCE (per diagnostica in DataLogger) */
+volatile uint32_t g_can1_sce_count  = 0U;
 
 
 void CAN_Inverter_Init(CAN_HandleTypeDef *hcan) {
     if (hcan == NULL) return;
 
-    configure_can_filters(hcan);
-    HAL_CAN_Start(hcan);
-    HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING);
-    HAL_CAN_ActivateNotification(hcan,CAN_IT_ERROR_WARNING | CAN_IT_ERROR_PASSIVE );
+    g_can1_runtime_state = CAN_RUNTIME_UNINITIALIZED;
+    g_can1_last_error = 0U;
 
+    if (!configure_can_filters(hcan)) {
+        g_can1_runtime_state = CAN_RUNTIME_INIT_FAILED;
+        g_can1_last_error = hcan->ErrorCode;
+        return;
+    }
+
+    {
+        const uint32_t max_attempts = 5U;
+        uint32_t attempt;
+        for (attempt = 1U; attempt <= max_attempts; attempt++) {
+            if (HAL_CAN_Start(hcan) == HAL_OK) {
+                g_can1_runtime_state = CAN_RUNTIME_READY;
+                g_can1_last_error = 0U;
+                break;
+            }
+
+            g_can1_last_error = hcan->ErrorCode;
+            (void)HAL_CAN_Stop(hcan);
+            osDelay(20);
+        }
+
+        if (attempt > max_attempts) {
+            g_can1_runtime_state = CAN_RUNTIME_INIT_FAILED;
+            return;
+        }
+    }
+
+    if (HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO0_MSG_PENDING) != HAL_OK) {
+        g_can1_runtime_state = CAN_RUNTIME_INIT_FAILED;
+        g_can1_last_error = hcan->ErrorCode;
+        return;
+    }
+
+    /* Abilita tutte le notifiche di errore CAN1 (SCE interrupt) */
+    if (HAL_CAN_ActivateNotification(hcan,
+        CAN_IT_ERROR_WARNING   |   /**< TEC o REC > 96  — bus degradato   */
+        CAN_IT_ERROR_PASSIVE   |   /**< TEC o REC > 127 — passive mode     */
+        CAN_IT_BUSOFF          |   /**< TEC > 255       — bus off          */
+        CAN_IT_LAST_ERROR_CODE     /**< LEC: bit-stuff, CRC, ACK, form...  */
+    ) != HAL_OK) {
+        g_can1_runtime_state = CAN_RUNTIME_INIT_FAILED;
+        g_can1_last_error = hcan->ErrorCode;
+        return;
+    }
 }
 
 void CAN_Car_Init(CAN_HandleTypeDef *hcan) {
     if (hcan == NULL) return;
 
-    configure_can_filters(hcan);
-    HAL_CAN_Start(hcan);
-    HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO1_MSG_PENDING);
+    g_can2_runtime_state = CAN_RUNTIME_UNINITIALIZED;
+    g_can2_last_error = 0U;
+
+    if (!configure_can_filters(hcan)) {
+        g_can2_runtime_state = CAN_RUNTIME_INIT_FAILED;
+        g_can2_last_error = hcan->ErrorCode;
+        return;
+    }
+
+    if (HAL_CAN_Start(hcan) != HAL_OK) {
+        g_can2_runtime_state = CAN_RUNTIME_INIT_FAILED;
+        g_can2_last_error = hcan->ErrorCode;
+        return;
+    }
+
+    if (HAL_CAN_ActivateNotification(hcan, CAN_IT_RX_FIFO1_MSG_PENDING) != HAL_OK) {
+        g_can2_runtime_state = CAN_RUNTIME_INIT_FAILED;
+        g_can2_last_error = hcan->ErrorCode;
+        return;
+    }
+
+    g_can2_runtime_state = CAN_RUNTIME_READY;
+    g_can2_last_error = 0U;
 }
 
 void HAL_CAN_ErrorCallback(CAN_HandleTypeDef *hcan) {
-    uint32_t esr = hcan->Instance->ESR;
-    uint8_t tec = (esr >> 24) & 0xFF;
-    uint8_t rec = (esr >> 16) & 0xFF;
+    /* Filtro: gestisci solo CAN1 (bus inverter - safety critical). */
+    if (hcan->Instance != CAN1) return;
 
-    /* This callback is IRQ context: avoid Serial_Log here (it uses mutexes/osDelay). */
-    (void)esr;
-    (void)tec;
-    (void)rec;
+    /* Snapshot ISR-safe del registro ESR (lettura da hardware register) */
+    uint32_t esr = hcan->Instance->ESR;
+
+    /* Aggiorna i flag globali  */
+    g_can1_sce_esr   = esr;
+    g_can1_sce_tec   = (uint8_t)((esr >> 24) & 0xFFU);  /* bits 31:24 */
+    g_can1_sce_rec   = (uint8_t)((esr >> 16) & 0xFFU);  /* bits 23:16 */
+    g_can1_sce_count++;
+
+    /* Segnala bus-off */
+    if (esr & CAN_ESR_BOFF) {
+        g_can1_busoff = 1U;
+    }
 }
 
 /**
@@ -235,10 +335,10 @@ void CAN_Inverter_Register(Inverter_t *inv) {
  *       FilterBank 14: 0x100, 0x101, 0x102, 0x103
  *       FilterBank 15: 0x104, 0x105, 0x106  (slot 4 repeats 0x106)
  */
-static void configure_can_filters(CAN_HandleTypeDef *hcan) {
+static bool configure_can_filters(CAN_HandleTypeDef *hcan) {
     CAN_FilterTypeDef filter_config = {0};
 
-    if (hcan == NULL) return;
+    if (hcan == NULL) return false;
 
     if (hcan->Instance == CAN1) {
         filter_config.FilterBank           = 0;
@@ -251,7 +351,9 @@ static void configure_can_filters(CAN_HandleTypeDef *hcan) {
         filter_config.FilterFIFOAssignment = CAN_RX_FIFO0;
         filter_config.FilterActivation     = ENABLE;
         filter_config.SlaveStartFilterBank = 14;      // bank 0-13 -> CAN1, 14-27 -> CAN2
-        HAL_CAN_ConfigFilter(hcan, &filter_config);
+        if (HAL_CAN_ConfigFilter(hcan, &filter_config) != HAL_OK) {
+            return false;
+        }
     }
     else if (hcan->Instance == CAN2) {
         /*
@@ -274,7 +376,9 @@ static void configure_can_filters(CAN_HandleTypeDef *hcan) {
         filter_config.FilterFIFOAssignment = CAN_RX_FIFO1;
         filter_config.FilterActivation     = ENABLE;
         filter_config.SlaveStartFilterBank = 14;
-        HAL_CAN_ConfigFilter(hcan, &filter_config);
+        if (HAL_CAN_ConfigFilter(hcan, &filter_config) != HAL_OK) {
+            return false;
+        }
 
         /* Bank 15: ECU RPM (0x104), ECU Brake (0x105), DASH (0x106), DASH (repeated) */
         filter_config.FilterBank           = 15;
@@ -282,8 +386,12 @@ static void configure_can_filters(CAN_HandleTypeDef *hcan) {
         filter_config.FilterIdLow          = (CAN_ID_ECU_BRAKE << 5);
         filter_config.FilterMaskIdHigh     = (CAN_ID_DASH_R2D      << 5);
         filter_config.FilterMaskIdLow      = (CAN_ID_DASH_R2D      << 5);
-        HAL_CAN_ConfigFilter(hcan, &filter_config);
+        if (HAL_CAN_ConfigFilter(hcan, &filter_config) != HAL_OK) {
+            return false;
+        }
     }
+
+    return true;
 }
 
 
@@ -379,6 +487,37 @@ const CarData_t* CAN_Car_GetData(void) {
      * OR use volatile reads if only reading primitives (no compound structures).
      */
     return &car_data;
+}
+
+CAN_RuntimeState_t CAN_GetCan1State(void) {
+    return g_can1_runtime_state;
+}
+
+CAN_RuntimeState_t CAN_GetCan2State(void) {
+    return g_can2_runtime_state;
+}
+
+void CAN_SetRecoveryPeriodMs(uint32_t period_ms) {
+    if (period_ms == 0U) {
+        return;
+    }
+    s_can_recovery_period_ms = period_ms;
+}
+
+void CAN_ServiceRecovery(CAN_HandleTypeDef *hcan1, CAN_HandleTypeDef *hcan2, uint32_t now_ms) {
+    if (hcan1 != NULL && g_can1_runtime_state == CAN_RUNTIME_INIT_FAILED) {
+        if ((now_ms - s_can1_last_retry_ms) >= s_can_recovery_period_ms) {
+            s_can1_last_retry_ms = now_ms;
+            CAN_Inverter_Init(hcan1);
+        }
+    }
+
+    if (hcan2 != NULL && g_can2_runtime_state == CAN_RUNTIME_INIT_FAILED) {
+        if ((now_ms - s_can2_last_retry_ms) >= s_can_recovery_period_ms) {
+            s_can2_last_retry_ms = now_ms;
+            CAN_Car_Init(hcan2);
+        }
+    }
 }
 
 

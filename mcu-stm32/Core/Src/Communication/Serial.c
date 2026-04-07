@@ -19,11 +19,11 @@ volatile uint8_t uart3_tx_busy = 0;
 extern UART_HandleTypeDef huart3;
 
 /* External variables from other modules */
-extern int16_t torque_request;              // From BaseControlMotor.c
-extern int16_t torque_limit_dyn;            // From BaseControlMotor.c
-extern uint32_t g_can_tx_ok_count;          // From BaseControlMotor.c
-extern uint32_t g_can_tx_fail_count;        // From BaseControlMotor.c
-extern uint32_t g_can_rx_count;             // From BaseControlMotor.c
+extern volatile int16_t torque_request;    /**< From BaseControlMotor.c — volatile: written by InvertersManageTask */
+extern volatile int16_t torque_limit_dyn;  /**< From BaseControlMotor.c — volatile: written by InvertersManageTask */
+extern uint32_t g_can_tx_ok_count;         /**< From BaseControlMotor.c */
+extern uint32_t g_can_tx_fail_count;       /**< From BaseControlMotor.c */
+extern uint32_t g_can_rx_count;            /**< From BaseControlMotor.c */
 
 
 

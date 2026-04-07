@@ -36,7 +36,7 @@ extern "C" {
  * Must be called once before osKernelStart().
  * Already invoked from main.c USER CODE section.
  */
-void Readings_Init(void);
+void DataReadings_Init(void);
 
 /* ─── FreeRTOS task entry point ─────────────────────────────────────────── */
 
@@ -47,7 +47,7 @@ void Readings_Init(void);
  * Registered in main.c as:
  *   osThreadNew(StartReadingsManager, NULL, &ReadingsManage_attributes)
  */
-void ReadingsManageTask(void);
+void DataManagerTask(void);
 
 /* ─── Shared-data accessors ─────────────────────────────────────────────── */
 

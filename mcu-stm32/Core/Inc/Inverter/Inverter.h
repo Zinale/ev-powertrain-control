@@ -88,7 +88,7 @@ typedef struct {
     uint16_t error_code;               /**< AMK error code (from SM2) */
     int16_t  igbt_temp_degC;           /**< IGBT temperature [0.1°C] (from SM2) */
     
-    uint16_t dc_bus_voltage;           /**< DC bus voltage [0.1V] (from SM3) */
+    uint16_t dc_bus_voltage;           /**< DC bus voltage [V] (from SM3) */
     int32_t  phase_u_current;          /**< Phase U current [mA] (from SM3) */
     
     int32_t  phase_v_current;          /**< Phase V current [mA] (from SM4) */

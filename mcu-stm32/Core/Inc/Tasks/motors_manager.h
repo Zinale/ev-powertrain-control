@@ -92,7 +92,7 @@ typedef struct
  * Registered in main.c as:
  *   osThreadNew(StartInvertersManager, NULL, &InvertersManage_attributes)
  */
-void InvertersManageTask(void);
+void MotorsManagerTask(void);
 
 /**
  * @brief Copy the error snapshot captured when the LEFT inverter last entered ERROR.

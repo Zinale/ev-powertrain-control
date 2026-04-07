@@ -30,8 +30,9 @@
 #include "Inverter.h"
 #include "ADC_Manager.h"
 #include "Tasks/data_logger.h"
-#include "Tasks/readings_manage.h"
-#include "Tasks/inverters_manage.h"
+#include "Tasks/motors_manager.h"
+#include "Tasks/data_manager.h"
+#include "Safety/device_state.h"
 #include "task.h"
 /* USER CODE END Includes */
 
@@ -71,17 +72,17 @@ const osThreadAttr_t DataLogger_attributes = {
   .stack_size = 1024 * 4,
   .priority = (osPriority_t) osPriorityLow,
 };
-/* Definitions for InvertersManage */
-osThreadId_t InvertersManageHandle;
-const osThreadAttr_t InvertersManage_attributes = {
-  .name = "InvertersManage",
+/* Definitions for MotorsManager */
+osThreadId_t MotorsManagerHandle;
+const osThreadAttr_t MotorsManager_attributes = {
+  .name = "MotorsManager",
   .stack_size = 2048 * 4,
   .priority = (osPriority_t) osPriorityAboveNormal,
 };
-/* Definitions for ReadingsManage */
-osThreadId_t ReadingsManageHandle;
-const osThreadAttr_t ReadingsManage_attributes = {
-  .name = "ReadingsManage",
+/* Definitions for DataManager */
+osThreadId_t DataManagerHandle;
+const osThreadAttr_t DataManager_attributes = {
+  .name = "DataManager",
   .stack_size = 512 * 4,
   .priority = (osPriority_t) osPriorityHigh,
 };
@@ -141,8 +142,8 @@ static void MX_UART5_Init(void);
 static void MX_CAN2_Init(void);
 static void MX_IWDG_Init(void);
 void StartDataLogger(void *argument);
-void StartInvertersManager(void *argument);
-void StartReadingsManager(void *argument);
+void StartMotorsManager(void *argument);
+void StartDataManager(void *argument);
 
 /* USER CODE BEGIN PFP */
 void MX_FREERTOS_Init(void);
@@ -191,6 +192,8 @@ int main(void)
   MX_CAN2_Init();
   MX_IWDG_Init();
   /* USER CODE BEGIN 2 */
+
+  DeviceState_Set(DEVICE_STATE_INIT);
   
   /* Freeze Independent Watchdog (IWDG) while debugging:
    * When the debugger halts the CPU, the IWDG would normally continue
@@ -208,7 +211,8 @@ int main(void)
   Watchdog_Refresh();
 
   Inverters_Init();
-  Readings_Init();
+  DataReadings_Init();
+  Watchdog_Refresh();
   //SchedulerInitFct();
   /* USER CODE END 2 */
 
@@ -239,6 +243,18 @@ int main(void)
   /* creation of mutex_CAN2 */
   mutex_CAN2Handle = osMutexNew(&mutex_CAN2_attributes);
 
+  if ((mutex_APPSHandle == NULL) ||
+      (mutex_SASHandle == NULL) ||
+      (mutex_INVERTER_LHandle == NULL) ||
+      (mutex_INVERTER_RHandle == NULL) ||
+      (mutex_UART5Handle == NULL) ||
+      (mutex_CAN1Handle == NULL) ||
+      (mutex_UART3Handle == NULL) ||
+      (mutex_CAN2Handle == NULL))
+  {
+    Error_Handler();
+  }
+
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
@@ -256,20 +272,23 @@ int main(void)
   CAN_ProcessQueue_Init();      /* CAN1 RX queue */
   CAN_Car_ProcessQueue_Init();  /* CAN2 RX queue */
 
-  /* Enable CAN after queue creation, so ISR can always enqueue safely. */
-  CAN_Inverter_Init(&hcan1);
-  CAN_Car_Init(&hcan2);
+  if (!CAN_QueuesReady())
+  {
+    Error_Handler();
+  }
+
+  /* Defer CAN peripheral start to task context (after osKernelStart). */
   /* USER CODE END RTOS_QUEUES */
 
   /* Create the thread(s) */
   /* creation of DataLogger */
   DataLoggerHandle = osThreadNew(StartDataLogger, NULL, &DataLogger_attributes);
 
-  /* creation of InvertersManage */
-  InvertersManageHandle = osThreadNew(StartInvertersManager, NULL, &InvertersManage_attributes);
+  /* creation of MotorsManager */
+  MotorsManagerHandle = osThreadNew(StartMotorsManager, NULL, &MotorsManager_attributes);
 
-  /* creation of ReadingsManage */
-  ReadingsManageHandle = osThreadNew(StartReadingsManager, NULL, &ReadingsManage_attributes);
+  /* creation of DataManager */
+  DataManagerHandle = osThreadNew(StartDataManager, NULL, &DataManager_attributes);
 
   /* USER CODE BEGIN RTOS_THREADS */
   /* add threads, ... */
@@ -539,7 +558,7 @@ static void MX_IWDG_Init(void)
 
   /* USER CODE END IWDG_Init 1 */
   hiwdg.Instance = IWDG;
-  hiwdg.Init.Prescaler = IWDG_PRESCALER_16;
+  hiwdg.Init.Prescaler = IWDG_PRESCALER_256;
   hiwdg.Init.Window = 4095;
   hiwdg.Init.Reload = 4095;
   if (HAL_IWDG_Init(&hiwdg) != HAL_OK)
@@ -761,32 +780,41 @@ void StartDataLogger(void *argument)
   /* USER CODE END 5 */
 }
 
-/* USER CODE BEGIN Header_StartInvertersManager */
+/* USER CODE BEGIN Header_StartMotorsManager */
 /**
-* @brief Function implementing the InvertersManage thread.
+* @brief Function implementing the MotorsManager thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartInvertersManager */
-void StartInvertersManager(void *argument)
+/* USER CODE END Header_StartMotorsManager */
+void StartMotorsManager(void *argument)
 {
-  /* USER CODE BEGIN StartInvertersManager */
-  InvertersManageTask(); /* never returns */
-  /* USER CODE END StartInvertersManager */
+  /* USER CODE BEGIN StartMotorsManager */
+	MotorsManagerTask();
+  /* USER CODE END StartMotorsManager */
 }
 
-/* USER CODE BEGIN Header_StartReadingsManager */
+/* USER CODE BEGIN Header_StartDataManager */
 /**
-* @brief Function implementing the ReadingsManager thread.
+* @brief Function implementing the DataManager thread.
 * @param argument: Not used
 * @retval None
 */
-/* USER CODE END Header_StartReadingsManager */
-void StartReadingsManager(void *argument)
+/* USER CODE END Header_StartDataManager */
+void StartDataManager(void *argument)
 {
-  /* USER CODE BEGIN StartReadingsManager */
-  ReadingsManageTask(); /* never returns */
-  /* USER CODE END StartReadingsManager */
+  /* USER CODE BEGIN StartDataManager */
+  static uint8_t s_can_started = 0U;
+
+  if (s_can_started == 0U)
+  {
+    CAN_Inverter_Init(&hcan1);
+    CAN_Car_Init(&hcan2);
+    s_can_started = 1U;
+  }
+
+  DataManagerTask();
+  /* USER CODE END StartDataManager */
 }
 
 /**

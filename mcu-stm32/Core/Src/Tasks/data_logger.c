@@ -18,9 +18,9 @@
  *  ---------------------------------------------------------------------------
  */
 
+#include "data_manager.h"
+#include <motors_manager.h>
 #include "Tasks/data_logger.h"
-#include "Tasks/readings_manage.h"
-#include "Tasks/inverters_manage.h"
 #include "mutexes.h"
 #include "Inverter/Inverter.h"
 #include "cmsis_os.h"
@@ -126,6 +126,12 @@ void DataLoggerTask(void)
             InvTimingStats_t timing;
             InvertersManage_GetTimingStats(&timing);
 
+            if (g_can1_busoff) {
+                Serial_Log(LOGGER_CHANNEL, "[CAN1 BUS-OFF] TEC=%u REC=%u ESR=0x%08lX events=%lu\n",
+                    g_can1_sce_tec, g_can1_sce_rec, g_can1_sce_esr, g_can1_sce_count);
+                g_can1_busoff = 0U;  // reset dopo averlo loggato
+            }
+
 #ifdef DATA_COLLECT_MODE
             const Inverter_t *dc_inv = &inv_r_copy;
             const InvErrorSnapshot_t *dc_err_snap = &err_snap_r;
@@ -166,7 +172,6 @@ void DataLoggerTask(void)
                 
                 /* Check if inverter is in active state (LV_ACTIVE or higher) */
                 const uint8_t inverter_active = (dc_inv->state >= INV_STATE_LV_ACTIVE && dc_inv->state != INV_STATE_ERROR) ? 1U : 0U;
-                const uint8_t inverter_running = (dc_inv->state == INV_STATE_RUNNING) ? 1U : 0U;
                 const uint8_t inverter_error = (dc_inv->state == INV_STATE_ERROR) ? 1U : 0U;
 
                 if (inverter_active && (s_feather_logging_active == 0U)) {

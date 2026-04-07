@@ -62,6 +62,26 @@ extern "C" {
 #define CAN2_SCALE_FACTOR    1000.0f 
 #define CAN_TIMEOUT_MS      10U     
 
+/* =============================================================================
+ *  CAN1 SCE diagnostics — leggibili dalle task (scritti solo dall'ISR)
+ * ============================================================================= */
+extern volatile uint32_t g_can1_sce_esr;    /**< ESR snapshot al momento dell'errore */
+extern volatile uint8_t  g_can1_sce_tec;    /**< Transmit Error Counter all'errore   */
+extern volatile uint8_t  g_can1_sce_rec;    /**< Receive Error Counter all'errore    */
+extern volatile uint8_t  g_can1_busoff;     /**< 1 = bus-off attivo (reset da task)  */
+extern volatile uint32_t g_can1_sce_count;  /**< Totale eventi SCE dall'avvio        */
+
+typedef enum {
+    CAN_RUNTIME_UNINITIALIZED = 0U,
+    CAN_RUNTIME_READY         = 1U,
+    CAN_RUNTIME_INIT_FAILED   = 2U
+} CAN_RuntimeState_t;
+
+extern volatile CAN_RuntimeState_t g_can1_runtime_state;
+extern volatile CAN_RuntimeState_t g_can2_runtime_state;
+extern volatile uint32_t g_can1_last_error;
+extern volatile uint32_t g_can2_last_error;
+
 #define IMU_ACCEL_SCALE     0.001f
 #define IMU_GYRO_SCALE      0.1f
 #define IMU_MAG_SCALE       0.01f
@@ -126,6 +146,8 @@ void CAN_Inverter_Init(CAN_HandleTypeDef *hcan);
  * CRITICAL: This MUST be called before any CAN receipts.
  */
 void CAN_ProcessQueue_Init(void);
+
+bool CAN_QueuesReady(void);
 
 /**
  * @brief Drain and process all pending CAN RX messages from the queue.
@@ -261,6 +283,11 @@ void CAN_Car_TransmitAppsSas(CAN_HandleTypeDef *hcan, uint8_t apps_pct, int8_t s
  * @param inv     Pointer to inverter snapshot (must not be NULL)
  */
 void CAN_Car_TransmitInverterData(CAN_HandleTypeDef *hcan, uint8_t node_id, const Inverter_t *inv);
+
+CAN_RuntimeState_t CAN_GetCan1State(void);
+CAN_RuntimeState_t CAN_GetCan2State(void);
+void CAN_ServiceRecovery(CAN_HandleTypeDef *hcan1, CAN_HandleTypeDef *hcan2, uint32_t now_ms);
+void CAN_SetRecoveryPeriodMs(uint32_t period_ms);
 
 #ifdef __cplusplus
 }
