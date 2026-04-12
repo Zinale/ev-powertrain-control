@@ -1,0 +1,1024 @@
+10:19:46.419 [HB][BT] Client connesso | t=25021 ms
+10:19:51.753 [HB][BT] Client connesso | t=30028 ms
+10:19:52.259 [APPS]: pedal=0%| a=9 fil97 | errpx0imx|yws6q_ok=1 | [INV_R]: HV_ACTIVE | speef=0 RPM | to]YOrr| Tmot=20.3C Tinv=32.4CTmWs| D| Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:19:53.214 [APP8%2|X27=4 | erO0 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE  speeOAu| torquu=8.0NTooOrTinv=12.4K0tio=52/MFK=0V| Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:19:53.219 0,20.3,12.4,12.4,0,0,0.0,0.8,0.1,0, -999.00, -999.00, -999.00
+10:19:54.197 [A5edql=0=)| rXW2815err=0x00implaus=00tq_k=1%9YIu, -999.00, -999.00, -999.00
+10:19:54.199 [YYau||orque=0.0 Nm HU20.3C Tinv=12.5C Tyzt=16.=C | DC=0V | Ers: 0 Info: 0, -999.00, -999.00, -999.00
+10:19:54.200 0,20.3,12.5,12.5,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:19:55.191 [APPS]: pedal=0% | raw=832 filt=829,|(err=8x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=-0.0 Nm | Tmot=20.3C Tmnv=12.5CTigbt=12/5C | DG=0V | Err: 0 Info:3, -999.00, -999.00, -999.00
+10:19:55.192 0,20.3,12.,12.5,0,0,-0.0,0.1,0.0,3264175145, -999.00, -999.00, -999.00
+10:19:56.426 [HB][BT] Client connesso | t=35034 ms
+10:20:01.114 [APPS]:(pedal=0% | raw=768 filt=818 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ATivex|8stem|0Mursue=0r| Tmot=20.3C Tinv=12.4K Tigbt=1|H=0V | Err: 0 Ino: 0, -999.00, -999.00, -999.00
+10:20:01.121 0,20.3,12.4,12.4l0,0,0.4,-4.0,0.0,0, -999.00, -999.00, -999.00
+10:20:01.425 [HB][BT] Client connesso | t=40038 ms
+10:20:03.157 [ERROR] Code: 3587 | Entered at t=89203 8+96= ms ago), -999.00, -999.00, -999.00
+10:20:03.164 [CONDs]  Conditions: DC=0.0V | TorquYOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:03.334 [ERROR] Code: 3587 | Entered at t=89203 (+1069 ms X+H[CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=A55)[ERROR] Kolg: 3587 | Entered at t89203 (+1169 ms ago), -999.00, -999.00, -999.00
+10:20:03.336 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=8(RPM, -999.00, -999.00, -999.00
+10:20:03.436 [CONDs]  ConditioszhDC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:03.517 [ERROR] Code: 3587 | Entered at t=89203 (+1369 ms ago), -999.00, -999.00, -999.00
+10:20:03.523 [CONDditions: DC=0.0V | Torque=-1Jj5, -999.00, -999.00, -999.00
+10:20:03.618 [ERROR] Code: 3587 | Entered at t=89203 (+1469 ms ago), -999.00, -999.00, -999.00
+10:20:03.628 [CONDs]0 oditions:EC=0.0V | Torque=-| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:04.326 [ERROR] Code 35870| e|erul a| t=89223 .+2169 ms ago), -999.00, -999.00, -999.00
+10:20:04.331 [CONDs]  Conditions: DC=0.0V | Torue=m18| Steed=0 RRM, -999.00, -999.00, -999.00
+10:20:04.498 [GRROR]Code: 3587 | Entered at t=89203 (+2269 ms agoJC[CONDs]  Conditions:0.0V | Torque=-1 | Speed=45[ERROR] Codex0u|zut,i| t=9930BZjago), -999.00, -999.00, -999.00
+10:20:04.514 [CONDs]  Conditions: DC=0.0V | Tovque=-1 0 RPM, -999.00, -999.00, -999.00
+10:20:05.725 6v7|vx(d8ppld2030F06  dl 0  0           0                  0 0          0        0             l0t2 p  pt|pvxxpl064p66v7y||||v77o7__y,t 0. pb4pplp6 K-||66, -999.00, -999.00, -999.00
+10:20:06.505 [HB][BT] Client connesso | t=45047 ms
+10:20:11.454 [HB][BT] Client connesso | t=50049 ms
+10:20:13.881 [ROR[Qreda u=8=8+9q8v=(m.Rkxkm,12.5,86,.3.-9/0.0n1,0, -999.00, -999.00, -999.00
+10:20:13.949 [OONDs] cnditions: DC=L  Torqu==1 |+8:RVO[ERROZ] Code: 3587 |Eotered a89203 (+11969 ms ago), -999.00, -999.00, -999.00
+10:20:13.957 [Cs_  ConZs:dGOr|ToqueKlH0RTM, -999.00, -999.00, -999.00
+10:20:14.028 [ERROR Code: 357 | Envered ct t=89203 (+12069 ms ago), -999.00, -999.00, -999.00
+10:20:14.240 [RSEnYJt=89207 (+3szX/L[CONMBzu1 |0Wpmml=0R5I]stew81|4On|msmeX7=8920(jago), -999.00, -999.00, -999.00
+10:20:14.758 [ERSOR]Hg: 3=7qere0atO(.+97=h[CONDs] Conditions: DC=0.0V | Torquu==1 |(Sxmd=0RRM, -999.00, -999.00, -999.00
+10:20:14.836 [MXX[_:pYk0raw_S62 |ervO2mmpncu1 [R%II=I| stged0RPM|HK0.0Nm | Tot=24/C TinN:gb Dv | Ezv:7Mj6h[eRSov_-37 qYR|(x=22.qgo9Libu,q50,08,4.,0.1,1[S_ts]  Sf[S6.1WOklqemnxzp, -999.00, -999.00, -999.00
+10:20:16.448 [HB][BT] Client connesso | t=55051 ms
+10:20:21.632 [HB][BT] Client connesso | t=60051 ms
+10:20:26.460 [HB][BT] Client connesso | t=65051 ms
+10:20:31.714 [HB][BT] Client connesso | t=70051 ms
+10:20:34.717 0,19.1,12.5,12.5,0,0,0.0,0.0,-0.0,0, -47.75, 9.74, 8.99
+10:20:35.671 [APPS]: pedal=0% | raw=644 filt=771 | err=0x00 implaus=0 trq_ok=1 | r V_ACTI_E| srged=0 RPM| torquu=-pn0 Nm | Tmot=19.7C Tinv=12.5C igt=1.5C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:20:35.672 0,19.7,12.5,12.5,0,0,-0.0,-0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:20:36.445 [HB][BT] Client connesso | t=75058 ms
+10:20:36.639 [APPS]V0% | raw=808 filt=757,Y0 tru_ok=1 | [INV_R]: LV_OOVKVE | speed=0 RPM | torque=-0.0 Nm | Tmot=19.7C Tinv32.5Cu=2.5c |DC=0V | Err: 0 Info: 2, -999.00, -999.00, -999.00
+10:20:36.640 0,1yn712.5,32.5,0,0,-0.0,-0.0,0.0,3615145, -999.00, -999.00, -999.00
+10:20:37.818 [APPS]: pedal=0% | raw=706 filt=798 | err=x94imvlguw=0 trq_ok=1 | [INV_R]: HV_ACTIVE | sxmed=2 RPM | torque=0.0 Nm | Tmot=19.7C Tinv=12.5C Tigbt12.5C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:20:37.819 0,19.7,12.5,12.5,0,0,0.0,-0.1,0.1,0, -999.00, -999.00, -999.00
+10:20:38.609 [ApPS]: pedal=8% | raw=683 filt=798 | err0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTV | sxet=0 XM8|8voryue=4.80o |2Vmot=19.8C Tinv=12.5C Tigbt=12.5C |0DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:20:38.611 0,19.8,12.5,12.5,0,0,8.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:20:39.600 [APPS]: pedal=0% | raw=729 filt=808 | err=0x00iplaus=0trq_ok9 | [INV_R]:JV_ACTKQsp=00rpM(|0torqum=8.0 Nm | Tmot=19.7C Tinv=12.5C Tmgbt=12.5C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:20:39.603 0,19.7,2.5L.0,0,00,-0.0,=00,0, -999.00, -999.00, -999.00
+10:20:40.573 [CXP_]|edal=0% | raw=692 filt810| err=0x00 imp|aus0trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=19.7C Tinv=12.5C Tigbt=12.5C | =0V | Urr 80Info: 0, -999.00, -999.00, -999.00
+10:20:41.540 [HB][BT] Client connesso | t=80060 ms
+10:20:41.570 [APPS]: pelal=0% |raw=705 filt=78y|ezr=px800mmplaus=0 trq_ok=1 | [INV_R]: Hv_ACTIVM,| stmed0 RPM | torque=0.0 Nm |Tmot=19.7C Tinv=93.7GU12.5C | DC=0V |8]rv: 0 Info:4, -999.00, -999.00, -999.00
+10:20:41.570 0,19.7,1:.5,12.5l0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:20:42.549 [APP]:|YV0% | raw=787 filt=793 | err=0x00 imqlaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM |torque=0.0 Nm | Tmot=19.8j1Tigq2.5C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:20:43.593 [EPP0% |raw=61 ilt=817 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTMVM(w|eedLH| torque=-0.0 Nm | Tmot=19.C Tinv=12.5C Tig1 DC=0V  Err: 0 Info:0C0,19.7,12.5,1.5,0,0,-0., -999.00, -999.00, -999.00
+10:20:44.497 [APp[]: pedal=0% | raw=871 fil=810 | urr=0x800y|luw=0z1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.5C Tigbt=12.5C | DC=0V | Urrz 00Inn: p, -999.00, -999.00, -999.00
+10:20:44.515 0,19.816.=,32.5,0,0,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:20:45.508 [APPS]: pmlal=0% | raw=686 filt:5seO0 imp|au=0 trq_ok=1 | [INV_R]: HV_ACTIV | seed0 trque=0.0 Nm | Tmot=19.7C Tinv=12.5C Tig=12.5C | DC=0V | Err: 0 InKj, -999.00, -999.00, -999.00
+10:20:46.481 [HB][BT] Client connesso | t=85073 ms
+10:20:46.489 [APPS]: edal5 |hqw=w7Z[Werr=0x00 im+0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 N| Tmot1.7C Tinv=12.5C Tigbt=1:.5K | LC=6(Mrv1In: 0, -999.00, -999.00, -999.00
+10:20:46.489 0,19.7,12.5,12.5,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:20:46.490 [ERROR] Code: 3587 | Entered at t=63h1054 m8yw-, -999.00, -999.00, -999.00
+10:20:46.504 [CONDs]  Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:46.595 [GSROS] Code: 3587 | Enteredat|97143 (+70 ms2ago), -999.00, -999.00, -999.00
+10:20:46.606 [ONDs]  Conditions:DC0.0v| Torqe=-1 | Speed=0 VT_, -999.00, -999.00, -999.00
+10:20:46.694 [RoR] sole: 3587  Entered at t=17143 (+170ms wo), -999.00, -999.00, -999.00
+10:20:46.785 [CONDs]  Conditions: DC=0.0V | Torque=-1 |,RPMS[ERROR] Code: 3587 | Entered at t=17143 (+270 ms ago), -999.00, -999.00, -999.00
+10:20:46.812 [CONDs]  CoV DC=0.0V0| Torque=-1 |Speed=2 RPM, -999.00, -999.00, -999.00
+10:20:46.888 [ERROR] Code: 3587 | Entered at t=17143 (+3700w ago-, -999.00, -999.00, -999.00
+10:20:46.896 [CONDs]  Cotitioos:(DG0.2V | TK-3  Speed=0 Rpm, -999.00, -999.00, -999.00
+10:20:47.000 [ERROR] Coge, -999.00, -999.00, -999.00
+10:20:47.002 [CONDs]  onditions: DC=0.0V =-| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.077 [ERROR] Code: 3587 | Enter, -999.00, -999.00, -999.00
+10:20:47.086 [zW DC=0.0V | Torque=-1|([peed=0 RM, -999.00, -999.00, -999.00
+10:20:47.195 [ERROR] Code: 3587 | Entered at t=17143 (+670 ms ago), -999.00, -999.00, -999.00
+10:20:47.196 [CONDs]  Conditions: DC=| Torque=-q | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.295 [ERROR] Code:SEnted at t=171432(/70m ago), -999.00, -999.00, -999.00
+10:20:47.297 [CONDs]  Conditions:0DC=0.0V | Torque=-1 | Sp=0 rPM, -999.00, -999.00, -999.00
+10:20:47.383 [ERROW 3587 | Entered0qt t=17953, -999.00, -999.00, -999.00
+10:20:47.385 [CONds]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.434 [AQSW] H794 filt=781 | err=0x00 impleus=0 trq_k[INVR]: ERROspegf=0 RPM |zr Tmot=19.7C Tinv=12.5C Tigbt=12.5C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:20:47.466 [ERROR] Sodu: 3587 | Enter6 t=17qt3 (+970 ms ago), -999.00, -999.00, -999.00
+10:20:47.479 [CONDs]  Conditions: DC=0.0V| Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.594 [ERROR] Code: 3587 | Entered at t=17143 (+1070 ms ago9[CONDs] onz_kAdC=0.0V | Toryuu=-1  Sqeed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.709 [ERROR] Code: 3587 | Entered at t=17143 (+1170 msX+H[CONDs]  Conditions: DC=|-1 |Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.770 [ERROR] Code: 3587 | Q a1w143 (+1270 ms ago), -999.00, -999.00, -999.00
+10:20:47.857 [ERROR_God:Entered at t=17143 (1370 ms igo), -999.00, -999.00, -999.00
+10:20:47.887 [CONDs]  Conditions: DC=p.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:47.984 [ERROR] Code: 3587 | EnuereX17143 (+1470 ms ag)mj[COND]0 Conditions: DC=0.0V | Torque=-1 |0 RPM, -999.00, -999.00, -999.00
+10:20:48.067 [ERROR] Code: 3587 | Entered at t=17143 (+150msq)-, -999.00, -999.00, -999.00
+10:20:48.068 [CONDs]  CondZ_o dc0nx0|orque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:48.176 [ERROR] Code: 3587 | Entgred aLSBjago), -999.00, -999.00, -999.00
+10:20:48.177 [CONDs]  Conditions: DC=0n8v0|orwm=/3_HVVM, -999.00, -999.00, -999.00
+10:20:48.258 [ERROR] Cofe: 3587 | GY, -999.00, -999.00, -999.00
+10:20:48.363 [CONDs]  Conditions: DC=0.0V | TK=q(| Speet0rpMMoUII=uodez 358w| Enture2X717143 (+1870 ms ago), -999.00, -999.00, -999.00
+10:20:48.370 [CONDs]  Conditions: DC=0.0V | Torque=-5 | Speed0RXM, -999.00, -999.00, -999.00
+10:20:48.417 [APPS]: pedal=0% | raw=781 filt=781 |err=0x00 implaus=0 trq_ok=1 | [IOV_R_5I| speed=0 RPM | |ruum=-4.0 N[TmotNUioLTigbt=12.5C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:20:48.448 [ERROR] Code: 3=87 |(Eterel av,|37LMBZms ago), -999.00, -999.00, -999.00
+10:20:48.469 [COOFs] DC=0.0V | Torque=-1 | Spgef=L5, -999.00, -999.00, -999.00
+10:20:48.586 [ERROR] Code: 3587 | Entered at t=171t3+20wps ao9=z[CONDsConditions: DC=0.0V Torqug=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:48.983 [ERROR] Gome: 35:7| Entered at t=17143 (+2170 ms ago), -999.00, -999.00, -999.00
+10:20:48.990 [CONDs] CodiZk DC=0.0V | Torque=-1 | Sped rPM, -999.00, -999.00, -999.00
+10:20:48.990 [ERROR] Code: 3587 | Entered at t=17143 (+2270 ms ago), -999.00, -999.00, -999.00
+10:20:48.992 [CONDs]  Conditmons: tz|Vorque=1 | Speed0 ZPM, -999.00, -999.00, -999.00
+10:20:48.994 [ERROR] Code: 3Entered at t=17143 (+2370 ms ago), -999.00, -999.00, -999.00
+10:20:48.995 [CONDs]  Conditions: DC=0.0VQ-q |0spml=0 VPM, -999.00, -999.00, -999.00
+10:20:48.996 [ERROR] Code: 358entrudat t=975+2470 ms ago), -999.00, -999.00, -999.00
+10:20:48.998 [COND]Conditions: DC=0.0V | orque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:49.054 [ERROR] Code:03587 | Mntered at t=17143 (+2570 s ago), -999.00, -999.00, -999.00
+10:20:49.058 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:49.169 [ERROR] Code: 3587 | Entered at t=17143 (+2670 ms yw9-[CONDs]  Conditions:0.0V | Torque=-3| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:49.239 [ERROR] Code: 3587 | Entered at t=17143 (+2770 ms ago), -999.00, -999.00, -999.00
+10:20:49.249 [CONDs]  Contktion: [hK|OKLSpegd=1 RPM, -999.00, -999.00, -999.00
+10:20:49.340 [ERROR] Code: 3587 | Entezedat t=17143 (+2870 ms ago), -999.00, -999.00, -999.00
+10:20:49.344 [CONDs]  Conditions: DC=0.0V | Torque/3H1 RPM, -999.00, -999.00, -999.00
+10:20:49.396 [APPS]: pedal=0% | raw=790 filt=791 | err=0x00 implaus=8 trq_, -999.00, -999.00, -999.00
+10:20:49.401 0,19.7,12.5,12.5,0,0,0.0,8.0,0.1,0, -999.00, -999.00, -999.00
+10:20:49.456 [ERROR](Code:3587 | Enterd attq143 (+2970 ms ag+H[CONDs]  Contitins: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:49.581 [ERROR] Code:3587 | Entered at t=17943 (+3070 ms qw+, -999.00, -999.00, -999.00
+10:20:49.596 [CONDs]  Conditmons: LC=1.0V[-1 | Speed=0RPm, -999.00, -999.00, -999.00
+10:20:49.681 [ERROR] Code:3587  EnYt=1713 (+3170 ms ago), -999.00, -999.00, -999.00
+10:20:49.682 [ConDs] Kodtyons: DC=0.0V | Torque=-1 | Speed=0 RP], -999.00, -999.00, -999.00
+10:20:49.737 [ERROR] Code: 3587 | Entered at,v=37363 TSjagoiM, -999.00, -999.00, -999.00
+10:20:49.739 [COND] Condz_k=0n0V |(rue=-1 | SYYVA55, -999.00, -999.00, -999.00
+10:20:49.846 [ERROR] Co: 3587 |Entered at t=17143 (3370 ms ago)C[CONDs]  Conditions: DC=0.0V | Trqum=1|,[rwgl=8RTM, -999.00, -999.00, -999.00
+10:20:49.946 [ERROR] Sode: 3587 | Entered at t=17143 (+3470 ms ago), -999.00, -999.00, -999.00
+10:20:49.947 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=00rpM, -999.00, -999.00, -999.00
+10:20:50.035 [ERROR] : su8 |entered at t=1143+3570 msx+H[CONDs]  Conditions: DC=0.0V |0Torqum=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:50.155 [ERROR] Code: 3587 | EnterY, -999.00, -999.00, -999.00
+10:20:50.156 [CONDs Conditions: Ds=0.0V | Torque=-1 | Spee= RPM, -999.00, -999.00, -999.00
+10:20:50.239 [ERROR] Code: 3597 | Entered at t=17143 (+3770 ms ago), -999.00, -999.00, -999.00
+10:20:50.247 [CONDs]  C TC=.2VVorque=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:50.330 [ERROR]Code: 3587 | Entered at t=17143 (+380 ms ago), -999.00, -999.00, -999.00
+10:20:50.331 [CONGs  Conditons: Qr| Toryuu=-1 | W8YvQ75, -999.00, -999.00, -999.00
+10:20:50.385 [APPS]: pedal=0% | raw=759filt=8, -999.00, -999.00, -999.00
+10:20:50.387 [INV_R]: ERROR  spee=p RPM | torque=-0.0 Nm | Tmot=19.8C Tinv=12.5C Tygbt=12.=C | DC=0V | Grrzh% 6-, -999.00, -999.00, -999.00
+10:20:50.389 0,19.8,12.5,12580-4.0,-0.0,0.1-3264175145, -999.00, -999.00, -999.00
+10:20:50.416 [ERROR] gode: 3587 | Entered at t=17143 (+3y70 ms ago), -999.00, -999.00, -999.00
+10:20:50.424 [CONDs] io., -999.00, -999.00, -999.00
+10:20:50.624 [ERz%a | tedytt1713(+4274 msX+X[CONDs]  Conditions: DC=0.V| Torque=-1 | Sxeed05[ERROR] Code: 35Entered at t=710(+4172ms ago+, -999.00, -999.00, -999.00
+10:20:50.626 [CONDs((Kondm|ions: DC=0.0V | Trque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:50.719 [ERROR] Code: 3587 | Entered at t=17143 (+43, -999.00, -999.00, -999.00
+10:20:50.721 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:50.850 [ERROR] Code: 3587 | Entered at t=1743 (+jag+, -999.00, -999.00, -999.00
+10:20:50.945 [CONDsWh|onw: DC=0.0V | Tozque=-1 | SpeeP[ERROS_ 35sEntered at t=17143 (+5470ms ago), -999.00, -999.00, -999.00
+10:20:50.946 [CONDs]  Conditm0.0V | Torque=-=( Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:51.010 [ERROR] Cve(3587 EougrYH,171t3 +4570[., -999.00, -999.00, -999.00
+10:20:51.017 [CONDs]  Conditionsz DC=0.0V | TorquYOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:51.105 [ERROR] Code: 3587 |(Entered at t=17153 (4670 ms ago), -999.00, -999.00, -999.00
+10:20:51.111 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:51.204 [ERROR] Code:357 | Entered at t17143 (4778 ms yw), -999.00, -999.00, -999.00
+10:20:51.207 [CONDs]  Conditions: DC=0.0VUK-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:51.316 [ERROR] Code: 3587 | Entered at t=1w143 (+4870 ms ago), -999.00, -999.00, -999.00
+10:20:51.361 [APPS]: pevel=x-0| raw=711 filt=816 | err=0|80mxlaus=1v1 | [INV_R]: ERROR | speed=4 RPM | torque=-0.0 Nm | Tmot=19.7C Tinv=12.=C Tigbt=12.M(DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:20:51.373 0,19.7,12.5,12.5,0,0,-0.0,-0.0,0.0,3264175345, -999.00, -999.00, -999.00
+10:20:51.407 [ERROV_CogEnteed at t=17143 (+4970 ms ago), -999.00, -999.00, -999.00
+10:20:51.408 [CONDs]  ConditoonsGCLi|,orque=-1 | Speed=0RPM, -999.00, -999.00, -999.00
+10:20:51.459 [HB][BT] Client connesso | t=90080 ms
+10:20:51.520 [ERROR] Code: 3587 | Mntered at t=17143 (+5070 ms ago), -999.00, -999.00, -999.00
+10:20:51.522 [CONDs]  Conditions: DC=0.0V | Torque=-9 | Stmed=0 VPM, -999.00, -999.00, -999.00
+10:20:51.614 [ERROR] Code: 3587 | Entermd0at t=17143 (+170 ms go), -999.00, -999.00, -999.00
+10:20:51.616 [CONDs]  Conditins: DC=0.V |htrque=-1| Sqeef=0 RPM, -999.00, -999.00, -999.00
+10:20:51.702 [ERROR] 3Qat t=17143 (+5:70 ms ago), -999.00, -999.00, -999.00
+10:20:51.707 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Spuet=8 RPM, -999.00, -999.00, -999.00
+10:20:51.802 [EROR]ode:03587 | Entered at t=1716BZ5[CONDs] ons dC=0.0V | TorueOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:51.913 [ERROR] Code: 3587 | Entered at t=17143 (+5470 ms ago), -999.00, -999.00, -999.00
+10:20:51.917 [CONDs] Cow=pn8V | Trug=-1 | Speed=0RPM, -999.00, -999.00, -999.00
+10:20:51.989 [ERROR] C 3u87 |Entere71SBZjago), -999.00, -999.00, -999.00
+10:20:52.109 [CONDs]  Conditions: DC=0.0V | TorquKLSed0 Sc[ERROR] Code: 3587 | Entered0at t=57147 (+5670msx+H[CONDs]  Condiuions: DC00V | Torque=-1 | Speed=1 RPM, -999.00, -999.00, -999.00
+10:20:52.198 [ERJ 3587 | Entgred at t=17143 (+5770 ms qoo), -999.00, -999.00, -999.00
+10:20:52.198 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:52.296 [ERROR] Code: 3587 | Entered at t17143 (k5870 ms ago-, -999.00, -999.00, -999.00
+10:20:52.298 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:52.359 [APPS_ sgdal=0% | raw=886 filt812 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: ERROR | speed=3 SRO |vorsue0.0 No | tmot=19.7C Tinv=12.5C Ti12.5C | DoHE:3587 Info: 6, -999.00, -999.00, -999.00
+10:20:52.402 [ERROR] Coee: 8xqesme a t=17143 (+5972 osa+H[CONDs]  Conditions: DC=0.0V | Torque=-1 | Sxmd=,PM, -999.00, -999.00, -999.00
+10:20:52.525 [ERROR] Sdu:h3587 Entered at t=174 700ms qgo9, -999.00, -999.00, -999.00
+10:20:52.525 [CONDs] 0C|ytions:FC=0.Torque=-1 | Speet=0 RPM, -999.00, -999.00, -999.00
+10:20:52.667 [CONDs]  Conditions: DC=0.0 | TovueOKL2Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:52.681 [ERROR] Code: 3587 | Entered at t17143 (+6270 ms ago), -999.00, -999.00, -999.00
+10:20:52.792 [CONDs]  Conditions: DC=0.0 | oq=-1 |Spegf=VTM-[ERROR] Code: 3587 |(Entered at t=1SBZjago), -999.00, -999.00, -999.00
+10:20:52.794 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Se=0 RPM, -999.00, -999.00, -999.00
+10:20:52.886 [ERROR h357|lmntmveY171ua(%j, -999.00, -999.00, -999.00
+10:20:52.887 [CONDs]  Conditions: DC=0.0V |Wosue=-1 | SYYVA55, -999.00, -999.00, -999.00
+10:20:52.983 [ERROR] Code: 3587 | Entered 17143 (+570 ms ag), -999.00, -999.00, -999.00
+10:20:52.986 [COND]0Condmvoos:MK0n0Torque=-1 |Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:53.089 [CONDs]  C DG=8/(|Torswe=-1 0 RPM, -999.00, -999.00, -999.00
+10:20:53.167 [ERROR] Code: 3587 | Entered at t=1713 (+6770 ms ago), -999.00, -999.00, -999.00
+10:20:53.260 [CONDs]  Conditmons: FG=4.0V | [KLSxeedx0zX]MM=M_Ce: 587 | Entered at0v=17143 )+7973osago), -999.00, -999.00, -999.00
+10:20:53.277 [CONDs]  Conditions: DC0.0v | torque=-1 | SpeeOC55, -999.00, -999.00, -999.00
+10:20:53.347 [EPXS]: refal=0%X813 filt=832 | err=0x00 iopnaws=0t|1|[INV_R]:ERVOR | spee3uHKe=00 Nm | mot=1.7C TinOLTigbt=12.5C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:20:53.347 0,19.7,12.5,12.5,0,0,0.0,-0.1,0.4,0, -999.00, -999.00, -999.00
+10:20:53.354 [ERROR] Code: 3=8Gnweseg(qv 7143 (+6970 ms ago9, -999.00, -999.00, -999.00
+10:20:53.380 [CONDs]  Condi|ionsz DC=0.0V | Torque=-1  Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:53.484 [ERROR] Code: 35x | Entered(a| t=1714 (+7070 ms aJ[CONDs]  Conditions: D0.0que=-1 | Speed0RPM, -999.00, -999.00, -999.00
+10:20:53.572 [eRROV](Code 3587 | Entered at t17 +7170 msyg+[CONDs]  ConditioHQoquemLSpeed=4 RPM, -999.00, -999.00, -999.00
+10:20:53.664 [ERROr Kotu:43=7)Go=1q43 h+7270 mw ago), -999.00, -999.00, -999.00
+10:20:53.674 [CONDs]  Conlitions: DC=.0V  Tosqu=-1|= rpM, -999.00, -999.00, -999.00
+10:20:53.750 [ERROR] Code: 3587 | Enuered itt=593 (+7370 ms ago), -999.00, -999.00, -999.00
+10:20:53.877 [CONDs]  ConWk DC=.0V | Torque=-1 | Speed=0 RPMC[ERROR] CoR  EntwredX17147 (+7470ms ago+, -999.00, -999.00, -999.00
+10:20:53.958 [CONDs]  Conditions: DC=.1V | Torque==9(|hsm|=8,VPM[ERROR] Code: 3587 | Entered avs0 ms(ioo9, -999.00, -999.00, -999.00
+10:20:53.961 [CONDs]  Contmtios: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:54.380 [ERROR] Code: 3587 | entered at t=17143 (+767na+H[CONDs]  Conditions:C=0.0V| Trque=-9(|0Stemd=0 RPM, -999.00, -999.00, -999.00
+10:20:54.386 [ERROR] Code: 3587 | Entered at t=17143 (+7770 ms ago), -999.00, -999.00, -999.00
+10:20:54.386 [COND, -999.00, -999.00, -999.00
+10:20:54.389 [ERROR]0col: 3587 | Entered at t=17143 (+7870 ms ag), -999.00, -999.00, -999.00
+10:20:54.391 [CONDs]  Conditions:(DC=0.0V | TK-5,i0 RPM, -999.00, -999.00, -999.00
+10:20:54.393 [APPS]: pedal=0% | raw=6670vilt=12 | ers=0xp0 implaus=0 trq_ok=1 | Inv%ERROV| qeed=0 RPM | torque=0.0 nm|tot9.8C,Tinv=12.5CTkgbt=12.5C | DC=0V |]rz:(358 Ingo:(7, -999.00, -999.00, -999.00
+10:20:54.393 [ERROV] Code: 3MEntat t17143 (7970 ms0ago), -999.00, -999.00, -999.00
+10:20:54.394 [CONDs]  Conditions: DC=0.0V |K-1 |Speel=00RPM, -999.00, -999.00, -999.00
+10:20:54.445 [ERROR] ode: 3587 | Enteredatv1SB0 ms ago), -999.00, -999.00, -999.00
+10:20:54.456 [CONDs]z_k=00V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:54.562 [ERROR] Code: 3587 Etered at t=17143(+17Rkg/H[CONEs_ DC=0.0v| Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:54.674 [ERROR] Code: 3587 | Entered at t=17143 (+8270 ms ago), -999.00, -999.00, -999.00
+10:20:54.675 [CONDs]  Conditions: DC=0.0V | Torue=-1 | Spemd=0 RPM, -999.00, -999.00, -999.00
+10:20:54.830 [ERROR_Entered at t=17143 (+8376(mx[CONDs]  Conditions: DC= ue=m1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:54.839 [ERROR] Coy7enterut at |=17143 (+8470 ms ago), -999.00, -999.00, -999.00
+10:20:54.948 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed0 RPM[RRoR God:(3587 |ereh]OLSB70 m qwo), -999.00, -999.00, -999.00
+10:20:54.949 [CONDs]  Conditions:(DC=0.0V | Torque=- | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:55.049 [RROR]Code: 3587 |0Entered yt w=37JBZj ago), -999.00, -999.00, -999.00
+10:20:55.053 [CONDs]  Conditions: DC=0.x8| Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:55.166 [ERROR] Code: 3587 | Entered at t=17163(+83nX+H[CONDs]  ition DC0.0V | Torque=-1 |SwgeeH5, -999.00, -999.00, -999.00
+10:20:55.239 [ERROR] Code: 3787 | Entered at t=17143 (+8870mw ego-, -999.00, -999.00, -999.00
+10:20:55.241 [CON]0Conli|yVS6= oyoKLWpemd=0 RPM, -999.00, -999.00, -999.00
+10:20:55.291 [APPS]: pedal=0% | raw=98 filt=760 | err=0x00Z[4,|zq_oo=9]IwHQJ, -999.00, -999.00, -999.00
+10:20:55.291 [Tmot=19.8C Tinv=12.5C Tigbt=1| FC6Nno: 6, -999.00, -999.00, -999.00
+10:20:55.337 [ERROR] Code: 3587t t=17143 (+8970 ms ago), -999.00, -999.00, -999.00
+10:20:55.338 [CONDs]  Conditions: DC=0.1V | Kmspewt82tM, -999.00, -999.00, -999.00
+10:20:55.426 [ERROS]Code: 35:7 |Entered at t=17147 8+=02sago), -999.00, -999.00, -999.00
+10:20:55.433 [CONDs]  Conditions: DC=0.0To]YOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:55.536 [ERROR OodeSeey)vBZr7pms awo), -999.00, -999.00, -999.00
+10:20:55.537 [CONDs]  Conditions: DC=4.0Vjk-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:55.641 [ERROR] Code: 3587 | Enterel a97943 )+92 ms X, -999.00, -999.00, -999.00
+10:20:55.728 [ERROR]ode: 3587 | Entered at t=17143 (+9370 ms ago), -999.00, -999.00, -999.00
+10:20:55.730 [CONDs]nitions:0DC=80V|(Torue=-1 | Speed=0 RP, -999.00, -999.00, -999.00
+10:20:55.815 [ERROR] Code: 3MEntered at t=17143 (+9470 ms ago), -999.00, -999.00, -999.00
+10:20:55.939 [CONDs]  Coodi|ionsNso-q8|2stmmO[ERROR] Code: 3587 | entmredavt=1714s mago), -999.00, -999.00, -999.00
+10:20:55.944 [CONDs]tios, -999.00, -999.00, -999.00
+10:20:55.947 [sme0 RPM, -999.00, -999.00, -999.00
+10:20:56.133 [ERSS_Eterdat t=17143 (+9670 ms ag+H[CONDs]  Conditions: DC=0.0V0|0tryue=-1|SYYVA55[ERROZ]Code: 3583at1v3(9774 ms ago), -999.00, -999.00, -999.00
+10:20:56.139 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:56.208 [ERROR] ode: 3587 | Entered at t=5753n, -999.00, -999.00, -999.00
+10:20:56.220 [CODs]Conditions: DC=00V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:56.292 [APP[]8|udal=9-)raw=72 filt=792 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: ERROR | speed=0 RPM | toryue=/0.0Nm o=9.x,nv=2Ml+K1| _377Info: 6, -999.00, -999.00, -999.00
+10:20:56.293 0,19.8,12.5,12.5,0,0,-0.0,-0.0,-0.0,3264175145, -999.00, -999.00, -999.00
+10:20:56.324 [ERROR] Code: 3587 | EnterY, -999.00, -999.00, -999.00
+10:20:56.408 [CODs][yvion0FG=4.2V|Hk-3 | Speedrss[ERROR_Code: 35Entered qtt=q71(+18870 ms ag), -999.00, -999.00, -999.00
+10:20:56.476 [HB][BT] Client connesso | t=95088 ms
+10:20:56.529 [CONDs]( Conditions:TC0.0 W[1 | Speed88ZP_[ERR Code: 3587 | Entered at t=17143 (q0a), -999.00, -999.00, -999.00
+10:20:56.531 [CONDs]  Conditions: DC=0.0V | Torque=-3 |,S|m|0 RPM, -999.00, -999.00, -999.00
+10:20:56.627 [CONDs]  Conditions: DC=0.0V | Torque=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:56.715 [ERROR] Cod:3587 |)ntr|0cvt=17362yi ag), -999.00, -999.00, -999.00
+10:20:56.716 [CONDs]  Conditions: DC=0.0V | Torque=-1 | SpeedO, -999.00, -999.00, -999.00
+10:20:56.848 [ERROR] Code:03=8 |_wrgd ct t=17343 (+1047jago-, -999.00, -999.00, -999.00
+10:20:56.852 [CONDs]  Conditions: Dr| TorqueSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:56.892 [ERROR] Code: 3587 | Entered at t=17BZjago), -999.00, -999.00, -999.00
+10:20:56.926 [COT 0cnli|owaLS0nQue_kLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:56.996 [ERROR]C 3587 | Entered at t=17143 (+10670 ms ago), -999.00, -999.00, -999.00
+10:20:57.014 [CONDs]  Conditions: DC=44WrqyyO, -999.00, -999.00, -999.00
+10:20:57.104 [R Enteevetht77143(+10770 ms ago), -999.00, -999.00, -999.00
+10:20:57.215 [CONFsW DC=0.0V | Tovqum=-1,|[puf=2Huz[UzrOR377en_/17q|0(oy887,msekH[CONDs]  CondityonDO=0.0V |Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:57.272 [APPS]: pedal=0% | raw=8 filtxgrv=px00 imlX]rqq |INV_R]: ERRSsvy6NG=ov=9/7C]nv_LTigbt=12.5C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:20:57.275 0,19.7,12.5,32.5,0,0,0.p,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:20:57.318 [ERROR] Code: 3587 |0MnvvYit_BZ70c_i[CONDs]  Conditions: DC=0.0V | torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:57.407 [ERROR] Code: 3587 | Entered at t=17147 (+LL6]kkOukgoOq |,Toruuu=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:57.519 [CONDs]  CondivionsFC=0.1W Zk_9|0wxmuf=8(RPM, -999.00, -999.00, -999.00
+10:20:57.600 [ERROR] Code: 3587 | Entez at =17LBZjago), -999.00, -999.00, -999.00
+10:20:57.686 [CwtZk DK=0.0V0| Tovqum==s_=Csciumh5JQ0att=17143 (+11370 ms aoo), -999.00, -999.00, -999.00
+10:20:57.715 [CONDs]  Conditions: DC=0/0UTorsue/1  Speed=1RPm, -999.00, -999.00, -999.00
+10:20:57.813 [ERROR] Cofe:  Entertqt t1SiiMiwo)[CMNDs]0Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:57.896 [ERROR] Code: 3587 | Entered atOLS, -999.00, -999.00, -999.00
+10:20:57.899 [k_tC0VH0torque=-1 | Wpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:57.993 [CONDs] CoV0Dk8/1WKokSpeed=0 RPM, -999.00, -999.00, -999.00
+10:20:58.112 [ERROR] Code 3587 | Enveret)ev(|=3563 (+11770 ms ago), -999.00, -999.00, -999.00
+10:20:58.114 [CONDs]  CondZWk DC=02V2TK-1hU2VSM, -999.00, -999.00, -999.00
+10:20:58.187 [q.mi[m:03588| Envered at t=17143 (+11870 ms ago), -999.00, -999.00, -999.00
+10:20:58.254 [CONDs]  Conditions: DC=0.0V | Torque=KL=Wh[APPS]: pedal=0% | raw=923vilt=763 | err=4x00 implaus=0 tr IvR_Gr_r,|hstegOO t[Kr| Tmo=19.7C Tinv=12.5C Tigbt=12.5C | D| Err: 358 Info: 6, -999.00, -999.00, -999.00
+10:20:58.334 [MrJ%:qY73t8+1njcg+H[CONDs]  Conditions: DC=0.0V | ToYKL Speed=0RPM, -999.00, -999.00, -999.00
+10:20:58.367 [ERROR] Code: 3587 |Gurey, -999.00, -999.00, -999.00
+10:20:58.476 [COND]  Condityon: LK=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:58.503 [ERROR] Code: 3587 | Entered at t=17143 ,/1217Jo, -999.00, -999.00, -999.00
+10:20:58.573 [ERROR] Code: 3587 | Entered at LsG70 ms ago), -999.00, -999.00, -999.00
+10:20:58.789 [CONDsWAC7tyn:s|(OOK5hU7[UVVO[_Cole:3587 | Entered at t=17143 (+12370 ms cgo+C[CONDs] Conditions: DC=0.0V | Toremd1vV[7-oUIrOrwZmYOLWBZzago), -999.00, -999.00, -999.00
+10:20:58.906 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 R_K[ERROR] Code: 3597 a|(=5y[ZnXH[CONDs]  Condiuions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:58.996 [ERROR] Code: 3587 | Entered at t=1714 82v7_J=[w]fizVC=8.0V |8Vovu-9(| Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:59.086 [ERROR] Code: 3587 | Entered at t=171438(+12770 ms ago+, -999.00, -999.00, -999.00
+10:20:59.089 [ucn4dC2.3:hLSeed0rXM, -999.00, -999.00, -999.00
+10:20:59.168 [URVOR]Code: 3587 | Enteed at t=17132x/12870msago+, -999.00, -999.00, -999.00
+10:20:59.169 [CONDs]  Conditions:%DC=L)svo.Wvw[[, -999.00, -999.00, -999.00
+10:20:59.269 [APPS]: pYV0%|raw=716 filt=800 | err00n01hvmV_Z]:(URVOR | speed=0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.5C TZ12.5C | DC=0V |(Urr,3=878yvol0,59.8/q.caeRN5 35870| Mturm|8m|8|=3(+12970 ms ago), -999.00, -999.00, -999.00
+10:20:59.371 [CONDs] Condiik DC=0.0V | Torque=-1|rmel[ERROr0t: 7580|r)tjjagoiM[CONDs]  Conitins: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:20:59.786 [ERROR] Code: Qy=7143(i+118i)[C_NDs]  Condi|ions: DC=0.0V | Torque=-1 | Speed=0 ZPM, -999.00, -999.00, -999.00
+10:20:59.792 [ERROR] Code: 3587 | Entered at t=17143 (+1327p s ago), -999.00, -999.00, -999.00
+10:21:00.139 [ERRoR] Cde: 358 | Entered at t=17143 (+13370 s ago), -999.00, -999.00, -999.00
+10:21:00.141 [CONDs] Kondktion, -999.00, -999.00, -999.00
+10:21:00.142 [CONDs]  Conditions:lC=q.0V | Vo/svvpmeSoYIiat t=17143 +13u70 m qwo-, -999.00, -999.00, -999.00
+10:21:00.505 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:00.509 [ERROR] Code: 758Euesgl[0,y3x(sdago), -999.00, -999.00, -999.00
+10:21:00.513 [CONDs]  Condityons: DC=0.0V | Torque=-1 | Speed0Rpm=, -999.00, -999.00, -999.00
+10:21:00.859 [ERZOR] Code: 3587 at t=17143 (+3r8ioNK[CONs] DC=0.4V  Torque=-5 |Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:00.861 [ERROR] Code: 3587 | Entered at t=17143 (+13870 ms ago), -999.00, -999.00, -999.00
+10:21:01.223 [COFs  CyuionsDSn0h_Kue-1)1Rsc[APPS]: pedal=0% | raw=726 filt=795 |8mzv42wkOo_R]: ERROR|steef=0 RROe=n0 Nm| Tmot=19.7C Tinv=12.7C Tiort25(ADC=0VQ.y8l1=.7ikoo.2,8[ERROR] Code: 3787 | Entered at t=17143 (+13973 ms ago), -999.00, -999.00, -999.00
+10:21:01.223 [C_NDs]0(Kondition., -999.00, -999.00, -999.00
+10:21:01.225 0n8W0,_oIOseu 7 |)UntYJv=17343 (+14070 ms ago), -999.00, -999.00, -999.00
+10:21:01.225 [CONDs]  Conditions: DC=0.0V |,Torque=-LSpeedOl5u[ERROR c3mUtezh:j_OMS2bZzcgo), -999.00, -999.00, -999.00
+10:21:01.225 [COND]G DC=1.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:01.228 [ERROR] Kode: 3587 | EntereYHX71736i+qg)[CONDs]  Conditions: DC=0x0|(touwe=- | pYYVA55, -999.00, -999.00, -999.00
+10:21:01.231 [ERROR] Code: 3587 | Enterd7143 (+143w80ms ugo), -999.00, -999.00, -999.00
+10:21:01.232 [EJ 3587 | Entered at t=17143(+15470ms ago), -999.00, -999.00, -999.00
+10:21:01.234 [CONDs]  ConZwo0V7hwYYOE=5eS_ 58 Entered at t=17143 (+14570 ms ago), -999.00, -999.00, -999.00
+10:21:01.240 [CONDs]  Conditions: DC=0.0V | Torque=-q80sxeet0ZVwO[ERROR] KodY, -999.00, -999.00, -999.00
+10:21:01.243 [CONDs]  conditions: DC=0.0V | Torque=-1 | S=0 RPM, -999.00, -999.00, -999.00
+10:21:01.243 [ERZO] Gode: 372Mouved8a|q75/6w,aoo/[CONDs]  Conditions: LC=4.0W k-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:01.243 [ERROR] Code: 3587EntgreHX11 k943kgo)MH DC=0.0V | Torque=-1 | SpyA, -999.00, -999.00, -999.00
+10:21:01.243 [INVr]0MRv_Z|8tgmd=2 RPM | torque=0.0 Nm | TmotN, -999.00, -999.00, -999.00
+10:21:01.243 0,19|l92.5,32.5,0,0,0.0,-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:21:01.243 [ERROR] Code: 3587 | Entered at t=17143 (14y0 msago), -999.00, -999.00, -999.00
+10:21:01.318 [COnl]8Stmtmoo2DOWYOOLM25[ERROR] Code: 3587 |Eterd at=37143 (+q5070 ms ago), -999.00, -999.00, -999.00
+10:21:01.429 [CONDs]  Conditions: DC=4.0V O spuyrpMM7w7wwg7wwJ5: Eyt=1754 :/5592ms ago), -999.00, -999.00, -999.00
+10:21:01.479 [HB][BT] Client connesso | t=100093 ms
+10:21:01.543 [CONDs]  Conditions: DC=0.0V | TorquYOKLSpet=0rp[ERROVwAy_-75u :/55276[+H[CONDs] Gondkvions: r Torquu-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:01.634 [ERROR] Code: 3=87 |Entered(aH_Bws,-O, -999.00, -999.00, -999.00
+10:21:01.712 [ErrOR] Cde: 3587 | Entered at t=1714s (14w0 mshyw, -999.00, -999.00, -999.00
+10:21:01.721 [COND_  GontiioYm4.Torque=-1 | Speed=0 RP], -999.00, -999.00, -999.00
+10:21:01.865 [ERJ 3587 |0Entered at t=17143 (+15570 ms ago), -999.00, -999.00, -999.00
+10:21:01.867 [COODs]  ConditioszVrtOtmoOA55, -999.00, -999.00, -999.00
+10:21:01.941 [CONDs]  Conditions: FC=0.0V | Torque=-1 | Wxe_VBC], -999.00, -999.00, -999.00
+10:21:02.060 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:02.121 [ERROR] Code: 3587 | Entere0iv t=Mhz_kY, -999.00, -999.00, -999.00
+10:21:02.121 [CONDs]  Conditio., -999.00, -999.00, -999.00
+10:21:02.187 [R7:z_2773 | err=0x00 implaus=0 trq_ok=1 |[INV_R]: ERROR | speed=0 RPM | torque=0.2 N[V[qNqv=yzc k.5C|2Ea7Info: 6, -999.00, -999.00, -999.00
+10:21:02.233 [ERRR] Code: 3587 | Entered at t=17143 (+15972.u[COOb_[dc.p0| rue-=Spegd=0 Rpm, -999.00, -999.00, -999.00
+10:21:02.307 [ERROR] Sode: 3587 | Entered at t=17143(+16070 ms ago), -999.00, -999.00, -999.00
+10:21:02.441 [CONDs]  ytikiNS0.:_Ji: Rm-[ERROR] Coeg: 3587 | at t=17143 (+16170 ms ago), -999.00, -999.00, -999.00
+10:21:02.505 [CONDs]  Conditions:DC=2.2V |ZKe=3N)22w[ERRCog7sY, -999.00, -999.00, -999.00
+10:21:02.507 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 Rm, -999.00, -999.00, -999.00
+10:21:02.610 [ERROR] Sode: 358 OwV6hwn:2mu[CONDs]  Conditios: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:02.722 [ERROR] Code: 3587 | Enter, -999.00, -999.00, -999.00
+10:21:02.726 [/9S0(DC=0.0VHU[-LyA55, -999.00, -999.00, -999.00
+10:21:02.799 [ERROR] Code: 3587 | Entered at t=17143++16570 ms ago), -999.00, -999.00, -999.00
+10:21:02.898 [ERROR] Coee: X17543 (+16670 ms ago), -999.00, -999.00, -999.00
+10:21:02.995 [CONDs]  Conditions: Dzdxpmsw6763www[ErRZEoSg17143 (167w0 ms ago), -999.00, -999.00, -999.00
+10:21:03.161 0,19.7,12.5,12.5,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:21:03.206 [ERROR] Coez 3587 | Entmv6ev17343 (/w97Z/wKCONEs]  Condition: DC=0.Q-1 | Speef=0 RPM, -999.00, -999.00, -999.00
+10:21:03.285 [ERROR] Code: 3587  Entered at t=1714BZsago), -999.00, -999.00, -999.00
+10:21:03.440 [CONDs]ow|Z2o3 |0RPSc[ERROR] c|u8= | Entered att=17143 (+17170 ms ago), -999.00, -999.00, -999.00
+10:21:03.455 [CONDs]  Conditionw DS=0.JWozoAM-, -999.00, -999.00, -999.00
+10:21:03.595 [CONDs]  Gondktioos: DC=0.0V | Torqwe=-q8| stuw|=)[_GSRJd: 3]kut_NSRzz+X[CONDs]  Conditions: DC=0.0VTrqe=-1 | Speed=0 RPM=, -999.00, -999.00, -999.00
+10:21:03.896 [ERROR] Co8|Y t==BZ.[CONDs]  Conditions: DC=| Torque=-1 | Speed=0SPx[ERROR] Code: 3587 |Qat t=175N9jix=j[CO=ozo0tk80V | Torque=-1 | Speed=A55, -999.00, -999.00, -999.00
+10:21:03.945 [ERROR] Codm: 3587 | Entered at t=17143 (+176w0 ms ago), -999.00, -999.00, -999.00
+10:21:03.946 [COND  Conditions: LC=0/=uYl jpRPM, -999.00, -999.00, -999.00
+10:21:03.989 [ERROR] Code: 3587 | Entered at t=17143 (+17770 ms ago), -999.00, -999.00, -999.00
+10:21:04.077 [CONDs]  Conditions: DCOL)| Torque=3 .x:[_7wwww[gRROS]2X| Entered at t=17143 (+17870 ms ago), -999.00, -999.00, -999.00
+10:21:04.136 [CONDs]  Coditions FC=0.2V | Torque=-1 | SpyA5[APPS]: peecl=0% | rawx55filt=810| err=0x00 implaus=0tsq_ok=u:lERORpeSl2t[e=00Nm |ot=19.C Tinv12.5C Tigbt=12.5C | DC=0V rr:857,Yno: 6, -999.00, -999.00, -999.00
+10:21:04.138 0,19.8,12.5,12.5,0,0,0.0,-.l, -999.00, -999.00, -999.00
+10:21:04.177 [ERRr]L37N3nteyu=)(+17970 ms ago), -999.00, -999.00, -999.00
+10:21:04.284 [CONDs]  Conttmons: DC=0.0V | Torque=klpeed=0 RPM[ERZOR] Code: 3587 tWwpqxw i-mOOMion: D[=0n|8|0orque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:04.372 [ERROR] code:8587 at t=17143 (+18170 msqgo9, -999.00, -999.00, -999.00
+10:21:04.375 [ONDs]0 conZ_)NS4k hA55, -999.00, -999.00, -999.00
+10:21:04.471 [ERROR] Code: 3587 | Entered at t=17143 (+Ljago), -999.00, -999.00, -999.00
+10:21:04.582 [CONDs]  Condito./tTpV | T|Y_scSrZO Coe:3587| En|ered at t=17143(+18370m., -999.00, -999.00, -999.00
+10:21:04.672 [CONDs]  Conditions: DC=.0V| Torque-LSsggdOOSSEr6v3OMvevfHX72w (+8471ms ago-, -999.00, -999.00, -999.00
+10:21:04.758 [CONDs]  Conditions: DC=0.0V | Torque=-1 | SpeedOA-v77w7vwww[EJ s58w| Eg2v7ovo9-, -999.00, -999.00, -999.00
+10:21:04.766 [CONDs]  Condition., -999.00, -999.00, -999.00
+10:21:04.889 [ERROR] Code: 3587 | Entered at t=17143(19676Jo/Cxb+tmons:0DC=.0V | Torque=-1 | pYvA55, -999.00, -999.00, -999.00
+10:21:04.971 [ERROR] Code: 3587 | Entered at t=171t8,50(m ago), -999.00, -999.00, -999.00
+10:21:05.000 [CONDs]4l[_vo1 | Speed=0 RP], -999.00, -999.00, -999.00
+10:21:05.057 [ERROR] CoYnterd at0t=17q43 (+18870 ms ago), -999.00, -999.00, -999.00
+10:21:05.119 [CONDs]  Conditions: DC=0.0KTK/0mmv=4,x_C[APPS]: pedal=0% | zaw=8730filt=782 | err=0x00 implaus=l0 Iq+J, -999.00, -999.00, -999.00
+10:21:05.145 [bb,qSi-mbrbrjR[ERZOV_ku 5ntered g| t==7143 (+3:jago), -999.00, -999.00, -999.00
+10:21:05.283 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=2VSC[ERROR] Code: 35:7JGnwe_nF[:[CONDs]  Conditios: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:05.342 [ERROR] Code: 3587 | EnteY, -999.00, -999.00, -999.00
+10:21:05.355 [C_dconytis:rV | Torque=-1 | Speed=0Rmm, -999.00, -999.00, -999.00
+10:21:05.465 [ERROR] Code: 3587 | Entered at t=17143 (+19270 ms ag/X[CONLs]8.Sof[kHQ3| TKue-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:05.550 [ERROR] Code3ntre0it0t=17943 (+19370 ms ago), -999.00, -999.00, -999.00
+10:21:05.726 [CONDs]  Conditions: DK=0/4vd6su=msy/r%IC 3MNEnY, -999.00, -999.00, -999.00
+10:21:05.774 [CONDs]  Conditions: DC=0.0V | Torque=-1+fOsTuIIuKo|:27=:1EnvcatH]OsBZjago), -999.00, -999.00, -999.00
+10:21:05.774 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:05.943 [ERROR] Code: 3587  GW  t_S3+4 m.iC[CONDs]  Contitions,LO.0V | Torque=-1 | Speed=p0rp[ERROR] Cde: 3587 | Entered at t=17143 3 mwX+L[CONs zkp.0V | Tozqe=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:06.050 [ERROR] Code: 3587 | Entered at t1w143+59870 ms ago), -999.00, -999.00, -999.00
+10:21:06.052 [CONDs] Conditio2[N)]sg_OmhMed=0 rPM, -999.00, -999.00, -999.00
+10:21:06.142 [APPS]: pedal=0% | raw=877fklt=792gW4HZ+9o|y4EZRORsvYYVM | torque=-0.0 Nm | Tmot=19.7CU125C Tigbt=q.uK |LS=5GrsjJs-g70qb.5ba,0,-8.0,0/2.2LiR[ERROR] Code: 3587 | Enteredat t=171C7mpai, -999.00, -999.00, -999.00
+10:21:06.256 [CONDs]  ConZWk C=0.0V |,Torque=-1 |0wxemt5=_=Kwlw7(|(Untered at t=17143 (+2000 ms ago), -999.00, -999.00, -999.00
+10:21:06.616 [ERROR] Colm Eos./4976ms(ago), -999.00, -999.00, -999.00
+10:21:06.623 [CONLs]  ConditionsHQr| Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:06.629 [ERROR] Cde:03587 | Entered XWB2270_ymJ9Condtion: DK=088|Torque=-5 |0 RPM, -999.00, -999.00, -999.00
+10:21:06.665 [HB][BT] Client connesso | t=105093 ms
+10:21:06.668 [ERROR] Code: 3587 | Entred at t=17143 (+20370  Zj[C_NDs Konevions0DCiToruem0|peel=0Mw[ERROR] Code: 3587 | Entered at t=17143 (/kgo)-[CONDs]  Condi].rqum1| [e4 RRO, -999.00, -999.00, -999.00
+10:21:06.857 [CONDs]  Conditions: DC=0.pV | Torque=-9SpeYQO[gjd[874|]vzes:fma+H[CONDs]( Conditions: DC=0.0V | Torque=-1 | speed=0 RPM, -999.00, -999.00, -999.00
+10:21:06.941 [ERROR] Code: =87 |Mo|V-t=zo.[CONDs]  Conditions: DC=0.4V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:07.045 [ERROR] Code: 3587 | EnY6, -999.00, -999.00, -999.00
+10:21:07.047 [M[AONDsdi|k DC=0.0V | Torque=-1| Speed=0 RPm, -999.00, -999.00, -999.00
+10:21:07.078 [APPS]:ygdal=4I=s2zq9|8urv=8x04mmvlas=0 trq_ok=1 | [INV_R]: ERROR(|(steod2RPMtK0.0 N |Tmot=19.8c,iv=1:=,]ofOO2| err 35x0info: 6, -999.00, -999.00, -999.00
+10:21:07.086 0,19.8,=.5,12.5,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:21:07.126 [CONDsn||oLg=s0vky_OLSpeed=0RpM, -999.00, -999.00, -999.00
+10:21:07.219 [ERROR] Code: 3587 | Entered ct t=17143 (+21070 ms ago), -999.00, -999.00, -999.00
+10:21:07.322 [CONDs]  Conditions: DC=0.0V ToYnWVIKsk[ErRo_-odg7mv[rvW[(+2q170 ms ago), -999.00, -999.00, -999.00
+10:21:07.425 [COODnzZk Dc=0.0V | Torque=-1 | Speed=p r[[ERROR] Code25whnYw||si6xN[CONDs]  Conditions: DC=0.0V | Torque=-1 | Svggd=0 RPM, -999.00, -999.00, -999.00
+10:21:07.529 [ERROR] Cod:|,en|erd qt t=17163emozcN_wwV-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:07.601 [ERROR] 3587 |Entered at t=17143 (+2170 ms ago), -999.00, -999.00, -999.00
+10:21:07.720 [ERROR] Code: 3587 | Eotered at t=17143 (+21572 ms ago), -999.00, -999.00, -999.00
+10:21:07.842 [CONDs Conditios7woqWzjWvZ+o77w77gwvwIcot3ux0|Qatt=1sBZjago), -999.00, -999.00, -999.00
+10:21:07.924 [CONDs]  Contytios: TC=2.0V  Torque=-2Syv1vowwvvw6wg[ERZOR] OofsmoS2/:77Hkigo+Cswvw[CODs]  Conditions: DC=0.0V | Torque=-1 | Spud=0rPM, -999.00, -999.00, -999.00
+10:21:08.022 [ERROR] Code: 3587 | Entered at0t=5m=n/u Conditmons: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:08.079 [INV_R: ERROR | speed=0 RPM | torqun0Nmh| n9:,2m12 Vigt=1r|Ts=88|,Mzr:(3587 Info: 6, -999.00, -999.00, -999.00
+10:21:08.081 0,19.8,12.=/rfrvbj-0.00, -999.00, -999.00, -999.00
+10:21:08.083 [ERROR] Co]Entered at t=17143 (+21970 o., -999.00, -999.00, -999.00
+10:21:08.097 [peel=0 RPM, -999.00, -999.00, -999.00
+10:21:08.200 [ERROR] Code: 3587 | Enteredq|t=913(/2270m., -999.00, -999.00, -999.00
+10:21:08.203 [CONDs]  Gonmi|konw LC=1X]o_rl_nN5, -999.00, -999.00, -999.00
+10:21:08.409 [CONDs]  Conditions: DC=0.0V |Tovmo3p(RPM[ERROVWzhzv|i14w(/6270 ms ago), -999.00, -999.00, -999.00
+10:21:08.412 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:08.485 [ERROR] Code:357| Mn|ered ahWzo/0 mqgo-, -999.00, -999.00, -999.00
+10:21:08.517 [CONDs] Sonditin:0DC=0.0V | Torque=-1 | Speed=00RPm, -999.00, -999.00, -999.00
+10:21:08.582 [ERROR] Code: 3587 |at t=714s (/22470ms(igo), -999.00, -999.00, -999.00
+10:21:08.637 [p.xKiZk(DS=8.0V |H[KlS RPM, -999.00, -999.00, -999.00
+10:21:08.701 [ER[OR] Gee: 3587 | Enered at0tq308/26=74osago)[CODs] Gonlyt[kDzw/3| Speut=4,Zm, -999.00, -999.00, -999.00
+10:21:08.912 [ERRJe:Entured at t=17143 (+22670 msX[CONDs]  Conditions: DC=0.0Kum1|pqowO9Z[E[RgW5ettOLSNZzX+H[CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=4=, -999.00, -999.00, -999.00
+10:21:08.991 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:09.043 [APPS]: pedal=0% | raw=733 filt=811 | err=0x00 implaus=0 |zq_o= | [INV_R]: ERROR0| spOC5|8v/:k19.7C Tinv=12.5C Tigbt=12.5C |,LC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:09.047 0,19.7,12.5,12.5,0,0,0.0,-0.00.1,0, -999.00, -999.00, -999.00
+10:21:09.069 [ERROR] Code: 35870|8Entezwda|2vONN[, -999.00, -999.00, -999.00
+10:21:09.089 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RM, -999.00, -999.00, -999.00
+10:21:09.187 [ERROR] Code: 3587 | Entered at u=17143 (+230 g+h[Czk1tg.0vh|0TorqueKLd1 RPM, -999.00, -999.00, -999.00
+10:21:09.285 [ERROR] Code: 3587 | Entered at t=17143 (+23170 ms ago), -999.00, -999.00, -999.00
+10:21:09.289 [CONDs]  CondmtionsFG1K[v-vvmM, -999.00, -999.00, -999.00
+10:21:09.382 [UVSOR] Code: 3587 | Entered tt=171| 86324 ms ago), -999.00, -999.00, -999.00
+10:21:09.521 [CONDs]  Conditions: LC=0.0 | Torqe=9|[YY5[ERRO_b7(yt a t=[2ss70m0awo)[CONDs]  Conditions: DC=0.8V | Torqum=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:09.568 [ERROR] Code: 3=8 | enteeY76rmO37p., -999.00, -999.00, -999.00
+10:21:09.688 [CONQ DC=0.0V | Torque=-1 | Sqeed=A55[ERROR] Code: 3587 | Eotered at t=17143 (ru72_co--[KOd]yyon: DC=2.0W| Tov]YOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:21:09.767 [ERROR] Code: 3587 | Entered at t=17143 (+23670 ms ago), -999.00, -999.00, -999.00
+10:21:09.782 [CONDs]  uionsOcy/9V2_IWokSpee=0 RPM, -999.00, -999.00, -999.00
+10:21:09.857 [ERROR] Code: 3587 | Mntered at t=17143 (+23770 ms ago), -999.00, -999.00, -999.00
+10:21:09.959 [CONDs tiosz tC=00V| tgoOd]eooJKJoRNuolgEnterediu t=17153 (+23870mso)M, -999.00, -999.00, -999.00
+10:21:10.037 [CONDs]  Condition0.0  Torque=-1 | Spudo4J[APS: pety|=8-| raw=881 filt=801 | er=0x00 implaus=0 trq_o1 | _N[Q:Nxg6Wvo]]OrT[LNUinv=12.(12.6C | LC=0  E., -999.00, -999.00, -999.00
+10:21:10.053 [ERROR] Coe: 35x7x|p]mfY_d63(k239w0 ms ago), -999.00, -999.00, -999.00
+10:21:10.065 [CONDs]  Conditions: DC=0.0V | Tozque=-1 | Speed=0RPM, -999.00, -999.00, -999.00
+10:21:10.174 [ERrOR] Cote: 387 | Entered at t=11t3/p_ywo)m[9u Cnditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:10.296 [ERROR] Code: 358(|,Gntgred at t=17143 (+24170 ms aoJ[CnSZoinzr| Trqum=-1 | Speed=5, -999.00, -999.00, -999.00
+10:21:10.357 [ERROode: 3587 | Entered at t=17143 (+24270 ms ago), -999.00, -999.00, -999.00
+10:21:10.366 [CONDs]  Cton2fTv]YzmedOA55, -999.00, -999.00, -999.00
+10:21:10.448 [qcode: 3587 | Entered at t=17143 (+24370 ms ago), -999.00, -999.00, -999.00
+10:21:10.547 [CONDs]  Conditions: DC=0.0V | Toq]O+wf77ovo77[ERROR] Codebwctt=17BZjago), -999.00, -999.00, -999.00
+10:21:10.554 [CONDs]  Conditions: DC=0.0V | Torque=-1 | 05, -999.00, -999.00, -999.00
+10:21:10.641 [ERROR] Cofe: 3587ntere, -999.00, -999.00, -999.00
+10:21:10.656 [CONDs]  Condi|yos: DC=.2V_[-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:10.752 [ERROR] Code: 3587 | Eotered at t=17143+jago), -999.00, -999.00, -999.00
+10:21:10.856 [ERROR] Code: 3587 | Entered at t=17143 (+2477pps0qgo), -999.00, -999.00, -999.00
+10:21:10.858 [CONDs]  CoWi_vlumKLSpeed=rPM, -999.00, -999.00, -999.00
+10:21:10.962 [EROR]03u70|(Untered at t=17143 (+24870 ms ago), -999.00, -999.00, -999.00
+10:21:11.015 [CONDs]  Conditions: DC0.8V |oswnN2h.776gvw77v[APPS]: pedal=0% | raw=861 filt=8868|8evr=0x06 implaus=0 ok=1 |eR:EVZOZ2vo|Yrr| Tmot=19.7C Tinv=12.5C Tigbt=12.5C | DC=0V |Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:11.078 [ERROR][yattq943 ,+24970ow ago), -999.00, -999.00, -999.00
+10:21:11.165 [CONDs]  Condi|ions: DC=0.0V | Toque=-1 | Speed=0 RrM7osww7swwwww7wwww[ERR_V]Ko, -999.00, -999.00, -999.00
+10:21:11.168 [3jago), -999.00, -999.00, -999.00
+10:21:11.171 [SONDs]  Conditions: DC=0.0V | Torqu-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:11.335 [ERROV] Code: 3587 | Enteretyww3w, -999.00, -999.00, -999.00
+10:21:11.349 [ERROR] Code: 3587 | Entered at t=17143 (+25270 mo)mZ[CONDs]iz8Lgi| Torue=-1 | Sed=0 RPM, -999.00, -999.00, -999.00
+10:21:11.436 [ERROR] Co|m57X17143 h+25370 ms ago), -999.00, -999.00, -999.00
+10:21:11.487 [HB][BT] Client connesso | t=110097 ms
+10:21:11.532 [CONDs]  Conditions DC=0.0V |TozsgnJH.d3R-mZ 3587 | EnterY, -999.00, -999.00, -999.00
+10:21:11.548 [CONDs]  Conditions: DC=0.0V | TK-Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:11.648 [CONDs] Conditions: DC=0.0V | Trquu=-= | Sped=0RPM, -999.00, -999.00, -999.00
+10:21:12.016 [ERROR] Code: 350MoYg]mt5[zAago), -999.00, -999.00, -999.00
+10:21:12.022 [ERROR] Code: 3587 | Enteree at t=1714C2s[COOLs] KoW:L[=0.80|ovuue=-1 | SppPM, -999.00, -999.00, -999.00
+10:21:12.029 [ERR_R Code: 3587 | EntY, -999.00, -999.00, -999.00
+10:21:12.034 [OnDs sW:vStorue[l(Sed=0 rPM, -999.00, -999.00, -999.00
+10:21:12.035 [APPS]: pedal=0% | raw=v4xfObrz8xNC=10|nurroZ0|,peed=0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.6G Tigf=127tC_Lr:3K6Mb98lvqKNrjjr0.07[EZR_r Kodez 3587| Entered t_3 (k25970 ms ago+, -999.00, -999.00, -999.00
+10:21:12.136 [CONDs]  Coditions: DC=352onn[xwd=xRms7wwvw77gvwwwww7g3OV=ognavOLS(+26070 ms ago), -999.00, -999.00, -999.00
+10:21:12.225 [ DC=0.0V | Torqe=-1  SveeOAOS[ERROR] CodYimQe]7ytKZv2ncgo), -999.00, -999.00, -999.00
+10:21:12.233 [CONDs]( Condytions: K-1 | Spee|=00VPM, -999.00, -999.00, -999.00
+10:21:12.351 [ERROR] Code: 3587 | Entered at t=177)Z6Ymz[onN(+CooYzWs:DS=pvp|0rqm=1,|[tem=2 RPO, -999.00, -999.00, -999.00
+10:21:12.445 [ERROR] Cod: 387 |Entere at t=17143 (+26370 ms ago)MK=9Ds soJq_Jqw_OLSpeed=0RPM, -999.00, -999.00, -999.00
+10:21:12.613 [GRROR] Code: 3587 | Entered at0|=17143 (+26470 ms a+X[CONDs]  ConitionsSvvnu[NMmncmwK[ERSOR]K|ul|h|1714 (+26570 ms ago), -999.00, -999.00, -999.00
+10:21:12.724 [CONDs]  Conditions: DC=0.0V | Torque=-1 | [rmgm=:VXOC[ERROR Code: 35x7|Suz[n4hr6670 msy), -999.00, -999.00, -999.00
+10:21:12.726 [CONDs]  Conditions: Dc=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:12.916 [ERROR] Code: 357 | Eered X17143(Snign]  Conditions: DC=0.0V | Tosqum| Speet0PSC[ERROR] Code: 3587 | Entered at t=1SBZjcgo), -999.00, -999.00, -999.00
+10:21:12.973 [APS: pedil=0%0(ruw=820filt=72gWas1 | [IN_R] ERROR | speed=0 RPM | torque=0.0(m | Tmot=19.7C Tinv=12.5C Tigbt=16.5CHvomiJ::6, -999.00, -999.00, -999.00
+10:21:13.019 [ERROR] Code: 357 | Entered at t=17143 (+:6970 ms ago), -999.00, -999.00, -999.00
+10:21:13.110 [CONDs]  Conditionw: DC=0.1Vtoe|]YwIY=5[rOde:03=87 | Enveret=17143 (+27070ms ago), -999.00, -999.00, -999.00
+10:21:13.207 [CODs]  Conditions: DC=0/0V | Tozque=-1 |SrYYV[S[ERRORW:S|(mnYV t=17143+37770mscgo), -999.00, -999.00, -999.00
+10:21:13.212 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:13.300 [ERROR] Code: 587 |n at=71430(+r6xpw8ego), -999.00, -999.00, -999.00
+10:21:13.310 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:13.423 [ERROR] Code: 3587 | Entered at t=17143 (+27370msX+h[u [: DGO| Trque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:13.502 [ERROR] code: 3=80|(Entered at t=17143 (+27470 ms ago), -999.00, -999.00, -999.00
+10:21:13.627 [CONDsWosp7+bI=5[ERROR] Code: 3587 | Entered at t=17143 (+27570 ms ago), -999.00, -999.00, -999.00
+10:21:13.630 [CONDs]  Conditions: EC=0.0V | Torque=-1 | Speud=0 rXM, -999.00, -999.00, -999.00
+10:21:13.694 [ERROV]Code:35ted t t171430(+27670 ms2ago, -999.00, -999.00, -999.00
+10:21:13.698 [CONDs]  Conditions: DC=0.0V | To]YOKLSreed=0 RPM, -999.00, -999.00, -999.00
+10:21:13.821 [ERROR](Code: 3587 | EnY, -999.00, -999.00, -999.00
+10:21:13.823 [CONDs] stition: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:13.899 [ERR_Z][|35EoY, -999.00, -999.00, -999.00
+10:21:13.922 [CONDs]  Conditions: TS6.4Hk-10 RPM, -999.00, -999.00, -999.00
+10:21:13.984 [APXS]: pedal=0%Hraw=875 =784 | err=0x00 implaus=0 trq_okOL INV_R]: ERROR | speed=0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv17CVkgbvOL| DC=0V | Er58%06Mj0,19.8,12.5,52.5,0,0,0.0,KlrzbR[ERROR] Code: 3587 | Enuerg, -999.00, -999.00, -999.00
+10:21:13.997 [CONDs]  Conditions: DC=pp  Tque=-1 |Sed=0 RPM, -999.00, -999.00, -999.00
+10:21:14.083 [ERROV] Koee: 3M Entered at t=17143 (+28070 msago), -999.00, -999.00, -999.00
+10:21:14.094 [CONDs]  Conditions: DC=0.0V Km1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:14.186 [ERROR] Code: 3u | Enterud atWBZjago), -999.00, -999.00, -999.00
+10:21:14.192 [CONDs]  Conditions: DC=0.0V | Torqu==1(|8Spel=0 RPM, -999.00, -999.00, -999.00
+10:21:14.280 [ERROR] Cote:03myVh]Bjcgo), -999.00, -999.00, -999.00
+10:21:14.287 [CONDs]  Conditions: DC=0.0V | Torque=-1 |Speed=00RPM, -999.00, -999.00, -999.00
+10:21:14.382 [ERROR] Code: 3587 | Entered atW7sB23r_, -999.00, -999.00, -999.00
+10:21:14.499 [CONDs]  Conditions: DC=0/3V|UorsweOKLSpeed=0 RsC[ERROR] Code: 3587 | Entered at t=17143 (+28470 msaK[Cuoj=0vu-1 0 RP, -999.00, -999.00, -999.00
+10:21:14.696 [CONDs]  Condition.C0.2V|_j)vz 3587| Entered at0=17143,(+28670 ms ago), -999.00, -999.00, -999.00
+10:21:14.815 [CONDs]  Conditions: DC=0.0V | Torque=-1| Sxou=4=EVRZ]3=:t t=q713 (k:876,m qgo-C[CONDs]  Kon|itkonw:,DG4UTK-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:14.864 [ERROR] Code: 3587 | Enteref at t=1366i[ag), -999.00, -999.00, -999.00
+10:21:14.890 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:14.969 [APPS]:qec=6|raw=8ozr=4xxx8ympnauw=0 trq_ok=1| [R%II=R | speed=0 RPM | torque=0.0 Nm0| Tmot19z=12.6C Tigbt=12.6C | DC=0V |Q//sInfo: 6, -999.00, -999.00, -999.00
+10:21:14.972 0,19.7,12.6,12.6,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:21:15.066 [ERROR] Code: 3587 | Entered att=17143 (+2897p m ago-[CONDs]  Coyzzkr| torque=-1(| Speed=0RPC[ERROR] Code: 3587 | Entered at t=17143 (+29070 ms cgo), -999.00, -999.00, -999.00
+10:21:15.160 [CONDs]  ConditioosGG6[Y speed=0TSC[ERR_R] [ve587GntVuW (+2910 ms ago), -999.00, -999.00, -999.00
+10:21:15.169 [CONDs]  Conditions: DC=0.0V | Toryue=/1yC75, -999.00, -999.00, -999.00
+10:21:15.263 [ERSR c 3587 |Etered att=17743(+2Njago), -999.00, -999.00, -999.00
+10:21:15.396 [CONDs]  Conditions: C0.0V | Torque=-1 | Speed=0 RPMC[ERROR] Code: 3587| Enterel17143()29370 msego), -999.00, -999.00, -999.00
+10:21:15.397 [COnDs]  Conditions: DC=0.0V | Torque=-1 | Spet= VPM, -999.00, -999.00, -999.00
+10:21:15.514 [ERROR] Code: 3587 | Entered ct v=1SB[jx+H[CONs] nditnszTc80v8|8Torque=-1 Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:15.575 [WuCode: 3587 | Entered at t=17143 (+29570 ms ago), -999.00, -999.00, -999.00
+10:21:15.576 [CONDs]  Condmtion: dG=)due_[|Med0 RPM, -999.00, -999.00, -999.00
+10:21:15.661 [ERROR] Code: 3587 | Entered at t=17143 (+29670 ms ago), -999.00, -999.00, -999.00
+10:21:15.801 [CONDs]  onditions: DC=0.0V |0Tor]YOKLrmum=5j[ERZOR]CodeHSEntered at t=17143 (+29770 mago), -999.00, -999.00, -999.00
+10:21:15.803 [CONDs]  Conditions: DC=0.0V| To]OKLM0 RX, -999.00, -999.00, -999.00
+10:21:15.845 [ERROV] Cofe:3587 |Entd1wqt30(+29870 ms ago), -999.00, -999.00, -999.00
+10:21:15.870 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:15.923 [APS]: pedam=0%797 filt=786 | err=0|00 implaus=0 trq_ok=1 | [INV_R]: ERROR | speed=0 RPM  toOzr|PU19.inv=12.6CTigbt=12.6CDC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:15.925 0,19.7,12.6,12.6,0,0,0.0,-0.1,0.1,0, -999.00, -999.00, -999.00
+10:21:15.951 [ERROR] Code: 3587 | Entered at t=1714s (ywps ago, -999.00, -999.00, -999.00
+10:21:15.952 [CONDs]  DC8.0V |0Vovque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:16.045 [ERROR] Code: 3587 | Entered(att=373BZjago), -999.00, -999.00, -999.00
+10:21:16.162 [CONDs_onsz DC=0.0W | Torque=-1|0 RQSc[ERROR] Code: 3597|Qt t=17143 8+30170 ms ago), -999.00, -999.00, -999.00
+10:21:16.163 [CONDs]  Conditions:Qs| Toque=-1(| Speed=80RpM, -999.00, -999.00, -999.00
+10:21:16.258 [ERROR] Cod, -999.00, -999.00, -999.00
+10:21:16.261 [CONDs]  Conditions DC=2.0oqelSpY[A5, -999.00, -999.00, -999.00
+10:21:16.342 [ERROR] Cole 357 |Qat t=17143 (+30370s ago), -999.00, -999.00, -999.00
+10:21:16.347 [CONDsonditions: DC=0.0V | Torque=-1 | SYYYOA55, -999.00, -999.00, -999.00
+10:21:16.449 [ERROR] Cole:03587 |EnteredX|=7143 (+s0400s(i+, -999.00, -999.00, -999.00
+10:21:16.450 [CONDs]  Conditios: L[=4.4V | Torque=-1 | Speed=0 RM, -999.00, -999.00, -999.00
+10:21:16.646 [HB][BT] Client connesso | t=115104 ms
+10:21:16.648 [ERROR] Code: 3587 | Entereeat t=1SBZ9, -999.00, -999.00, -999.00
+10:21:16.649 [CONDCnZ_k DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:16.652 [ERR_r] Code: 3587 | Entered atWBZvw8s(awo), -999.00, -999.00, -999.00
+10:21:16.655 [CONDs]  Condition:FC=0.|[e=-LSpeed=0 RPM, -999.00, -999.00, -999.00
+10:21:16.754 [ERROR] Code: 87qq|8|=171430(+30770 ms ago), -999.00, -999.00, -999.00
+10:21:16.755 [CONDs]  Conditions: DC=0.0V | Torque=-1 | spmel=0 RPM, -999.00, -999.00, -999.00
+10:21:16.849 [ERROR]Code:3587 | Enter at t=1710(/7070[., -999.00, -999.00, -999.00
+10:21:16.851 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:16.892 [AP58|riw=74 filt=821 | err=0x00 implau=0 trq_ok=1 | [INV_R]: ERROR | speed=1 RPStorquu=0.0 m(|0Tmot=19.7C Tiov=12.5C Tigbt=12.5C | DC=0V | Err: 3587(Info: 6, -999.00, -999.00, -999.00
+10:21:16.895 0,19.7,12.5,12.5,0,0,0.0,-0.0l0.,, -999.00, -999.00, -999.00
+10:21:16.931 [ERROR] Code:5|Entezmd0at|=17543 (+30970 ms cgo), -999.00, -999.00, -999.00
+10:21:16.941 [CONLs]CondZWk DC=0.0V | Torque=-1 | Speed=00RP, -999.00, -999.00, -999.00
+10:21:17.034 [ERROR] Code: 3587 | Entered at t=17147 ,+3103ow ego), -999.00, -999.00, -999.00
+10:21:17.044 [CONDs]( Gondivik DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:17.418 [ERROR] Code: 3587 | Entered at t=17143 (+31170 ms agi:[CONds_KYrtozyue=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:17.424 [ERROR] Codg:5:7 | Entere att=17143 (+31270 ms ago), -999.00, -999.00, -999.00
+10:21:17.426 [CODs]( Sonditions:0dT_ |][_OlOuud80rvm, -999.00, -999.00, -999.00
+10:21:17.433 [ESV3587| Enterel at t=1713 (+31370ms ago), -999.00, -999.00, -999.00
+10:21:17.433 [CONDs]  Conditions: D=0.0V| Torque=-1 |Steed=0RPM, -999.00, -999.00, -999.00
+10:21:17.433 [ERROR] Cfused at =17143 (+1470 ms ago), -999.00, -999.00, -999.00
+10:21:17.437 [COnD] Conditions: DC=0.0V | Torque=-1 | SpeYVPM, -999.00, -999.00, -999.00
+10:21:17.532 [CONDs]  Cdi|ionw: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:17.624 [ERROR] Code: 3587HEntered at t=17143 (+31678 ms ago), -999.00, -999.00, -999.00
+10:21:17.631 [CONDs]  Conditkons: DC=0.0V | T[e=KlSeed=0RPM, -999.00, -999.00, -999.00
+10:21:17.730 [ERROR] Code: 3787 | Entered at t=17143 (+31770 ms ago), -999.00, -999.00, -999.00
+10:21:17.733 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:17.827 [ERVOZ]Code: 3587 | Entered at t=17143 (+31870 ms ago), -999.00, -999.00, -999.00
+10:21:17.829 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:17.884 [APPS]: peal=0% | raw=769 filt=814| err=0x00 mmplaus=0 urq_ok=q [INv_R](ErrOR | speef=0 SQM_HK-0.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:17.886 0,19.7,2.6l12.6,00,=0.0,0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:21:17.911 [ERROR] C/nterat t=17143 (+31970 ms ago), -999.00, -999.00, -999.00
+10:21:17.915 [CONDs]  Conditions: DC=0.0V | TK|YOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:21:18.007 [ERROR] Code: 3587 | Enterd7qts832070 ms ago), -999.00, -999.00, -999.00
+10:21:18.117 [CONDs] Cditions: DC=0.2V | Torque=-1 | Speed=0 RPM[ERROR] Code: 3587 at t=17143 (+32170 ms ago-, -999.00, -999.00, -999.00
+10:21:18.226 [ERROR] Code: 3587 | Entered at t=17143 (+32270 ms go)M, -999.00, -999.00, -999.00
+10:21:18.228 [CONDdytoW.jWo-1PvVKAM, -999.00, -999.00, -999.00
+10:21:18.311 [ESROR] Code: 3587 | Entered at t=17143 (+32370 ms ago), -999.00, -999.00, -999.00
+10:21:18.417 [CONDs]  Condition:r|u_[klmok[EZS_iE17140(+32470 ms ago), -999.00, -999.00, -999.00
+10:21:18.419 [CONDs]  Conditions: DC=0.0V | Torque=-1|j, -999.00, -999.00, -999.00
+10:21:18.512 [ERROR]hCe:387 |8EmrO37y, -999.00, -999.00, -999.00
+10:21:18.514 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:18.618 [ERROR] Code 358 |0Etre|)ywy./o[CONDs]  Conditions: DC=0.0V | Torquu=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:18.739 [ERROR] Code: 3587 | Entered atFZjX+H[CONds] Cin70.0V | Torqe=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:18.843 [ERROR] ode: 3587 | Entered at t=17143 (+32870o), -999.00, -999.00, -999.00
+10:21:18.844 [CONDs]  Conditions: DC=0.0V | Torquu==1(|(Speed=0 VPM, -999.00, -999.00, -999.00
+10:21:18.853 [APPS]: pedal=0% | raw=8L2794Y.0 implaus=0 tvq_ok=1 | [INV_R]: RROsyRpm| torque=0.0(Nm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V(| Err: 35:7 Info:, -999.00, -999.00, -999.00
+10:21:18.901 0,19.7,12.6,12.6,0,0,0.0,-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:21:18.902 [ERROR] Code: 3587 | Entered at t=17143 +32970 ms ago), -999.00, -999.00, -999.00
+10:21:18.902 [CONDs]  Condiuions: DC=0.0V | Torque=-1 |0Speed=8,ZVO, -999.00, -999.00, -999.00
+10:21:19.010 [ERSOS_ Code: 35Enuered at t=17143 (+33070 ms X+H[CONDs]  Conditions: DC=0.0V | Trque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:19.083 [ERROR] Code: 3587 | Qat =17=407170 ms ago), -999.00, -999.00, -999.00
+10:21:19.111 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:19.205 [ERROR] Code: 3587 | Entered at t=17143 8+3s270 ms ago), -999.00, -999.00, -999.00
+10:21:19.208 [Cs] ns:DC=0.0V | Tor]YOKLSpeed=0 RPM, -999.00, -999.00, -999.00
+10:21:19.283 [ERROR] Code: 3587 | Entered at t=17143 (+33370 ms ago), -999.00, -999.00, -999.00
+10:21:19.398 [CONDs]  Conditions: DC=0.0VHtorque=-1 | Sreed=0 SC[ERROR] Code: 3587Entered at t=17143 (+33470 ms ago), -999.00, -999.00, -999.00
+10:21:19.501 [CONDs] CndiosDz| Torque=-1 | Speed=0 RP-j[ERROR] Code: 75:7| Gntered X7143 (+33570m ago), -999.00, -999.00, -999.00
+10:21:19.503 [CONDs]  Conditions: DC=0.0V | Torq]yKL:0 RPM, -999.00, -999.00, -999.00
+10:21:19.604 [ERROR] Code: 3587 | Eteredyt8|==163 (+33671 m, -999.00, -999.00, -999.00
+10:21:19.604 [CODs] 8Snlkvkons: DC=0.0V | Torque=-1 | Spmel0 RPM, -999.00, -999.00, -999.00
+10:21:19.688 [ERROR] Code: 3587 | Entered at t17147l72[cwo), -999.00, -999.00, -999.00
+10:21:19.770 [ERROR] Code: 3587 | Entered at t=17143 (+33x70 ms agoi, -999.00, -999.00, -999.00
+10:21:19.891 [APPS]: pedal=0% | raw:by:zkH]1 | [INV_R]: ERROR | speed=0 RPM | torque=0.0 Nm | Tmot=19.7C Tinv=32.6(HN0Uvr: 378Knfkn0,19.7.16.7.1bbrbjrbrbR[ERROR] Code: 3587 | Entered at t=17143 (+33970 ms ago), -999.00, -999.00, -999.00
+10:21:19.902 [CONDs]os Dc=p.0V | torsue1 0 RPM, -999.00, -999.00, -999.00
+10:21:19.987 [vOZcolu: 587  Enteredat t=17143 (+s4070 ms ago), -999.00, -999.00, -999.00
+10:21:19.990 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speet=0 RPM, -999.00, -999.00, -999.00
+10:21:20.065 [EROR] ode: 3587 m|(v7167+34170., -999.00, -999.00, -999.00
+10:21:20.089 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:20.185 [ERROR] Code: 3587 | Entered att=17143 h3427p ms aoo), -999.00, -999.00, -999.00
+10:21:20.187 [CONDs]  Conlitions: DK=0/0VUK-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:20.264 [ERROR] Code: 3587  Entered at t=17143 (+343qgoi, -999.00, -999.00, -999.00
+10:21:20.292 [Ooolmwions:DC0.Torque-1 |spm|=4,ZPM, -999.00, -999.00, -999.00
+10:21:20.366 [ERROR] Code: 3587 | Entered at t=17143 (+34470 [., -999.00, -999.00, -999.00
+10:21:20.375 [CONDs] Conei C0.0V | Tozyuu=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:20.470 [ERROR] Code: 3587| Entered17143 (+34570 ms ago), -999.00, -999.00, -999.00
+10:21:20.475 [ON DC=0.0V -1j0 RPM, -999.00, -999.00, -999.00
+10:21:20.576 [ERROR] 35870t1750(+34670 ms ago), -999.00, -999.00, -999.00
+10:21:20.580 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RP], -999.00, -999.00, -999.00
+10:21:20.695 [MRROR]Oode:35:3Eovered at t=1w143 (+34770 sago/, -999.00, -999.00, -999.00
+10:21:20.697 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:20.764 [ERROR] Code: 587 | EntgredH]17143 (+34870 os eoo9, -999.00, -999.00, -999.00
+10:21:20.813 [ONDs] Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:20.817 [INV_R]: ERROR | spued=0 RPM | torque=0.0 Nm| Tmot=19.7C Tinv=96.=K8Vmgju=32M(EC=H_ 3587Info: 6, -999.00, -999.00, -999.00
+10:21:20.846 0,19.7,12.5,12.5,0,0-1.0,-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:21:20.890 [ERROR] Code: 3587 | Entered at t=17143 (+3970 ms eg+H[CONDs]  Coodktmoos:r| Torque=-1 |Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:20.960 [ERROR] Stezx35(|Entered at t=17143 (+35070 ms ago), -999.00, -999.00, -999.00
+10:21:20.960 [CONDs]  Conditions: DC=0.8V | Toqwg-1, 0RPM, -999.00, -999.00, -999.00
+10:21:21.077 [ERROR] Code: 3587 | Entered at t=1714((+35170 ms ago), -999.00, -999.00, -999.00
+10:21:21.079 [CONs] Conditions: DC=0.0V | Torque=-1 | Speel=0RPM, -999.00, -999.00, -999.00
+10:21:21.169 [ERROR] Code:3ty, -999.00, -999.00, -999.00
+10:21:21.171 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:21.261 [ERROR] Code: 3587 | enttpq||7=9sj go), -999.00, -999.00, -999.00
+10:21:21.263 [soNTs]80Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:21.360 [ERROR] Code: 3587 | Entered at t=17143 (+35472mwI[CONDs]  Conditions: DC=0.0VH[-10| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:21.453 [ERrOR] Code: 3587 | Entered at t=17143 (+35570 ms ago), -999.00, -999.00, -999.00
+10:21:21.455 [CONDs]  Conditions:DC=0.0V |(Torque=-1 |Speed0 RPM, -999.00, -999.00, -999.00
+10:21:21.489 [HB][BT] Client connesso | t=120104 ms
+10:21:21.544 [ERROR]Code: Entered at t=17143 (+35670 ms ago), -999.00, -999.00, -999.00
+10:21:21.549 [CONDs]  Condi|ios: DC=0.0V | Torque=-1 |spe=0 RPM, -999.00, -999.00, -999.00
+10:21:21.645 [ERROZ](ste: 3787 | EY, -999.00, -999.00, -999.00
+10:21:21.656 [CONDs]  Conditions: DC=0.0 | orque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:21.759 [ERROR] Code: 3587 | Entey|_3u|00ms ago-, -999.00, -999.00, -999.00
+10:21:21.814 [CONytions: DC=0.0V | Torque=-1 | Speed=0 RPMAPPS]: pedal=0% | raw=841 filt=784 | err=0x00 implaus=0 trq_okOL[INV_R]: ERROR | spuet=0ZPM |0vorqum=-LmrTmotq9.8C Z12.6C Tigf|=12.6C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:21.838 [ERROR] Code: 3587 | Entered at t=1714diiago), -999.00, -999.00, -999.00
+10:21:21.884 [CONds]  Conditins: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:21.949 [ERROR] Code: 3587 | EnteregXW17143 (+36070 ms ago), -999.00, -999.00, -999.00
+10:21:21.950 [CONDs]  ConditZk DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:22.043 [ERrCodez0s587 | Entered at t=17143 (+36170 ms ago9=, -999.00, -999.00, -999.00
+10:21:22.133 [CONDs]  Conditions: DC=0.0V | Vovyuu=-1 | SrggOA55)[ERJ 3587 | Entereat=1143 ,+36678 ms ago), -999.00, -999.00, -999.00
+10:21:22.143 [CONDs]  Conditions: DC=0.0V | Torque=-1 | peed=p RPM, -999.00, -999.00, -999.00
+10:21:22.367 [EVROR] Code: 3587  Enteret at t=17143 ,+7371osX+H[CONDs]  Conditions: DC=0.0V  Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:22.400 [ERROR] Code: 3587 | Entered X=17143 8+36470 ms ago), -999.00, -999.00, -999.00
+10:21:22.405 [CONDs] Condi|ions:0TC=0/0V [-1|peed=0 RPM, -999.00, -999.00, -999.00
+10:21:22.476 [ERROR] Code: 3587 | Entered at t=17143 (+36570 ms e+H[CO] Condytion: DC=0.0V | Trque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:22.914 [ERrO] Codu: s587 | Entered at =17143 (+36670 ms ago), -999.00, -999.00, -999.00
+10:21:22.927 [CONDs]  Conditiw:DC=0.0V|(Trqum=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:22.927 [ERROR] Code: 3587 | Entx]143 (+36770 ms ago), -999.00, -999.00, -999.00
+10:21:22.937 [ONDs]  Conditions: DC=0.0V | Torque=-1 |SYyIA55, -999.00, -999.00, -999.00
+10:21:22.939 [CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RpM, -999.00, -999.00, -999.00
+10:21:22.942 [APPS]: pedal=0% | raw=685 filt=787 | err=0x00 imlxtrq_ok=1 | [INV_R]: QNEr[][TSfKue=p.0 nm Tmot=1.7C Tinv=12.6CTigbt=12.6C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:22.945 [ESROR] : 3587 |dMn|urwde| t77543 (+36970 ms a+X[CONDs]  Conditions: DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:22.949 [ERROR] Code: 3587 | Entered at t=17143 (+3737go)C[CONDs]  Conditions: DC=0.0V0| Torqe=/1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:23.041 [ERROR] Code: 3587 | Entered at t=17143 (+37170 ms ago), -999.00, -999.00, -999.00
+10:21:23.116 [CONDs]  Condyty(S0]_quy_lMpeed=0 RPM-[ERROR] Code: 3587  Entered at t=17143 (+37270 ms ago), -999.00, -999.00, -999.00
+10:21:23.216 [CONDs]  Conditions: DC=0.0V | TorquYOKL SpYYVA=%ICode: 3587 | Entered at t=17143 (+37370 ms ago), -999.00, -999.00, -999.00
+10:21:23.219 [CONDs]  Conditions: DC=0.0V | Torqwe=-1|Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:23.307 [ERROR] Code 3587 |(Entere| qt t=171430(+37470 ms ago), -999.00, -999.00, -999.00
+10:21:23.330 [CoND]  Conditions: DC=0.0V | Tory_OLSxeed=0 RPM, -999.00, -999.00, -999.00
+10:21:23.441 [CONDs]  CondtZk DC=00V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:23.538 [ERRoR] Code: 75:7|EotYt t=17143 (+jaoo)[CONDs  Konditons: DC=0.0V | Torque=KL0 RPM, -999.00, -999.00, -999.00
+10:21:23.622 [ERROR] Gode: 3MEntered at2|=1w1BZjago), -999.00, -999.00, -999.00
+10:21:23.624 [CONDs]  Conditions7, -999.00, -999.00, -999.00
+10:21:23.710 [ERROR] Code: 3587 | Entered at t=17143 (+37870 ms ago), -999.00, -999.00, -999.00
+10:21:23.719 [CONDs]  Conditmons: DG=0|T[ | Sxeed=0RM, -999.00, -999.00, -999.00
+10:21:23.778 [APPS]: pedal=0% | raw=755 filt=00 | err=0x00 implaus=0 trq_ok=1 | 7.MROR | spee0RPM | torque=0.8(Nm | T19.8C Tinv=12.5C Tigbt=12.5C | DC=0V |rr: 8w R: 6-, -999.00, -999.00, -999.00
+10:21:23.810 [EVROR] codu 3587 |Entered at t=17143 (+37970 ms ago), -999.00, -999.00, -999.00
+10:21:23.811 [CONDs]  Conditions: DC=0.0V| Tovque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:23.959 [ERROR] Code: 3587 |0Enterel att=1714JZn a/j, -999.00, -999.00, -999.00
+10:21:23.961 [CONDs]  Cons:(C=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:24.018 [ERROR] Code: 3587 | Entered at |=171fB/N[CONDs]  Conditions: dC=00V0| orque=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:24.107 [ERROR] Code: 3587 | Entered at t=17143 (+38270 ms ago), -999.00, -999.00, -999.00
+10:21:24.107 [CONDs] s:DC=0.0V | torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:24.202 [ERROR] Code: 3587 | Entered at t=17143 (+38370sao, -999.00, -999.00, -999.00
+10:21:24.203 [CONDs]  Conditions, -999.00, -999.00, -999.00
+10:21:24.307 [ERROR] Code: 358|nteret at0|=17943 )6jago), -999.00, -999.00, -999.00
+10:21:24.308 [CONDs](Conditions: DC=0.0V | Torquu=-1 |(Sxumt=4,ZX], -999.00, -999.00, -999.00
+10:21:24.415 [ERROR](Cote: 3587 | Enteved at t=171BZmsgo9, -999.00, -999.00, -999.00
+10:21:24.418 [CONDs] H DC=0.0V | Torque=-1| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:24.520 [ERROR] Code: 3587 | Entered at t=171ii670 ms ago)[CONDs]  C DC=0.4V:|VwweO), -999.00, -999.00, -999.00
+10:21:24.587 [ERROR] Code: 3587 | Entered at t=17143 (+38w70 ms ago9, -999.00, -999.00, -999.00
+10:21:24.625 [CONDs]  condions0dC0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:24.681 [ERrOV]8godm=7 |at t=17143 (+38870s(ago), -999.00, -999.00, -999.00
+10:21:24.692 [CONDs]  ConditioosDC=| Uorq]YOKLSpeed=00RPM, -999.00, -999.00, -999.00
+10:21:24.763 [APPS]: pedal=0% | raw=858 filt=77:0|erO6omsne]1 | InVz0urzOZ | speed=0 RPM | torque=0.0 Nm | Tmot=19.8C8Tyv=12.6C Tigbt=12.6C | DC=0V | err:35x7 Ifo: 6, -999.00, -999.00, -999.00
+10:21:24.789 [ERROR] Code: 3587 | Entered at t=17143 (+38970 ms ago), -999.00, -999.00, -999.00
+10:21:24.798 [CONDs]  Conditions:(DC=0.0V | Torque=zyyVR, -999.00, -999.00, -999.00
+10:21:24.879 [ERroR] C 7=2|(Etered at t=17BZjago), -999.00, -999.00, -999.00
+10:21:24.913 [CONDs]  Conditions: DC=p.0 | Tryue=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:24.983 [ERROR] Code: 3587 |0Unteel0at t=17147 )+39170 msago), -999.00, -999.00, -999.00
+10:21:25.001 [CON DC=0.0V | Torque=-1 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:26.082 0b 08200p p ,2020x00p 0 d     4hP8p 0hp60t6l062 d6p0200000        d0  lA0H, -999.00, -999.00, -999.00
+10:21:26.511 [HB][BT] Client connesso | t=125106 ms
+10:21:27.512 [APPS]: pedal=0% | raw=861 filt=819 | err=0x00 implaus=00trq_==,|-[ONW_S_: I__ACIVE | speed=0 RPM | torque=4.0 Nm | Tmot=18.7C Tinv=12.6C Tiwbt=12.6C(|(DS=6V4r: 0, -999.00, -999.00, -999.00
+10:21:27.521 0,18.7,12.6,12.6,0,0,pn0.4,81,0, -999.00, -999.00, -999.00
+10:21:29.165 [APPS]: pedal=0% | raw=844v812 | err=0x10 implaus=0 trq_ok=1 |%BY, -999.00, -999.00, -999.00
+10:21:29.173 0,19.6,12.6,12.60,4,-0.0,02,0/0,3264175145, -999.00, -999.00, -999.00
+10:21:29.471 [APPS]:pelal=4% |rW295 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 NmTtqy7s Tiv12.6Gigbt=12.6C | DC=0V | Err: 0 Inf:(0, -999.00, -999.00, -999.00
+10:21:29.477 0,19.7,2.612.6,0,8,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:21:30.470 [APPS]: pedal=0% | raw=811 filt=856 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: XV_ACTMO0| speed0rPM| torque=0.0 Nm | Tmot=59.7C knolTigbv=12.5C | DC=0V | Err:0 Info: 0, -999.00, -999.00, -999.00
+10:21:30.473 0,19.7,12.5,12.5,0,0,0.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:21:31.444 [APPS]: pedal=0% | raw=919 filt=804 | err=0x00 implaus=0 trq_ok=1 | [MNV_ HV_AStIvM0|0s|muf=p(RPM(|torque=-0, -999.00, -999.00, -999.00
+10:21:31.446 0,19.7,12/5,12.5,0l0,-0.0,-0.1,8.2.777375155, -999.00, -999.00, -999.00
+10:21:31.502 [HB][BT] Client connesso | t=130115 ms
+10:21:31.858 [ERROR] Code: 3587 | Entered at t=0 (+5403 ms ago), -999.00, -999.00, -999.00
+10:21:31.862 [CNs  Gontitions: DC=4.8VW0H2 RPM, -999.00, -999.00, -999.00
+10:21:31.863 [ERROR] Code: 3587 | Entered at t=5433(+p ms ago), -999.00, -999.00, -999.00
+10:21:31.956 [CONDs]  Conditions: DK=0.0VTorque=0 |eeAj[EROR]35x7 | Eteref et t=5433 (+170 ms ago), -999.00, -999.00, -999.00
+10:21:32.052 [CONDs]  Conditions: DCpn0v8|hozqug=0 |2Vh%IuCo ereatt=5433 (+270 msc+X[CONDs]  Conditions: DC=0.0V  orqum=80|0Speed=0 RP], -999.00, -999.00, -999.00
+10:21:32.163 [ERROR] Code: 3587 | Entered(a|t==7773Sjsxx[CONDs]  Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:32.237 [ERRR] Code: 3787Goat =5433 (+470 ms ago), -999.00, -999.00, -999.00
+10:21:32.351 [ERROR] Code: 3587 | Entergd at t=5433 (+570 ms go), -999.00, -999.00, -999.00
+10:21:32.353 [COND]  Contions0Ts8v | Tor]YOSpeed=05, -999.00, -999.00, -999.00
+10:21:32.412 [MVZ[] pYV0% | raw=871 vi|tx0 | ev2,ooq1|[NV_R]: ERROR | speme=0 RPM | torque=0. Nm | Tmot=19.8C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00
+10:21:32.434 [ERROR] odez3587 | Entered at t=5433 (+670 os ago), -999.00, -999.00, -999.00
+10:21:32.451 [CONDs]  Conditions: DC=0.8 | Tozque0|H:gefA55, -999.00, -999.00, -999.00
+10:21:32.538 [ERROR] Code: 3587 | Entered at t=50 ms ago), -999.00, -999.00, -999.00
+10:21:32.540 [CONDs]  Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:32.630 [ERROR] Code: 3587 |tmrm att=54 (+0 ms ago), -999.00, -999.00, -999.00
+10:21:32.639 [CONDs]  Conditions: DC=0.1V | Torque=0 | Speed=0 ZPM, -999.00, -999.00, -999.00
+10:21:32.757 [ERROR] Code: ered at t=5433 (+72 msagoJc[CONTs_  Conditions: DC=0.0V | Torque=0 |0Speul=4ZPM, -999.00, -999.00, -999.00
+10:21:32.849 [ERJ35 Entered at0t=53 (3070 ms ag+H[CONDw]  Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:32.939 [ERR_Z],Kode: 3787 | Entered at t=5433 (+1170 ms ago), -999.00, -999.00, -999.00
+10:21:32.941 [CONDs]  Conditions: DzK | SpeYVA55, -999.00, -999.00, -999.00
+10:21:33.039 [RoR] Codu: 3587 | Entered at t=5433 (+1270 ms ago)[CONDs]  Conditions: DC=0.0V | TorqueSpYyVIA, -999.00, -999.00, -999.00
+10:21:33.123 [ERROR](Code: 3587 | Entered at t=5433 (+1370 ms ago), -999.00, -999.00, -999.00
+10:21:33.159 [CONDs]  Conditions: DC=0.4V Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:33.233 [ERROR] C Entered at t=5433 (+170 ms ago), -999.00, -999.00, -999.00
+10:21:33.314 [CONDs]  Conditions: DC=0.0V | Torque=0 |._wgooOE5[ERROR] Code: 3587 | Entered at t=5433 (+1570 ms ago), -999.00, -999.00, -999.00
+10:21:33.324 [CONDs] Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:33.406 [APPS]: pedal=0% | raw=733 filv=794 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: EZZOR | speed=0 RPM | torque=00(Nm | Tmot19.7G Tinv=12.6C Tigbt=12.6C | LC=00|(Grs:J 6M, -999.00, -999.00, -999.00
+10:21:33.407 0,19.7,12.6,12.6,0,0,0.0,0.0,0.1,0, -999.00, -999.00, -999.00
+10:21:33.411 [ERROR] Code: 3587 | EnteYY, -999.00, -999.00, -999.00
+10:21:33.430 [CONDs]  Kondktions: DC=0.0V| Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:33.519 [ERROR] Code: 3587 | Entered at t=5433 (+1770 ms ago), -999.00, -999.00, -999.00
+10:21:33.522 [CONDs]  Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:33.633 [ERROR] Code: 3587 | Entered at t=5433 (+1870 ms ago), -999.00, -999.00, -999.00
+10:21:33.636 [CONDs] C DC=0.0V |Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:33.707 [ERROR] Code: 358(| Eteredat t=5433 (+1970 ms ago), -999.00, -999.00, -999.00
+10:21:33.759 [CONDs]  Conditions: DC=0.0V | Torque=0 | Sqeed=0 RPM, -999.00, -999.00, -999.00
+10:21:33.825 [ERROR] Code: 3587 | Enterelau t=5433 (+2070ms ago), -999.00, -999.00, -999.00
+10:21:33.827 [CONDZoDC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:34.013 [ERROR] CodYEntd at t=5433 (+2170 ms a+H[CONDs]  Contmtins: DC=0.0V Toue0 Spuud=xr]m.[ERROR] Code: 3587 |Enteretqt t=533 (+2270 ms ago), -999.00, -999.00, -999.00
+10:21:34.100 [COND],Cnei|ionw DC=0.2V | Toue=p0| Spu|=0 RPO[ERZ_Z] Code: 3587 | Entered at t=5433 (+2370 s aoo-, -999.00, -999.00, -999.00
+10:21:34.118 [CONDs]  Conditinz DC=0.2W[0 0Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:34.340 [ERROR] Code:(3587 |Entesedat t=563fBZjagoi-[CONDs]  Conditions: DC=0.0V | Torque=speet=00Rp]=[ERROR] Code: 3587 | Entered at t=54C00ms agL[CONDs]  Contitions:(DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:34.369 [APPS]zx|=27 raw=7)filt=794| err=0x00 implaus=0 trq_ok=1 | _INV_R]: ERROR | speet=0 RPM | tovqwe0.2N[hTmot=1.CTinv=12.6C Tigbt=12.6C | DC=1W Grr: J 6, -999.00, -999.00, -999.00
+10:21:34.373 0,19.7,12.6,12.6,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:21:34.403 [ERROR] Code: 587(|(Entgredetv543(+2670 ms ago), -999.00, -999.00, -999.00
+10:21:34.512 [CONDs]  Coditonszhds=x.0 | Uorq]YO0 RPSC[ERROR] Cot: 3587 | ]ntered at t5633(+2770 ms ago), -999.00, -999.00, -999.00
+10:21:34.595 [CONFs_  C DC=0.0V | Tozy=6.|Swege0 RPMC[ESSOS]Code: 3587 | Entered at t=5433 (+2870 ms ego), -999.00, -999.00, -999.00
+10:21:34.598 [CONDw],%Oondmk=| Torqum=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:34.713 [Ej 3587 | Etured at t=5433 (+2970 s a[CONDs]  Conditions: DC=0.0V |tre=0Wtmgl_lH:5, -999.00, -999.00, -999.00
+10:21:34.801 [EVROZ] Code: 3587 | Entered atu,k078ms ego-, -999.00, -999.00, -999.00
+10:21:34.892 [CONDs]  Conditos0LC=0.0V 0 | Spuet=0 rpM-[ERROR] Cote: 3587|Eovwvef at t=5433(+3170 ms ag), -999.00, -999.00, -999.00
+10:21:34.894 [CONDs]  Conitions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:34.981 [ERROR] Code: 3587 | Mntmredat t=5433 (+270 m., -999.00, -999.00, -999.00
+10:21:35.008 [CONds]Conditions: DC=2.4V | Vorque=0 :A5u, -999.00, -999.00, -999.00
+10:21:35.085 [ERROR] Code: 3587 | EWat t=5433 (+3370 ms ago), -999.00, -999.00, -999.00
+10:21:35.098 [CONDs]  Conditinw,]C6.ZTorqwe=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:35.191 [ERROR] Code: 3587 | G_at t=5433 (+3470 ms ago), -999.00, -999.00, -999.00
+10:21:35.309 [ERROW 3587 | Entered et u=5433 (+3570 ms ago), -999.00, -999.00, -999.00
+10:21:35.415 [CONDs]Conitins:0Dc=0.0V | Torqe=0 | Speed=0 RP[APPS]: edal=0% | raw=820 filt=805 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: ERROR |speed=0 RPM | torye=-4.0 No | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | ErrJ 6, -999.00, -999.00, -999.00
+10:21:35.416 [ERroRu: 7=870|Mnturedat t=5433magi-[CONDs]  Conditions: |=8 TrqweOSpeee=0 RPM, -999.00, -999.00, -999.00
+10:21:35.503 [ERROR] Coee:358nredX5477(+3771 os ago), -999.00, -999.00, -999.00
+10:21:35.503 [COND]  Goomitions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:35.595 [ERROZ_ Code: 3587 | Entevu=5433 (+3870 m ago), -999.00, -999.00, -999.00
+10:21:35.595 [CONDs]  Conditions:DC=)|K0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:35.674 [ERROR] Code: 3587 | Entered att=5433 (+3970 ms ago), -999.00, -999.00, -999.00
+10:21:35.693 [CONDs]  Contitionn, -999.00, -999.00, -999.00
+10:21:35.783 [ERROR] Code: 3587 | Entered at t5433 (+47 ms ago), -999.00, -999.00, -999.00
+10:21:35.787 [CONDs]  Conditions:0dO82V|orsue=80| Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:36.062 [APPS]: pedal=0% | raw=822 filt=822 | err=0x00 implX inV_R]: OFF | speed=0 RPM | torque=00 Nm | Tmot=0.0G Tinv=0.0C Tigbt=0.0C | DC=0V | Err: 0 Info: 2, -999.00, -999.00, -999.00
+10:21:36.064 0,0.0,0.0,4.2,4,0,0.0,0.0,0.0,0, -999.00, -999.00, -999.00
+10:21:36.105 [ESROSW3587| tered at t=63 (+40 ms agoJX[CONDs]  Conditions: DC=2.0V| Trqum=-1 |[pugd=0 RPM, -999.00, -999.00, -999.00
+10:21:36.503 [HB][BT] Client connesso | t=135116 ms
+10:21:37.067 [INV_R]: HV_ACTIVE|.torque=0.0 Nm Tmot=8.7C Tinv=12.6C Tigbt12.6C | DC=0V | errz 0 Info 0, -999.00, -999.00, -999.00
+10:21:37.074 0,8.7,12.6,12.6,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:21:38.033 [APPS]: pedal=0% | raw=807 filt=801 | err=0x0p implaus=0 wrs_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=18.3C Tinv=12.6C Tigbt=12.6C|GK=0V| Err: p Info: 0, -999.00, -999.00, -999.00
+10:21:38.036 0,q8.3,12n6,12.6,0,0,8.8,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:21:39.016 [APPS]: pedan=LIraw=716 filt=789 | Y.0 implaus=0 trq_ok=1 %BYU%Y|(speed=2VTSuor]yOvNm Tmot=19.6C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:39.985 [APPS]z pedal=0% | raw=825 vynt=779.0 mplas=ph|rq_o=1(|([MNV_R]: HV_ACTIVE | speed=0 RPM | toruue=0.0 Nm | Tmot=19.7C Tinv=12.6C Tigb|=32.C(|DC=0V|QJ 0, -999.00, -999.00, -999.00
+10:21:41.074 [APPs]: pedal=0% | raw=759 fmlt82|r=0x00 imp|au=0 trq_ok=1 | [INV_R]: HV_ACtIVE0| speed=0RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.6C Tigbt=13.b| Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:41.079 0,19.8,12n612.6,0,0,0.0,0.0,0.1,0, -999.00, -999.00, -999.00
+10:21:41.512 [HB][BT] Client connesso | t=140120 ms
+10:21:41.974 [aPS:(xtml=0% | raw=719 filt=759 | err=px000ipleus=0 1 | [INV_R]: HV_ACTIVE |.0QTStorquYOKLr| Tmot=19.8C Tinv=56.6C Tigbt=12.6C | DC=0V | Errz  Info: 0, -999.00, -999.00, -999.00
+10:21:42.959 [APPS]: pedal=0% | raw=906 filt=804 | err=0x20im|lmus=0 1  [INV_R]: HV_ACTIVE | speed=0 SPM |torque=0.0 Nm | Tmt=1=.8C Tinv=16.6C Tig  DC=0v | Err 0 info: 0, -999.00, -999.00, -999.00
+10:21:42.961 0,19.8,12.6,16/6Krv0.1,-0.0,0, -999.00, -999.00, -999.00
+10:21:43.949 [APPS]: pedal=0% | raw=82795 |(urr=8x82omsnc1 | [INV_R]: HV_ACTIVE | speed=0:| torque=0.0 Nm | Tmot=19.7C Tinv=12.C Tmgbt=12.vC0DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:43.952 0,19.7,12.6,12.6,0,0,0.0,-0.1,0/0,0, -999.00, -999.00, -999.00
+10:21:44.964 [APPs]zpedal=0% | raw=800 filt=790 | err0pp imp|ys=0 try_ok=1 | [INV_R]: HV_ACTIQspee=0 ZXM | torque=0.0 Nm | Tmot=19.8C Tinv=q2.v0tiocv=1.6C |Q| Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:45.136 0,19.8,12.6,12.6,008.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:21:46.225 [APPS]: pedal=0% | raw=753 filt=806 | Y.mlaus=0 trq_ok=1 | [INV_R]: HV_ACVEHuOA|0tozye8.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:46.595 [HB][BT] Client connesso | t=145122 ms
+10:21:46.872 [APPS]: peda=0% | raw=903 filt=803 | er=0x00himp|aus=0(|rq_ok=1 | [INV_R]: HV_ACTIvE|0speed=0 RPM| torque=0.0 Nm | Tmot=19.8C Tinv=12.6C Tigbt=12.6C | DC=1V | Err:00 Info00, -999.00, -999.00, -999.00
+10:21:46.875 0,19.8,12.612.6,0,0,0.0,-0.0.-p.0,0, -999.00, -999.00, -999.00
+10:21:47.849 [APPS]: pedal=0% | raw=577 filt=791 | eOimp|aus=0 tvq_ok=1 |[MNV_R] LV_ACTIVE | peet= ZPM(|0torque0.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=52/6C| DC=0V | Err: pInfo: 0-, -999.00, -999.00, -999.00
+10:21:47.861 0,19.7,12.6,12.6,pl88=4..2.0,0, -999.00, -999.00, -999.00
+10:21:48.851 [APPS]: pedal=0% | raw=696 filt=790 | e implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | spee= rPM | torque=0.0 Nm | Tmo1tZ=1rctwbt=12.O(DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:48.853 0,19.8,12.6,12.6.0,0,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:21:49.825 [Al=0% | raw=891 filt=805 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE |H.0rpm(| tozyue=0.0 Nm | mot=19.7C Tinv=1r.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:49.826 0,19.7,12.6,12.6,0,0,0.0,-0.2,0.0,0, -999.00, -999.00, -999.00
+10:21:50.795 [APPSWal=0% | raw=707 filt=809 | err=0x00 implauq |([INV_R]: HV_ACRUspeed=0 Rm rq=0.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 0 Info 0, -999.00, -999.00, -999.00
+10:21:51.622 [HB][BT] Client connesso | t=150131 ms
+10:21:51.786 [APPS]: pedal=0%0| raw=963 filt=786 | erOKmplaus=0 trq_ok=9 | [INV_R]: HV_ACTIE | speed=0 RPM | torque=0.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=9:6s|(LK0V | Er7J 0, -999.00, -999.00, -999.00
+10:21:52.781 [INV_R]: XV_ACtIVE | speed=0 Rtor]Yorr|Tmt=q9.8S Tinv=12.6C Tigbt|6|D=pv | Err: 0Info: 0, -999.00, -999.00, -999.00
+10:21:52.781 0,19.8,12.6,12.6,0,0,0.0,-0.1,-0.0,0, -999.00, -999.00, -999.00
+10:21:53.761 [APPS]: pedal=0% | raw=872 filt=785 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | to]YOsANm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:21:53.764 0,19.7,12.6,12.6,0,0,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:21:55.722 0 RPM | torque=-0.0 Nm | Tmot=y.7C Tinv=12.6C Tigbt=12.6C | DC=0V | erJ,8, -999.00, -999.00, -999.00
+10:21:55.725 0,1=.7,12.6l6bpn,-0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:21:56.532 [HB][BT] Client connesso | t=155135 ms
+10:21:56.941 [APPS]: pedal=0% rew=55fklu=83rrr=0x00 implau=0trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0Nm  Tmou=19.8(nv=12.6C Tigbt=126G |0FG=0V |Err: Lr 0, -999.00, -999.00, -999.00
+10:21:56.945 [ERRO] Code: 3587 | Entered at t=63 (+21120 ms ago), -999.00, -999.00, -999.00
+10:21:56.945 [CONDs]  Conditions: Dc=08v|0toyg/3R0RM-, -999.00, -999.00, -999.00
+10:21:57.155 [ERROR] Code: 3587 | Entered at t=:1277Kyinago), -999.00, -999.00, -999.00
+10:21:57.157 [CONDw_Con[:Wk: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:21:57.791 [APPS]: pedam=0% | aw=w30 filt=798 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=-0.0 Nm | Tmot=-36.=C Uinv=12.6C Tigbt=12.6C | DC=pv | Err:0 Info: 0, -999.00, -999.00, -999.00
+10:21:57.793 0,-34.9,12.6,12.6,,8,-0.0,-0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:21:58.675 [APX[]: pedal=0%  raw=838 filt=813 | err=0x00 impnaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPMolv| Tmot=11.6C Tinv=12.6C TigbtOL, -999.00, -999.00, -999.00
+10:21:59.656 [APPS]: pedal=0% | raw=779 filt=833 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE |.0 RPM | torque=0.0 Nm | Tmot=18.6C Tin=126 igbt=q2.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:00.639 [APPS: edal=0% | raw=882 fil|=820|(err4y01 ix trq_ok=1 | [INV_R]: HV_ACTIVEspeed=0 RPM | torqe=-0.0Nm |Tmot=19.6CTinv=12.6C Tig_crn6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:00.641 0,19.6,1r.6,12.6,0,0-0.0,0.0,0.1,3264175145, -999.00, -999.00, -999.00
+10:22:01.547 [HB][BT] Client connesso | t=160138 ms
+10:22:01.608 [APPS]: pedal=0% | raw=991 filt=791  err=0x0mpX] trq_ok=1 | [INV_R_: HV_P(UU speed=0 RM | torque=0.0 Nm | Tmot=19.xCinv=126c Tigbt=16.S | DC=0V | Er:pinfoz, -999.00, -999.00, -999.00
+10:22:01.609 0l19.8,12.6,12.6,0,0,0.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:22:02.608 [APPS]: pedal=0% | raw=839 fklt7=Y0 m+0 trq_ok=1 | [INV_R]: HV_ACTIVE  wpeed=0 rPM  torque-0.0 Nm | Toot=19.7C Tinv=LTgbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:02.609 0,19.7,12.7,12.7,0,0,-jkr-.0,s641w5145, -999.00, -999.00, -999.00
+10:22:03.575 [APPS]: edal=0% | raw=722 filt=809 | err=0x00 implaus=0 trqok=1 | [IN_Z]: READY | speed=0 RPM |orue=8.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:04.579 [APPS]: pedal=0% | raw=796 filt=747|err0x00 implaus=80tvq_o==9_MOV_V]: HV_ACTIVE | speed=0 RPM | torque0.0 Nm | Tmot=19.7C Tinv=12.6C Tmgft=92.6C| DC=0V(| Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:05.533 [APPS]: pedq|=0% | raw=782 filtOerr=0xx00ymt|yus=9 tzy_okOL[INV_R]: HV_ACTIVE | pued=0(VPM | uorque=1.0 Nm |0to|19.(2.6C Ti13.6C | D Err 0 Info: 0, -999.00, -999.00, -999.00
+10:22:06.515 [APPS]: pedal=0% | raw=734 filt=780 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 Storque=0.0 Nm | Tmot=19.7O-_knvOLTigbt=126c | DC=0V | Err: 0 Info:, -999.00, -999.00, -999.00
+10:22:06.547 [HB][BT] Client connesso | t=165150 ms
+10:22:07.744 [APPS]: pedal=0% | raw=839 fmlt=72 | rr=0x20impmaus=0 trq_ok=1 | [INV_R]: HV_AGVOWGHn0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.6C Tigbt=12.6C(|(DC=0V  Err: 0 In: 0, -999.00, -999.00, -999.00
+10:22:08.489 [APPS]rYv%| raw27 filt=784 | err=0x00 implaus=0 trq_ok=1 | [INV_R]:(L_ICTIVE | speed=0 RPM | torque=-0.8  | Tmov7.[vmn=32.6CTigbt=12.6C | DC=0V | Urr:(0 Info: 0, -999.00, -999.00, -999.00
+10:22:10.481 [INV_R]:XV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.6C Tigbt=12.6C | DC=0V | erz:00 Info:10,1.8,12.6,12.6,0,0,0.0,-0.0,01.0, -999.00, -999.00, -999.00
+10:22:11.566 [HB][BT] Client connesso | t=170156 ms
+10:22:12.427 [APPS: pefaOraw=653 filt=781 | err=0x0p iplqs=0trq_o=1 | [INV_R]: HV_ACTIVE | speet=0 RPM | orqe=p.0nm | Tmot=19.8G Tinv=12.7C Tigbt=12.7C | DC=0V|8Err: 4 Ingo 0, -999.00, -999.00, -999.00
+10:22:13.582 [INV_R]: HV_ACUIVE |0spd=0 RPM | torque=0/0 NmTmot=19.8C Tinv=12.7C Tigbt=12.7C | r: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:14.375 [INV_R]: HV_ACTIVE | speed=0 RPM | torque=-0.0 Nm | Tmot=19.7C Tinv=12.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:14.379 0,19.7,12.6,12.6,0,0,-0.0,0.0,0.8,3264175145, -999.00, -999.00, -999.00
+10:22:15.366 [Qdal=0% | raw=837 filt=800 | err0x0LJmpaus=0 trq_o1 | [INV_R]: HV_ACTIVE| speed0 RPM | torque=0.0 N[Tmot=19.8C Tinv=12.6C tigbt=12.6C | DC=0V | ErrJ 0, -999.00, -999.00, -999.00
+10:22:16.420 [APPS]: pedal=0% | raw=760 filt=7720| evr=0x00 impmausO=1 | [INV_R]: HV_CCTIVE | speed=0 RPM | torque=0.0No|(Tmot=19.8(U12.6C Tigt12.6C | FC=4Urr:,0Info:, -999.00, -999.00, -999.00
+10:22:16.538 [HB][BT] Client connesso | t=175158 ms
+10:22:17.333 [AP0% |0raw=784 filt=812 | err=00 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=/2.6,+Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:17.337 0,19.8,12.7,12.7,0,0,-0.0,-0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:22:18.388 [APPS]: pedal=0% | raw=733 fylt=778| err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACVIVspeed=0 RPM | torque=0.0 Nm |(T|=19, -999.00, -999.00, -999.00
+10:22:19.337 [APPS]: pedal=0% | raw=779 filt=788|err=0x00 implcus=0 trq_ok=1 | [INV_R_, -999.00, -999.00, -999.00
+10:22:20.425 [AP]:p% | ryw=892(fmlt29| err=0x00 implaus=0 trq_ok=1 |([INV_R]: HV_ACTIVE| speud=0 RPM | torque=0.0 OoU[19.8C Tinv=12.7C Tigbt12.7K | DC=0V | Err, -999.00, -999.00, -999.00
+10:22:21.284 [APPS]: pedal=0% |862815 | err=0x00 implaus=0 trq_ok=1 | [INV_]hVACTIVE0|hpeef=0 RPM | torque=Krr|t19.xC Tmnv=12.7C Tigct=13.7C, -999.00, -999.00, -999.00
+10:22:21.562 [HB][BT] Client connesso | t=180161 ms
+10:22:22.278 [APPS]: pedal=54% | raw=342filt=2737 | err=0x00 implaus=0 try_ok=1 | [INV_S_HR, -999.00, -999.00, -999.00
+10:22:23.236 [APPS]: pelal=94% | ra=396 fiWerr=4x00 implaus0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 | torque=p.0 Nm |(Tmot=198C Tinw=12.7(12.7C | DS=p| uzz00[nfo 2, -999.00, -999.00, -999.00
+10:22:23.239 0,19.8,12.7,12.7,0,0,0.0,-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:22:24.209 [APPS]: pedal==KIYXW23979 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | toque=-00 Nm | Tmot=19.C Tinv=72/7C Tiwbt=12.7C |Dc=V |hMrr:0 Info: 0, -999.00, -999.00, -999.00
+10:22:24.230 0,19.8Lbrbbbjrbjrbrb4u, -999.00, -999.00, -999.00
+10:22:25.191 [APPS]: pedal=96% | rw=405 filt=4013 | err=0x00 implaus=0 trq_ok=1 | [INVR] HV_ICIVE | speed=0 RPM | torque=0.0 Nm | Tmot=1=.8KTinv=16.7C Tigbt=12.7C | Dc=0v | erzz82 Info: 0, -999.00, -999.00, -999.00
+10:22:25.201 0,19.8,12.,12.7,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:22:26.189 [APPS]: pedal=97% | raw=3913 filt=4020 | ezr=0|00 implaus=0 trq_ok=1 |0[YnV_R]:(HV_MKV_E | speed=0 RPM | torquux0(Nm| Tmot1.Cinw=12.Tigbt=12.7C | dC=0V | Mzr: 4(Info 0, -999.00, -999.00, -999.00
+10:22:26.573 [HB][BT] Client connesso | t=185165 ms
+10:22:27.165 [APPS]: pedal=96 |(raw=405 fivWr=0x00implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=19n8C tinv=12.6C Tigbt=12.6C | DC=0V(| Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:27.169 0,19.8,12.6,12.6,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:22:28.155 [APPS94% |m4057filv=3962 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speel=0 RPO | torque=0.0 Nm ] Vmot=19.8Cin12.S0vigbt=12.6C| DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:28.158 0,19.8,12.6,12.6,0,0,0.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:22:29.132 [APPW]: pedal=93% | raw=4039 filt=96 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVM |0spmud=4(RPM| torque=0.0 Nm |Tmot=19.8S Tiv=1.6C Tigbt=12.6C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:30.121 [APPS]: pedal=94% | raw=3855 filt=3951 | erO0 imlus=0 trq_ok= | [INV_R]: HV_ACIvE|eed=0 RP] | torque=0.0 Nm | Tmot=19.xC inv=12.7K Tygbt=12.7C | DC=0V | Err: 0 Info:00J0,19.8,127,12.7,0,0,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:22:31.089 [APPS]:0pedal=0% | raw=792 filt=923 | err=0x00 imrlaus=0-=1| [IV_R]: HV_ACRUspeed=0 RPMtoque=0.00Nm0| Tmot=19.8S Tinv=12.6C Tigbt=12.6C, -999.00, -999.00, -999.00
+10:22:31.095 0,59.8,52.6,1Kfbrck,8.0,0, -999.00, -999.00, -999.00
+10:22:31.589 [HB][BT] Client connesso | t=190169 ms
+10:22:32.070 [APPS]: pedal=0% | raw=861 filt=873 | grrLZ[0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed0 RPM | torque=00 Nm | Tmot=1NTinvOL6tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:32.072 0,19.8,12.7,12.7,0,0,0.0,-pnp|p.1,8, -999.00, -999.00, -999.00
+10:22:33.146 [APPS]: pedal=0% | raw=837 filt=876 | err=0x00 implaus=1 trq_ok=1 | [INV_R]: H_CCTI] |speef=Utorque=0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:34.047 [APPS]: pedal=0% | raw=917 filt=901 | er=0x00 ymplaus=4 trs_ok=1 | [IN%BYTIVE0| speel=0 RXM | torque=0.0 Nm | Tmot=19n8 Tinv=1:.7C Tiwbt=12.7C | DC=0V | Err: 2 Info: 0, -999.00, -999.00, -999.00
+10:22:34.049 0,19.8lqw|yz70,0,8.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:22:35.011 [APPS]: pedal=0% | raw=779 filt=889 | esr0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=08rP](|tovsue=0.0 No | Tmot=19.8C Tinv=12.7C Tignt92.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:35.033 0,19.8,12.7,12.7,0,0,0.0,-0.0,0.3,0, -999.00, -999.00, -999.00
+10:22:36.003 [APPS]: pedal=0% | raw=819 filt=872|err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed0 RPM | torque=0.0 Nm | Tmot=19c Tinv=1:.[V[12.7C | DC=0V | Err: 0 Info: 8, -999.00, -999.00, -999.00
+10:22:36.587 [HB][BT] Client connesso | t=195172 ms
+10:22:36.984 [APPS]: pedal=0% | raw=827 filt=906 | err=0x00 implaus=0 trq_k=1 | [MNV_R]:HV_ACVutyyyOKAM |rqe0.4 Om| TooOlI]r.C Tyobv=12n7c | DC=0V | Er: 0 Ino:k0,19.8,12.7,12.7,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:22:38.950 [(Vkgb=36.6C| DC=0V| EJnfo: 0, -999.00, -999.00, -999.00
+10:22:38.958 0,19.8rn12.6,0,0,0.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:22:39.933 [APPS]:edal=0% | rew=838 filt=828 | err=0x00 implaus=0 trq_ok=1 | [NVR]:HV_ACTIVE | speed=0 VPM |0vorque=-0.0 Nm | Tmot=19.:G TknOTigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:39.940 0,19.8,12.7,12.7,0,0,-0.6,/2.6ij51u, -999.00, -999.00, -999.00
+10:22:40.937 [APPS]: pedal=0% | raw=840 filNerr=0x00 implaus=0 trq_ok==,| [INVRw[VTivE | speet=00RPM | torque=-0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err:nfoz0,19.8,12.7l12.7,0,0,-0n0,-p.00.8,3264175145, -999.00, -999.00, -999.00
+10:22:41.573 [HB][BT] Client connesso | t=200175 ms
+10:22:43.108 0,19.,12.7,12.7,0,0,0.0,-0/9,6.0,1, -999.00, -999.00, -999.00
+10:22:43.885 [APPS]: pedal=0% | raw=961 nilt=876 | err=0x00 implaus0 trq_ok=9 |8[YNV_V]: HV_A(uU| speed=00rpM | tozqum==0.8 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 In[lC0,19.8,12.7,12n7l0l0.0,-0.0,0.1,3264175145, -999.00, -999.00, -999.00
+10:22:44.855 [APPS]: pedal=0% | raw=717 filt=852| err=0x00 mpq| [INV_R]: HV_ACtIVE0| speed=0 RPM | torque=-0.0 Nm | Tmot=19.8C Tinv=12.CTigbt=12.7C(|8TC=4 | Err:0 Info:(0, -999.00, -999.00, -999.00
+10:22:45.829 [ApS:0pedal=0% | raw=895 filt=839 | err=px00plaus=4 trq_ok=1 | [INV_R]: HV_ACTIVE | speud=0 RPM | torque=0/0Nm | Tmot=LNinv=1:.7CTkgft32/7CDC=0V |Q..J 0, -999.00, -999.00, -999.00
+10:22:46.582 [HB][BT] Client connesso | t=205176 ms
+10:22:46.830 [APPS]: peda=0% | raw=839 filt=859 | err=0x00 implaus=0 tro1|pV_R]: HV_ACTIVE h| orque=4.4 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:46.831 0,19.8,12.7,1270,, -999.00, -999.00, -999.00
+10:22:47.801 [APPS]: pedal=0% | raw=838 filt=8w8 | err=0x00 implaus=L1 | [INV_R]: HV_ACTIVE |,speed=1RPM torque=0.0 Nm | Tmot=19.8C Tinv=12.7C TZ12.7(DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:47.802 0,19.8,12.7,12.7,0,0,0.mp.,0.00, -999.00, -999.00, -999.00
+10:22:48.867 [APPS]: pedal=0% | raw=783filu=84err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=-0.0 Nm | Tmot=19.9C Tinv=qrC Tigbt=1.S|(DG=0V |rz ioz0,19.9,12.7,12.7,0,0,-0.0,-0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:22:49.774 [APPS]: xedal=0% | raw=824 filt=860 | err=0x00 ix|y=0(|zq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | vorque=1/2Tmot=19.9C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:49.782 0,19.9,12.7,12.7,0,0,0.0--0.1,0.0,0, -999.00, -999.00, -999.00
+10:22:50.761 [APPS]: pedal=0% | raw=854 filt=852 | er=6x00 imxlaus=0 trq_ok=1 | [INV%BY, -999.00, -999.00, -999.00
+10:22:51.574 [HB][BT] Client connesso | t=210182 ms
+10:22:51.736 [APPS_: pedal=0% | raw9N2871 |mrv=4|88 ymtX_1 | [INV%BY, -999.00, -999.00, -999.00
+10:22:52.714 0,19.8,12.7,12.7,0,0,0.p,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:22:53.790 [A5%| zaw686 filt=874 h.0[0(trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0RPM | torque=-0.0 Nm | Tmot=19.9C Tinv=12.7C0ywv|=12.C| DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:54.983 [QPP[]: pedcl=0% | raw=938 filt=862| err=0x00 implaus=0 urq_ok=1 | [IOV_R] HV_A(UUpeed=0 VPM ]K0.0 N[Tmot=19.9C Tinv=12.7C Tigbt=13.7P, -999.00, -999.00, -999.00
+10:22:55.671 [APPS]: pedal=0% | raw=871 filt=858 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | peed=0 RPM | torqwe=0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7O,FC=8 | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:55.672 0,19.8,q2.7,12.7,0,0,00,-0.1l0n0,0, -999.00, -999.00, -999.00
+10:22:56.590 [HB][BT] Client connesso | t=215191 ms
+10:22:56.623 [APPS]:ul=pe| qw=77q filt=L, -999.00, -999.00, -999.00
+10:22:56.629 [INV_R]: HV_ACTIQspeed=0 RPM | torque=-0.0 Nm| Tmot=19.(v=12.7GUZ12/7C |DC=0V  Grr:p Yfo: 0, -999.00, -999.00, -999.00
+10:22:56.644 0,19.8,12.7,12.7,0,0,-0.0,-0.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:22:57.667 [IPPS]/pgdal=0% | zaw=831 filt=8210| urz=8x4 imvocws0 trq_ok=1 | [INV_R]z hVACTIVE | spggd=| torque=0.0 Nm | Tmot=199Stinv=12.7C Tigbt12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:22:58.606 [APPS]: pedal=0% | raw=923 filt=859 | err=0x00 i=0 trq_o=1 | [INV_R]: HV_ACTIVE_wcRstorque=-0.0 Nm | Tmot=19.8C Tin=12.7C igbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:00.749 [INV_R]: HV_ACTIVE | speed=0 RPM | torque=-0.00Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:01.554 [APPS]: pedal=p% | raw=16 filt=860 | err=0x00 implaus=0 trq_ok=1 | I_]z XV_Y| speed=0 RPM | torque=0.0 Nm  Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:01.569 0,19.8,12.7,12.7,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:23:01.582 [HB][BT] Client connesso | t=220199 ms
+10:23:02.544 [APPS]: pedal=0% |raw=946 filt828 |0 implaus=oklINV_R]: V_aCTIVE | speed=0 RPM | torque=-pnxp8|mv=59.8(U12n7 Tiu12.7C |0c=0V | Ezz: 4Info:1, -999.00, -999.00, -999.00
+10:23:02.544 0,19.8,12.7,927,0,0,-0.0,-0.0,0.1,3264175145, -999.00, -999.00, -999.00
+10:23:03.534 [APPS]: pedal=0% | raw=75filt=874 | err=0x00 impnau=6kOl[Inv_R]ruYd]0| wpeed=0 RPM||ovqe1rTmot=19.8GVinv=12.7C UigbOL| D0v|0Erz::Yno: 0, -999.00, -999.00, -999.00
+10:23:03.538 0,19.8,12.7,12/7jbj0-0.00.1,3264175145, -999.00, -999.00, -999.00
+10:23:04.512 [APPS]: pedal=0% | raw=752 filt=830 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=2 RPO| torque=0n0N[Tmot=19.9C Tinv=12.7C Tigbt=12.7C | C=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:04.514 0,19.9,12.7,16.7,0,0,0.,, -999.00, -999.00, -999.00
+10:23:04.520 0.q,0, -999.00, -999.00, -999.00
+10:23:05.489 [APPS]: petal=0% | raw=935 filt=839 | grr=0x00 mplaus=0tvy_ok=1 | [INV_R], -999.00, -999.00, -999.00
+10:23:06.695 [APPS]: pmll0% 784 fil|=,mr=1y00 ipls=0rq_ok=1 |0[INV_R]: HV_ACURt.0 RPM | torque=0.0 Nm | Tmot=1..wc]12.7C| DS=0h| E.Jo0,98.7,12nw,0,0,0.0,-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:23:06.700 [HB][BT] Client connesso | t=225203 ms
+10:23:07.457 [APPS]: pedml=0% | raw=823 filt=880 | err=0x00 implaus=0 trq_ok=L%BY, -999.00, -999.00, -999.00
+10:23:08.603 [APPS]: pedal=0% | raw=907 filt=867 | err=0x00 implaus=0 q| iv_z]:,HV_CCTIVE | speed=0 RPM | torque=-0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0C0,19.8,12.7,12.7.2,r.0,0.0,3264175145, -999.00, -999.00, -999.00
+10:23:09.429 [APPS]: pudal=0% | raw=751filt=845 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | tor]YOrr| Tmot=19.xC Tinv=12.7C Tkgbt=13.7CErrz 0invo: 8, -999.00, -999.00, -999.00
+10:23:10.435 [INV_R]: HV_ACTIVE | speed=0(RXM | tosqug=0.0 Nm J198C Tinv=12.7C Tmojw73/O|qn.J 0, -999.00, -999.00, -999.00
+10:23:11.405 [APPS]: pedal=0% | raw=1065 filt=871 | err=0x00 implaus=0 trq_ok=1 | [IN_R]: IW_u|speedA5||orque=0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info:, -999.00, -999.00, -999.00
+10:23:11.409 0,19.8,12.7,12.7,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:23:11.604 [HB][BT] Client connesso | t=230205 ms
+10:23:12.393 [ATPS]: pedal=0% | raw=853 filt=8tr8| err=8|44,iplaus=0qk=[INV_R]: HV_ACTMVE | qggeOC5| torque=0.0 Nm | Tmot=19.8C Tinv=12.7G Tigbu=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:13.364 [APPS]: pedal=0% |777 f6 | err=0x00 implaus=0 trqok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0n80,|8||=1=.8CTZLTigbt=12.7C | DC=0V | Err: 0 Knfo: 0, -999.00, -999.00, -999.00
+10:23:14.353 [APPS]: pedal=0% | raw=933 filt=862err=0x00 implaus=0 trq_ok=1_i-Y, -999.00, -999.00, -999.00
+10:23:15.319 [APPS]: pedal=0% | raw=84 vilt=840| err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | TmoOLNTinv=12.7C Tigbt=12.7C |DGOLJfoz 0, -999.00, -999.00, -999.00
+10:23:16.318 []:8pu|q|=058 rgw3fZ843 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPm| tzqgLv8c Tinv=12.7CTmoj|=12.7C|| Err:0 Info: 0, -999.00, -999.00, -999.00
+10:23:16.622 [HB][BT] Client connesso | t=235211 ms
+10:23:17.308 [APPS]: pedal=0% | raw=904 filt=879 | err=0x00kmplaus=0 trq_ok=1 [KNV_R]:,HV_ACTIVE| speYVA5 | torqu=0.0 Nm | Tmot=19.8C Tinv=12Cz12.C(|O=(|Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:17.310 0,19.8,12.7,12.7,0,p,p.8,=00,0.0,0, -999.00, -999.00, -999.00
+10:23:18.271 [APPS]: pedal=0% | raw=815 v858 |Y.0 trq_ok=98 [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=19.9C Tinv=12.7C Tigbt=2.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:19.252 [PPS]: pedal=0%0| raw=961 filt=840 | err=0x00 implaus=0 trq_ok=1(| [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.8 Nm |(Tmot=19.C Vinv=12.8C Tigbt=12.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:19.253 0,19.8,12.8,12.8,0,0,0.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:23:20.232 [APPS]: pedal=p=0| raw=898(go[Werr=0x00 implaus=0 trq_ok=1| _IO-CY, -999.00, -999.00, -999.00
+10:23:21.219 2.7,0,0,00,-0.0,0/0.2, -999.00, -999.00, -999.00
+10:23:21.648 [HB][BT] Client connesso | t=240212 ms
+10:23:22.202 [APPS]: pedal=0% | raw=935 filt=885 | err=0x00 imrlaus=2 trq_ok=1 | [INV_R]: HV_ACTIVE |(peed=0 RRStorq=-0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:23.177 [[aPXS:(pedal=0% | raw=937 filt=87v | err=0x00(implaus=21 | [INV_R]: HV_QstYe,|0steed=0RPM | torque=0.0 Nm | Tmot=19.8C Tmv=72.7CTogbt=12.7C | DC=0V | Err: 00Info:00, -999.00, -999.00, -999.00
+10:23:24.163 [APPS]: pedal=0%|923 fi=86s|0erz=0x00 implaus=0 trq_ok=1 | [INV_R]z HV_ACTIVE(|wteee=0 RPM | torque=0.0S[Tmot=19.9C Tinv=12.8C Tigbt=12.8C |0T[=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:24.169 0,19.9,12.8,16.8/3.LKLfsc1,0, -999.00, -999.00, -999.00
+10:23:25.190 [ATPS]: pedal=0% | raw=23V877 | err=0x00 ioplaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=3 SRM| |orque=0.0 Nm | Tmot=19.8S Tmnv=12/:CTigbu=12(DC=Err: 0 Info:(0, -999.00, -999.00, -999.00
+10:23:25.191 0,19.8,12.8,12.8,0,0,0.0,0.0,0.0,0, -999.00, -999.00, -999.00
+10:23:26.139 [APPS]: pedal=0% | raw=870 filtOerr=0x00 implaus=0 trq_ok=1 | [INV_R]: IW_CtUU|.0 RPM | torque=0.0 Nm | Tmot=19.8C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:26.141 0,19.8,12.7,12.7,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:23:26.611 [HB][BT] Client connesso | t=245212 ms
+10:23:27.129 [APPS]: pedal=0%|rcw1 gkoOr=xp0 implaus=0 trq_ok=5([IV_R]: HU, -999.00, -999.00, -999.00
+10:23:28.101 [APPS]: pedal=0% | raw=743 filt=840 | err=0x000implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speet=0 RPM | torque=0.0 Nm | Tmot=19nxC0Tinv=12:C Tigbt=12.8C | DC=0V | Errz 0 Info: 0, -999.00, -999.00, -999.00
+10:23:29.096 [APPS]: pedal=0% | raw=742 filt=860 | err=0x00 implaus=0 trq_ok=1 | [IN-CY_ACTIVedRPM | torque=-0.0 Nm | Tmot=19.9C Tinv=12.7C Tigbt=12.7C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:29.101 0,19.9,12.7,12.7,0,0,-0.0,0.0,K155, -999.00, -999.00, -999.00
+10:23:30.062 [APPS]: pedal=0% | raw=780 filt=8,_=33imqlas=0 tqok=1|[INV_R_:,HV_EGIVE | speed=0 RPM | torqe=0.0 Nm | mot=1.8C Tinv=1.8bt=12.8C | DC=0V | Grr 8MnfKn,99.8,12.8,13.,0,1,0.0=0.p,0.0,0, -999.00, -999.00, -999.00
+10:23:31.056 [APPS]: pedal=0%| raw837filt=3urr=0x00 implaus=0 trq_o1 | [INV_RWJYACTI | speed=0 RPM |)torywe=1r| Tot=qynSTinv=9:S Tiobt=12.7 | DC=0V |Err: p Inf: 0, -999.00, -999.00, -999.00
+10:23:31.056 0lqr71r.7,0,8,0.0,-0.0.0.0,0, -999.00, -999.00, -999.00
+10:23:31.611 [HB][BT] Client connesso | t=250215 ms
+10:23:32.054 [APPSW0% | va=828 fmlt=-msr=00Zus=0 trq_ok=50|[INV_R]: IV_ACTRUspeed=4 RPM | torque=2.1 NmTmot=19.yC Tinv12.8C Tigbt=12.8C | DC=0V Enfo: 0, -999.00, -999.00, -999.00
+10:23:32.063 0,19.9,q2.8L0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:23:33.006 [APPS]: pedal=0%|raw=823 filt=869 |err=0x00 implaus=0 trq_ok=1H[%B, -999.00, -999.00, -999.00
+10:23:33.013 0,19.8,12.7,12.7,0,0,0.0,-0.0,0.,0, -999.00, -999.00, -999.00
+10:23:34.221 [A]z peda|=0%8|,vow=75filt=806 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=1nyC Tiv=12.8C Tigbt=12.8C  DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:35.969 [INV_R]: HV_ACTIVE | speed=0W, -999.00, -999.00, -999.00
+10:23:35.989 0,19.8,12.8,12.8,0,0,0.0,0.0,0.1,0, -999.00, -999.00, -999.00
+10:23:36.616 [HB][BT] Client connesso | t=255216 ms
+10:23:36.949 [APPS]: pedal=0% H742=833 | err=0x00 implaus=0 trq_ok=1 | [INV%|eed=4 RPM | torque=-0.0 Nm|Tmot=19.9G Vmnv12.7C igbt=12.7C | DC=0V | Err: 88Inno4, -999.00, -999.00, -999.00
+10:23:36.949 0,19.N)rbr0,0,-0.0,-0.1,0.0,3264175145, -999.00, -999.00, -999.00
+10:23:37.918 [APPS] tedam=0%  rw flt=82r | err=0x00 implaus=1trqq%BY, -999.00, -999.00, -999.00
+10:23:37.924 0,19.9,12.8.16.9-0,0,0.0--, -999.00, -999.00, -999.00
+10:23:38.918 [APRS_IH_=80u ilt=814 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.p Nm | To|=59.8C Tinv=12.8C Tigbt=12nxC | DC=0v8|,Uzz: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:38.918 0,19.8,12.8,12.8l0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:23:39.984 [APPS]: pedal=0% | raw=829 filt=820 | err=0x00 implaus=0 trq_o| INv_R]: HV_ACTIVE | speed0 RPM | t[ue=)r| Tmot=19.8C Tinv=12.8C Tigbt=12.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:39.984 19.8,12.8,12.8,0,0,0.0,-0.0,0.1,0, -999.00, -999.00, -999.00
+10:23:40.867 [APPS]z pedal=0% | raw=860 filt=818 |n0implaus=00trq_ooOL[INV_RWBY, -999.00, -999.00, -999.00
+10:23:40.882 0,19.812.8,128,82,=/2.-1/3,0.10, -999.00, -999.00, -999.00
+10:23:41.613 [HB][BT] Client connesso | t=260222 ms
+10:23:41.855 [APPS]:0pe|i|=0% |scw_6t=815 |rr=0x00 implauw=:vw_o[IV_R]: HV_ACTIVE | speed=0 RPM (tosqug=0.0TmoOLNynv=52.8C Tigbt=12/8C, -999.00, -999.00, -999.00
+10:23:41.862 0,19.8,16.=/36)znnbjrnp,, -999.00, -999.00, -999.00
+10:23:42.851 [APPS]: pedal=0% | raw=939 filt=823 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTRUspeed=0:5| tozque=-1.0(Om | Tmot=19.8C Tinv=12.8C Tigbt=12.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:42.855 0,19.8,12.8,12.8,0,0,-0.0,0.0,0.1,3264175145, -999.00, -999.00, -999.00
+10:23:44.844 0,19.9,12.8,12.8,0,0,-00,-0.8,0.0,3264175145, -999.00, -999.00, -999.00
+10:23:45.849 [APPS] pedcl=0% | raw=848 filt=832 | err=0x00 implaus=0 trq_ok=1 | [R%BY, -999.00, -999.00, -999.00
+10:23:46.615 [HB][BT] Client connesso | t=265222 ms
+10:23:46.774 [APPS]: pedal=0% | raw=835 filt=827 | err=xpymplmw=.v_okC%BY, -999.00, -999.00, -999.00
+10:23:47.761 [Apv2f7cxfzZ|ez=0|x:mmzg,urq1 | [INV_R]: HV_ACTIVE | spee|=8 RRO | to0.0 Nm |t[1..v7Kwly |Ezr:(0Info: 0, -999.00, -999.00, -999.00
+10:23:48.767 [APPS]: pedal=0% | raw=829 filt=793 | err=0x00implaus=80tzq_ok=1 | _MOV_R]: HV_P(u] su|u:vy_r3nm Tmo|=199GTynv=12.8K Tiobt=13.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:51.868 [HB][BT] Client connesso | t=270224 ms
+10:23:51.871 [APPS]: pedal=0% | raw=8x30filt=820 | ezr=0x00 implaus=0 trq_ok=1 | ynVr:0lMCTIWsYvA5tozqu=1nm8|(To|=3.8C Ti=u2.8C|DC=0V | Urr: 0 Infkn0,19.8,q2.8,12.8,0,8,4.2,0.0,0.1,0, -999.00, -999.00, -999.00
+10:23:52.682 [APPS]: pedal=0% |(vyw=:08 fimuOer000 implf1 |vtz_]| sxugd=0 RPM | uorque=0.0 Nm | [19.9C Tinv=12.8C Tigbt=12.8CFC=0V e6vv0p, -999.00, -999.00, -999.00
+10:23:53.664 [APPS]: pedal=0%,|aw=78iw_=43 _Hi%BY, -999.00, -999.00, -999.00
+10:23:53.665 [_x0hnfo:00-Zw=y9,12.8,9.8,0,0,.0,-0.,1.1,0, -999.00, -999.00, -999.00
+10:23:54.648 7wow7w7wvo7wwww7ww36/o7vvw3ww7w7o7w7g7o7ww73swnw77w7wwowswww7w3ww7wwwv7o76wwwvwwwo=p=p | raw=818 filv=827 | err=0x00implaus= trq_ok=1,|_ONV_R]:(RQ%_UbWwvd78|0|o_YoNIrrsTiv=92K8Vigj|=1:.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:54.649 0,19.812.:,12.8,0,0,0.0,0.1.0.1,0, -999.00, -999.00, -999.00
+10:23:56.631 [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=1)Tinv=13.8C T_n,xk|0Ezr: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:56.635 [HB][BT] Client connesso | t=275232 ms
+10:23:57.602 [APPs]: pedal=0% | raw=71 fimt=816 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_Ctv peut0h[sH2skrr9.8c Tin=92.8C Tigbt=12.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:23:59.571 0,1Nb.8,12.8,0,0,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:24:00.533 [APPS]: pedal=0% | ra=763 filt=805 | err=0x00 implaus=0 trq_ok=1( [KNV_R]: H_CU, -999.00, -999.00, -999.00
+10:24:00.541 [RtO8/2N[T[19.9c Tynv=92.8C Tigbt=12.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:24:00.541 0,19.9,12.8,12.8,0,0,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:24:01.649 [HB][BT] Client connesso | t=280240 ms
+10:24:02.623 [APPS]: pegal=0% |_x0| uvrS sozHv_IKTIVE |Hn0 RPM | torque=0p |0Tmot=19.9CTinv=12.8C Tigbt=12.8C | DOaurzh|90,19.=L.bn8NI4=rrrR[APPS]: YvZw7r36,|2gvOJ0 tok=1 | [IV_R]: HV_ACTIVE | spYYVA5| torque=0.0 m | mot=1=.8CTinv=12.8CTigbt=2.8C | DC=0V | Ezz: 4Knfo2, -999.00, -999.00, -999.00
+10:24:02.623 0,99.,12.8,12.8,0,p,0.0l-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:24:03.743 [APPS]: pedcn=0% | raw=766 ilt=789 | err=0x00 implaus=0 trq_ok=1 | BY, -999.00, -999.00, -999.00
+10:24:04.483 [APPS]: pedal=0% | rqw=878 filv=820 | err=0J0 ok=1 | [iNVR]: HV_ACTIVE _0 RPM | torque=-0.0 Nm | Tmot=19.8C Tinv=12.8C Tigbt=12.8C | DC=0V | Grv: 0Info: 0, -999.00, -999.00, -999.00
+10:24:05.450 [APPS]: pea5p|kw8(vklt=911|(mrr=0x00 implaus=0 trq_ok=1 |([I_R]: HV_ACTIVE | spee=PM(|tye=.8No Tm19.8C =2Tigbt=12.8C | FG=1W Err:0 Info: 0, -999.00, -999.00, -999.00
+10:24:05.461 0,59/8,1brbbbrr1.4, -999.00, -999.00, -999.00
+10:24:06.441 [APPS]:tetcl=0% | raw=636 filt=817 | err=0x00 implaus=0 trq_ok=1 |[INV_R]: HV_ACtIVE0| speed=0RH_[0pTmot=19.8C Tinv=12.8G Tkgbt=12.8C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:24:06.442 0,19.8,12.8,12.8,0,0,0.0,0.0,0.0,0, -999.00, -999.00, -999.00
