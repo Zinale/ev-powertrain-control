@@ -38,7 +38,7 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
 #define TORQUE_LIMIT_NEG           (-2100)  /**< Negative limit (regen braking) */
 
 /* Torque rate limiter */
-#define TORQUE_RATE_LIMIT_PER_MS    20U     /**< Max variation per ms [0.1% Mn] */
+#define TORQUE_RATE_LIMIT_PER_MS    10U     /**< Max variation per ms [0.1% Mn] */
 #define TORQUE_RATE_LIMIT_PER_CYCLE (TORQUE_RATE_LIMIT_PER_MS * CONTROL_LOOP_PERIOD_MS) /**< Scaled for actual task period */
 
 /* AMK motor physical parameters */
@@ -95,25 +95,6 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
  * @return Torque limit [0.1% Mn]
  */
 int16_t Motor_CalculateDynamicTorqueLimit(int16_t speed_rpm, uint32_t actual_power);
-
-/**
- * @brief Calculate regenerative braking torque (single-pedal mode)
- * 
- * Implements three-stage formula:
- * 1. Pedal-dependent: T_req = T_max_regen * (1 - pedal_pct / P_threshold)
- * 2. Speed-dependent fade-out: k_vel = min(1, speed_current / speed_min)
- * 3. Power limit: |T_req| <= P_batt_max * 60 / (2π * speed_rpm)
- * 
- * Returns negative torque value for regeneration.
- * 
- * @param speed_rpm Current motor speed [RPM]
- * @param pedal_percent Current pedal position [0-100%]
- * @param dc_voltage Current DC bus voltage [0.1V]
- * @return Regenerative torque request [0.1% Mn] (negative value)
- */
-int16_t Motor_CalculateRegenerativeBraking(int16_t speed_rpm, 
-                                            uint8_t pedal_percent, 
-                                            uint16_t dc_voltage);
 
 /**
  * @brief Apply rate limiting to requested torque

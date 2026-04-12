@@ -18,6 +18,10 @@ char uart3_dma_buffer[UART3_DMA_BUFFER_SIZE];
 volatile uint8_t uart3_tx_busy = 0;
 extern UART_HandleTypeDef huart3;
 
+char uart6_dma_buffer[UART6_DMA_BUFFER_SIZE];
+volatile uint8_t uart6_tx_busy = 0;
+extern UART_HandleTypeDef huart6;
+
 /* External variables from other modules */
 extern volatile int16_t torque_request;    /**< From BaseControlMotor.c — volatile: written by InvertersManageTask */
 extern volatile int16_t torque_limit_dyn;  /**< From BaseControlMotor.c — volatile: written by InvertersManageTask */
@@ -93,6 +97,26 @@ void Serial_Log(SerialChannel_t ch, const char *format, ...)
 				uart3_tx_busy = 0;
 			}
 			Mutex_UART3_Unlock();
+		}
+	#endif
+
+	#ifdef SERIAL6_LOG_ENABLED
+		/* UART6 mirrors UART5: inviare se LOG_CH_UART5 o LOG_CH_UART6 sono attivi */
+		if ((ch & LOG_CH_UART5) || (ch & LOG_CH_UART6))
+		{
+			Mutex_UART6_Lock();
+			memcpy(uart6_dma_buffer, tmp, (size_t)length);
+			uart6_tx_busy = 1;
+
+			if (HAL_UART_Transmit_DMA(&huart6, (uint8_t *)uart6_dma_buffer, (uint16_t)length) == HAL_OK)
+			{
+				while (uart6_tx_busy) { osDelay(1); }
+			}
+			else
+			{
+				uart6_tx_busy = 0;
+			}
+			Mutex_UART6_Unlock();
 		}
 	#endif
 }

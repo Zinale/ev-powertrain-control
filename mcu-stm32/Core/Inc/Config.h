@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file Config.h
  * @author Alessandro Zingaretti | Polimarche Racing Team - UNIVPM
  * @brief Global configuration and build options
@@ -23,9 +23,12 @@ extern "C" {
  * The corresponding Serial5_Log / Serial3_Log calls compile to
  * a single (void)format statement — no code generated, no CPU cost.
  * ========================================================= */
-#define SERIAL5_LOG_ENABLED   /**< UART5 — PC debug / USB-UART adapter */
-#define SERIAL3_LOG_ENABLED   /**< UART3 — Dashboard / external device  */
+#define SERIAL5_LOG_ENABLED   /**< UART5 — external device */
+#define SERIAL3_LOG_ENABLED   /**< UART3 — PC  */
+#define SERIAL6_LOG_ENABLED   /**< UART6 — external device */
 
+
+#define R2D_BYPASS   /**< Comment out to require real R2D from CAN2 */
 
 
 /* =========================================================
@@ -61,6 +64,14 @@ extern "C" {
 #endif
 
 
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+
 
 
 #define APPS_NUM_SENSORS            1U
@@ -85,9 +96,6 @@ extern "C" {
  *                         checks are more lenient for bench testing.
  * 
  * ============================================================================ */
-
-
-
 
 /* =============================================================================
  * BUILD MODE SELECTION
@@ -155,9 +163,14 @@ extern "C" {
 #endif
 
 
-/* 
- * REGENERATIVE BRAKING CONFIGURATION
- */
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+
 
 /** Control-loop period used by the inverter task [ms].  Keep in sync
  *  with INVERTERS_TASK_PERIOD_MS in inverters_manage.c.              */
@@ -207,8 +220,25 @@ extern "C" {
     #error "Invalid DATA_COLLECT_INV_SIDE value"
 #endif
 
-#define REGEN_ENABLED               1U     /**< 1 = enabled, 0 = disabled */
 
+
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+
+
+
+//#define ANTI_NEG_WHILESTOPPED
+#define REGEN_FORCE_ENABLE
+#define REGEN_ENABLED               0U     /**< 1 = enabled, 0 = disabled */
+#define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
+#if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)
+    #error "REVERSE_TORQUE_ENABLED cannot be true when REGEN_ENABLED is true, to avoid conflicting negative torque sources. Please disable one of them in Config.h."
+#endif
 /* Regenerative braking strategy */
 #ifdef REGEN_ENABLED
     #if REGEN_ENABLED
@@ -217,7 +247,7 @@ extern "C" {
         #define REGEN_MODE_BALANCED        1U   /**< 75% of max regen torque (default) */
         #define REGEN_MODE_AGGRESSIVE      2U   /**< 100% of max regen torque */
         
-        #define REGEN_CURRENT_MODE         REGEN_MODE_CONSERVATIVE
+        #define REGEN_CURRENT_MODE         REGEN_MODE_BALANCED
         
         /* Battery safety limits — adapt to bench DC bus voltage!
          * Race config (540V:  REGEN_PBATT_MAX_W = 54000, NOMINAL_V = 540
@@ -226,16 +256,16 @@ extern "C" {
         #define REGEN_DC_BUS_NOMINAL_V      350U     /**< DC bus nominal voltage [V] */
         /* DC Bus Derating limits (to be kept slightly below AMK hard limits) */
         /*View the configuration of AIPEX PRO files ID 32798-3 and 32798-7*/
-        #define REGEN_DC_DERATE_START_V     380U   /**< Above this: start reducing regen torque */
-        #define REGEN_DC_DERATE_END_V       395U   /**< Above this: NO regen torque */
+        #define REGEN_DC_DERATE_START_V     400U   /**< Above this: start reducing regen torque */
+        #define REGEN_DC_DERATE_END_V       420U   /**< Above this: NO regen torque */
 
         /* Pedal threshold and hysteresis: below threshold regen can activate.
          * Hysteresis avoids traction/regen toggling near the crossing point. */
-        #define REGEN_PEDAL_THRESHOLD_PCT   25U      /**< Regen candidate when pedal < 25% */
+        #define REGEN_PEDAL_THRESHOLD_PCT   40U      /**< Regen candidate when pedal < 25% */
         #define REGEN_PEDAL_HYST_PCT        3U       /**< +/- hysteresis band around threshold */
         
         /* Motor speed thresholds */
-        #define REGEN_SPEED_MIN_RPM         3000U      /**< Below this: fade-out regen */
+        #define REGEN_SPEED_MIN_RPM         4000U      /**< Below this: fade-out regen */
         #define REGEN_SPEED_CRITICAL_RPM    2000U      /**< Below this: NO regen */
         
         /* Logging */
@@ -243,17 +273,136 @@ extern "C" {
     #endif
 #endif
 
+
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+/*==========================================================================================================================================*/
+
+
 /* =========================================================
- * R2D BYPASS (test only)
+ * DEBUG MAX TEST
  *
- * When defined, the MCU state machine treats r2d_active as always
- * true, skipping the CAN2 Ready-to-Drive signal requirement.
- * This lets you reach MCU_STATE_RUNNING on the bench without a
- * dashboard connected.
+ * When enabled, MotorsManagerTask runs a one-shot test sequence
+ * bypassing ALL normal safety limits:
+ *   - APPS plausibility / torque_allowed gate
+ *   - TORQUE_SETPOINT_MAX cap
+ *   - Torque rate-limiter
+ *   - Dynamic power limit (Motor_CalculateDynamicTorqueLimit)
+ *   - Regen speed/pedal guards
  *
- * REMOVE or comment out for any real vehicle run.
+ * The sequence is ARMED when the inverter enters INV_STATE_RUNNING.
+ * TRIGGERED when APPS exceeds AUTOTEST_APPS_TRIGGER_PCT.
+ * Once triggered, the cycle runs to completion and CANNOT be aborted mid-run.
+ * After completion the state machine returns to IDLE — multiple back-to-back
+ * launches are possible.  The pedal must drop below
+ * (TRIGGER_PCT - RETRIGGER_HYST_PCT) before a new trigger is accepted,
+ * preventing accidental re-fire while the pedal is still held high.
+ *
+ * Two presets are available (select via AUTOTEST_PRESET):
+ *
+ *   Preset 1 — DRIVE → REGEN + COOLDOWN (AUTOTEST_PRESET_DRIVE_REGEN)
+ *     Phase 1 (DRIVE):    injects +DRIVE_TORQUE_PCT % Mn for DRIVE_DURATION_MS.
+ *     Phase 2 (REGEN):    injects -REGEN_TORQUE_PCT % Mn for REGEN_DURATION_MS.
+ *     Phase 3 (COOLDOWN): zero torque for COOLDOWN_MS (locked, cannot abort).
+ *     → returns to IDLE (re-triggerable).
+ *
+ *   Preset 2 — REVERSE only (AUTOTEST_PRESET_REVERSE)
+ *     Phase 1 (REVERSE):  injects -REVERSE_TORQUE_PCT % Mn for REVERSE_DURATION_MS.
+ *     → returns to IDLE (re-triggerable).
+ *     (No regen phase — pure negative torque / reverse.)
+ *
+ * Error recovery (INV_STATE_ERROR) is still handled normally —
+ * the override only activates while the inverter is RUNNING.
+ *
+ * *** FOR BENCH / LAB USE ONLY — NEVER enable in the vehicle! ***
  * ========================================================= */
-#define R2D_BYPASS   /**< Comment out to require real R2D from CAN2 */
+
+
+//#define AUTOTEST   /**< Uncomment to enable the max-debug test sequence */
+
+#ifdef AUTOTEST
+    #warning "AUTOTEST is active — all torque safety limits bypassed!"
+
+    /* -----------------------------------------------------------------------
+     * TEST PRESET SELECTION
+     *   1 (DRIVE_REGEN) : APPS-triggered drive → regen → cooldown sequence
+     *   2 (REVERSE)     : APPS-triggered negative-torque only (no regen)
+     * ----------------------------------------------------------------------- */
+    #define AUTOTEST_PRESET_DRIVE_REGEN   1U   /**< Preset 1: drive→regen+cooldown */
+    #define AUTOTEST_PRESET_REVERSE       2U   /**< Preset 2: reverse torque only  */
+
+    #define AUTOTEST_PRESET               AUTOTEST_PRESET_DRIVE_REGEN
+
+    /** APPS pedal threshold [%] that triggers the test sequence.
+     *  Push the pedal above this level to start a cycle. */
+    #define AUTOTEST_APPS_TRIGGER_PCT     85U
+
+    /** Re-arm hysteresis [%]: pedal must drop below (TRIGGER_PCT - this value)
+     *  after a completed cycle before the next trigger is accepted. */
+    #define AUTOTEST_APPS_RETRIGGER_HYST_PCT  10U
+
+    /* --- Common: COOLDOWN (both presets) ----------------------------------- */
+
+    /** Cooldown duration [ms] at end of any cycle — zero torque, cannot be aborted. */
+    #define AUTOTEST_COOLDOWN_MS          5000U
+    
+    //***************************************************************** */
+    /* --- PRESET 1: DRIVE -> REGEN -> COOLDOWN -------------------------------- */
+
+    /** Traction torque [% of Mn].  Values > 100 exceed AMK nominal (stress). */
+    #define AUTOTEST_DRIVE_TORQUE_PCT     200U
+
+    /** Duration of the traction phase [ms]. */
+    #define AUTOTEST_DRIVE_DURATION_MS    4000U
+
+    /** Regenerative braking torque magnitude [% of Mn]. Applied as negative. */
+    #define AUTOTEST_REGEN_TORQUE_PCT     100U
+
+    /** Duration of the regen phase [ms]. */
+    #define AUTOTEST_REGEN_DURATION_MS    4000U
+
+    //***************************************************************** */
+    /* --- PRESET 2: REVERSE -> COOLDOWN -------------------------------------- */
+
+    /** Reverse torque magnitude [% of Mn]. Injected as negative torque. */
+    #define AUTOTEST_REVERSE_TORQUE_PCT   50U
+
+    /** Duration of the reverse phase [ms]. */
+    #define AUTOTEST_REVERSE_DURATION_MS  3000U
+
+    /* -----------------------------------------------------------------------
+     * Derived CAN units  (AMK scale: 1 unit = 0.1 % Mn)
+     *   e.g.  200 % Mn drive  →  +2000 CAN units
+     *          50 % Mn regen  →   -500 CAN units
+     *          20 % Mn reverse→   -200 CAN units
+     * ----------------------------------------------------------------------- */
+    #define AUTOTEST_DRIVE_TORQUE_CAN \
+        ((int16_t)((int32_t)(AUTOTEST_DRIVE_TORQUE_PCT) * 10))
+    #define AUTOTEST_REGEN_TORQUE_CAN \
+        ((int16_t)(-((int32_t)(AUTOTEST_REGEN_TORQUE_PCT) * 10)))
+    #define AUTOTEST_REVERSE_TORQUE_CAN \
+        ((int16_t)(-((int32_t)(AUTOTEST_REVERSE_TORQUE_PCT) * 10)))
+
+    #if ((AUTOTEST_PRESET != AUTOTEST_PRESET_DRIVE_REGEN) && \
+         (AUTOTEST_PRESET != AUTOTEST_PRESET_REVERSE))
+        #error "Invalid AUTOTEST_PRESET — choose DRIVE_REGEN(1) or REVERSE(2)"
+    #endif
+
+    /* Consistency warnings: AUTOTEST bypasses all normal guards, so these
+     * combinations are intentionally allowed — but make them visible. */
+    #if (AUTOTEST_PRESET == AUTOTEST_PRESET_DRIVE_REGEN) && !REGEN_ENABLED
+        #warning "AUTOTEST DRIVE_REGEN: regen phase will fire even though REGEN_ENABLED=0 (bypass is intentional)"
+    #endif
+
+    #if (AUTOTEST_PRESET == AUTOTEST_PRESET_REVERSE) && !REVERSE_TORQUE_ENABLED
+        #warning "AUTOTEST REVERSE: negative torque will be injected even though REVERSE_TORQUE_ENABLED=0 (bypass is intentional)"
+    #endif
+
+#endif /* AUTOTEST */
 
 #ifdef __cplusplus
 }

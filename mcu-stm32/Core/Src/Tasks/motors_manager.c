@@ -1,4 +1,4 @@
-/**
+﻿/**
  * @file inverters_manage.c
  * @author Alessandro Zingaretti | Polimarche Racing Team - UNIVPM
  * @brief Inverters Manager Task — inverter control loop and error diagnostics
@@ -77,9 +77,32 @@ static int16_t s_torque_setpoint_prev_right = 0;
 static InverterState_t s_prev_inv_state_left  = INV_STATE_OFF;
 static InverterState_t s_prev_inv_state_right = INV_STATE_OFF;
 
+#ifdef AUTOTEST
+/* -----------------------------------------------------------------------
+ * AUTOTEST — one-shot drive -> regen sequence state machine.
+ *
+ * The state advances once per MotorsManagerTask cycle, independent of
+ * which inverter side is active.  Torque is injected directly into
+ * Inverter_BuildCommand, bypassing Motor_ProcessInverterControl.
+ * ----------------------------------------------------------------------- */
+typedef enum {
+    DBG_PHASE_IDLE     = 0, /**< Armed — waiting for APPS trigger while inverter RUNNING */
+    DBG_PHASE_DRIVE,        /**< Preset 1: positive traction torque                       */
+    DBG_PHASE_REGEN,        /**< Preset 1: negative regen torque                          */
+    DBG_PHASE_COOLDOWN,     /**< Preset 1: zero-torque cooldown (locked, cannot abort)    */
+    DBG_PHASE_REVERSE,      /**< Preset 2: negative reverse torque (no regen)             */
+    /* Note: no DONE state — after each cycle the SM returns to IDLE.
+     * Re-trigger requires pedal to dip below (TRIGGER_PCT - RETRIGGER_HYST_PCT). */
+} DbgTestPhase_t;
+
+static DbgTestPhase_t s_dbg_phase       = DBG_PHASE_IDLE;
+static uint32_t       s_dbg_phase_t0_ms = 0U;
+static bool           s_dbg_trigger_armed = true; /**< Set when pedal drops below re-arm threshold */
+#endif /* AUTOTEST */
+
 /**
  * @brief Execution time tracking (worst-case per log window).
- *        Written only by this task; read atomically on Cortex-M7.
+ *        Written only by this task; read atomically on Cortex-M7.  
  */
 static volatile uint32_t s_max_time_us    = 0U;
 static volatile uint32_t s_warning_count  = 0U;
@@ -114,9 +137,17 @@ void MotorsManagerTask(void)
          */
         Mutex_APPS_Lock();
         uint8_t pedal_percent = g_apps.torque_allowed ? g_apps.final_percent : 0U;
-        /* Double safety gate: APPS plausibility AND MCU state (R2D + CAN health) */
+        /* Deadzone and snap are already handled by APPS.c (APPS_DEADZONE_PERCENT).
+         * Do NOT apply a second deadzone here — it would conflict with an uncalibrated
+         * potentiometer and cause torque to remain at maximum even with pedal released. */
         bool torque_allowed = g_apps.torque_allowed && MCU_IsTorqueAllowed();
         bool apps_implausibility = g_apps.implausibility_active;
+
+        #ifdef AUTOTEST
+                /* Raw pedal reading (not gated by torque_allowed) — used for trigger condition */
+                uint8_t dbg_raw_pedal_pct = g_apps.final_percent;
+        #endif
+
         Mutex_APPS_Unlock();
 
         /* 
@@ -141,6 +172,91 @@ void MotorsManagerTask(void)
             snap_left_state
         );
 
+        #ifdef AUTOTEST
+                /* ----------------------------------------------------------------
+                *  AUTOTEST — advance phase SM once per cycle, then resolve
+                *  the raw CAN torque value to inject this cycle.
+                *  dbg_torque / dbg_lim_pos / dbg_lim_neg are used in both the
+                *  LEFT and RIGHT inverter control blocks below (whichever are
+                *  TORQUE_CONTROL_ENABLED).
+                * ---------------------------------------------------------------- */
+                {
+                    bool any_inv_running = (snap_left_state  == INV_STATE_RUNNING) ||
+                                        (snap_right_state == INV_STATE_RUNNING);
+                    uint32_t dbg_now = HAL_GetTick();
+
+                    switch (s_dbg_phase)
+                    {
+                    case DBG_PHASE_IDLE:
+                        /* Re-arm: pedal must dip below threshold-hysteresis after any cycle */
+                        if (dbg_raw_pedal_pct <
+                            (AUTOTEST_APPS_TRIGGER_PCT - AUTOTEST_APPS_RETRIGGER_HYST_PCT))
+                        {
+                            s_dbg_trigger_armed = true;
+                        }
+                        /* Trigger: inverter RUNNING, pedal above threshold, and re-armed */
+                        if (s_dbg_trigger_armed && any_inv_running &&
+                            (dbg_raw_pedal_pct >= AUTOTEST_APPS_TRIGGER_PCT))
+                        {
+                            s_dbg_trigger_armed = false;
+                            s_dbg_phase_t0_ms   = dbg_now;
+                            #if (AUTOTEST_PRESET == AUTOTEST_PRESET_DRIVE_REGEN)
+                                s_dbg_phase = DBG_PHASE_DRIVE;
+                            #else /* REVERSE */
+                                s_dbg_phase = DBG_PHASE_REVERSE;
+                            #endif
+                        }
+                        break;
+
+                    /* --- Preset 1 phases ---------------------------------------- */
+                    case DBG_PHASE_DRIVE:
+                        if ((dbg_now - s_dbg_phase_t0_ms) >= AUTOTEST_DRIVE_DURATION_MS)
+                        {
+                            s_dbg_phase       = DBG_PHASE_REGEN;
+                            s_dbg_phase_t0_ms = dbg_now;
+                        }
+                        break;
+                    case DBG_PHASE_REGEN:
+                        if ((dbg_now - s_dbg_phase_t0_ms) >= AUTOTEST_REGEN_DURATION_MS)
+                        {
+                            s_dbg_phase       = DBG_PHASE_COOLDOWN;
+                            s_dbg_phase_t0_ms = dbg_now;
+                        }
+                        break;
+                    case DBG_PHASE_COOLDOWN:
+                        if ((dbg_now - s_dbg_phase_t0_ms) >= AUTOTEST_COOLDOWN_MS)
+                        {
+                            s_dbg_phase = DBG_PHASE_IDLE; /* cycle complete — re-arm for next run */
+                        }
+                        break;
+
+                    /* --- Preset 2 phases ---------------------------------------- */
+                    case DBG_PHASE_REVERSE:
+                        if ((dbg_now - s_dbg_phase_t0_ms) >= AUTOTEST_REVERSE_DURATION_MS)
+                        {
+                            s_dbg_phase       = DBG_PHASE_COOLDOWN; /* zero-torque cooldown before re-arm */
+                            s_dbg_phase_t0_ms = dbg_now;
+                        }
+                        break;
+
+                    default:
+                        break;
+                    }
+        }
+
+        int16_t dbg_torque;
+        switch (s_dbg_phase)
+        {
+            case DBG_PHASE_DRIVE:    dbg_torque = AUTOTEST_DRIVE_TORQUE_CAN;   break;
+            case DBG_PHASE_REGEN:    dbg_torque = AUTOTEST_REGEN_TORQUE_CAN;   break;
+            case DBG_PHASE_REVERSE:  dbg_torque = AUTOTEST_REVERSE_TORQUE_CAN; break;
+            default:                 dbg_torque = 0;                                  break; /* IDLE / COOLDOWN */
+        }
+        /* Limits: allow only the sign of the requested torque */
+        int16_t dbg_lim_pos = (dbg_torque > 0) ? dbg_torque : 0;
+        int16_t dbg_lim_neg = (dbg_torque < 0) ? dbg_torque : 0;
+    #endif /* AUTOTEST */
+
 
         /* 
          *  3 - Inverter LEFT control loop
@@ -152,6 +268,28 @@ void MotorsManagerTask(void)
             Mutex_CAN1_Lock();
 
             #if INVERTER_LEFT_TORQUE_CONTROL_ENABLED
+                #ifdef AUTOTEST
+                if (g_inverter_left.state == INV_STATE_RUNNING)
+                {
+                    /* Bypass all safety limits — inject raw debug torque */
+                    InverterCommandMsg1_t cmd_dbg = Inverter_BuildCommand(
+                        &g_inverter_left, dbg_torque, dbg_lim_pos, dbg_lim_neg);
+                    (void)CAN_Inverter_TransmitCommand(&hcan1, &g_inverter_left, &cmd_dbg);
+                    torque_request              = dbg_torque;
+                    s_torque_setpoint_prev_left = dbg_torque;
+                }
+                else
+                {
+                    /* Not yet RUNNING (startup / error recovery) — normal path */
+                    Motor_ProcessInverterControl(
+                        &hcan1,
+                        &g_inverter_left,
+                        pedal_percent,
+                        torque_allowed,
+                        &s_torque_setpoint_prev_left
+                    );
+                }
+                #else
                 Motor_ProcessInverterControl(
                     &hcan1,
                     &g_inverter_left,
@@ -159,6 +297,7 @@ void MotorsManagerTask(void)
                     torque_allowed,
                     &s_torque_setpoint_prev_left
                 );
+                #endif /* AUTOTEST */
             #else
                 s_torque_setpoint_prev_left = 0;
                 g_inverter_left.torque_request = 0;
@@ -209,12 +348,34 @@ void MotorsManagerTask(void)
             Mutex_CAN1_Lock();
 
             #if INVERTER_RIGHT_TORQUE_CONTROL_ENABLED
+                #ifdef AUTOTEST
+                if (g_inverter_right.state == INV_STATE_RUNNING)
+                {
+                    /* Bypass all safety limits — inject raw debug torque */
+                    InverterCommandMsg1_t cmd_dbg = Inverter_BuildCommand(
+                        &g_inverter_right, dbg_torque, dbg_lim_pos, dbg_lim_neg);
+                    (void)CAN_Inverter_TransmitCommand(&hcan1, &g_inverter_right, &cmd_dbg);
+                    torque_request               = dbg_torque;
+                    s_torque_setpoint_prev_right = dbg_torque;
+                }
+                else
+                {
+                    /* Not yet RUNNING (startup / error recovery) — normal path */
+                    Motor_ProcessInverterControl(
+                        &hcan1,
+                        &g_inverter_right,
+                        pedal_percent, torque_allowed,
+                        &s_torque_setpoint_prev_right
+                    );
+                }
+                #else
                 Motor_ProcessInverterControl(
                     &hcan1,
                     &g_inverter_right,
                     pedal_percent, torque_allowed,
                     &s_torque_setpoint_prev_right
                 );
+                #endif /* AUTOTEST */
             #else
                 s_torque_setpoint_prev_right = 0;
                 g_inverter_right.torque_request = 0;

@@ -133,6 +133,8 @@ void DataLoggerTask(void)
                 g_can1_busoff = 0U;  // reset dopo averlo loggato
             }
 
+            HAL_GPIO_TogglePin(LD1_GPIO_Port, LD1_Pin); 
+
 #ifdef DATA_COLLECT_MODE
             const Inverter_t *dc_inv = &inv_r_copy;
             const InvErrorSnapshot_t *dc_err_snap = &err_snap_r;
@@ -229,28 +231,20 @@ void DataLoggerTask(void)
                                             ? (HAL_GetTick() - s_esp32_start_tick_ms)
                                             : 0U;
 
-                /* [APPS]: pedal position, raw ADC, filtered ADC, error state
-                 * [selected inverter]: state, speed, torque, temperatures, DC voltage
+                /* Verbose [APPS] line: only every 10 cycles to reduce BT traffic.
+                 * The CSV line below carries all data every cycle.
                  */
-                Serial_Log(LOGGER_CHANNEL,
-                    "[APPS]: pedal=%u%% | raw=%u filt=%u | err=0x%02X implaus=%d trq_ok=%d | "
-                    "[%s]: %s | speed=%d RPM | torque=%.1f Nm | "
-                    "Tmot=%.1fC Tinv=%.1fC Tigbt=%.1fC | DC=%dV | Err: %d Info: %d\r\n",
-                    apps_copy.final_percent,
-                    apps_copy.sensors[0].raw,
-                    apps_copy.sensors[0].filtered,
-                    apps_copy.error_code,
-                    (int)apps_copy.implausibility_active,
-                    (int)apps_copy.torque_allowed,
-                    dc_inv_label,
-                    Inverter_GetStateName(dc_inv->state),
-                    dc_inv->speed_rpm,
-                    (float)dc_inv->torque_value * (float)TORQUE_SCALE_FACTOR,
-                    (float)dc_inv->motor_temp_degC    / 10.0f,
-                    (float)dc_inv->inverter_temp_degC / 10.0f,
-                    (float)dc_inv->igbt_temp_degC     / 10.0f,
-                    dc_inv->dc_bus_voltage,
-                    dc_inv->error_code, dc_inv->error_info_1);
+                if ((cycle_counter % 10U) == 0U) {
+                    Serial_Log(LOGGER_CHANNEL,
+                        "[%s]: %s | p=%u%% spd=%d T=%.1f DC=%dV E:%d\r\n",
+                        dc_inv_label,
+                        Inverter_GetStateName(dc_inv->state),
+                        apps_copy.final_percent,
+                        dc_inv->speed_rpm,
+                        (float)dc_inv->torque_value * (float)TORQUE_SCALE_FACTOR,
+                        (int)dc_inv->dc_bus_voltage,
+                        dc_inv->error_code);
+                }
 
                 /*
                  * CSV line — column order must match the Python script header:
@@ -263,7 +257,7 @@ void DataLoggerTask(void)
                     (float)dc_inv->motor_temp_degC    / 10.0f,
                     (float)dc_inv->inverter_temp_degC / 10.0f,
                     (float)dc_inv->igbt_temp_degC     / 10.0f,
-                    (float)dc_inv->dc_bus_voltage,
+                    (int)dc_inv->dc_bus_voltage,
                     dc_inv->speed_rpm,
                     (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
                     (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,

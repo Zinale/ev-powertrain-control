@@ -32,6 +32,7 @@ extern osMutexId_t mutex_INVERTER_LHandle;
 extern osMutexId_t mutex_INVERTER_RHandle;
 extern osMutexId_t mutex_UART5Handle;
 extern osMutexId_t mutex_UART3Handle;
+extern osMutexId_t mutex_UART6Handle;
 extern osMutexId_t mutex_CAN1Handle;
 extern osMutexId_t mutex_CAN2Handle;
 
@@ -132,6 +133,22 @@ void Mutex_UART3_Unlock(void)
 }
 
 /* =============================================================================
+ *  UART6 MUTEX
+ * ============================================================================= */
+
+void Mutex_UART6_Lock(void)
+{
+    if (mutex_UART6Handle != NULL)
+        osMutexAcquire(mutex_UART6Handle, osWaitForever);
+}
+
+void Mutex_UART6_Unlock(void)
+{
+    if (mutex_UART6Handle != NULL)
+        osMutexRelease(mutex_UART6Handle);
+}
+
+/* =============================================================================
  *  CAN1 MUTEX
  * ============================================================================= */
 
@@ -175,6 +192,7 @@ bool Mutex_IsInitialized(void)
            (mutex_INVERTER_RHandle != NULL) &&
            (mutex_UART5Handle      != NULL) &&
            (mutex_UART3Handle      != NULL) &&
+           (mutex_UART6Handle      != NULL) &&
            (mutex_CAN1Handle       != NULL) &&
            (mutex_CAN2Handle       != NULL);
 }

@@ -265,7 +265,11 @@ InverterCommandMsg1_t Inverter_BuildCommand(const Inverter_t *inv,
             break;
 
         case INV_STATE_ERROR:
-            cmd.control_word = INV_CTRL_ERROR_RESET;
+            /* Do NOT send ERROR_RESET here — the proper 2-step sequence
+             * (set bErrorReset=1, then release to 0) is handled by
+             * Motor_ProcessInverterControl().  Sending ERROR_RESET
+             * continuously would prevent the required falling edge. */
+            cmd.control_word = 0;
             cmd.torque_setpoint = 0;
             cmd.torque_limit_pos = 0;
             cmd.torque_limit_neg = 0;

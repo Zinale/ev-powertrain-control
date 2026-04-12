@@ -8,6 +8,10 @@
 #define COMM_MODE_BLUETOOTH 2
 #define COMM_MODE           COMM_MODE_BLUETOOTH   // <-- cambia qui
 
+#define DEBUG_HEARTBEAT
+
+#define SERIAL2_BAUD 9600
+
 #if COMM_MODE == COMM_MODE_WIFI
 
 #include <WiFi.h>
@@ -31,7 +35,7 @@
 #define RXD2 16
 #define TXD2 17
 
-const uint32_t serial2Baud = 115200;
+const uint32_t serial2Baud = SERIAL2_BAUD;
 const uint16_t tcpPort = 8080;
 
 // Se true, scarta la negoziazione Telnet quando un client Telnet si collega per errore.
@@ -42,14 +46,16 @@ const size_t maxRxLineLen = 256;
 
 #if COMM_MODE == COMM_MODE_WIFI
 #ifdef WIFI_SSID
-const char* wifiSsid = WIFI_SSID;
+//const char* wifiSsid = WIFI_SSID;
 #else
+//const char* wifiSsid = "Gigante-Fondatore";
 const char* wifiSsid = "labpesanti";
 #endif
 
 #ifdef WIFI_PASSWORD
-const char* wifiPassword = WIFI_PASSWORD;
+//const char* wifiPassword = WIFI_PASSWORD;
 #else
+//const char* wifiPassword = "grisha-jaeger";
 const char* wifiPassword = "s3VJWdwMew";
 #endif
 
@@ -305,6 +311,23 @@ void loop() {
 #endif
   }
 
+  #ifdef DEBUG_HEARTBEAT
+  // Heartbeat: stampa ogni 5 secondi quando il client è connesso
+    static uint32_t lastHeartbeatMs = 0;
+    const uint32_t heartbeatIntervalMs = 5000;
+    uint32_t nowMs = millis();
+    if (connesso && (nowMs - lastHeartbeatMs >= heartbeatIntervalMs)) {
+      lastHeartbeatMs = nowMs;
+  #if COMM_MODE == COMM_MODE_WIFI
+      Serial.printf("[HB][WiFi] Client connesso | t=%lu ms\r\n", nowMs);
+      inviaAlClient(String("[HB][WiFi] Client connesso | t=") + nowMs + " ms\r\n");
+  #elif COMM_MODE == COMM_MODE_BLUETOOTH
+      Serial.printf("[HB][BT] Client connesso | t=%lu ms\r\n", nowMs);
+      inviaAlClient(String("[HB][BT] Client connesso | t=") + nowMs + " ms\r\n");
+  #endif
+    }
+  #endif
+
   static String rxBuffer = "";
   while (Serial2.available() > 0) {
     char c = static_cast<char>(Serial2.read());
@@ -320,7 +343,12 @@ void loop() {
           float t1 = calcolaTempDaTensione(pinNTC1);
           float t2 = calcolaTempDaTensione(pinNTC2);
           float t3 = calcolaTempDaTensione(pinNTC3);
-          String outData = validLine + ", " + String(t1, 2) + ", " + String(t2, 2) + ", " + String(t3, 2) + "\r\n";
+          String outData;
+          if (isDigit(validLine.charAt(0))) {
+              outData = validLine + ", " + String(t1,2) + ", " + String(t2,2) + ", " + String(t3,2) + "\r\n";
+          } else {
+              outData = validLine + "\r\n";  
+          }
           if (connesso) inviaAlClient(outData);
           Serial.print(outData);
         }

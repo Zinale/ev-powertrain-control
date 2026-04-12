@@ -6,15 +6,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Core/Src/Drive/BaseControlMotor.c \
-../Core/Src/Drive/Inverter.c 
+../Core/Src/Drive/ErrorRecovery.c \
+../Core/Src/Drive/Inverter.c \
+../Core/Src/Drive/Regen.c 
 
 OBJS += \
 ./Core/Src/Drive/BaseControlMotor.o \
-./Core/Src/Drive/Inverter.o 
+./Core/Src/Drive/ErrorRecovery.o \
+./Core/Src/Drive/Inverter.o \
+./Core/Src/Drive/Regen.o 
 
 C_DEPS += \
 ./Core/Src/Drive/BaseControlMotor.d \
-./Core/Src/Drive/Inverter.d 
+./Core/Src/Drive/ErrorRecovery.d \
+./Core/Src/Drive/Inverter.d \
+./Core/Src/Drive/Regen.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -24,7 +30,7 @@ Core/Src/Drive/%.o Core/Src/Drive/%.su Core/Src/Drive/%.cyclo: ../Core/Src/Drive
 clean: clean-Core-2f-Src-2f-Drive
 
 clean-Core-2f-Src-2f-Drive:
-	-$(RM) ./Core/Src/Drive/BaseControlMotor.cyclo ./Core/Src/Drive/BaseControlMotor.d ./Core/Src/Drive/BaseControlMotor.o ./Core/Src/Drive/BaseControlMotor.su ./Core/Src/Drive/Inverter.cyclo ./Core/Src/Drive/Inverter.d ./Core/Src/Drive/Inverter.o ./Core/Src/Drive/Inverter.su
+	-$(RM) ./Core/Src/Drive/BaseControlMotor.cyclo ./Core/Src/Drive/BaseControlMotor.d ./Core/Src/Drive/BaseControlMotor.o ./Core/Src/Drive/BaseControlMotor.su ./Core/Src/Drive/ErrorRecovery.cyclo ./Core/Src/Drive/ErrorRecovery.d ./Core/Src/Drive/ErrorRecovery.o ./Core/Src/Drive/ErrorRecovery.su ./Core/Src/Drive/Inverter.cyclo ./Core/Src/Drive/Inverter.d ./Core/Src/Drive/Inverter.o ./Core/Src/Drive/Inverter.su ./Core/Src/Drive/Regen.cyclo ./Core/Src/Drive/Regen.d ./Core/Src/Drive/Regen.o ./Core/Src/Drive/Regen.su
 
 .PHONY: clean-Core-2f-Src-2f-Drive
 

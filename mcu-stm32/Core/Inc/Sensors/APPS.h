@@ -33,9 +33,9 @@ extern "C" {
 
 /* APPS_NUM_SENSORS is defined in Config.h to avoid circular include dependencies */
 
-#define APPS_MEDIAN_WINDOW          9U       /**< Samples for median filter (keep odd) */
-#define APPS_FILTER_WINDOW          30U       /**< Samples for moving average filter */
-#define APPS_DEADZONE_PERCENT       25U      /**< Initial deadzone [%] */
+#define APPS_MEDIAN_WINDOW          19U       /**< Samples for median filter (keep odd) */
+#define APPS_FILTER_WINDOW          40U       /**< Samples for moving average filter */
+#define APPS_DEADZONE_PERCENT       5U      /**< Initial deadzone [%] */
 
 /* ---- Plausibility thresholds  ---- */
 #define APPS_IMPLAUSIBILITY_THRESHOLD_PERCENT   10U     /**< Max allowed diff between sensors [%] */

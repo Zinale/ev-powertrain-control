@@ -62,8 +62,10 @@ IWDG_HandleTypeDef hiwdg;
 
 UART_HandleTypeDef huart5;
 UART_HandleTypeDef huart3;
+UART_HandleTypeDef huart6;
 DMA_HandleTypeDef hdma_uart5_tx;
 DMA_HandleTypeDef hdma_usart3_tx;
+DMA_HandleTypeDef hdma_usart6_tx;
 
 /* Definitions for DataLogger */
 osThreadId_t DataLoggerHandle;
@@ -126,8 +128,12 @@ osMutexId_t mutex_CAN2Handle;
 const osMutexAttr_t mutex_CAN2_attributes = {
   .name = "mutex_CAN2"
 };
+/* Definitions for mutex_UART6 */
+osMutexId_t mutex_UART6Handle;
+const osMutexAttr_t mutex_UART6_attributes = {
+  .name = "mutex_UART6"
+};
 /* USER CODE BEGIN PV */
-
 
 /* USER CODE END PV */
 
@@ -141,6 +147,7 @@ static void MX_USART3_UART_Init(void);
 static void MX_UART5_Init(void);
 static void MX_CAN2_Init(void);
 static void MX_IWDG_Init(void);
+static void MX_USART6_UART_Init(void);
 void StartDataLogger(void *argument);
 void StartMotorsManager(void *argument);
 void StartDataManager(void *argument);
@@ -191,6 +198,7 @@ int main(void)
   MX_UART5_Init();
   MX_CAN2_Init();
   MX_IWDG_Init();
+  MX_USART6_UART_Init();
   /* USER CODE BEGIN 2 */
 
   DeviceState_Set(DEVICE_STATE_INIT);
@@ -243,17 +251,8 @@ int main(void)
   /* creation of mutex_CAN2 */
   mutex_CAN2Handle = osMutexNew(&mutex_CAN2_attributes);
 
-  if ((mutex_APPSHandle == NULL) ||
-      (mutex_SASHandle == NULL) ||
-      (mutex_INVERTER_LHandle == NULL) ||
-      (mutex_INVERTER_RHandle == NULL) ||
-      (mutex_UART5Handle == NULL) ||
-      (mutex_CAN1Handle == NULL) ||
-      (mutex_UART3Handle == NULL) ||
-      (mutex_CAN2Handle == NULL))
-  {
-    Error_Handler();
-  }
+  /* creation of mutex_UART6 */
+  mutex_UART6Handle = osMutexNew(&mutex_UART6_attributes);
 
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
@@ -587,7 +586,7 @@ static void MX_UART5_Init(void)
 
   /* USER CODE END UART5_Init 1 */
   huart5.Instance = UART5;
-  huart5.Init.BaudRate = 115200;
+  huart5.Init.BaudRate = 9600;
   huart5.Init.WordLength = UART_WORDLENGTH_8B;
   huart5.Init.StopBits = UART_STOPBITS_1;
   huart5.Init.Parity = UART_PARITY_NONE;
@@ -642,6 +641,41 @@ static void MX_USART3_UART_Init(void)
 }
 
 /**
+  * @brief USART6 Initialization Function
+  * @param None
+  * @retval None
+  */
+static void MX_USART6_UART_Init(void)
+{
+
+  /* USER CODE BEGIN USART6_Init 0 */
+
+  /* USER CODE END USART6_Init 0 */
+
+  /* USER CODE BEGIN USART6_Init 1 */
+
+  /* USER CODE END USART6_Init 1 */
+  huart6.Instance = USART6;
+  huart6.Init.BaudRate = 9600;
+  huart6.Init.WordLength = UART_WORDLENGTH_8B;
+  huart6.Init.StopBits = UART_STOPBITS_1;
+  huart6.Init.Parity = UART_PARITY_NONE;
+  huart6.Init.Mode = UART_MODE_TX_RX;
+  huart6.Init.HwFlowCtl = UART_HWCONTROL_NONE;
+  huart6.Init.OverSampling = UART_OVERSAMPLING_16;
+  huart6.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
+  huart6.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  if (HAL_UART_Init(&huart6) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN USART6_Init 2 */
+
+  /* USER CODE END USART6_Init 2 */
+
+}
+
+/**
   * Enable DMA controller clock
   */
 static void MX_DMA_Init(void)
@@ -661,6 +695,9 @@ static void MX_DMA_Init(void)
   /* DMA2_Stream0_IRQn interrupt configuration */
   HAL_NVIC_SetPriority(DMA2_Stream0_IRQn, 5, 0);
   HAL_NVIC_EnableIRQ(DMA2_Stream0_IRQn);
+  /* DMA2_Stream6_IRQn interrupt configuration */
+  HAL_NVIC_SetPriority(DMA2_Stream6_IRQn, 5, 0);
+  HAL_NVIC_EnableIRQ(DMA2_Stream6_IRQn);
 
 }
 
@@ -747,6 +784,11 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
         extern volatile uint8_t uart3_tx_busy;
         uart3_tx_busy = 0;
     }
+    if (huart == &huart6)
+    {
+        extern volatile uint8_t uart6_tx_busy;
+        uart6_tx_busy = 0;
+    }
 }
 
 void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
@@ -760,6 +802,11 @@ void HAL_UART_ErrorCallback(UART_HandleTypeDef *huart)
     {
         extern volatile uint8_t uart3_tx_busy;
         uart3_tx_busy = 0;
+    }
+    if (huart == &huart6)
+    {
+        extern volatile uint8_t uart6_tx_busy;
+        uart6_tx_busy = 0;
     }
 }
 

@@ -11,7 +11,7 @@
  * Internal state
  * ============================================================================ */
 
-static volatile MCU_State_t s_state      = MCU_STATE_INIT;
+volatile MCU_State_t s_state      = MCU_STATE_INIT;
 static volatile uint32_t    s_entry_tick = 0U;
 
 /* ============================================================================

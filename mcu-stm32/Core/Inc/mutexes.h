@@ -36,6 +36,10 @@ void Mutex_UART5_Unlock(void);
 void Mutex_UART3_Lock(void);
 void Mutex_UART3_Unlock(void);
 
+/* ---- UART6 --------------------------------------------------------------- */
+void Mutex_UART6_Lock(void);
+void Mutex_UART6_Unlock(void);
+
 /* ---- CAN1 ---------------------------------------------------------------- */
 void Mutex_CAN1_Lock(void);
 void Mutex_CAN1_Unlock(void);
