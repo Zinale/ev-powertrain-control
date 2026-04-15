@@ -137,6 +137,7 @@ void MotorsManagerTask(void)
          */
         Mutex_APPS_Lock();
         uint8_t pedal_percent = g_apps.torque_allowed ? g_apps.final_percent : 0U;
+        pedal_percent = (pedal_percent > 90U) ? 100U : pedal_percent; /* sanity cap */
         /* Deadzone and snap are already handled by APPS.c (APPS_DEADZONE_PERCENT).
          * Do NOT apply a second deadzone here — it would conflict with an uncalibrated
          * potentiometer and cause torque to remain at maximum even with pedal released. */

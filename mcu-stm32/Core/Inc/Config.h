@@ -234,7 +234,7 @@ extern "C" {
 
 //#define ANTI_NEG_WHILESTOPPED
 #define REGEN_FORCE_ENABLE
-#define REGEN_ENABLED               0U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED              0U     /**< 1 = enabled, 0 = disabled */
 #define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
 #if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)
     #error "REVERSE_TORQUE_ENABLED cannot be true when REGEN_ENABLED is true, to avoid conflicting negative torque sources. Please disable one of them in Config.h."
@@ -348,7 +348,7 @@ extern "C" {
     /* --- Common: COOLDOWN (both presets) ----------------------------------- */
 
     /** Cooldown duration [ms] at end of any cycle — zero torque, cannot be aborted. */
-    #define AUTOTEST_COOLDOWN_MS          5000U
+    #define AUTOTEST_COOLDOWN_MS          1000U
     
     //***************************************************************** */
     /* --- PRESET 1: DRIVE -> REGEN -> COOLDOWN -------------------------------- */
@@ -357,10 +357,10 @@ extern "C" {
     #define AUTOTEST_DRIVE_TORQUE_PCT     200U
 
     /** Duration of the traction phase [ms]. */
-    #define AUTOTEST_DRIVE_DURATION_MS    4000U
+    #define AUTOTEST_DRIVE_DURATION_MS    5000U
 
     /** Regenerative braking torque magnitude [% of Mn]. Applied as negative. */
-    #define AUTOTEST_REGEN_TORQUE_PCT     100U
+    #define AUTOTEST_REGEN_TORQUE_PCT     150U
 
     /** Duration of the regen phase [ms]. */
     #define AUTOTEST_REGEN_DURATION_MS    4000U

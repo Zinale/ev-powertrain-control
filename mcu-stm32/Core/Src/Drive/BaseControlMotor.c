@@ -148,6 +148,7 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
             }
         #else
             /* Regen disabled: traction only */
+            pedal_percent = (pedal_percent < 10) ? 0U : pedal_percent; /* sanity cap */
             torque_raw = (int16_t)((pedal_percent * TORQUE_SETPOINT_MAX) / 100);
         #endif
 
