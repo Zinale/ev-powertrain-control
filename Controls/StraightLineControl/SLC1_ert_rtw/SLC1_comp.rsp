@@ -1,0 +1,7 @@
+-IC:/Users/zinga/Documents/.UNIVPM/PolimarcheRacingTeam/EV-POWERTRAIN-CONTROL/ev-powertrain-control/Controls/StraightLineControl
+-IC:/Users/zinga/Documents/.UNIVPM/PolimarcheRacingTeam/EV-POWERTRAIN-CONTROL/ev-powertrain-control/Controls/StraightLineControl/SLC1_ert_rtw
+-I"C:/Program Files/MATLAB/R2025b/extern/include"
+-I"C:/Program Files/MATLAB/R2025b/simulink/include"
+-I"C:/Program Files/MATLAB/R2025b/rtw/c/src"
+-I"C:/Program Files/MATLAB/R2025b/rtw/c/src/ext_mode/common"
+-I"C:/Program Files/MATLAB/R2025b/rtw/c/ert"
