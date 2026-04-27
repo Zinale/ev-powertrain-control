@@ -1,0 +1,32 @@
+Vehicle Body 3DOF Dual Track | Simulink
+
+LONGITUDINAL
+vehicle mass,m [kg]								370
+longitudinal distance from center of mass to front axle, a [m]			0.775
+longitudinal distance from center of mass to rear axle, b [m]			0.775
+vertical distance from center to mass to axle plane, h [m]			0.35
+initial inertial frame longitudinal position, X_0 [m]				0
+
+LATERAL
+Lateral distance from geometric centerline to center of mass, d [m]		[1.2,1.2]
+Track width, w [m] (2 valori)							[1.4,1.4]
+Mapped corner stiffness ??? (3 opzioni)
+----------
+---------
+--------
+Initial inertial frame lateral displacement, Y_o [m]		0
+Initial road frame lateral velocity, ydot_o [m/s]		0
+
+YAW
+Yaw polar inertia, Izz [kg*m^2]					4000
+Initial road frame yaw angle, psi_o [rad]			0
+Initial road frame yaw rate, r_o [rad/s]			0
+
+AERODYNAMIC
+Longitudinal drag area, Af [m^2]				2
+Longitudinal drag coefficient, Cd [-]				.3
+Longitudinal lift coefficient, Cl [-]				.1
+Longitudinal drag pitch moment, Cpm [-]				.1
+Relative wind angle vector, beta_w [rad]			[0 0.01:0.01:0.3]
+Side force coefficient vector, Cs [-]				[0:0.03:0.9]
+Yaw moment coefficient vector, Cym [-]				[0 1e-6:0.01:0.3] 
