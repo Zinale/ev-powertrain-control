@@ -7,4 +7,5 @@ Documents/Password AipexPro carica dati su inverter.txt
 /Controls/TV/utils/.specstory
 /.specstory
 /Tests/FeatherDataCollectorBancoMotori/.specstory
+/Controls/.specstory
 /Tests/ESP32-WIFI-BT-communication/.specstory
