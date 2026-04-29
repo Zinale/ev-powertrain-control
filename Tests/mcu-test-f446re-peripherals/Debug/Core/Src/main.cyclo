@@ -1,0 +1,15 @@
+../Core/Src/main.c:165:6:Serial_Log	7
+../Core/Src/main.c:188:6:HAL_UART_TxCpltCallback	2
+../Core/Src/main.c:195:6:HAL_GPIO_EXTI_Callback	2
+../Core/Src/main.c:206:6:HAL_CAN_RxFifo0MsgPendingCallback	4
+../Core/Src/main.c:230:5:main	17
+../Core/Src/main.c:460:6:SystemClock_Config	4
+../Core/Src/main.c:516:13:MX_ADC1_Init	7
+../Core/Src/main.c:603:13:MX_CAN1_Init	2
+../Core/Src/main.c:640:13:MX_CAN2_Init	2
+../Core/Src/main.c:677:13:MX_IWDG_Init	2
+../Core/Src/main.c:705:13:MX_TIM2_Init	7
+../Core/Src/main.c:767:13:MX_USART2_UART_Init	2
+../Core/Src/main.c:798:13:MX_DMA_Init	1
+../Core/Src/main.c:826:13:MX_GPIO_Init	1
+../Core/Src/main.c:872:6:Error_Handler	1
