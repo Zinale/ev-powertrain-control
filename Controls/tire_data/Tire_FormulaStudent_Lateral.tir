@@ -1,0 +1,64 @@
+[MDI_HEADER]
+FILE_TYPE                ='tir'
+FILE_VERSION             = 3.0
+FILE_FORMAT              ='ASCII'
+! : COMMENT :              File generato da MATLAB fitting
+$----------------------------------------------------------------units
+[UNITS]
+LENGTH                   ='meter'
+FORCE                    ='newton'
+ANGLE                    ='radians'
+MASS                     ='kg'
+TIME                     ='second'
+$-----------------------------------------------------------------model
+[MODEL]
+PROPERTY_FILE_FORMAT     ='PAC2002'
+USE_MODE                 = 2
+$------------------------------------------------------------dimensions
+[DIMENSION]
+UNLOADED_RADIUS          = 0.2032     $ (16"/2) in metri
+WIDTH                    = 0.1524     $ 6.0" in metri
+ASPECT_RATIO             = 0.50       $ Altezza spalla / Larghezza (3"/6")
+RIM_RADIUS               = 0.1270     $ (10"/2) in metri
+RIM_WIDTH                = 0.1778     $ Esempio: Cerchio da 7" in metri
+$--------------------------------------------------------------inertia
+[INERTIA]
+MASS                     = 5.2        $ Peso approssimativo in kg (circa 11.5 lbs)
+IXX                      = 0.35       $ DA VERIFICARE (Momento diametrale)
+IYY                      = 0.55       $ DA VERIFICARE (Momento polare)
+$-------------------------------------------------------------parameter
+[VERTICAL]
+FNOMIN                   = 1112.000000    $ (Lascia FZ0 com'è nel codice)
+VERTICAL_STIFFNESS       = 120000     $ DA VERIFICARE (Rigidezza verticale N/m)
+VERTICAL_DAMPING         = 50         $ Smorzamento verticale Ns/m
+$--------------------------------------------------------------scaling
+[SCALING_COEFFICIENTS]
+LFZO                     = 1
+LCX                      = 1
+LMUX                     = 1
+LEX                      = 1
+LKX                      = 1
+LCY                      = 1
+LMUY                     = 1
+LEY                      = 1
+LKY                      = 1
+$-------------------------------------------------------------LATERAL_FORCE
+[LATERAL_COEFFICIENTS]
+PCY1                     =    1.80950
+PDY1                     =    2.63285
+PDY2                     =   -0.49999
+PDY3                     =    9.99822
+PKY1                     =  -21.27292
+PKY2                     =    0.77835
+PKY3                     =   -0.22203
+PEY1                     =    1.68127
+PEY2                     =    0.14432
+PEY3                     =   -0.02731
+PEY4                     =   -2.72135
+PHY1                     =   -0.00502
+PHY2                     =   -0.00932
+PHY3                     =   -0.20696
+PVY1                     =   -0.08608
+PVY2                     =    0.01447
+PVY3                     =   -1.65332
+PVY4                     =   -1.39340

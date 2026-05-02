@@ -1,0 +1,4 @@
+../Core/Src/Drive/BaseControlMotor.c:32:9:Motor_CalculateDynamicTorqueLimit	32	static
+../Core/Src/Drive/BaseControlMotor.c:54:9:Motor_ApplyTorqueRateLimit	24	static
+../Core/Src/Drive/BaseControlMotor.c:67:6:Motor_UpdateStatusLeds	16	static
+../Core/Src/Drive/BaseControlMotor.c:95:6:Motor_ProcessInverterControl	56	static
