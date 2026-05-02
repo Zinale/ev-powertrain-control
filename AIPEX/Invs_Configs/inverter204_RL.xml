@@ -1,0 +1,663 @@
+<DEV>
+  <DATA Device="KW" Name="Inverter204_RL" ProductCode="3.9.0.0" Selection="" Version="2.11">
+    <PARAMETER Instance="0">
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="1" Max="20.000" Min="0.250" Name="NC cycle time" Type="Dec" Unit="ms" Value="1.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="2" Max="20.000" Min="0.250" Name="SERCOS cycle time" Type="Dec" Unit="ms" Value="1.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="6" Name="Drive telegr.start.time" Type="Dec" Unit="ms" Value="0.200"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="7" Name="Feedb.acquis.start.time" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="8" Name="Command valid time (T3)" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR DataLen="2" ID="11" Name="Status class 1-errors" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="12" Name="Status class 2-warnings" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="13" Name="Status class 3-messages" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="15" Max="7" Min="0" Name="Telegr. type par." Type="Dec" Value="6"/>
+      <PAR DataLen="2" ID="16" Name="Configuration list AT" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="17" Name="ID-No.list all op.data" Type="Dec" Value="529">
+        <List Num="529" V0="1" V1="2" V10="17" V100="144" V101="147" V102="148" V103="149" V104="150" V105="153" V106="154" V107="157" V108="158" V109="159" V11="18" V110="160" V111="161" V112="162" V113="169" V114="170" V115="173" V116="175" V117="179" V118="180" V119="181" V12="19" V120="182" V121="185" V122="186" V123="187" V124="188" V125="189" V126="191" V127="192" V128="193" V129="206" V13="20" V130="207" V131="209" V132="210" V133="211" V134="212" V135="216" V136="217" V137="219" V138="222" V139="228" V14="21" V140="254" V141="258" V142="259" V143="260" V144="262" V145="263" V146="264" V147="265" V148="269" V149="270" V15="22" V150="284" V151="285" V152="286" V153="287" V154="296" V155="301" V156="303" V157="305" V158="307" V159="310" V16="23" V160="311" V161="312" V162="313" V163="326" V164="330" V165="331" V166="332" V167="333" V168="334" V169="335" V17="24" V170="336" V171="337" V172="348" V173="378" V174="380" V175="384" V176="390" V177="392" V178="398" V179="400" V18="25" V180="403" V181="405" V182="406" V183="409" V184="410" V185="411" V186="412" V187="447" V188="530" V189="32768" V19="26" V190="32769" V191="32770" V192="32771" V193="32772" V194="32773" V195="32774" V196="32775" V197="32776" V198="32780" V199="32781" V2="6" V20="28" V200="32782" V201="32795" V202="32796" V203="32798" V204="32800" V205="32801" V206="32802" V207="32803" V208="32804" V209="32805" V21="29" V210="32806" V211="32807" V212="32808" V213="32809" V214="32813" V215="32821" V216="32823" V217="32824" V218="32826" V219="32827" V22="30" V220="32828" V221="32829" V222="32830" V223="32831" V224="32832" V225="32833" V226="32834" V227="32835" V228="32836" V229="32837" V23="32" V230="32840" V231="32841" V232="32842" V233="32843" V234="32864" V235="32865" V236="32866" V237="32867" V238="32882" V239="32891" V24="33" V240="32894" V241="32895" V242="32896" V243="32901" V244="32904" V245="32913" V246="32914" V247="32915" V248="32916" V249="32917" V25="34" V250="32920" V251="32922" V252="32924" V253="32926" V254="32928" V255="32929" V256="32932" V257="32933" V258="32935" V259="32936" V26="35" V260="32938" V261="32940" V262="32941" V263="32942" V264="32943" V265="32944" V266="32948" V267="32952" V268="32953" V269="32956" V27="36" V270="32959" V271="32960" V272="32961" V273="32977" V274="32978" V275="32979" V276="32980" V277="32989" V278="32990" V279="32991" V28="37" V280="32993" V281="32996" V282="32999" V283="33076" V284="33098" V285="33100" V286="33101" V287="33102" V288="33104" V289="33113" V29="38" V290="33116" V291="33117" V292="33730" V293="33732" V294="34023" V295="34025" V296="34026" V297="34027" V298="34039" V299="34040" V3="7" V30="39" V300="34041" V301="34042" V302="34043" V303="34044" V304="34045" V305="34046" V306="34047" V307="34048" V308="34050" V309="34052" V31="40" V310="34053" V311="34055" V312="34060" V313="34061" V314="34062" V315="34063" V316="34070" V317="34071" V318="34072" V319="34073" V32="41" V320="34074" V321="34075" V322="34076" V323="34077" V324="34088" V325="34090" V326="34091" V327="34094" V328="34095" V329="34096" V33="42" V330="34099" V331="34100" V332="34120" V333="34146" V334="34147" V335="34148" V336="34149" V337="34151" V338="34152" V339="34153" V34="43" V340="34154" V341="34155" V342="34157" V343="34160" V344="34161" V345="34162" V346="34164" V347="34165" V348="34166" V349="34167" V35="44" V350="34168" V351="34171" V352="34173" V353="34174" V354="34177" V355="34178" V356="34179" V357="34180" V358="34182" V359="34183" V36="45" V360="34184" V361="34185" V362="34186" V363="34187" V364="34188" V365="34189" V366="34190" V367="34191" V368="34192" V369="34193" V37="46" V370="34194" V371="34195" V372="34196" V373="34197" V374="34199" V375="34202" V376="34203" V377="34204" V378="34205" V379="34206" V38="47" V380="34210" V381="34212" V382="34213" V383="34215" V384="34217" V385="34218" V386="34219" V387="34220" V388="34221" V389="34222" V39="49" V390="34223" V391="34224" V392="34225" V393="34226" V394="34227" V395="34228" V396="34229" V397="34230" V398="34231" V399="34232" V4="8" V40="50" V400="34233" V401="34234" V402="34235" V403="34238" V404="34239" V405="34265" V406="34266" V407="34273" V408="34274" V409="34275" V41="51" V410="34276" V411="34277" V412="34278" V413="34279" V414="34280" V415="34281" V416="34282" V417="34283" V418="34284" V419="34285" V42="52" V420="34286" V421="34298" V422="34304" V423="34816" V424="35328" V425="35584" V426="34299" V427="34300" V428="34301" V429="34302" V43="55" V430="33300" V431="33301" V432="33302" V433="33303" V434="33141" V435="33142" V436="33143" V437="33144" V438="33145" V439="33146" V44="57" V440="33147" V441="33148" V442="33149" V443="33150" V444="33151" V445="33170" V446="33171" V447="33172" V448="32919" V449="33174" V45="76" V450="33175" V451="33176" V452="33177" V453="33178" V454="33179" V455="33180" V456="33181" V457="33182" V458="33183" V459="33184" V46="77" V460="33185" V461="33186" V462="33187" V463="33188" V464="33189" V465="478" V466="532" V467="32887" V468="32888" V469="34069" V47="78" V470="194" V471="32945" V472="32946" V473="1020" V474="1021" V475="1022" V476="1019" V477="32986" V478="32987" V479="359" V48="79" V480="430" V481="437" V482="32988" V483="34118" V484="34119" V485="34243" V486="34244" V487="34303" V488="34261" V489="34246" V49="80" V490="34247" V491="34248" V492="34249" V493="34262" V494="33190" V495="33191" V496="33192" V497="34117" V498="34264" V499="33196" V5="11" V50="81" V500="33197" V501="33198" V502="33199" V503="33304" V504="33305" V505="33306" V506="33307" V507="33308" V508="33309" V509="33310" V51="82" V510="33311" V511="33312" V512="33313" V513="33314" V514="33315" V515="33316" V516="33317" V517="33318" V518="33319" V519="33320" V52="83" V520="33321" V521="33322" V522="33323" V523="33324" V524="33325" V525="33326" V526="33327" V527="33328" V528="33329" V53="84" V54="85" V55="86" V56="89" V57="91" V58="92" V59="93" V6="12" V60="94" V61="95" V62="96" V63="97" V64="98" V65="99" V66="100" V67="101" V68="102" V69="103" V7="13" V70="104" V71="108" V72="109" V73="110" V74="111" V75="112" V76="113" V77="114" V78="115" V79="116" V8="15" V80="117" V81="121" V82="122" V83="123" V84="124" V85="125" V86="126" V87="129" V88="130" V89="131" V9="16" V90="132" V91="133" V92="134" V93="135" V94="136" V95="137" V96="140" V97="141" V98="142" V99="143"/>
+      </PAR>
+      <PAR DataLen="2" ID="18" Name="Op.datalist com.ph.2" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="19" Name="Op.datalist com.ph.3" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="20" Name="Op.datalist com.ph.4" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="21" Name="Inval.datalist com.ph.2" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="22" Name="Inval.datalist com.ph.3" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="23" Name="Inval.datalist com.ph.4" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="24" Name="Configuration list MDT" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="25" Name="All command data list" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="26" Name="Conf. status bits" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="28" Max="65000" Min="0" Name="MST Error Counter" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="29" Max="65000" Min="0" Name="MDT Error Counter" Type="Dec" Value="0"/>
+      <PAR DataLen="1" ID="30" Name="Softwareversion" Type="Ascii" Value="KW  211 0000 adb2080">
+        <List Num="20" V0="75" V1="87" V10="48" V11="48" V12="32" V13="97" V14="100" V15="98" V16="50" V17="48" V18="56" V19="48" V2="32" V3="32" V4="50" V5="49" V6="49" V7="32" V8="48" V9="48"/>
+      </PAR>
+      <PAR DataLen="2" ID="32" Name="Primary operat. mode" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="33" Name="Second. operat. mode1" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34" Name="Second. operat. mode2" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="35" Name="Second. operat. mode3" Type="Hex" Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="36" Max="30000.0000" Min="-30000.0000" Name="Velocity command value" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="37" Max="30000.0000" Min="-30000.0000" Name="Velocity command value addit" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="38" Max="30000.0000" Min="0.0000" Name="Pos. velocity limit" Type="Dec" Unit="1/min" Value="18600.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="39" Max="0.0000" Min="-30000.0000" Name="Neg. velocity limit" Type="Dec" Unit="1/min" Value="-18600.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="40" Max="30000.0000" Min="-30000.0000" Name="Velocity feedback value" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="41" Max="30000.0000" Min="1.0000" Name="Homing velocity" Type="Dec" Unit="1/min" Value="100.0000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="42" Max="60000.000" Min="1.000" Name="Homing acceleration" Type="Dec" Unit="rev./ss" Value="100.000"/>
+      <PAR DataLen="2" ID="43" Max="7" Min="0" Name="Velocity polarity" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="44" Name="Velocity data scaling type" Type="Bin" Value="2"/>
+      <PAR DataLen="2" ID="45" Max="32767" Min="1" Name="Velocity data scaling factor" Type="Dec" Value="1"/>
+      <PAR DataLen="2" ID="46" Max="0" Min="-9" Name="Velocity data scaling expone" Type="Dec" Value="-4"/>
+      <PAR DataLen="4" ID="47" Max="2147483647" Min="-2147483648" Name="Position command value" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="49" Max="2147483647" Min="-2147483648" Name="Positive position limit" Type="Dec" Unit="incr." Value="2147483647"/>
+      <PAR DataLen="4" ID="50" Max="2147483647" Min="-2147483648" Name="Negative position limit" Type="Dec" Unit="incr." Value="-2147483648"/>
+      <PAR DataLen="4" ID="51" Max="2147483647" Min="-2147483648" Name="Position feedback value" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="52" Max="2147483647" Min="-2147483648" Name="Home ref. position 1" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="55" Max="15" Min="0" Name="Closed loop polar. par." Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="57" Max="65535" Min="0" Name="In position window" Type="Dec" Unit="incr." Value="1000"/>
+      <PAR DataLen="2" ID="76" Max="255" Min="0" Name="Position data scaling type" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="77" Max="65535" Min="1" Name="Linear position data scaling" Type="Dec" Value="1"/>
+      <PAR DataLen="2" ID="78" Max="0" Min="-9" Name="Linear position data scaling" Type="Dec" Value="-7"/>
+      <PAR DataLen="4" ID="79" Max="4294967295" Min="1" Name="Rotational position resoluti" Type="Dec" Unit="incr." Value="3600000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="80" Max="3000.0" Min="-3000.0" Name="Torque command value" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="81" Max="3000.0" Min="-3000.0" Name="Torque command value additiv" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="82" Max="3000.0" Min="-3000.0" Name="Positive torque limit" Type="Dec" Unit="% MN" Value="200.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="83" Max="3000.0" Min="-3000.0" Name="Negative torque limit" Type="Dec" Unit="% MN" Value="-200.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="84" Max="3000.0" Min="-3000.0" Name="Torque feedb.val" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR DataLen="2" ID="85" Max="7" Min="0" Name="Torque polarity" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="86" Name="Torque data scaling" Type="Bin" Value="0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="89" Name="Transmit time MDT (T2)" Type="Dec" Unit="ms" Value="1.000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="91" Max="30000.0000" Min="0.0000" Name="Bip.veloc. limit" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="92" Max="3000.0" Min="0.0" Name="Bip.torque limit" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR DataLen="2" ID="93" Max="32767" Min="1" Name="Torque scaling factor" Type="Dec" Value="1"/>
+      <PAR DataLen="2" ID="94" Max="0" Min="-5" Name="Torque scaling exponent" Type="Dec" Value="-2"/>
+      <PAR DataLen="1" ID="95" Name="Diagnosis" Type="Ascii" Value="">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="96" Max="65278" Min="0" Name="Slave identifier (SKLN)" Type="Hex" Value="257"/>
+      <PAR DataLen="2" ID="97" Name="Diag.mask st.class 2" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="98" Name="Diag.mask st.class 3" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="99" Name="Diag.reset st.class 1" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="100" Max="30000" Min="1" Name="Prop.gain speed control" Type="Dec" Value="40"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="101" Max="3000.0" Min="0.0" Name="Integr.act.time sp.ctrl" Type="Dec" Unit="ms" Value="20.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="102" Max="3276.7" Min="0.0" Name="Diff.time speed control" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR DataLen="4" ID="103" Max="2147483647" Min="1" Name="Modulo value" Type="Dec" Unit="incr." Value="20000"/>
+      <PAR DataLen="2" ID="104" Max="30000" Min="20" Name="Position loop KV-factor" Type="Dec" Value="20"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="108" Name="Feedrate override" Type="Dec" Unit="%" Value="100.00"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="109" Max="1000.000" Min="0.000" Name="Motor peak current" Type="Dec" Unit="A" Value="105.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="110" Max="1000.000" Min="0.000" Name="Inverter peak current" Type="Dec" Unit="A" Value="20.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="111" Max="1000.000" Min="0.000" Name="Motor nom. current" Type="Dec" Unit="A" Value="41.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="112" Max="1000.000" Min="0.000" Name="Inverter nom. current" Type="Dec" Unit="A" Value="2.500"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="113" Max="30000.0000" Min="1.0000" Name="Maximum speed" Type="Dec" Unit="1/min" Value="18000.0000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="114" Name="Overload limit motor" Type="Dec" Unit="%" Value="50.0"/>
+      <PAR DataLen="2" ID="115" Name="Position feedback type" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="116" Max="33554432" Min="200" Name="Resol. mot. encoder" Type="Dec" Unit="incr." Value="262144"/>
+      <PAR DataLen="4" ID="117" Max="4294967295" Min="0" Name="Resol. ext.pos.feedb." Type="Dec" Unit="incr." Value="100"/>
+      <PAR DataLen="4" ID="121" Max="30000" Min="1" Name="Load gear input rev." Type="Dec" Unit="rev." Value="10"/>
+      <PAR DataLen="4" ID="122" Max="30000" Min="1" Name="Load gear output rev." Type="Dec" Unit="rev." Value="10"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="123" Max="429496.7295" Min="0.0000" Name="Feed constant" Type="Dec" Unit="mm/rev." Value="10.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="124" Max="60000.0000" Min="0.0000" Name="Zero velocity window" Type="Dec" Unit="1/min" Value="50.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="125" Max="30000.0000" Min="0.0000" Name="Velocity Threshold Nx" Type="Dec" Unit="1/min" Value="1000.0000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="126" Max="1000.0" Min="0.0" Name="Torque Threshold Mdx" Type="Dec" Unit="% MN" Value="100.0"/>
+      <PAR DataLen="2" ID="129" Name="Manufact.status class 1" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="130" Max="2147483647" Min="-2147483648" Name="Probe1 val.p.edge" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="131" Max="2147483647" Min="-2147483648" Name="Probe1 val.n.edge" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="132" Max="2147483647" Min="-2147483648" Name="Probe2 val.p.edge" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="133" Max="2147483647" Min="-2147483648" Name="Probe2 val.n.edge" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="134" Name="Master ctrl.word" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="135" Name="Drive stat. word" Type="Hex" Value="0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="136" Max="60000.000" Min="1.000" Name="Positive acceleration" Type="Dec" Unit="rev./ss" Value="100.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="137" Max="-1.000" Min="-60000.000" Name="Negative acceleration" Type="Dec" Unit="rev./ss" Value="-100.000"/>
+      <PAR DataLen="1" ID="140" Name="Inverter type" Type="Ascii" Value="">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="141" Name="Motor type" Type="Ascii" Value="DD5-14-10-POW">
+        <List Num="13" V0="68" V1="68" V10="80" V11="79" V12="87" V2="53" V3="45" V4="49" V5="52" V6="45" V7="49" V8="48" V9="45"/>
+      </PAR>
+      <PAR DataLen="1" ID="142" Name="Application type" Type="Ascii" Value="">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="143" Name="SERCOS interface vers." Type="Ascii" Value="">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="144" Name="Status word" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="147" Name="Homing par." Type="Bin" Value="32768"/>
+      <PAR DataLen="2" ID="148" Name="Drive hom.cycle commd." Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="149" Name="Cmd. pos. stop" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="150" Max="2147483647" Min="-2147483648" Name="Reference offset 1" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="153" Max="2147483647" Min="-2147483648" Name="Spindle angle position" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="154" Name="Spindle posit. par." Type="Bin" Value="32768"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="157" Max="60000.0000" Min="1.0000" Name="Velocity window" Type="Dec" Unit="1/min" Value="100.0000"/>
+      <PAR DataLen="4" ID="158" Max="1000000" Min="1" Name="Power threshold Px" Type="Dec" Unit="W" Value="100"/>
+      <PAR DataLen="4" ID="159" Max="2147483647" Min="0" Name="Excess Error" Type="Dec" Unit="incr." Value="1000000"/>
+      <PAR DataLen="2" ID="160" Name="Acceleration data scaling ty" Type="Bin" Value="2"/>
+      <PAR DataLen="2" ID="161" Max="32767" Min="1" Name="Acceleration data scaling fa" Type="Dec" Value="1"/>
+      <PAR DataLen="2" ID="162" Max="0" Min="-9" Name="Acceleration data scaling ex" Type="Dec" Value="-3"/>
+      <PAR DataLen="2" ID="169" Name="Probe ctrl. par." Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="170" Name="Cmd. Probe.cycle" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="173" Max="2147483647" Min="-2147483648" Name="Marker posit. A" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="175" Name="Displacement Parameter 1" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="179" Name="Probe status" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="180" Max="2147483647" Min="-2147483648" Name="Spindle rel. offset" Type="Dec" Unit="incr." Value="10000"/>
+      <PAR DataLen="2" ID="181" Name="Diag. manufact. class 2" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="182" Name="Diag. manufact. Status" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="185" Name="Length data AT" Type="Dec" Unit="byte" Value="32"/>
+      <PAR DataLen="2" ID="186" Name="Length data MDT" Type="Dec" Unit="byte" Value="32"/>
+      <PAR DataLen="2" ID="187" Name="List of data AT" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="188" Name="List of data MDT" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="4" ID="189" Max="2147483647" Min="-2147483648" Name="Following dist." Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="191" Name="Cmd. cancel ref. point" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="192" Name="List backup data" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="193" Name="Positioning jerk" Type="Dec" Unit="rev./sss" Value="0.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="194" Max="60000.000" Min="-60000.000" Name="Acceleration setpoint" Type="Dec" Unit="rev./ss" Value="0.000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="206" Name="Drive on delay time" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="207" Name="Drive off delay time" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="209" Max="30000.0000" Min="0.0000" Name="Lower adaption limit" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="210" Max="30000.0000" Min="0.0000" Name="Upper adaption limit" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="211" Max="500.0" Min="0.0" Name="Prop. gain adaptation" Type="Dec" Unit="%" Value="100.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="212" Max="500.0" Min="0.0" Name="Integ.action time adap." Type="Dec" Unit="%" Value="100.0"/>
+      <PAR DataLen="2" ID="216" Name="Switch par. set comm." Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="217" Max="3" Min="0" Name="Preselect parameter set" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="219" Name="List parameter set" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="222" Max="30000.0000" Min="1.0000" Name="Spindle pos. speed" Type="Dec" Unit="1/min" Value="300.0000"/>
+      <PAR DataLen="4" ID="228" Max="65535" Min="0" Name="Synchr. pos. window" Type="Dec" Unit="incr." Value="1000"/>
+      <PAR DataLen="2" ID="254" Max="3" Min="0" Name="Act. Par. set" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="258" Name="Target position" Type="Dec" Unit="incr." Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="259" Name="Positioning velocity" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="260" Name="Positioning acceleration" Type="Dec" Unit="rev./ss" Value="0.000"/>
+      <PAR DataLen="2" ID="262" Name="Init.prog.load.comm." Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="263" Name="Cmd. load data" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="264" Name="Cmd. save data" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="265" Max="2" Min="0" Name="Language" Type="Hex" Value="1"/>
+      <PAR DataLen="2" ID="269" Name="ID memory mode" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="270" Name="Temp. par. list" Type="Dec" Value="92">
+        <List Num="92" V0="36" V1="38" V10="83" V11="91" V12="92" V13="100" V14="101" V15="102" V16="104" V17="124" V18="125" V19="126" V2="39" V20="136" V21="137" V22="147" V23="150" V24="153" V25="154" V26="157" V27="158" V28="159" V29="169" V3="41" V30="180" V31="222" V32="228" V33="265" V34="296" V35="301" V36="303" V37="305" V38="307" V39="348" V4="42" V40="392" V41="530" V42="32780" V43="32781" V44="32894" V45="32895" V46="32916" V47="32917" V48="32926" V49="32928" V5="49" V50="32929" V51="32935" V52="34050" V53="34052" V54="34148" V55="34149" V56="34151" V57="34152" V58="34154" V59="34155" V6="50" V60="34177" V61="34178" V62="34179" V63="34180" V64="34182" V65="34189" V66="34190" V67="34221" V68="34222" V69="34223" V7="52" V70="34224" V71="34227" V72="34285" V73="33300" V74="33301" V75="33302" V76="33303" V77="33141" V78="33144" V79="33174" V8="80" V80="33175" V81="34246" V82="34247" V83="34248" V84="34249" V85="33190" V86="33191" V87="33192" V88="34264" V89="33305" V9="82" V90="33306" V91="33307"/>
+      </PAR>
+      <PAR DataLen="2" ID="284" Name="Operation mode 4" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="285" Name="Operation mode 5" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="286" Name="Operation mode 6" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="287" Name="Operation mode 7" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="296" Max="400" Min="0" Name="Velocity feed forward gain" Type="Dec" Unit="%" Value="100"/>
+      <PAR DataLen="2" ID="301" Name="Alloc. control bit 1" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="303" Name="Alloc. control bit 2" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="305" Name="Alloc. status bit 1" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="307" Name="Alloc. status bit 2" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="310" Name="Overload motor" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="311" Name="Warn. overtemp. inv." Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="312" Name="Warn. overtemp. mot." Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="313" Name="Warning cooler" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="326" Name="Par. checksum" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="330" Name="Message Nact = Nset" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="331" Name="Message Nact &lt; Nmin" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="332" Name="Message Nact &lt; Nx" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="333" Name="Message Md &gt;= Mdx" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="334" Name="Message Md &gt;= Mdlimit" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="335" Name="Message Ncomm &gt; Nlimit" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="336" Name="Message In Position" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="337" Name="Message P &gt;= Px" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="348" Name="Acc. feed forward gain" Type="Dec" Unit="%" Value="0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="359" Name="Positioning deceleration" Type="Dec" Unit="rev./ss" Value="0.000"/>
+      <PAR DataLen="4" ID="378" Name="Abs. encoder range 1" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="380" Max="4096" Min="0" Name="DC-bus voltage" Type="Dec" Unit="V" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="384" Name="Temperature internal" Type="Dec" Unit="grd C" Value="0.0"/>
+      <PAR DataLen="2" ID="390" Name="Diagnostic number" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="392" Max="5000" Min="0" Name="Velocity feedback filter" Type="Dec" Unit="us" Value="1000"/>
+      <PAR DataLen="2" ID="398" Name="List status bits" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="400" Name="Home switch" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="403" Name="Status act. pos. value" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="405" Name="Probe 1 enable" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="406" Name="Probe 2 enable" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="409" Name="Probe1 pos.latch" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="410" Name="Probe1 neg.latch" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="411" Name="Probe2 pos.latch" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="412" Name="Probe2 neg.latch" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="430" Name="Active target position" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="437" Name="Positioning status" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="447" Name="Cmd. set abs. position" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="478" Name="Limit switch status" Type="Bin" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="530" Max="1000.0" Min="0.0" Name="Clamping torque" Type="Dec" Unit="% MN" Value="100.0"/>
+      <PAR DataLen="2" ID="532" Name="Limit switch control" Type="Bin" Value="0"/>
+      <PAR DataLen="1" ID="1019" Name="MAC address" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="1020" Name="IP address" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="1021" Name="Subnet mask" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="1022" Name="Gateway address" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32768" Max="1000.0" Min="0.0" Name="Nom. motor voltage" Type="Dec" Unit="V" Value="350.0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="32769" Max="1000.000" Min="0.000" Name="Magnet. current IM" Type="Dec" Unit="A" Value="35.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="32770" Max="1000.000" Min="0.000" Name="Magnet. current IM1" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32771" Max="2000.0" Min="0.0" Name="Nom. torque" Type="Dec" Unit="Nm" Value="9.8"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="32772" Max="30000.0000" Min="10.0000" Name="Nom. velocity" Type="Dec" Unit="1/min" Value="12000.0000"/>
+      <PAR DataLen="4" ID="32773" Name="Service bits" Type="Bin" Value="20481"/>
+      <PAR Comma="4" DataLen="2" DecimalPlace="4" ID="32774" Max="1.5000" Min="0.0050" Name="Rotor time constant" Type="Dec" Unit="s" Value="0.0100"/>
+      <PAR DataLen="2" ID="32775" Max="400" Min="2" Name="Pole number motor" Type="Dec" Value="10"/>
+      <PAR DataLen="2" ID="32776" Max="64000" Min="8" Name="Sinus encoder period" Type="Dec" Value="16384"/>
+      <PAR Comma="1" DataLen="4" DecimalPlace="1" ID="32780" Max="1200000.0" Min="1.0" Name="Accel. ramp" Type="Dec" Unit="ms" Value="100.0"/>
+      <PAR Comma="1" DataLen="4" DecimalPlace="1" ID="32781" Max="1200000.0" Min="1.0" Name="Decel. ramp" Type="Dec" Unit="ms" Value="100.0"/>
+      <PAR Comma="1" DataLen="4" DecimalPlace="1" ID="32782" Max="1200000.0" Min="0.0" Name="Decel.ramp RF inactive" Type="Dec" Unit="ms" Value="100.0"/>
+      <PAR DataLen="2" ID="32795" Name="Source UE" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="32796" Name="Source RF" Type="Dec" Value="5"/>
+      <PAR DataLen="2" ID="32798" Name="User list 1" Type="Hex" Value="11">
+        <List Num="11" V0="1" V1="500" V10="1400" V2="50" V3="500" V4="600" V5="450" V6="1150" V7="1250" V8="250" V9="1250"/>
+      </PAR>
+      <PAR DataLen="4" ID="32800" Name="AMK main op. mode" Type="Hex" Value="4718594"/>
+      <PAR DataLen="4" ID="32801" Name="AMK second op. mode 1" Type="Hex" Value="4390979"/>
+      <PAR DataLen="4" ID="32802" Name="AMK second op. mode 2" Type="Hex" Value="4390979"/>
+      <PAR DataLen="4" ID="32803" Name="AMK second op. mode 3" Type="Hex" Value="4390979"/>
+      <PAR DataLen="4" ID="32804" Name="AMK second op. mode 4" Type="Hex" Value="4390979"/>
+      <PAR DataLen="4" ID="32805" Name="AMK second op. mode 5" Type="Hex" Value="4390979"/>
+      <PAR DataLen="4" ID="32806" Name="AMK second op. mode 6" Type="Hex" Value="4390979"/>
+      <PAR DataLen="4" ID="32807" Name="AMK dig.torque contr." Type="Hex" Value="4718594"/>
+      <PAR DataLen="4" ID="32808" Name="AMK position control" Type="Hex" Value="4457476"/>
+      <PAR DataLen="4" ID="32809" Name="AMK dig. speed control" Type="Hex" Value="4718659"/>
+      <PAR DataLen="4" ID="32813" Name="Par.set assignm. 1" Type="Hex" Value="50462976"/>
+      <PAR DataLen="4" ID="32821" Name="Password" Type="Dec" Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="32823" Name="Veloc.cmd.a.ramp" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR DataLen="4" ID="32824" Max="2147483647" Min="-2147483648" Name="Follow. distance" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="32826" Max="2147483647" Min="-2147483648" Name="SAK value" Type="Dec" Unit="incr." Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32827" Max="1000.0" Min="-1000.0" Name="Magn.curr.feedb." Type="Dec" Unit="A" Value="0.0"/>
+      <PAR Comma="2" DataLen="4" DecimalPlace="2" ID="32828" Name="Actual curr. value phase U" Type="Dec" Unit="A" Value="0.00"/>
+      <PAR Comma="2" DataLen="4" DecimalPlace="2" ID="32829" Name="Actual curr. value phase V" Type="Dec" Unit="A" Value="0.00"/>
+      <PAR Comma="2" DataLen="4" DecimalPlace="2" ID="32830" Name="Actual curr. value phase W" Type="Dec" Unit="A" Value="0.00"/>
+      <PAR DataLen="2" ID="32831" Name="Comm. angle" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="32832" Name="Encoder signal S2" Type="Dec" Unit="mV" Value="0"/>
+      <PAR DataLen="2" ID="32833" Name="Encoder signal S1" Type="Dec" Unit="mV" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32834" Max="1000.0" Min="-1000.0" Name="Torque curr.feedback" Type="Dec" Unit="A" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32835" Name="Torque command value intern" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR DataLen="2" ID="32836" Max="4096" Min="0" Name="DC-bus voltage" Type="Dec" Unit="V" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32837" Name="DC-bus monitoring" Type="Dec" Unit="V" Value="50.0"/>
+      <PAR DataLen="2" ID="32840" Name="Diagnostic list" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="32841" Name="Encoder list motor" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="32842" Name="Encoder list customer" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="32843" Name="Service command" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="32864" Name="Output port 3" Type="Dec" Value="544"/>
+      <PAR DataLen="4" ID="32865" Name="Port 3 bit 0" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="32866" Name="Port 3 bit 1" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="32867" Name="Port 3 bit 2" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="32882" Name="Slot assignment" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="32887" Name="Park position" Type="Dec" Unit="incr." Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="32888" Name="Park speed" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="32891" Name="Velocity command value inter" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR DataLen="2" ID="32894" Max="2000" Min="0" Name="Pos.cmd.val.filt." Type="Dec" Unit="ms" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32895" Max="6553.5" Min="0.0" Name="Diff.time pos. control" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR DataLen="4" ID="32896" Name="Position command value int." Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="32901" Name="Global service bits" Type="Bin" Value="66112"/>
+      <PAR DataLen="2" ID="32904" Name="Inverter on" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="32913" Max="1" Min="0" Name="Clear error" Type="Hex" Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="32914" Name="Sum add. velocity" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32915" Name="Sum add. torque" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR DataLen="2" ID="32916" Name="Cyclic filter" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="32917" Name="Time zone" Type="Ascii" Value="">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="4" ID="32919" Name="Service list" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32920" Name="O.load time mot." Type="Dec" Unit="s" Value="5.0"/>
+      <PAR DataLen="4" ID="32922" Name="Resid.dist.erase wind." Type="Dec" Unit="incr." Value="100000000"/>
+      <PAR DataLen="2" ID="32924" Name="Op.mode change par." Type="Bin" Value="1"/>
+      <PAR DataLen="2" ID="32926" Name="AMK homing cycle par." Type="Bin" Value="2048"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32928" Max="2000.0" Min="0.0" Name="Time filter 1" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32929" Max="2000.0" Min="0.0" Name="Time filter 2" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR DataLen="2" ID="32932" Max="4000" Min="0" Name="Barrier frequ." Type="Dec" Unit="Hz" Value="0"/>
+      <PAR DataLen="2" ID="32933" Max="200" Min="0" Name="Band width" Type="Dec" Unit="Hz" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32935" Max="1000.0" Min="0.0" Name="Voltage standstill" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR DataLen="4" ID="32936" Name="Window" Type="Dec" Unit="incr." Value="1000"/>
+      <PAR DataLen="2" ID="32938" Name="Customer var. 1" Type="Hex" Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="32940" Max="30000.0000" Min="0.0000" Name="High homing velocity" Type="Dec" Unit="1/min" Value="1000.0000"/>
+      <PAR DataLen="4" ID="32941" Name="SERCOS service" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="32942" Name="Service control" Type="Hex" Value="0"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="32943" Max="60.00" Min="0.00" Name="Warning time" Type="Dec" Unit="s" Value="4.00"/>
+      <PAR DataLen="4" ID="32944" Name="SYADR" Type="Hex" Value="0"/>
+      <PAR DataLen="1" ID="32945" Name="List parameter set" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="1" ID="32946" Name="Drive DB file" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="4" ID="32948" Name="Message 4x32" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="32952" Max="65535" Min="0" Name="At sync. speed window" Type="Dec" Unit="incr." Value="1000"/>
+      <PAR DataLen="2" ID="32953" Name="Encoder type" Type="Hex" Value="60"/>
+      <PAR DataLen="2" ID="32956" Max="255" Min="4" Name="Add. acceleration value" Type="Dec" Value="10"/>
+      <PAR DataLen="2" ID="32959" Name="Offset resolver" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="32960" Max="65535" Min="1" Name="Input M.enc. gear" Type="Dec" Unit="rev." Value="1"/>
+      <PAR DataLen="2" ID="32961" Max="65535" Min="1" Name="Output M.enc. gear" Type="Dec" Unit="rev." Value="1"/>
+      <PAR DataLen="2" ID="32977" Name="Input port 3" Type="Dec" Value="32"/>
+      <PAR DataLen="4" ID="32978" Name="Port 3 bit 0" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="32979" Name="Port 3 bit 1" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="32980" Name="Port 3 bit 2" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="32986" Max="1000" Min="0" Name="Factor derating" Type="Dec" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32987" Max="100.0" Min="0.0" Name="Treshold derating" Type="Dec" Unit="%" Value="50.0"/>
+      <PAR DataLen="2" ID="32988" Name="Delay software reset" Type="Dec" Unit="ms" Value="1000"/>
+      <PAR DataLen="2" ID="32989" Max="32767" Min="0" Name="Torque filt.time" Type="Dec" Unit="ms" Value="0"/>
+      <PAR DataLen="2" ID="32990" Max="65535" Min="0" Name="NK-shift" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="32991" Max="100" Min="0" Name="V/F start up" Type="Dec" Unit="%" Value="0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="32993" Name="Dead time comp.2" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR DataLen="4" ID="32996" Name="Data signification" Type="Dec" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="32999" Name="Overload limit inverter" Type="Dec" Unit="%" Value="50.0"/>
+      <PAR DataLen="2" ID="33076" Name="Second period" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33098" Name="Incr.Pos.value" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="33100" Name="Actual power value" Type="Dec" Unit="W" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33101" Name="Display overload inverter" Type="Dec" Unit="%" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33102" Name="Display overload motor" Type="Dec" Unit="%" Value="0.0"/>
+      <PAR DataLen="4" ID="33104" Max="4294967295" Min="0" Name="Position feedback mod." Type="Dec" Unit="incr." Value="0"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="33113" Name="Torq.cmd.val.C." Type="Dec" Unit="% MN" Value="0.00"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33116" Name="Temperature internal" Type="Dec" Unit="grd C" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33117" Name="Temperature external" Type="Dec" Unit="grd C" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33141" Max="2000.0" Min="0.0" Name="V/F input filter" Type="Dec" Unit="ms" Value="0.0"/>
+      <PAR DataLen="2" ID="33142" Name="Commutation valid" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="33143" Name="Communication monitor" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="33144" Name="Timeout communication monito" Type="Dec" Unit="ms" Value="200"/>
+      <PAR DataLen="2" ID="33145" Name="OSC channel 1" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="33146" Name="OSC channel 2" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="33147" Name="OSC channel 3" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="33148" Name="OSC channel 4" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33149" Max="3000.0" Min="0.0" Name="Saturation current" Type="Dec" Unit="A" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33150" Max="3000.0" Min="0.0" Name="Brake torque" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33151" Max="180.0" Min="0.0" Name="max. angle difference encode" Type="Dec" Unit="grad" Value="0.0"/>
+      <PAR DataLen="2" ID="33170" Max="2" Min="0" Name="IPO mode" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33171" Name="Active power (el.)" Type="Dec" Unit="W" Value="0"/>
+      <PAR DataLen="4" ID="33172" Name="Reactive power (el.)" Type="Dec" Unit="var" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33174" Max="500.0" Min="-500.0" Name="Damping factor position" Type="Dec" Unit="%" Value="0.0"/>
+      <PAR DataLen="2" ID="33175" Name="List glitch filter time" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="4" ID="33176" Name="Process data 1" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33177" Name="Process data 2" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33178" Name="Process data 3" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33179" Name="Process data 4" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33180" Name="Performance index sensorless" Type="Dec" Value="0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33181" Name="Actual current Ia" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33182" Name="Actual current Ib" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33183" Name="Voltage Ua" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33184" Name="Voltage Ub" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33185" Name="Magn.curr.feedb." Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33186" Name="Torque curr.feedback" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33187" Name="Actual curr. value phase U" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33188" Name="Actual curr. value phase V" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33189" Name="Actual curr. value phase W" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="33190" Name="Velocity feedforward factor" Type="Dec" Unit="%" Value="0.00"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="33191" Name="Velocity feedforward delay 1" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="33192" Name="Delay target position value" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="33196" Name="Display friction torque" Type="Dec" Unit="Nm" Value="0.00"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="33197" Name="Display friction torque line" Type="Dec" Unit="Nm" Value="0.00"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33198" Name="Display holding torque" Type="Dec" Unit="Nm" Value="0.0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="33199" Name="Display of moment of inertia" Type="Dec" Unit="kgcm2" Value="0.000"/>
+      <PAR DataLen="2" ID="33300" Name="Motion Test 1" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="33301" Name="Motion Test 2" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="33302" Name="Motion Test 3" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="33303" Name="Motion Test 4" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="33304" Name="Motion service switch" Type="Bin" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33305" Max="3000.0" Min="-3000.0" Name="Variable positive torque lim" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="33306" Max="3000.0" Min="-3000.0" Name="Variable negative torque lim" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR DataLen="2" ID="33307" Name="Time constant variable torqu" Type="Dec" Unit="ms" Value="0"/>
+      <PAR DataLen="4" ID="33308" Name="Output mask" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="33309" Name="List absolute position" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="4" ID="33310" Name="Thermal resistance winding s" Type="Float" Unit="K/W" Value="0"/>
+      <PAR DataLen="4" ID="33311" Name="Thermal resistance stator-ro" Type="Float" Unit="K/W" Value="0"/>
+      <PAR DataLen="4" ID="33312" Name="Thermal resistance stator en" Type="Float" Unit="K/W" Value="0"/>
+      <PAR DataLen="4" ID="33313" Name="Ambient temperatureThermal r" Type="Float" Unit="K/W" Value="0"/>
+      <PAR DataLen="4" ID="33314" Name="Thermal capacity winding" Type="Float" Unit="J/K" Value="0"/>
+      <PAR DataLen="4" ID="33315" Name="Thermal capacity stator" Type="Float" Unit="J/K" Value="0"/>
+      <PAR DataLen="4" ID="33316" Name="Thermal capacity rotor" Type="Float" Unit="J/K" Value="0"/>
+      <PAR DataLen="4" ID="33317" Name="Electrical winding resistanc" Type="Float" Unit="Ohm" Value="0"/>
+      <PAR DataLen="4" ID="33318" Name="Ambient temperature" Type="Float" Unit="K" Value="0"/>
+      <PAR DataLen="4" ID="33319" Name="Magnetic flux density propor" Type="Float" Unit="T2/V2s2" Value="0"/>
+      <PAR DataLen="4" ID="33320" Name="Hysteresis proportional fact" Type="Float" Unit="J/T2" Value="0"/>
+      <PAR DataLen="4" ID="33321" Name="Eddy current proportional fa" Type="Float" Unit="Js/T2" Value="0"/>
+      <PAR DataLen="4" ID="33322" Name="Thermal model reserve 1" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33323" Name="Thermal model reserve 2" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33324" Name="Thermal model reserve 3" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33325" Name="Thermal model reserve 4" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33326" Name="Thermal model reserve 5" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33327" Name="Thermal model reserve 6" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33328" Name="Thermal model reserve 7" Type="Float" Value="0"/>
+      <PAR DataLen="4" ID="33329" Name="Thermal model reserve 8" Type="Float" Value="0"/>
+      <PAR DataLen="2" ID="33730" Name="System booting" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="33732" Name="System reset" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34023" Name="BUS address part." Type="Hex" Value="1"/>
+      <PAR DataLen="2" ID="34025" Name="BUS mode" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34026" Name="BUS mode attribut" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34027" Name="BUS fail.charac." Type="Dec" Value="2"/>
+      <PAR DataLen="2" ID="34039" Name="OSC Control" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34040" Name="OSC config list" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34041" Name="OSC actual values" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34042" Name="OSC data list" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34043" Name="TG Control" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34044" Name="TG config list" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34045" Name="Inductance LD" Type="Dec" Unit="mH" Value="0.24"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34046" Name="Inductance LQ" Type="Dec" Unit="mH" Value="0.12"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34047" Max="32.767" Min="0.000" Name="Dead time meas.1" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR DataLen="2" ID="34048" Name="PWM frequency" Type="Dec" Unit="kHz" Value="8"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34050" Max="300.0" Min="0.0" Name="TN current Q" Type="Dec" Unit="ms" Value="1.2"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34052" Max="300.0" Min="0.0" Name="TN current D" Type="Dec" Unit="ms" Value="1.2"/>
+      <PAR DataLen="1" ID="34053" Name="ID transfer" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34055" Name="EF type" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="34060" Name="List SEEP 1" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34061" Name="List SEEP 2" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34062" Name="Fault statistic" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="4" ID="34063" Max="200000" Min="0" Name="Time meter power" Type="Dec" Value="0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="34069" Max="1000.000" Min="0.000" Name="Starting current" Type="Dec" Unit="A" Value="0.000"/>
+      <PAR DataLen="4" ID="34070" Max="2147483647" Min="-2147483648" Name="Home signal distance" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="1" ID="34071" Name="System name" Type="Ascii" Value="Inverter104_RR">
+        <List Num="14" V0="73" V1="110" V10="52" V11="95" V12="82" V13="82" V2="118" V3="101" V4="114" V5="116" V6="101" V7="114" V8="49" V9="48"/>
+      </PAR>
+      <PAR DataLen="1" ID="34072" Name="Data set name" Type="Ascii" Value="aipexInverter-FreeTorqueNEW">
+        <List Num="28" V0="97" V1="105" V10="116" V11="101" V12="114" V13="45" V14="70" V15="114" V16="101" V17="101" V18="84" V19="111" V2="112" V20="114" V21="113" V22="117" V23="101" V24="78" V25="69" V26="87" V27="0" V3="101" V4="120" V5="73" V6="110" V7="118" V8="101" V9="114"/>
+      </PAR>
+      <PAR DataLen="2" ID="34073" Name="Scaling parameters" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34074" Name="Homing Counter 1" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="34075" Name="Actual Counter 1" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="34076" Name="Homing Counter 2" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="34077" Name="Actual Counter 2" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="1" ID="34088" Name="Event trace" Type="Ascii" Value="">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34090" Name="User list 2" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34091" Name="User list 3" Type="Hex" Value="91">
+        <List Num="91" V0="1281" V1="644" V10="4112" V11="514" V12="4864" V13="4096" V14="544" V15="2" V16="25" V17="12304" V18="34306" V19="12802" V2="50" V20="2048" V21="1024" V22="2" V23="7" V24="16" V25="514" V26="2048" V27="4096" V28="528" V29="2" V3="8" V30="21" V31="8208" V32="512" V33="6912" V34="4096" V35="560" V36="648" V37="50" V38="8" V39="3" V4="516" V40="17408" V41="4224" V42="0" V43="2" V44="26" V45="4112" V46="2" V47="15360" V48="8320" V49="544" V5="768" V50="656" V51="50" V52="8" V53="2" V54="15616" V55="8320" V56="512" V57="0" V58="32830" V59="8224" V6="4096" V60="37378" V61="12802" V62="2048" V63="512" V64="2" V65="22" V66="32" V67="0" V68="19456" V69="8321" V7="0" V70="32" V71="34049" V72="59393" V73="2051" V74="1024" V75="2" V76="4" V77="16" V78="512" V79="4352" V8="2" V80="4096" V81="16" V82="2" V83="13" V84="8208" V85="512" V86="3584" V87="4096" V88="48" V89="500" V9="5" V90="0"/>
+      </PAR>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34094" Name="Rise time SWC" Type="Dec" Unit="A/s" Value="0.000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34095" Name="Final value SWC" Type="Dec" Unit="A" Value="0.0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="34096" Max="1000.000" Min="0.000" Name="Standstill current" Type="Dec" Unit="A" Value="53.100"/>
+      <PAR DataLen="2" ID="34099" Max="4000" Min="0" Name="Delay time SWC" Type="Dec" Unit="ms" Value="0"/>
+      <PAR DataLen="2" ID="34100" Name="Binary input word" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34117" Name="OSC config list 2" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34118" Name="Brake mode" Type="Bin" Value="0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="34119" Name="Torque constant Kt adaption" Type="Dec" Unit="Nm/A" Value="0.000"/>
+      <PAR DataLen="2" ID="34120" Name="Binary output word" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="34146" Name="Memory address" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34147" Name="Memory data" Type="Hex" Value="0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34148" Name="Kp V.contr.gain" Type="Dec" Unit="A/V" Value="0.050"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34149" Max="300.0" Min="0.0" Name="V contr.int.time" Type="Dec" Unit="ms" Value="100.0"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34151" Name="Kp current Q" Type="Dec" Unit="V/A" Value="0.64"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34152" Name="Kp current D" Type="Dec" Unit="V/A" Value="0.58"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34153" Max="100000.0000" Min="1.0000" Name="Maximum speed motor" Type="Dec" Unit="1/min" Value="100000.0000"/>
+      <PAR DataLen="4" ID="34154" Name="Start marker" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="4" ID="34155" Name="Marker window" Type="Dec" Unit="incr." Value="0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34157" Max="32.767" Min="-32.768" Name="Dead time meas." Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR DataLen="1" ID="34160" Name="Part number motor" Type="Ascii" Value="A2370DD">
+        <List Num="7" V0="65" V1="50" V2="51" V3="55" V4="48" V5="68" V6="68"/>
+      </PAR>
+      <PAR DataLen="2" ID="34161" Name="Prod. date motor" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34162" Name="Serial number motor" Type="Dec" Value="0"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34164" Name="Resistance Rtt" Type="Dec" Unit="Ohm" Value="0.14"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34165" Name="Hold. torque brake" Type="Dec" Unit="Nm" Value="0.0"/>
+      <PAR DataLen="2" ID="34166" Name="Temperature sensor motor" Type="Dec" Value="14016"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34167" Name="Inductance Ltt" Type="Dec" Unit="mH" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34168" Name="Time Imax motor" Type="Dec" Unit="s" Value="1.2"/>
+      <PAR DataLen="2" ID="34171" Name="Event filter" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="34173" Name="NTP serveraddress" Type="Hex" Value="16777343"/>
+      <PAR DataLen="2" ID="34174" Name="SWK monitoring" Type="Dec" Value="18">
+        <List Num="18" V0="130" V1="90" V10="0" V11="0" V12="0" V13="0" V14="0" V15="0" V16="0" V17="0" V2="50" V3="50" V4="0" V5="0" V6="0" V7="10" V8="0" V9="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34177" Max="100" Min="0" Name="Lower threshold current adap" Type="Dec" Unit="%" Value="19"/>
+      <PAR DataLen="2" ID="34178" Max="100" Min="0" Name="Upper threshold current adap" Type="Dec" Unit="%" Value="68"/>
+      <PAR DataLen="2" ID="34179" Max="100" Min="1" Name="Gradient KpQ" Type="Dec" Unit="%" Value="20"/>
+      <PAR DataLen="2" ID="34180" Max="400" Min="100" Name="Gradient TnQ" Type="Dec" Unit="%" Value="400"/>
+      <PAR DataLen="4" ID="34182" Name="Limit position increment" Type="Dec" Unit="incr." Value="2147483647"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34183" Max="30000.0000" Min="0.0000" Name="Velocity Threshold SL" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR DataLen="2" ID="34184" Name="Compensation dead time PWM" Type="Dec" Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34185" Max="200.0000" Min="0.0000" Name="Resistance rotor" Type="Dec" Unit="Ohm" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34186" Max="2000.0000" Min="0.0000" Name="Inductance stator" Type="Dec" Unit="mH" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34187" Max="2000.0000" Min="0.0000" Name="Inductance rotor" Type="Dec" Unit="mH" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34188" Max="2000.0000" Min="0.0000" Name="Main inductance" Type="Dec" Unit="mH" Value="0.0000"/>
+      <PAR DataLen="2" ID="34189" Name="Bit list sensorless" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="34190" Name="Bit list parameter finding" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="34191" Max="16777215" Min="0" Name="Velocity acquisition KP" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34192" Max="16777215" Min="0" Name="Velocity acquisition Ki" Type="Dec" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34193" Name="Nominal current" Type="Dec" Unit="A" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34194" Name="Peak current" Type="Dec" Unit="A" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34195" Name="Peak current time" Type="Dec" Unit="s" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34196" Name="Treshold external component" Type="Dec" Unit="%" Value="50.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34197" Name="Display external component" Type="Dec" Unit="%" Value="0.0"/>
+      <PAR DataLen="4" ID="34199" Name="Actual power value bipolar" Type="Dec" Unit="W" Value="0"/>
+      <PAR DataLen="2" ID="34202" Name="Bit mask port 3" Type="Hex" Value="0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34203" Max="3.500" Min="0.000" Name="Voltage at 25 degree" Type="Dec" Unit="V" Value="0.754"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34204" Max="3.500" Min="0.000" Name="Voltage at 75 degree" Type="Dec" Unit="V" Value="1.067"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34205" Max="3.500" Min="0.000" Name="Voltage at 125 degree" Type="Dec" Unit="V" Value="1.450"/>
+      <PAR DataLen="4" ID="34206" Name="Product code" Type="Hex" Value="2307"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34210" Max="32.767" Min="0.000" Name="Dead time meas.2" Type="Dec" Unit="ms" Value="0.000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34212" Name="Voltage Usq" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34213" Name="Voltage Usd" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34215" Name="Temperature IGBT" Type="Dec" Unit="grd C" Value="0.0"/>
+      <PAR DataLen="4" ID="34217" Name="AMK Test 1" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34218" Name="AMK Test 2" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34219" Name="AMK Test 3" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34220" Name="AMK Test 4" Type="Dec" Value="0"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34221" Name="Friction torque" Type="Dec" Unit="Nm" Value="0.00"/>
+      <PAR Comma="2" DataLen="2" DecimalPlace="2" ID="34222" Name="Friction torque linear" Type="Dec" Unit="Nm" Value="0.00"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34223" Name="Holding torque" Type="Dec" Unit="Nm" Value="0.0"/>
+      <PAR Comma="3" DataLen="4" DecimalPlace="3" ID="34224" Name="Inertia" Type="Dec" Unit="kgcm2" Value="0.000"/>
+      <PAR DataLen="4" ID="34225" Name="Mode pilot control" Type="Bin" Value="0"/>
+      <PAR DataLen="4" ID="34226" Name="List load model" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34227" Name="Motion control bits" Type="Bin" Value="0"/>
+      <PAR DataLen="2" ID="34228" Max="255" Min="0" Name="Angle feed forward SL" Type="Dec" Value="0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34229" Max="3276.7" Min="0.0" Name="Sliding factor SL" Type="Dec" Value="0.0"/>
+      <PAR DataLen="2" ID="34230" Name="List bus" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34231" Name="Usq pilot control" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34232" Name="Usd pilot control" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34233" Name="Resistance Rs" Type="Dec" Unit="Ohm" Value="0.000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34234" Name="Voltage constant Ke" Type="Dec" Unit="V/krmp" Value="18.8"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34235" Max="150.0" Min="100.0" Name="increase motor voltage" Type="Dec" Unit="%" Value="116.0"/>
+      <PAR DataLen="4" ID="34238" Name="List IR filter" Type="Float" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34239" Max="100" Min="0" Name="V/F Integratorstopp" Type="Dec" Unit="%" Value="0"/>
+      <PAR DataLen="2" ID="34243" Name="Offset commutation" Type="Dec" Unit="incr." Value="0"/>
+      <PAR DataLen="2" ID="34244" Name="Electrical field angle" Type="Dec" Unit="incr." Value="0"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34246" Max="65.535" Min="0.001" Name="ZR-current T1-d" Type="Dec" Unit="ms" Value="2.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34247" Max="65.535" Min="0.001" Name="ZR-current T2-d" Type="Dec" Unit="ms" Value="2.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34248" Max="65.535" Min="0.001" Name="ZR-current T1-q" Type="Dec" Unit="ms" Value="2.000"/>
+      <PAR Comma="3" DataLen="2" DecimalPlace="3" ID="34249" Max="65.535" Min="0.001" Name="ZR-current T2-q" Type="Dec" Unit="ms" Value="2.000"/>
+      <PAR DataLen="4" ID="34261" Name="Customer variable 2" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34262" Name="Motor encoder database image" Type="Hex" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34264" Max="3000.0" Min="0.0" Name="Maximum torque" Type="Dec" Unit="% MN" Value="3000.0"/>
+      <PAR DataLen="2" ID="34265" Max="6401" Min="101" Name="encoder ratio" Type="Dec" Value="101"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34266" Max="100.0" Min="0.0" Name="Voltage reserve" Type="Dec" Unit="V" Value="30.0"/>
+      <PAR DataLen="4" ID="34273" Name="Osci 1" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34274" Name="Osci 2" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34275" Name="Osci 3" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34276" Name="Osci 4" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34277" Name="Osci 5" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34278" Name="Osci 6" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34279" Name="Osci 7" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34280" Name="Osci 8" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="34281" Max="16384" Min="-16384" Name="Current setpoint ISQ" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="34282" Max="16384" Min="-16384" Name="Current setpoint ISD" Type="Dec" Value="0"/>
+      <PAR DataLen="2" ID="34283" Name="Comm. angle" Type="Dec" Value="0"/>
+      <PAR DataLen="4" ID="34284" Max="32600" Min="4096" Name="OSC container len" Type="Dec" Unit="byte" Value="20000"/>
+      <PAR DataLen="2" ID="34285" Name="Motion data list" Type="Dec" Value="0">
+        <List Num="0"/>
+      </PAR>
+      <PAR DataLen="2" ID="34286" Max="10000" Min="0" Name="Time stop drive cmd." Type="Dec" Unit="ms" Value="100"/>
+      <PAR DataLen="2" ID="34298" Max="32767" Min="0" Name="Torque feedback filter" Type="Dec" Unit="ms" Value="0"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34299" Max="10.0000" Min="-10.0000" Name="Velocity setpoint in control" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="4" DataLen="4" DecimalPlace="4" ID="34300" Max="10.0000" Min="-10.0000" Name="Velocity act. value in contr" Type="Dec" Unit="1/min" Value="0.0000"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34301" Max="300.0" Min="-300.0" Name="Torque setpoint filter input" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34302" Max="300.0" Min="-300.0" Name="Torque setpoint filter outpu" Type="Dec" Unit="% MN" Value="0.0"/>
+      <PAR Comma="1" DataLen="2" DecimalPlace="1" ID="34303" Name="DC-bus monitor upper limit" Type="Dec" Unit="V" Value="0.0"/>
+      <PAR DataLen="2" ID="34304" Name="Comm. input word" Type="Hex" Value="0"/>
+      <PAR DataLen="2" ID="34816" Name="Comm. output word" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="35328" Name="Comm. input double word" Type="Hex" Value="0"/>
+      <PAR DataLen="4" ID="35584" Name="Comm. output double word" Type="Hex" Value="0"/>
+    </PARAMETER>
+  </DATA>
+</DEV>

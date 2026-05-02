@@ -1,0 +1,1982 @@
+Id	Name	P-Set	Value	Unit	Remark
+1	NC cycle time	0	1.000	ms	
+2	SERCOS cycle time	0	1.000	ms	
+6	Drive telegr.start.time	0	0.200	ms	
+7	Feedb.acquis.start.time	0	0.000	ms	
+8	Command valid time (T3)	0	0.000	ms	
+11	Status class 1-errors	0	0000 0000  0000 0000B		
+12	Status class 2-warnings	0	0000 0000  0000 0000B		
+13	Status class 3-messages	0	0000 0000  0000 0000B		
+15	Telegr. type par.	0	6		
+16	Configuration list AT	0	0		
+17	ID-No.list all op.data	0	529		
+17-2		0	1		
+17-3		0	2		
+17-4		0	6		
+17-5		0	7		
+17-6		0	8		
+17-7		0	11		
+17-8		0	12		
+17-9		0	13		
+17-10		0	15		
+17-11		0	16		
+17-12		0	17		
+17-13		0	18		
+17-14		0	19		
+17-15		0	20		
+17-16		0	21		
+17-17		0	22		
+17-18		0	23		
+17-19		0	24		
+17-20		0	25		
+17-21		0	26		
+17-22		0	28		
+17-23		0	29		
+17-24		0	30		
+17-25		0	32		
+17-26		0	33		
+17-27		0	34		
+17-28		0	35		
+17-29		0	36		
+17-30		0	37		
+17-31		0	38		
+17-32		0	39		
+17-33		0	40		
+17-34		0	41		
+17-35		0	42		
+17-36		0	43		
+17-37		0	44		
+17-38		0	45		
+17-39		0	46		
+17-40		0	47		
+17-41		0	49		
+17-42		0	50		
+17-43		0	51		
+17-44		0	52		
+17-45		0	55		
+17-46		0	57		
+17-47		0	76		
+17-48		0	77		
+17-49		0	78		
+17-50		0	79		
+17-51		0	80		
+17-52		0	81		
+17-53		0	82		
+17-54		0	83		
+17-55		0	84		
+17-56		0	85		
+17-57		0	86		
+17-58		0	89		
+17-59		0	91		
+17-60		0	92		
+17-61		0	93		
+17-62		0	94		
+17-63		0	95		
+17-64		0	96		
+17-65		0	97		
+17-66		0	98		
+17-67		0	99		
+17-68		0	100		
+17-69		0	101		
+17-70		0	102		
+17-71		0	103		
+17-72		0	104		
+17-73		0	108		
+17-74		0	109		
+17-75		0	110		
+17-76		0	111		
+17-77		0	112		
+17-78		0	113		
+17-79		0	114		
+17-80		0	115		
+17-81		0	116		
+17-82		0	117		
+17-83		0	121		
+17-84		0	122		
+17-85		0	123		
+17-86		0	124		
+17-87		0	125		
+17-88		0	126		
+17-89		0	129		
+17-90		0	130		
+17-91		0	131		
+17-92		0	132		
+17-93		0	133		
+17-94		0	134		
+17-95		0	135		
+17-96		0	136		
+17-97		0	137		
+17-98		0	140		
+17-99		0	141		
+17-100		0	142		
+17-101		0	143		
+17-102		0	144		
+17-103		0	147		
+17-104		0	148		
+17-105		0	149		
+17-106		0	150		
+17-107		0	153		
+17-108		0	154		
+17-109		0	157		
+17-110		0	158		
+17-111		0	159		
+17-112		0	160		
+17-113		0	161		
+17-114		0	162		
+17-115		0	169		
+17-116		0	170		
+17-117		0	173		
+17-118		0	175		
+17-119		0	179		
+17-120		0	180		
+17-121		0	181		
+17-122		0	182		
+17-123		0	185		
+17-124		0	186		
+17-125		0	187		
+17-126		0	188		
+17-127		0	189		
+17-128		0	191		
+17-129		0	192		
+17-130		0	193		
+17-131		0	206		
+17-132		0	207		
+17-133		0	209		
+17-134		0	210		
+17-135		0	211		
+17-136		0	212		
+17-137		0	216		
+17-138		0	217		
+17-139		0	219		
+17-140		0	222		
+17-141		0	228		
+17-142		0	254		
+17-143		0	258		
+17-144		0	259		
+17-145		0	260		
+17-146		0	262		
+17-147		0	263		
+17-148		0	264		
+17-149		0	265		
+17-150		0	269		
+17-151		0	270		
+17-152		0	284		
+17-153		0	285		
+17-154		0	286		
+17-155		0	287		
+17-156		0	296		
+17-157		0	301		
+17-158		0	303		
+17-159		0	305		
+17-160		0	307		
+17-161		0	310		
+17-162		0	311		
+17-163		0	312		
+17-164		0	313		
+17-165		0	326		
+17-166		0	330		
+17-167		0	331		
+17-168		0	332		
+17-169		0	333		
+17-170		0	334		
+17-171		0	335		
+17-172		0	336		
+17-173		0	337		
+17-174		0	348		
+17-175		0	378		
+17-176		0	380		
+17-177		0	384		
+17-178		0	390		
+17-179		0	392		
+17-180		0	398		
+17-181		0	400		
+17-182		0	403		
+17-183		0	405		
+17-184		0	406		
+17-185		0	409		
+17-186		0	410		
+17-187		0	411		
+17-188		0	412		
+17-189		0	447		
+17-190		0	530		
+17-191		0	32768		
+17-192		0	32769		
+17-193		0	32770		
+17-194		0	32771		
+17-195		0	32772		
+17-196		0	32773		
+17-197		0	32774		
+17-198		0	32775		
+17-199		0	32776		
+17-200		0	32780		
+17-201		0	32781		
+17-202		0	32782		
+17-203		0	32795		
+17-204		0	32796		
+17-205		0	32798		
+17-206		0	32800		
+17-207		0	32801		
+17-208		0	32802		
+17-209		0	32803		
+17-210		0	32804		
+17-211		0	32805		
+17-212		0	32806		
+17-213		0	32807		
+17-214		0	32808		
+17-215		0	32809		
+17-216		0	32813		
+17-217		0	32821		
+17-218		0	32823		
+17-219		0	32824		
+17-220		0	32826		
+17-221		0	32827		
+17-222		0	32828		
+17-223		0	32829		
+17-224		0	32830		
+17-225		0	32831		
+17-226		0	32832		
+17-227		0	32833		
+17-228		0	32834		
+17-229		0	32835		
+17-230		0	32836		
+17-231		0	32837		
+17-232		0	32840		
+17-233		0	32841		
+17-234		0	32842		
+17-235		0	32843		
+17-236		0	32864		
+17-237		0	32865		
+17-238		0	32866		
+17-239		0	32867		
+17-240		0	32882		
+17-241		0	32891		
+17-242		0	32894		
+17-243		0	32895		
+17-244		0	32896		
+17-245		0	32901		
+17-246		0	32904		
+17-247		0	32913		
+17-248		0	32914		
+17-249		0	32915		
+17-250		0	32916		
+17-251		0	32917		
+17-252		0	32920		
+17-253		0	32922		
+17-254		0	32924		
+17-255		0	32926		
+17-256		0	32928		
+17-257		0	32929		
+17-258		0	32932		
+17-259		0	32933		
+17-260		0	32935		
+17-261		0	32936		
+17-262		0	32938		
+17-263		0	32940		
+17-264		0	32941		
+17-265		0	32942		
+17-266		0	32943		
+17-267		0	32944		
+17-268		0	32948		
+17-269		0	32952		
+17-270		0	32953		
+17-271		0	32956		
+17-272		0	32959		
+17-273		0	32960		
+17-274		0	32961		
+17-275		0	32977		
+17-276		0	32978		
+17-277		0	32979		
+17-278		0	32980		
+17-279		0	32989		
+17-280		0	32990		
+17-281		0	32991		
+17-282		0	32993		
+17-283		0	32996		
+17-284		0	32999		
+17-285		0	33076		
+17-286		0	33098		
+17-287		0	33100		
+17-288		0	33101		
+17-289		0	33102		
+17-290		0	33104		
+17-291		0	33113		
+17-292		0	33116		
+17-293		0	33117		
+17-294		0	33730		
+17-295		0	33732		
+17-296		0	34023		
+17-297		0	34025		
+17-298		0	34026		
+17-299		0	34027		
+17-300		0	34039		
+17-301		0	34040		
+17-302		0	34041		
+17-303		0	34042		
+17-304		0	34043		
+17-305		0	34044		
+17-306		0	34045		
+17-307		0	34046		
+17-308		0	34047		
+17-309		0	34048		
+17-310		0	34050		
+17-311		0	34052		
+17-312		0	34053		
+17-313		0	34055		
+17-314		0	34060		
+17-315		0	34061		
+17-316		0	34062		
+17-317		0	34063		
+17-318		0	34070		
+17-319		0	34071		
+17-320		0	34072		
+17-321		0	34073		
+17-322		0	34074		
+17-323		0	34075		
+17-324		0	34076		
+17-325		0	34077		
+17-326		0	34088		
+17-327		0	34090		
+17-328		0	34091		
+17-329		0	34094		
+17-330		0	34095		
+17-331		0	34096		
+17-332		0	34099		
+17-333		0	34100		
+17-334		0	34120		
+17-335		0	34146		
+17-336		0	34147		
+17-337		0	34148		
+17-338		0	34149		
+17-339		0	34151		
+17-340		0	34152		
+17-341		0	34153		
+17-342		0	34154		
+17-343		0	34155		
+17-344		0	34157		
+17-345		0	34160		
+17-346		0	34161		
+17-347		0	34162		
+17-348		0	34164		
+17-349		0	34165		
+17-350		0	34166		
+17-351		0	34167		
+17-352		0	34168		
+17-353		0	34171		
+17-354		0	34173		
+17-355		0	34174		
+17-356		0	34177		
+17-357		0	34178		
+17-358		0	34179		
+17-359		0	34180		
+17-360		0	34182		
+17-361		0	34183		
+17-362		0	34184		
+17-363		0	34185		
+17-364		0	34186		
+17-365		0	34187		
+17-366		0	34188		
+17-367		0	34189		
+17-368		0	34190		
+17-369		0	34191		
+17-370		0	34192		
+17-371		0	34193		
+17-372		0	34194		
+17-373		0	34195		
+17-374		0	34196		
+17-375		0	34197		
+17-376		0	34199		
+17-377		0	34202		
+17-378		0	34203		
+17-379		0	34204		
+17-380		0	34205		
+17-381		0	34206		
+17-382		0	34210		
+17-383		0	34212		
+17-384		0	34213		
+17-385		0	34215		
+17-386		0	34217		
+17-387		0	34218		
+17-388		0	34219		
+17-389		0	34220		
+17-390		0	34221		
+17-391		0	34222		
+17-392		0	34223		
+17-393		0	34224		
+17-394		0	34225		
+17-395		0	34226		
+17-396		0	34227		
+17-397		0	34228		
+17-398		0	34229		
+17-399		0	34230		
+17-400		0	34231		
+17-401		0	34232		
+17-402		0	34233		
+17-403		0	34234		
+17-404		0	34235		
+17-405		0	34238		
+17-406		0	34239		
+17-407		0	34265		
+17-408		0	34266		
+17-409		0	34273		
+17-410		0	34274		
+17-411		0	34275		
+17-412		0	34276		
+17-413		0	34277		
+17-414		0	34278		
+17-415		0	34279		
+17-416		0	34280		
+17-417		0	34281		
+17-418		0	34282		
+17-419		0	34283		
+17-420		0	34284		
+17-421		0	34285		
+17-422		0	34286		
+17-423		0	34298		
+17-424		0	34304		
+17-425		0	34816		
+17-426		0	35328		
+17-427		0	35584		
+17-428		0	34299		
+17-429		0	34300		
+17-430		0	34301		
+17-431		0	34302		
+17-432		0	33300		
+17-433		0	33301		
+17-434		0	33302		
+17-435		0	33303		
+17-436		0	33141		
+17-437		0	33142		
+17-438		0	33143		
+17-439		0	33144		
+17-440		0	33145		
+17-441		0	33146		
+17-442		0	33147		
+17-443		0	33148		
+17-444		0	33149		
+17-445		0	33150		
+17-446		0	33151		
+17-447		0	33170		
+17-448		0	33171		
+17-449		0	33172		
+17-450		0	32919		
+17-451		0	33174		
+17-452		0	33175		
+17-453		0	33176		
+17-454		0	33177		
+17-455		0	33178		
+17-456		0	33179		
+17-457		0	33180		
+17-458		0	33181		
+17-459		0	33182		
+17-460		0	33183		
+17-461		0	33184		
+17-462		0	33185		
+17-463		0	33186		
+17-464		0	33187		
+17-465		0	33188		
+17-466		0	33189		
+17-467		0	478		
+17-468		0	532		
+17-469		0	32887		
+17-470		0	32888		
+17-471		0	34069		
+17-472		0	194		
+17-473		0	32945		
+17-474		0	32946		
+17-475		0	1020		
+17-476		0	1021		
+17-477		0	1022		
+17-478		0	1019		
+17-479		0	32986		
+17-480		0	32987		
+17-481		0	359		
+17-482		0	430		
+17-483		0	437		
+17-484		0	32988		
+17-485		0	34118		
+17-486		0	34119		
+17-487		0	34243		
+17-488		0	34244		
+17-489		0	34303		
+17-490		0	34261		
+17-491		0	34246		
+17-492		0	34247		
+17-493		0	34248		
+17-494		0	34249		
+17-495		0	34262		
+17-496		0	33190		
+17-497		0	33191		
+17-498		0	33192		
+17-499		0	34117		
+17-500		0	34264		
+17-501		0	33196		
+17-502		0	33197		
+17-503		0	33198		
+17-504		0	33199		
+17-505		0	33304		
+17-506		0	33305		
+17-507		0	33306		
+17-508		0	33307		
+17-509		0	33308		
+17-510		0	33309		
+17-511		0	33310		
+17-512		0	33311		
+17-513		0	33312		
+17-514		0	33313		
+17-515		0	33314		
+17-516		0	33315		
+17-517		0	33316		
+17-518		0	33317		
+17-519		0	33318		
+17-520		0	33319		
+17-521		0	33320		
+17-522		0	33321		
+17-523		0	33322		
+17-524		0	33323		
+17-525		0	33324		
+17-526		0	33325		
+17-527		0	33326		
+17-528		0	33327		
+17-529		0	33328		
+17-530		0	33329		
+18	Op.datalist com.ph.2	0	0		
+19	Op.datalist com.ph.3	0	0		
+20	Op.datalist com.ph.4	0	0		
+21	Inval.datalist com.ph.2	0	0		
+22	Inval.datalist com.ph.3	0	0		
+23	Inval.datalist com.ph.4	0	0		
+24	Configuration list MDT	0	0		
+25	All command data list	0	0		
+26	Conf. status bits	0	0		
+28	MST Error Counter	0	0		
+29	MDT Error Counter	0	0		
+30	Softwareversion	0	KW  211 0000 adb2080		
+		1	KW  211 0000 adb2080		
+		2	KW  211 0000 adb2080		
+		3	KW  211 0000 adb2080		
+32	Primary operat. mode	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+33	Second. operat. mode1	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+34	Second. operat. mode2	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+35	Second. operat. mode3	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+36	Velocity command value	0	0.0000	1/min	
+		1	1000.0000	1/min	
+		2	1000.0000	1/min	
+		3	1000.0000	1/min	
+37	Velocity command value addit	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+38	Pos. velocity limit	0	18600.0000	1/min	
+		1	5000.0000	1/min	
+		2	5000.0000	1/min	
+		3	5000.0000	1/min	
+39	Neg. velocity limit	0	-18600.0000	1/min	
+		1	-5000.0000	1/min	
+		2	-5000.0000	1/min	
+		3	-5000.0000	1/min	
+40	Velocity feedback value	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+41	Homing velocity	0	100.0000	1/min	
+		1	100.0000	1/min	
+		2	100.0000	1/min	
+		3	100.0000	1/min	
+42	Homing acceleration	0	100.000	rev./ss	
+		1	100.000	rev./ss	
+		2	100.000	rev./ss	
+		3	100.000	rev./ss	
+43	Velocity polarity	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+44	Velocity data scaling type	0	0000 0000  0000 0010B		
+		1	0000 0000  0000 0010B		
+		2	0000 0000  0000 0010B		
+		3	0000 0000  0000 0010B		
+45	Velocity data scaling factor	0	1		
+		1	1		
+		2	1		
+		3	1		
+46	Velocity data scaling expone	0	-4		
+		1	-4		
+		2	-4		
+		3	-4		
+47	Position command value	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+49	Positive position limit	0	2147483647	incr.	
+		1	2147483647	incr.	
+		2	2147483647	incr.	
+		3	2147483647	incr.	
+50	Negative position limit	0	-2147483648	incr.	
+		1	-2147483648	incr.	
+		2	-2147483648	incr.	
+		3	-2147483648	incr.	
+51	Position feedback value	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+52	Home ref. position 1	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+55	Closed loop polar. par.	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+57	In position window	0	1000	incr.	
+		1	1000	incr.	
+		2	1000	incr.	
+		3	1000	incr.	
+76	Position data scaling type	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+77	Linear position data scaling	0	1		
+		1	1		
+		2	1		
+		3	1		
+78	Linear position data scaling	0	-7		
+		1	-7		
+		2	-7		
+		3	-7		
+79	Rotational position resoluti	0	3600000	incr.	
+		1	3600000	incr.	
+		2	3600000	incr.	
+		3	3600000	incr.	
+80	Torque command value	0	0.0	% MN	
+		1	10.0	% MN	
+		2	10.0	% MN	
+		3	10.0	% MN	
+81	Torque command value additiv	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+82	Positive torque limit	0	200.0	% MN	
+		1	120.0	% MN	
+		2	120.0	% MN	
+		3	120.0	% MN	
+83	Negative torque limit	0	-200.0	% MN	
+		1	-120.0	% MN	
+		2	-120.0	% MN	
+		3	-120.0	% MN	
+84	Torque feedb.val	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+85	Torque polarity	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+86	Torque data scaling	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+89	Transmit time MDT (T2)	0	1.000	ms	
+91	Bip.veloc. limit	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+92	Bip.torque limit	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+93	Torque scaling factor	0	1		
+		1	1		
+		2	1		
+		3	1		
+94	Torque scaling exponent	0	-2		
+		1	-2		
+		2	-2		
+		3	-2		
+95	Diagnosis	0			
+96	Slave identifier (SKLN)	0	0101H		
+		1	0101H		
+		2	0101H		
+		3	0101H		
+97	Diag.mask st.class 2	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+98	Diag.mask st.class 3	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+99	Diag.reset st.class 1	0	0000 0000  0000 0000B		
+100	Prop.gain speed control	0	40		
+		1	200		
+		2	200		
+		3	200		
+101	Integr.act.time sp.ctrl	0	20.0	ms	
+		1	10.0	ms	
+		2	10.0	ms	
+		3	10.0	ms	
+102	Diff.time speed control	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+103	Modulo value	0	20000	incr.	
+		1	20000	incr.	
+		2	20000	incr.	
+		3	20000	incr.	
+104	Position loop KV-factor	0	20		
+		1	400		
+		2	400		
+		3	400		
+108	Feedrate override	0	100.00	%	
+109	Motor peak current	0	105.000	A	
+		1	5.000	A	
+		2	5.000	A	
+		3	5.000	A	
+110	Inverter peak current	0	20.000	A	
+111	Motor nom. current	0	41.000	A	
+		1	2.500	A	
+		2	2.500	A	
+		3	2.500	A	
+112	Inverter nom. current	0	2.500	A	
+113	Maximum speed	0	18000.0000	1/min	
+		1	6000.0000	1/min	
+		2	6000.0000	1/min	
+		3	6000.0000	1/min	
+114	Overload limit motor	0	50.0	%	
+		1	50.0	%	
+		2	50.0	%	
+		3	50.0	%	
+115	Position feedback type	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+116	Resol. mot. encoder	0	262144	incr.	
+		1	20480	incr.	
+		2	20480	incr.	
+		3	20480	incr.	
+117	Resol. ext.pos.feedb.	0	100	incr.	
+		1	100	incr.	
+		2	100	incr.	
+		3	100	incr.	
+121	Load gear input rev.	0	10	rev.	
+		1	10	rev.	
+		2	10	rev.	
+		3	10	rev.	
+122	Load gear output rev.	0	10	rev.	
+		1	10	rev.	
+		2	10	rev.	
+		3	10	rev.	
+123	Feed constant	0	10.0000	mm/rev.	
+		1	10.0000	mm/rev.	
+		2	10.0000	mm/rev.	
+		3	10.0000	mm/rev.	
+124	Zero velocity window	0	50.0000	1/min	
+		1	50.0000	1/min	
+		2	50.0000	1/min	
+		3	50.0000	1/min	
+125	Velocity Threshold Nx	0	1000.0000	1/min	
+		1	1000.0000	1/min	
+		2	1000.0000	1/min	
+		3	1000.0000	1/min	
+126	Torque Threshold Mdx	0	100.0	% MN	
+		1	100.0	% MN	
+		2	100.0	% MN	
+		3	100.0	% MN	
+129	Manufact.status class 1	0	0000 0000  0000 0000B		
+130	Probe1 val.p.edge	0	0	incr.	
+131	Probe1 val.n.edge	0	0	incr.	
+132	Probe2 val.p.edge	0	0	incr.	
+133	Probe2 val.n.edge	0	0	incr.	
+134	Master ctrl.word	0	0000H		
+135	Drive stat. word	0	0000H		
+136	Positive acceleration	0	100.000	rev./ss	
+		1	100.000	rev./ss	
+		2	100.000	rev./ss	
+		3	100.000	rev./ss	
+137	Negative acceleration	0	-100.000	rev./ss	
+		1	-100.000	rev./ss	
+		2	-100.000	rev./ss	
+		3	-100.000	rev./ss	
+140	Inverter type	0			
+		1			
+		2			
+		3			
+141	Motor type	0	DD5-14-10-POW		
+		1			
+		2			
+		3			
+142	Application type	0			
+		1			
+		2			
+		3			
+143	SERCOS interface vers.	0			
+144	Status word	0	0000H		
+147	Homing par.	0	1000 0000  0000 0000B		
+		1	1000 0000  0000 0000B		
+		2	1000 0000  0000 0000B		
+		3	1000 0000  0000 0000B		
+148	Drive hom.cycle commd.	0	0000 0000  0000 0000B		
+149	Cmd. pos. stop	0	0000 0000  0000 0000B		
+150	Reference offset 1	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+153	Spindle angle position	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+154	Spindle posit. par.	0	1000 0000  0000 0000B		
+		1	1000 0000  0000 0000B		
+		2	1000 0000  0000 0000B		
+		3	1000 0000  0000 0000B		
+157	Velocity window	0	100.0000	1/min	
+		1	100.0000	1/min	
+		2	100.0000	1/min	
+		3	100.0000	1/min	
+158	Power threshold Px	0	100	W	
+		1	100	W	
+		2	100	W	
+		3	100	W	
+159	Excess Error	0	1000000	incr.	
+		1	1000000	incr.	
+		2	1000000	incr.	
+		3	1000000	incr.	
+160	Acceleration data scaling ty	0	0000 0000  0000 0010B		
+		1	0000 0000  0000 0010B		
+		2	0000 0000  0000 0010B		
+		3	0000 0000  0000 0010B		
+161	Acceleration data scaling fa	0	1		
+		1	1		
+		2	1		
+		3	1		
+162	Acceleration data scaling ex	0	-3		
+		1	-3		
+		2	-3		
+		3	-3		
+169	Probe ctrl. par.	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+170	Cmd. Probe.cycle	0	0000 0000  0000 0000B		
+173	Marker posit. A	0	0	incr.	
+175	Displacement Parameter 1	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+179	Probe status	0	0000 0000  0000 0000B		
+180	Spindle rel. offset	0	10000	incr.	
+		1	10000	incr.	
+		2	10000	incr.	
+		3	10000	incr.	
+181	Diag. manufact. class 2	0	0000 0000  0000 0000B		
+182	Diag. manufact. Status	0	0000 0000  0000 0000B		
+185	Length data AT	0	32	byte	
+186	Length data MDT	0	32	byte	
+187	List of data AT	0	0		
+188	List of data MDT	0	0		
+189	Following dist.	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+191	Cmd. cancel ref. point	0	0000 0000  0000 0000B		
+192	List backup data	0	0		
+193	Positioning jerk	0	0.000	rev./sss	
+194	Acceleration setpoint	0	0.000	rev./ss	
+		1	0.000	rev./ss	
+		2	0.000	rev./ss	
+		3	0.000	rev./ss	
+206	Drive on delay time	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+207	Drive off delay time	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+209	Lower adaption limit	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+210	Upper adaption limit	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+211	Prop. gain adaptation	0	100.0	%	
+		1	100.0	%	
+		2	100.0	%	
+		3	100.0	%	
+212	Integ.action time adap.	0	100.0	%	
+		1	100.0	%	
+		2	100.0	%	
+		3	100.0	%	
+216	Switch par. set comm.	0	0000 0000  0000 0000B		
+217	Preselect parameter set	0	0000 0000  0000 0000B		
+219	List parameter set	0	0		
+222	Spindle pos. speed	0	300.0000	1/min	
+		1	300.0000	1/min	
+		2	300.0000	1/min	
+		3	300.0000	1/min	
+228	Synchr. pos. window	0	1000	incr.	
+		1	1000	incr.	
+		2	1000	incr.	
+		3	1000	incr.	
+254	Act. Par. set	0	0000 0000  0000 0000B		
+258	Target position	0	0	incr.	
+259	Positioning velocity	0	0.0000	1/min	
+260	Positioning acceleration	0	0.000	rev./ss	
+262	Init.prog.load.comm.	0	0000 0000  0000 0000B		
+263	Cmd. load data	0	0000 0000  0000 0000B		
+264	Cmd. save data	0	0000 0000  0000 0000B		
+265	Language	0	0001H		
+269	ID memory mode	0	0000 0000  0000 0000B		
+270	Temp. par. list	0	92		
+270-2		0	36		
+270-3		0	38		
+270-4		0	39		
+270-5		0	41		
+270-6		0	42		
+270-7		0	49		
+270-8		0	50		
+270-9		0	52		
+270-10		0	80		
+270-11		0	82		
+270-12		0	83		
+270-13		0	91		
+270-14		0	92		
+270-15		0	100		
+270-16		0	101		
+270-17		0	102		
+270-18		0	104		
+270-19		0	124		
+270-20		0	125		
+270-21		0	126		
+270-22		0	136		
+270-23		0	137		
+270-24		0	147		
+270-25		0	150		
+270-26		0	153		
+270-27		0	154		
+270-28		0	157		
+270-29		0	158		
+270-30		0	159		
+270-31		0	169		
+270-32		0	180		
+270-33		0	222		
+270-34		0	228		
+270-35		0	265		
+270-36		0	296		
+270-37		0	301		
+270-38		0	303		
+270-39		0	305		
+270-40		0	307		
+270-41		0	348		
+270-42		0	392		
+270-43		0	530		
+270-44		0	32780		
+270-45		0	32781		
+270-46		0	32894		
+270-47		0	32895		
+270-48		0	32916		
+270-49		0	32917		
+270-50		0	32926		
+270-51		0	32928		
+270-52		0	32929		
+270-53		0	32935		
+270-54		0	34050		
+270-55		0	34052		
+270-56		0	34148		
+270-57		0	34149		
+270-58		0	34151		
+270-59		0	34152		
+270-60		0	34154		
+270-61		0	34155		
+270-62		0	34177		
+270-63		0	34178		
+270-64		0	34179		
+270-65		0	34180		
+270-66		0	34182		
+270-67		0	34189		
+270-68		0	34190		
+270-69		0	34221		
+270-70		0	34222		
+270-71		0	34223		
+270-72		0	34224		
+270-73		0	34227		
+270-74		0	34285		
+270-75		0	33300		
+270-76		0	33301		
+270-77		0	33302		
+270-78		0	33303		
+270-79		0	33141		
+270-80		0	33144		
+270-81		0	33174		
+270-82		0	33175		
+270-83		0	34246		
+270-84		0	34247		
+270-85		0	34248		
+270-86		0	34249		
+270-87		0	33190		
+270-88		0	33191		
+270-89		0	33192		
+270-90		0	34264		
+270-91		0	33305		
+270-92		0	33306		
+270-93		0	33307		
+284	Operation mode 4	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+285	Operation mode 5	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+286	Operation mode 6	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+287	Operation mode 7	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+296	Velocity feed forward gain	0	100	%	
+		1	100	%	
+		2	100	%	
+		3	100	%	
+301	Alloc. control bit 1	0	0		
+		1	0		
+		2	0		
+		3	0		
+303	Alloc. control bit 2	0	0		
+		1	0		
+		2	0		
+		3	0		
+305	Alloc. status bit 1	0	0		
+		1	0		
+		2	0		
+		3	0		
+307	Alloc. status bit 2	0	0		
+		1	0		
+		2	0		
+		3	0		
+310	Overload motor	0	0000 0000  0000 0000B		
+311	Warn. overtemp. inv.	0	0000 0000  0000 0000B		
+312	Warn. overtemp. mot.	0	0000 0000  0000 0000B		
+313	Warning cooler	0	0000 0000  0000 0000B		
+326	Par. checksum	0	0		
+330	Message Nact = Nset	0	0000 0000  0000 0000B		
+331	Message Nact < Nmin	0	0000 0000  0000 0000B		
+332	Message Nact < Nx	0	0000 0000  0000 0000B		
+333	Message Md >= Mdx	0	0000 0000  0000 0000B		
+334	Message Md >= Mdlimit	0	0000 0000  0000 0000B		
+335	Message Ncomm > Nlimit	0	0000 0000  0000 0000B		
+336	Message In Position	0	0000 0000  0000 0000B		
+337	Message P >= Px	0	0000 0000  0000 0000B		
+348	Acc. feed forward gain	0	0	%	
+		1	0	%	
+		2	0	%	
+		3	0	%	
+359	Positioning deceleration	0	0.000	rev./ss	
+378	Abs. encoder range 1	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+380	DC-bus voltage	0	0	V	
+384	Temperature internal	0	0.0	grd C	
+390	Diagnostic number	0	0		
+392	Velocity feedback filter	0	1000	us	
+		1	1000	us	
+		2	1000	us	
+		3	1000	us	
+398	List status bits	0	0		
+400	Home switch	0	0000 0000  0000 0000B		
+403	Status act. pos. value	0	0000 0000  0000 0000B		
+405	Probe 1 enable	0	0000 0000  0000 0000B		
+406	Probe 2 enable	0	0000 0000  0000 0000B		
+409	Probe1 pos.latch	0	0000 0000  0000 0000B		
+410	Probe1 neg.latch	0	0000 0000  0000 0000B		
+411	Probe2 pos.latch	0	0000 0000  0000 0000B		
+412	Probe2 neg.latch	0	0000 0000  0000 0000B		
+430	Active target position	0	0	incr.	
+437	Positioning status	0	0000 0000  0000 0000B		
+447	Cmd. set abs. position	0	0000 0000  0000 0000B		
+478	Limit switch status	0	0000 0000  0000 0000B		
+530	Clamping torque	0	100.0	% MN	
+		1	100.0	% MN	
+		2	100.0	% MN	
+		3	100.0	% MN	
+532	Limit switch control	0	0000 0000  0000 0000B		
+1019	MAC address	0	0		
+1020	IP address	0	0		
+1021	Subnet mask	0	0		
+1022	Gateway address	0	0		
+32768	Nom. motor voltage	0	350.0	V	
+		1	350.0	V	
+		2	350.0	V	
+		3	350.0	V	
+32769	Magnet. current IM	0	35.000	A	
+		1	1.500	A	
+		2	1.500	A	
+		3	1.500	A	
+32770	Magnet. current IM1	0	0.000	A	
+		1	1.000	A	
+		2	1.000	A	
+		3	1.000	A	
+32771	Nom. torque	0	9.8	Nm	
+		1	2.0	Nm	
+		2	2.0	Nm	
+		3	2.0	Nm	
+32772	Nom. velocity	0	12000.0000	1/min	
+		1	3000.0000	1/min	
+		2	3000.0000	1/min	
+		3	3000.0000	1/min	
+32773	Service bits	0	0000 0000  0000 0000  0101 0000  0000 0001B		
+		1	0000 0000  0000 0000  0001 0000  0000 0101B		
+		2	0000 0000  0000 0000  0001 0000  0000 0101B		
+		3	0000 0000  0000 0000  0001 0000  0000 0101B		
+32774	Rotor time constant	0	0.0100	s	
+		1	0.0360	s	
+		2	0.0360	s	
+		3	0.0360	s	
+32775	Pole number motor	0	10		
+		1	4		
+		2	4		
+		3	4		
+32776	Sinus encoder period	0	16384		
+		1	1024		
+		2	1024		
+		3	1024		
+32780	Accel. ramp	0	100.0	ms	
+		1	100.0	ms	
+		2	100.0	ms	
+		3	100.0	ms	
+32781	Decel. ramp	0	100.0	ms	
+		1	100.0	ms	
+		2	100.0	ms	
+		3	100.0	ms	
+32782	Decel.ramp RF inactive	0	100.0	ms	
+		1	100.0	ms	
+		2	100.0	ms	
+		3	100.0	ms	
+32795	Source UE	0	0		
+32796	Source RF	0	5		
+32798	User list 1	0	11		
+32798-2		0	0001H		
+32798-3		0	01F4H		
+32798-4		0	0032H		
+32798-5		0	01F4H		
+32798-6		0	0258H		
+32798-7		0	01C2H		
+32798-8		0	047EH		
+32798-9		0	04E2H		
+32798-10		0	00FAH		
+32798-11		0	04E2H		
+32798-12		0	0578H		
+32800	AMK main op. mode	0	00480002H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32801	AMK second op. mode 1	0	00430043H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32802	AMK second op. mode 2	0	00430043H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32803	AMK second op. mode 3	0	00430043H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32804	AMK second op. mode 4	0	00430043H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32805	AMK second op. mode 5	0	00430043H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32806	AMK second op. mode 6	0	00430043H		
+		1	00430043H		
+		2	00430043H		
+		3	00430043H		
+32807	AMK dig.torque contr.	0	00480002H		
+		1	00480002H		
+		2	00480002H		
+		3	00480002H		
+32808	AMK position control	0	00440404H		
+		1	00440404H		
+		2	00440404H		
+		3	00440404H		
+32809	AMK dig. speed control	0	00480043H		
+		1	00480043H		
+		2	00480043H		
+		3	00480043H		
+32813	Par.set assignm. 1	0	03020100H		
+32821	Password	0	0		
+32823	Veloc.cmd.a.ramp	0	0.0000	1/min	
+32824	Follow. distance	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+32826	SAK value	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+32827	Magn.curr.feedb.	0	0.0	A	
+32828	Actual curr. value phase U	0	0.00	A	
+32829	Actual curr. value phase V	0	0.00	A	
+32830	Actual curr. value phase W	0	0.00	A	
+32831	Comm. angle	0	0	incr.	
+32832	Encoder signal S2	0	0	mV	
+32833	Encoder signal S1	0	0	mV	
+32834	Torque curr.feedback	0	0.0	A	
+32835	Torque command value intern	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+32836	DC-bus voltage	0	0	V	
+32837	DC-bus monitoring	0	50.0	V	
+32840	Diagnostic list	0	0		
+32841	Encoder list motor	0	0		
+32842	Encoder list customer	0	0		
+32843	Service command	0	0000H		
+32864	Output port 3	0	544		
+32865	Port 3 bit 0	0	0		
+32866	Port 3 bit 1	0	0		
+32867	Port 3 bit 2	0	0		
+32882	Slot assignment	0	00000000H		
+32887	Park position	0	0	incr.	
+32888	Park speed	0	0.0000	1/min	
+32891	Velocity command value inter	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+32894	Pos.cmd.val.filt.	0	0	ms	
+32895	Diff.time pos. control	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+32896	Position command value int.	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+32901	Global service bits	0	0000 0000  0000 0001  0000 0010  0100 0000B		
+32904	Inverter on	0	0000H		
+32913	Clear error	0	0000H		
+32914	Sum add. velocity	0	0.0000	1/min	
+32915	Sum add. torque	0	0.0	% MN	
+32916	Cyclic filter	0	0		
+32917	Time zone	0			
+32919	Service list	0	0		
+32920	O.load time mot.	0	5.0	s	
+		1	5.0	s	
+		2	5.0	s	
+		3	5.0	s	
+32922	Resid.dist.erase wind.	0	100000000	incr.	
+		1	100000000	incr.	
+		2	100000000	incr.	
+		3	100000000	incr.	
+32924	Op.mode change par.	0	0000 0000  0000 0001B		
+		1	0000 0000  0000 0001B		
+		2	0000 0000  0000 0001B		
+		3	0000 0000  0000 0001B		
+32926	AMK homing cycle par.	0	0000 1000  0000 0000B		
+		1	0000 1000  0000 0000B		
+		2	0000 1000  0000 0000B		
+		3	0000 1000  0000 0000B		
+32928	Time filter 1	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+32929	Time filter 2	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+32932	Barrier frequ.	0	0	Hz	
+		1	0	Hz	
+		2	0	Hz	
+		3	0	Hz	
+32933	Band width	0	0	Hz	
+		1	0	Hz	
+		2	0	Hz	
+		3	0	Hz	
+32935	Voltage standstill	0	0.0	V	
+		1	0.0	V	
+		2	0.0	V	
+		3	0.0	V	
+32936	Window	0	1000	incr.	
+		1	1000	incr.	
+		2	1000	incr.	
+		3	1000	incr.	
+32938	Customer var. 1	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+32940	High homing velocity	0	1000.0000	1/min	
+		1	1000.0000	1/min	
+		2	1000.0000	1/min	
+		3	1000.0000	1/min	
+32941	SERCOS service	0	00000000H		
+32942	Service control	0	00000000H		
+32943	Warning time	0	4.00	s	
+32944	SYADR	0	00000000H		
+32945	List parameter set	0	0		
+32946	Drive DB file	0	0		
+32948	Message 4x32	0	00000000H		
+32952	At sync. speed window	0	1000	incr.	
+		1	1000	incr.	
+		2	1000	incr.	
+		3	1000	incr.	
+32953	Encoder type	0	003CH		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+32956	Add. acceleration value	0	10		
+		1	10		
+		2	10		
+		3	10		
+32959	Offset resolver	0	0		
+		1	0		
+		2	0		
+		3	0		
+32960	Input M.enc. gear	0	1	rev.	
+		1	1	rev.	
+		2	1	rev.	
+		3	1	rev.	
+32961	Output M.enc. gear	0	1	rev.	
+		1	1	rev.	
+		2	1	rev.	
+		3	1	rev.	
+32977	Input port 3	0	32		
+32978	Port 3 bit 0	0	0		
+32979	Port 3 bit 1	0	0		
+32980	Port 3 bit 2	0	0		
+32986	Factor derating	0	0		
+32987	Treshold derating	0	50.0	%	
+32988	Delay software reset	0	1000	ms	
+32989	Torque filt.time	0	0	ms	
+		1	0	ms	
+		2	0	ms	
+		3	0	ms	
+32990	NK-shift	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+32991	V/F start up	0	0	%	
+		1	0	%	
+		2	0	%	
+		3	0	%	
+32993	Dead time comp.2	0	0.000	ms	
+		1	0.000	ms	
+		2	0.000	ms	
+		3	0.000	ms	
+32996	Data signification	0	0		
+32999	Overload limit inverter	0	50.0	%	
+33076	Second period	0	0		
+33098	Incr.Pos.value	0	0	incr.	
+33100	Actual power value	0	0	W	
+33101	Display overload inverter	0	0.0	%	
+33102	Display overload motor	0	0.0	%	
+33104	Position feedback mod.	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+33113	Torq.cmd.val.C.	0	0.00	% MN	
+33116	Temperature internal	0	0.0	grd C	
+33117	Temperature external	0	0.0	grd C	
+33141	V/F input filter	0	0.0	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+33142	Commutation valid	0	0000 0000  0000 0000B		
+33143	Communication monitor	0	0		
+33144	Timeout communication monito	0	200	ms	
+33145	OSC channel 1	0	0		
+33146	OSC channel 2	0	0		
+33147	OSC channel 3	0	0		
+33148	OSC channel 4	0	0		
+33149	Saturation current	0	0.0	A	
+		1	0.0	A	
+		2	0.0	A	
+		3	0.0	A	
+33150	Brake torque	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+33151	max. angle difference encode	0	0.0	grad	
+		1	0.0	grad	
+		2	0.0	grad	
+		3	0.0	grad	
+33170	IPO mode	0	0		
+33171	Active power (el.)	0	0	W	
+33172	Reactive power (el.)	0	0	var	
+33174	Damping factor position	0	0.0	%	
+		1	0.0	%	
+		2	0.0	%	
+		3	0.0	%	
+33175	List glitch filter time	0	0		
+33176	Process data 1	0	0		
+33177	Process data 2	0	0		
+33178	Process data 3	0	0		
+33179	Process data 4	0	0		
+33180	Performance index sensorless	0	0		
+33181	Actual current Ia	0	0.000	A	
+33182	Actual current Ib	0	0.000	A	
+33183	Voltage Ua	0	0.0	V	
+33184	Voltage Ub	0	0.0	V	
+33185	Magn.curr.feedb.	0	0.000	A	
+33186	Torque curr.feedback	0	0.000	A	
+33187	Actual curr. value phase U	0	0.000	A	
+33188	Actual curr. value phase V	0	0.000	A	
+33189	Actual curr. value phase W	0	0.000	A	
+33190	Velocity feedforward factor 	0	0.00	%	
+		1	0.00	%	
+		2	0.00	%	
+		3	0.00	%	
+33191	Velocity feedforward delay 1	0	0.000	ms	
+		1	0.000	ms	
+		2	0.000	ms	
+		3	0.000	ms	
+33192	Delay target position value	0	0.000	ms	
+		1	0.000	ms	
+		2	0.000	ms	
+		3	0.000	ms	
+33196	Display friction torque	0	0.00	Nm	
+33197	Display friction torque line	0	0.00	Nm	
+33198	Display holding torque	0	0.0	Nm	
+33199	Display of moment of inertia	0	0.000	kgcm2	
+33300	Motion Test 1	0	0		
+33301	Motion Test 2	0	0		
+33302	Motion Test 3	0	0		
+33303	Motion Test 4	0	0		
+33304	Motion service switch	0	0000 0000  0000 0000  0000 0000  0000 0000B		
+		1	0000 0000  0000 0000  0000 0000  0000 0000B		
+		2	0000 0000  0000 0000  0000 0000  0000 0000B		
+		3	0000 0000  0000 0000  0000 0000  0000 0000B		
+33305	Variable positive torque lim	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+33306	Variable negative torque lim	0	0.0	% MN	
+		1	0.0	% MN	
+		2	0.0	% MN	
+		3	0.0	% MN	
+33307	Time constant variable torqu	0	0	ms	
+		1	0	ms	
+		2	0	ms	
+		3	0	ms	
+33308	Output mask	0	00000000H		
+33309	List absolute position	0	0		
+33310	Thermal resistance winding s	0	0	K/W	
+		1	0	K/W	
+		2	0	K/W	
+		3	0	K/W	
+33311	Thermal resistance stator-ro	0	0	K/W	
+		1	0	K/W	
+		2	0	K/W	
+		3	0	K/W	
+33312	Thermal resistance stator en	0	0	K/W	
+		1	0	K/W	
+		2	0	K/W	
+		3	0	K/W	
+33313	Ambient temperatureThermal r	0	0	K/W	
+		1	0	K/W	
+		2	0	K/W	
+		3	0	K/W	
+33314	Thermal capacity winding	0	0	J/K	
+		1	0	J/K	
+		2	0	J/K	
+		3	0	J/K	
+33315	Thermal capacity stator	0	0	J/K	
+		1	0	J/K	
+		2	0	J/K	
+		3	0	J/K	
+33316	Thermal capacity rotor	0	0	J/K	
+		1	0	J/K	
+		2	0	J/K	
+		3	0	J/K	
+33317	Electrical winding resistanc	0	0	Ohm	
+		1	0	Ohm	
+		2	0	Ohm	
+		3	0	Ohm	
+33318	Ambient temperature	0	0	K	
+		1	0	K	
+		2	0	K	
+		3	0	K	
+33319	Magnetic flux density propor	0	0	T2/V2s2	
+		1	0	T2/V2s2	
+		2	0	T2/V2s2	
+		3	0	T2/V2s2	
+33320	Hysteresis proportional fact	0	0	J/T2	
+		1	0	J/T2	
+		2	0	J/T2	
+		3	0	J/T2	
+33321	Eddy current proportional fa	0	0	Js/T2	
+		1	0	Js/T2	
+		2	0	Js/T2	
+		3	0	Js/T2	
+33322	Thermal model reserve 1	0	0		
+		1	0		
+		2	0		
+		3	0		
+33323	Thermal model reserve 2	0	0		
+		1	0		
+		2	0		
+		3	0		
+33324	Thermal model reserve 3	0	0		
+		1	0		
+		2	0		
+		3	0		
+33325	Thermal model reserve 4	0	0		
+		1	0		
+		2	0		
+		3	0		
+33326	Thermal model reserve 5	0	0		
+		1	0		
+		2	0		
+		3	0		
+33327	Thermal model reserve 6	0	0		
+		1	0		
+		2	0		
+		3	0		
+33328	Thermal model reserve 7	0	0		
+		1	0		
+		2	0		
+		3	0		
+33329	Thermal model reserve 8	0	0		
+		1	0		
+		2	0		
+		3	0		
+33730	System booting	0	0000H		
+33732	System reset	0	0000H		
+34023	BUS address part.	0	0001H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+34025	BUS mode	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+34026	BUS mode attribut	0	0000H		
+		1	0000H		
+		2	0000H		
+		3	0000H		
+34027	BUS fail.charac.	0	2		
+		1	2		
+		2	2		
+		3	2		
+34039	OSC Control	0	0000H		
+34040	OSC config list	0	0		
+34041	OSC actual values	0	0		
+34042	OSC data list	0	0		
+34043	TG Control	0	0000H		
+34044	TG config list	0	0		
+34045	Inductance LD	0	0.24	mH	
+		1	0.00	mH	
+		2	0.00	mH	
+		3	0.00	mH	
+34046	Inductance LQ	0	0.12	mH	
+		1	0.00	mH	
+		2	0.00	mH	
+		3	0.00	mH	
+34047	Dead time meas.1	0	0.000	ms	
+34048	PWM frequency	0	8	kHz	
+		1	8	kHz	
+		2	8	kHz	
+		3	8	kHz	
+34050	TN current Q	0	1.2	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+34052	TN current D	0	1.2	ms	
+		1	0.0	ms	
+		2	0.0	ms	
+		3	0.0	ms	
+34053	ID transfer	0	0		
+34055	EF type	0	0		
+34060	List SEEP 1	0	0		
+34061	List SEEP 2	0	0		
+34062	Fault statistic	0	0		
+34063	Time meter power	0	0		
+34069	Starting current	0	0.000	A	
+		1	0.000	A	
+		2	0.000	A	
+		3	0.000	A	
+34070	Home signal distance	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+34071	System name	0	Inverter104_RR		
+34072	Data set name	0	aipexInverter-FreeTorqueNEW		
+34073	Scaling parameters	0	0		
+34074	Homing Counter 1	0	0	incr.	
+34075	Actual Counter 1	0	0	incr.	
+34076	Homing Counter 2	0	0	incr.	
+34077	Actual Counter 2	0	0	incr.	
+34088	Event trace	0			
+34090	User list 2	0	0		
+34091	User list 3	0	91		
+34091-2		0	0501H		
+34091-3		0	0284H		
+34091-4		0	0032H		
+34091-5		0	0008H		
+34091-6		0	0204H		
+34091-7		0	0300H		
+34091-8		0	1000H		
+34091-9		0	0000H		
+34091-10		0	0002H		
+34091-11		0	0005H		
+34091-12		0	1010H		
+34091-13		0	0202H		
+34091-14		0	1300H		
+34091-15		0	1000H		
+34091-16		0	0220H		
+34091-17		0	0002H		
+34091-18		0	0019H		
+34091-19		0	3010H		
+34091-20		0	8602H		
+34091-21		0	3202H		
+34091-22		0	0800H		
+34091-23		0	0400H		
+34091-24		0	0002H		
+34091-25		0	0007H		
+34091-26		0	0010H		
+34091-27		0	0202H		
+34091-28		0	0800H		
+34091-29		0	1000H		
+34091-30		0	0210H		
+34091-31		0	0002H		
+34091-32		0	0015H		
+34091-33		0	2010H		
+34091-34		0	0200H		
+34091-35		0	1B00H		
+34091-36		0	1000H		
+34091-37		0	0230H		
+34091-38		0	0288H		
+34091-39		0	0032H		
+34091-40		0	0008H		
+34091-41		0	0003H		
+34091-42		0	4400H		
+34091-43		0	1080H		
+34091-44		0	0000H		
+34091-45		0	0002H		
+34091-46		0	001AH		
+34091-47		0	1010H		
+34091-48		0	0002H		
+34091-49		0	3C00H		
+34091-50		0	2080H		
+34091-51		0	0220H		
+34091-52		0	0290H		
+34091-53		0	0032H		
+34091-54		0	0008H		
+34091-55		0	0002H		
+34091-56		0	3D00H		
+34091-57		0	2080H		
+34091-58		0	0200H		
+34091-59		0	0000H		
+34091-60		0	803EH		
+34091-61		0	2020H		
+34091-62		0	9202H		
+34091-63		0	3202H		
+34091-64		0	0800H		
+34091-65		0	0200H		
+34091-66		0	0002H		
+34091-67		0	0016H		
+34091-68		0	0020H		
+34091-69		0	0000H		
+34091-70		0	4C00H		
+34091-71		0	2081H		
+34091-72		0	0020H		
+34091-73		0	8501H		
+34091-74		0	E801H		
+34091-75		0	0803H		
+34091-76		0	0400H		
+34091-77		0	0002H		
+34091-78		0	0004H		
+34091-79		0	0010H		
+34091-80		0	0200H		
+34091-81		0	1100H		
+34091-82		0	1000H		
+34091-83		0	0010H		
+34091-84		0	0002H		
+34091-85		0	000DH		
+34091-86		0	2010H		
+34091-87		0	0200H		
+34091-88		0	0E00H		
+34091-89		0	1000H		
+34091-90		0	0030H		
+34091-91		0	01F4H		
+34091-92		0	0000H		
+34094	Rise time SWC	0	0.000	A/s	
+		1	0.000	A/s	
+		2	0.000	A/s	
+		3	0.000	A/s	
+34095	Final value SWC	0	0.0	A	
+		1	0.0	A	
+		2	0.0	A	
+		3	0.0	A	
+34096	Standstill current	0	53.100	A	
+		1	0.000	A	
+		2	0.000	A	
+		3	0.000	A	
+34099	Delay time SWC	0	0	ms	
+		1	0	ms	
+		2	0	ms	
+		3	0	ms	
+34100	Binary input word	0	0000H		
+34117	OSC config list 2	0	0		
+34118	Brake mode	0	0000 0000  0000 0000B		
+		1	0000 0000  0000 0000B		
+		2	0000 0000  0000 0000B		
+		3	0000 0000  0000 0000B		
+34119	Torque constant Kt adaption	0	0.000	Nm/A	
+34120	Binary output word	0	0000H		
+34146	Memory address	0	00000000H		
+34147	Memory data	0	0000H		
+34148	Kp V.contr.gain	0	0.050	A/V	
+		1	0.050	A/V	
+		2	0.050	A/V	
+		3	0.050	A/V	
+34149	V contr.int.time	0	100.0	ms	
+		1	5.0	ms	
+		2	5.0	ms	
+		3	5.0	ms	
+34151	Kp current Q	0	0.64	V/A	
+		1	0.00	V/A	
+		2	0.00	V/A	
+		3	0.00	V/A	
+34152	Kp current D	0	0.58	V/A	
+		1	0.00	V/A	
+		2	0.00	V/A	
+		3	0.00	V/A	
+34153	Maximum speed motor	0	100000.0000	1/min	
+		1	100000.0000	1/min	
+		2	100000.0000	1/min	
+		3	100000.0000	1/min	
+34154	Start marker	0	0	incr.	
+34155	Marker window	0	0	incr.	
+34157	Dead time meas.	0	0.000	ms	
+34160	Part number motor	0	A2370DD		
+		1			
+		2			
+		3			
+34161	Prod. date motor	0	0		
+34162	Serial number motor	0	0		
+34164	Resistance Rtt	0	0.14	Ohm	
+		1	0.00	Ohm	
+		2	0.00	Ohm	
+		3	0.00	Ohm	
+34165	Hold. torque brake	0	0.0	Nm	
+		1	0.0	Nm	
+		2	0.0	Nm	
+		3	0.0	Nm	
+34166	Temperature sensor motor	0	14016		
+		1	0		
+		2	0		
+		3	0		
+34167	Inductance Ltt	0	0.0	mH	
+		1	0.0	mH	
+		2	0.0	mH	
+		3	0.0	mH	
+34168	Time Imax motor	0	1.2	s	
+		1	0.0	s	
+		2	0.0	s	
+		3	0.0	s	
+34171	Event filter	0	0000H		
+34173	NTP serveraddress	0	0100007FH		
+34174	SWK monitoring	0	18		
+34174-2		0	130		
+34174-3		0	90		
+34174-4		0	50		
+34174-5		0	50		
+34174-6		0	0		
+34174-7		0	0		
+34174-8		0	0		
+34174-9		0	10		
+34174-10		0	0		
+34174-11		0	0		
+34174-12		0	0		
+34174-13		0	0		
+34174-14		0	0		
+34174-15		0	0		
+34174-16		0	0		
+34174-17		0	0		
+34174-18		0	0		
+34174-19		0	0		
+		1	0		
+		2	0		
+		3	0		
+34177	Lower threshold current adap	0	19	%	
+		1	100	%	
+		2	100	%	
+		3	100	%	
+34178	Upper threshold current adap	0	68	%	
+		1	100	%	
+		2	100	%	
+		3	100	%	
+34179	Gradient KpQ	0	20	%	
+		1	100	%	
+		2	100	%	
+		3	100	%	
+34180	Gradient TnQ	0	400	%	
+		1	100	%	
+		2	100	%	
+		3	100	%	
+34182	Limit position increment	0	2147483647	incr.	
+		1	2147483647	incr.	
+		2	2147483647	incr.	
+		3	2147483647	incr.	
+34183	Velocity Threshold SL	0	0.0000	1/min	
+		1	0.0000	1/min	
+		2	0.0000	1/min	
+		3	0.0000	1/min	
+34184	Compensation dead time PWM	0	0		
+34185	Resistance rotor	0	0.0000	Ohm	
+34186	Inductance stator	0	0.0000	mH	
+34187	Inductance rotor	0	0.0000	mH	
+34188	Main inductance	0	0.0000	mH	
+34189	Bit list sensorless	0	0000 0000  0000 0000B		
+34190	Bit list parameter finding	0	0000 0000  0000 0000B		
+34191	Velocity acquisition KP	0	0		
+34192	Velocity acquisition Ki	0	0		
+34193	Nominal current	0	0.0	A	
+34194	Peak current	0	0.0	A	
+34195	Peak current time	0	0.0	s	
+34196	Treshold external component	0	50.0	%	
+34197	Display external component	0	0.0	%	
+34199	Actual power value bipolar	0	0	W	
+34202	Bit mask port 3	0	0000H		
+34203	Voltage at 25 degree	0	0.754	V	
+34204	Voltage at 75 degree	0	1.067	V	
+34205	Voltage at 125 degree	0	1.450	V	
+34206	Product code	0	00000903H		
+34210	Dead time meas.2	0	0.000	ms	
+34212	Voltage Usq	0	0.0	V	
+34213	Voltage Usd	0	0.0	V	
+34215	Temperature IGBT	0	0.0	grd C	
+34217	AMK Test 1	0	0		
+34218	AMK Test 2	0	0		
+34219	AMK Test 3	0	0		
+34220	AMK Test 4	0	0		
+34221	Friction torque	0	0.00	Nm	
+		1	0.00	Nm	
+		2	0.00	Nm	
+		3	0.00	Nm	
+34222	Friction torque linear	0	0.00	Nm	
+		1	0.00	Nm	
+		2	0.00	Nm	
+		3	0.00	Nm	
+34223	Holding torque	0	0.0	Nm	
+		1	0.0	Nm	
+		2	0.0	Nm	
+		3	0.0	Nm	
+34224	Inertia	0	0.000	kgcm2	
+		1	0.000	kgcm2	
+		2	0.000	kgcm2	
+		3	0.000	kgcm2	
+34225	Mode pilot control	0	0000 0000  0000 0000  0000 0000  0000 0000B		
+		1	0000 0000  0000 0000  0000 0000  0000 0000B		
+		2	0000 0000  0000 0000  0000 0000  0000 0000B		
+		3	0000 0000  0000 0000  0000 0000  0000 0000B		
+34226	List load model	0	0		
+		1	0		
+		2	0		
+		3	0		
+34227	Motion control bits	0	0000 0000  0000 0000B		
+34228	Angle feed forward SL	0	0		
+34229	Sliding factor SL	0	0.0		
+34230	List bus	0	0		
+		1	0		
+		2	0		
+		3	0		
+34231	Usq pilot control	0	0.0	V	
+34232	Usd pilot control	0	0.0	V	
+34233	Resistance Rs	0	0.000	Ohm	
+		1	0.000	Ohm	
+		2	0.000	Ohm	
+		3	0.000	Ohm	
+34234	Voltage constant Ke	0	18.8	V/krmp	
+		1	0.0	V/krmp	
+		2	0.0	V/krmp	
+		3	0.0	V/krmp	
+34235	increase motor voltage	0	116.0	%	
+		1	115.5	%	
+		2	115.5	%	
+		3	115.5	%	
+34238	List IR filter	0	0		
+		1	0		
+		2	0		
+		3	0		
+34239	V/F Integratorstopp	0	0	%	
+34243	Offset commutation	0	0	incr.	
+		1	0	incr.	
+		2	0	incr.	
+		3	0	incr.	
+34244	Electrical field angle	0	0	incr.	
+34246	ZR-current T1-d	0	2.000	ms	
+		1	2.000	ms	
+		2	2.000	ms	
+		3	2.000	ms	
+34247	ZR-current T2-d	0	2.000	ms	
+		1	2.000	ms	
+		2	2.000	ms	
+		3	2.000	ms	
+34248	ZR-current T1-q	0	2.000	ms	
+		1	2.000	ms	
+		2	2.000	ms	
+		3	2.000	ms	
+34249	ZR-current T2-q	0	2.000	ms	
+		1	2.000	ms	
+		2	2.000	ms	
+		3	2.000	ms	
+34261	Customer variable 2	0	00000000H		
+		1	00000000H		
+		2	00000000H		
+		3	00000000H		
+34262	Motor encoder database image	0	0		
+34264	Maximum torque	0	3000.0	% MN	
+		1	3000.0	% MN	
+		2	3000.0	% MN	
+		3	3000.0	% MN	
+34265	encoder ratio	0	101		
+34266	Voltage reserve	0	30.0	V	
+34273	Osci 1	0	0		
+34274	Osci 2	0	0		
+34275	Osci 3	0	0		
+34276	Osci 4	0	0		
+34277	Osci 5	0	0		
+34278	Osci 6	0	0		
+34279	Osci 7	0	0		
+34280	Osci 8	0	0		
+34281	Current setpoint ISQ	0	0		
+34282	Current setpoint ISD	0	0		
+34283	Comm. angle	0	0		
+34284	OSC container len	0	20000	byte	
+34285	Motion data list	0	0		
+34286	Time stop drive cmd.	0	100	ms	
+		1	100	ms	
+		2	100	ms	
+		3	100	ms	
+34298	Torque feedback filter	0	0	ms	
+		1	0	ms	
+		2	0	ms	
+		3	0	ms	
+34299	Velocity setpoint in control	0	0.0000	1/min	
+34300	Velocity act. value in contr	0	0.0000	1/min	
+34301	Torque setpoint filter input	0	0.0	% MN	
+34302	Torque setpoint filter outpu	0	0.0	% MN	
+34303	DC-bus monitor upper limit	0	0.0	V	
+34304	Comm. input word	0	0000H		
+34816	Comm. output word	0	0000H		
+35328	Comm. input double word	0	00000000H		
+35584	Comm. output double word	0	00000000H		
