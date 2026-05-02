@@ -6,7 +6,7 @@
 // ---------------------------------------------------------------------------
 #define COMM_MODE_WIFI      1
 #define COMM_MODE_BLUETOOTH 2
-#define COMM_MODE           COMM_MODE_BLUETOOTH   // <-- cambia qui
+#define COMM_MODE           COMM_MODE_WIFI   // <-- cambia qui
 
 #define DEBUG_HEARTBEAT
 
@@ -38,9 +38,7 @@
 const uint32_t serial2Baud = SERIAL2_BAUD;
 const uint16_t tcpPort = 8080;
 
-// Se true, scarta la negoziazione Telnet quando un client Telnet si collega per errore.
 const bool filterTelnetNegotiation = true;
-// Se false, il bridge diventa solo monitor (non inoltra comandi client verso Serial2).
 const bool forwardClientToSerial2 = false;
 const size_t maxRxLineLen = 256;
 
@@ -112,7 +110,7 @@ void setupTransport() {
   if (!SerialBT.begin(bluetoothName)) {
     Serial.println("[ERRORE] Inizializzazione Bluetooth fallita");
     while (1) {
-      delay(1000);
+      delay(500);
     }
   }
 
@@ -260,6 +258,11 @@ bool isPayloadChar(char c) {
     case '-':
     case '+':
     case '/':
+    case '>':
+    case '<':
+    case '!':
+    case '*':
+    case '#':
       return true;
     default:
       return false;
@@ -270,20 +273,9 @@ bool isPayloadStartChar(char c) {
   return c == '[' || isAlphaNumeric(static_cast<unsigned char>(c)) || c == '-' || c == '+';
 }
 
-// Ritorna la riga "riparata" se riconoscibile, stringa vuota se da scartare.
-// - Riga diagnostica STM32: inizia con '[TAG]:' → trova il primo '[' e taglia il rumore prima.
-// - Riga CSV:               inizia con cifra e contiene almeno una virgola.
-// - Tutto il resto:         scartato.
+
 String sanitizeLine(const String& line) {
-  const int bracketIdx = line.indexOf('[');
-  if (bracketIdx >= 0) {
-    const String trimmed = line.substring(bracketIdx);
-    return (trimmed.length() >= 5) ? trimmed : String();
-  }
-  if (isDigit(static_cast<unsigned char>(line.charAt(0))) && line.indexOf(',') > 0) {
-    return line;
-  }
-  return String();
+  return (line.length() > 0) ? line : String();
 }
 
 void setup() {
@@ -312,7 +304,6 @@ void loop() {
   }
 
   #ifdef DEBUG_HEARTBEAT
-  // Heartbeat: stampa ogni 5 secondi quando il client è connesso
     static uint32_t lastHeartbeatMs = 0;
     const uint32_t heartbeatIntervalMs = 5000;
     uint32_t nowMs = millis();
@@ -332,9 +323,6 @@ void loop() {
   while (Serial2.available() > 0) {
     char c = static_cast<char>(Serial2.read());
 
-    // \r e \n terminano entrambi la riga (STM32 invia \r\n).
-    // Gestirli allo stesso modo permette di recuperare la riga
-    // anche se uno dei due byte viene corrotto dal rumore UART.
     if (c == '\r' || c == '\n') {
       rxBuffer.trim();
       if (rxBuffer.length() > 0) {

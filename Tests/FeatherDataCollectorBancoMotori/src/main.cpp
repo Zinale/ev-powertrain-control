@@ -95,7 +95,7 @@ bool openNewLogFile(const String& requestedPath = "") {
     //CSV HEADER
     //writer.writerow(['TempMotor','TempInverter','TempIGBT','Voltage','Speed','Id','Iq','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3',"Time_s"])
 
-    activeLogFile.println("Time_s,TempMotor,TempInverter,TempIGBT,Voltage,Speed,Iq,Id,TorqueMotor,PedalPerc,NTC1,NTC2,NTC3");
+    activeLogFile.println("Time_s,TempMotor,TempInverter,TempIGBT,Voltage,Speed,Iq,Id,TorqueMotor,PedalPerc,StatusWord,ErrCode,ErrInfo1,PhaseU_mA,PhaseV_mA,PhaseW_mA,Power_W,NTC1,NTC2,NTC3");
     activeLogFile.flush();
   }
 

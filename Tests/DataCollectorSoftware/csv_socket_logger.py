@@ -4,7 +4,7 @@ import datetime
 from datetime import time
 import sys
 
-ESP_IP = '192.168.0.237'
+ESP_IP = '192.168.1.239'
 PORT = 8080
 CSV_FILE = f'dati_sensori_{datetime.datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
 # ----------------------
@@ -24,7 +24,7 @@ def main():
             writer = csv.writer(file)
             
             #HEADERS
-            writer.writerow(["Time_ms",'TempMotor','TempInverter','TempIGBT','Voltage','Speed','Iq','Id','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3'])
+            writer.writerow(["Time_ms","TempMotor","TempInverter","TempIGBT","Voltage","Speed","Iq","Id","TorqueMotor","PedalPerc","InvState","ErrCode","StatusWord","ErrInfo1","PhaseU_mA","PhaseV_mA","PhaseW_mA","Power_W"])
             #writer.writerow(['c','NTC1', 'NTC2', 'NTC3'])
 
             buffer = ""
