@@ -12,3 +12,5 @@ Documents/Password AipexPro carica dati su inverter.txt
 Controls/docs/Perception, Deep Learning, and ADAS Workflows for Formula Student Driverless Vehicles.pptx
 /Documents/.specstory
 /Controls/.specstory
+/Tests/mcu-test-f446re-peripherals/.specstory
+.pio/
