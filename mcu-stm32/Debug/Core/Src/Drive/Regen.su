@@ -1,2 +1,0 @@
-../Core/Src/Drive/Regen.c:22:6:Regen_ShouldUseRegen	24	static
-../Core/Src/Drive/Regen.c:89:9:Regen_CalculateTorque	56	static

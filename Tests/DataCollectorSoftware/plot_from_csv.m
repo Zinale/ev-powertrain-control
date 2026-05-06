@@ -1,3 +1,8 @@
+clear;      
+clc;        
+close all; 
+
+
 % --- Selezione file tramite finestra di dialogo ---
 [filename, filepath] = uigetfile('*.csv', 'Seleziona il file dati sensori');
 if isequal(filename, 0)
@@ -6,7 +11,7 @@ if isequal(filename, 0)
 end
 fullpath = fullfile(filepath, filename);
 
-% --- Lettura CSV: salta righe non numeriche (es. "ESP32 Bridge connesso") ---
+% --- Lettura CSV: salta righe non numeriche (es. "ESP32 Bridge connesso") ---  
 % Leggi tutte le righe come testo
 fid = fopen(fullpath, 'r');
 rawLines = {};
@@ -18,31 +23,163 @@ while ~feof(fid)
 end
 fclose(fid);
 
-% Tieni header (riga 1) + righe che iniziano con una cifra
-keep = false(1, numel(rawLines));
-keep(1) = true;
-for i = 2:numel(rawLines)
-    keep(i) = ~isempty(regexp(rawLines{i}, '^\d', 'once'));
+% Rimuovi eventuali \r residui (file Windows letti su qualsiasi piattaforma)
+rawLines = cellfun(@(l) strrep(l, char(13), ''), rawLines, 'UniformOutput', false);
+
+% --- Determine expected column count from first valid data row -------------
+% Accetta: numeri interi/float (con segno, punto decimale, NaN, notaz. sci.)
+validNumPat  = '^-?(\d+(\.\d*)?|\.\d+)([eE][+-]?\d+)?$|^NaN$|^nan$';
+% Pattern per campo testuale (Source, SourceFile, ecc.) — qualsiasi stringa
+% non vuota che NON sia un numero e NON inizi con cifra o segno
+textFieldPat = '^[A-Za-z_]';
+
+headerCols  = numel(strsplit(rawLines{1}, ','));
+headerNames = strsplit(strtrim(rawLines{1}), ',');
+headerNames = strtrim(headerNames);
+
+% Determina quali indici di colonna sono numerici scansionando le prime
+% righe dati (salta righe con meno di headerCols campi o con campi vuoti)
+numericColIdx = [];
+for i = 2:min(numel(rawLines), 30)
+    fields = strsplit(strtrim(rawLines{i}), ',');
+    nf_i = numel(fields);
+    if nf_i < 10, continue; end  % riga troppo corta per essere dati
+    nCheck = min(nf_i, headerCols);  % tolera file merged con trailing-empty strippati
+    % Colonne testuali = non-vuote E non-numeriche (es. Source, SourceFile)
+    isText = cellfun(@(f) ~isempty(strtrim(f)) && isempty(regexp(strtrim(f), validNumPat, 'once')), fields(1:nCheck));
+    if sum(isText) <= 3   % tollera max 3 col. testuali
+        numericColIdx = find(~isText);  % include numerici E vuoti (=NaN)
+        break;
+    end
+end
+if isempty(numericColIdx)
+    numericColIdx = 1:headerCols;  % fallback: considera tutto numerico
 end
 
-% Scrivi su file temporaneo pulito e leggi con readtable
+% Trova il numero di colonne dalle prime righe valide (gestisce NTC extra)
+expectedCols = headerCols;
+for i = 2:min(numel(rawLines), 20)
+    fields = strsplit(strtrim(rawLines{i}), ',');
+    if numel(fields) < max(numericColIdx), continue; end   % riga troppo corta
+    numOk = all(cellfun(@(f) isempty(strtrim(f)) || ~isempty(regexp(strtrim(f), validNumPat, 'once')), fields(numericColIdx)));
+    if numOk && numel(fields) >= max(numericColIdx)
+        expectedCols = numel(fields);
+        break;
+    end
+end
+
+% Aggiungi NTC1,NTC2,... all'header se le righe dati hanno colonne extra
+extra = expectedCols - headerCols;
+if extra > 0
+    ntcNames = arrayfun(@(n) sprintf('NTC%d', n), 1:extra, 'UniformOutput', false);
+    rawLines{1} = [rawLines{1}, sprintf(',%s', ntcNames{:})];
+end
+
+% Tieni header + righe valide:
+%   - numero di campi = expectedCols
+%   - tutti i campi numerici (per gli indici in numericColIdx) sono validi
+%   - campo vuoto = NaN (accettato)
+keep = false(1, numel(rawLines));
+keep(1) = true;
+nBad  = 0;
+nPad  = 0;
+for i = 2:numel(rawLines)
+    fields = strsplit(strtrim(rawLines{i}), ',');
+    nf = numel(fields);
+
+    % Scarta righe troppo corte (sicuramente corrotte/vuote) o enormi
+    if nf < 14 || nf > expectedCols + 5
+        nBad = nBad + 1; continue;
+    end
+
+    % Controlla solo i campi numerici effettivamente presenti
+    presentNumIdx = numericColIdx(numericColIdx <= nf);
+    numOk = all(cellfun(@(f) isempty(strtrim(f)) || ...
+        ~isempty(regexp(strtrim(f), validNumPat, 'once')), fields(presentNumIdx)));
+
+    if numOk
+        % Padda con virgole vuote se la riga è più corta dell'atteso
+        if nf < expectedCols
+            rawLines{i} = [rawLines{i}, repmat(',', 1, expectedCols - nf)];
+            nPad = nPad + 1;
+        % Tronca se leggermente più lunga (es. NTC extra non previsti)
+        elseif nf > expectedCols
+            parts = strsplit(rawLines{i}, ',');
+            rawLines{i} = strjoin(parts(1:expectedCols), ',');
+        end
+        keep(i) = true;
+    else
+        nBad = nBad + 1;
+    end
+end
+if nBad > 0
+    fprintf('[WARN] Scartate %d righe corrotte (errori UART / merge di campi)\n', nBad);
+end
+if nPad > 0
+    fprintf('[INFO] Paddato %d righe con campi mancanti (colonne NTC/extra assenti)\n', nPad);
+end
+
+% Estrai nomi colonne dall'header (rimuovi BOM UTF-8 e altri ctrl chars iniziali)
+headerLine = regexprep(rawLines{1}, '^[^\x21-\x7E]+', '');
+varNames   = strtrim(strsplit(strtrim(headerLine), ','));
+varNamesOk = matlab.lang.makeValidName(varNames);
+
+% Scrivi su file temporaneo SOLO le righe dati (senza header)
+% così readtable non può confondersi su quale riga sia l'header
 tmpFile = [tempname '.csv'];
 fid = fopen(tmpFile, 'w');
-for i = find(keep)
+dataIdx = find(keep);
+dataIdx(dataIdx == 1) = [];   % escludi riga header (i=1)
+for i = dataIdx
     fprintf(fid, '%s\n', rawLines{i});
 end
 fclose(fid);
-data = readtable(tmpFile);
+
+data = readtable(tmpFile, 'Delimiter', ',', 'ReadVariableNames', false);
 delete(tmpFile);
+
+% Assegna nomi colonne (gestisci eventuale mismatch)
+nDataCols = width(data);
+nNameCols = numel(varNamesOk);
+if nDataCols <= nNameCols
+    data.Properties.VariableNames = varNamesOk(1:nDataCols);
+else
+    extraNames = arrayfun(@(n) sprintf('Extra%d',n), 1:(nDataCols-nNameCols), 'UniformOutput', false);
+    data.Properties.VariableNames = [varNamesOk, extraNames];
+end
+
+% Rimuovi colonne di metadati non-sensore presenti nei file merged (Source, SourceFile)
+for mc_ = {'Source', 'SourceFile'}
+    if ismember(mc_{1}, data.Properties.VariableNames)
+        data = removevars(data, mc_{1});
+    end
+end
+
+% --- Rimuovi righe con Time_ms non crescente (riconnessioni / timestamp UART corrotti) ---
+% Nota: esp32_log_merger.py fa già questo; il blocco seguente è un fallback
+%       per i file caricati direttamente senza passare per il merger.
+tColFilt = find(strcmpi(data.Properties.VariableNames, 'Time_ms'), 1);
+if ~isempty(tColFilt)
+    t_raw_filt = data.(data.Properties.VariableNames{tColFilt});
+    bad_time   = [false; diff(t_raw_filt) < 0];
+    if any(bad_time)
+        fprintf('[WARN] Rimossi %d campioni con Time_ms non monotono (riconnessioni/timestamp corrotti)\n', ...
+                sum(bad_time));
+        data = data(~bad_time, :);
+    end
+end
 
 % --- Asse temporale in secondi ---
 % Supporta sia CSV Feather (Time_s) sia CSV ESP32 (Time_ms)
 cols = data.Properties.VariableNames;
-if ismember('Time_ms', cols)
-    tempo = data.Time_ms / 1000;
-elseif ismember('Time_s', cols)
-    tempo = data.Time_s;
+timeColMs = find(strcmpi(cols, 'Time_ms'), 1);
+timeColS  = find(strcmpi(cols, 'Time_s'),  1);
+if ~isempty(timeColMs)
+    tempo = data.(cols{timeColMs}) / 1000;
+elseif ~isempty(timeColS)
+    tempo = data.(cols{timeColS});
 else
+    fprintf('[ERR] Colonne trovate: %s\n', strjoin(cols, ', '));
     error('Colonna temporale non trovata (atteso Time_ms o Time_s).');
 end
 
@@ -50,7 +187,8 @@ end
 % Colonne CSV: Time_ms/Time_s, TempMotor, TempInverter, TempIGBT,
 %              Voltage, Speed, Iq, Id, TorqueMotor, PedalPerc,
 %              InvState (*), ErrCode, StatusWord, ErrInfo1,
-%              PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W
+%              PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W,
+%              TorqueSetpoint (*), TorqueLimitDyn (*) — solo backend ESP32
 %              NTC1, NTC2, NTC3 (*) — solo backend Feather
 %  (*) = colonna opzionale
 
@@ -79,17 +217,39 @@ else
     invState = [];
 end
 
+% TorqueSetpoint / TorqueLimitDyn: presenti solo nel backend ESP32
+hasTorqueControl = ismember('TorqueSetpoint', cols) && ismember('TorqueLimitDyn', cols);
+if hasTorqueControl
+    torqueSetpoint  = data.TorqueSetpoint;
+    torqueLimitDyn  = data.TorqueLimitDyn;
+end
+
 % NTC: presenti solo nel backend Feather
+% Controlla ogni canale separatamente (il file merged può avere NTC1 ma non NTC2/3)
 hasNTC = ismember('NTC1', cols);
+nanCol = nan(height(data), 1);
 if hasNTC
     ntc1 = data.NTC1;
-    ntc2 = data.NTC2;
-    ntc3 = data.NTC3;
+    if ismember('NTC2', cols); ntc2 = data.NTC2; else; ntc2 = nanCol; end
+    if ismember('NTC3', cols); ntc3 = data.NTC3; else; ntc3 = nanCol; end
     % Sostituisci valori sentinella (-999) con NaN
     ntc1(ntc1 == -999) = NaN;
     ntc2(ntc2 == -999) = NaN;
     ntc3(ntc3 == -999) = NaN;
+    % Clipping fisico NTC: range plausibile -40..200°C
+    ntc1(ntc1 < -40 | ntc1 > 200) = NaN;
+    ntc2(ntc2 < -40 | ntc2 > 200) = NaN;
+    ntc3(ntc3 < -40 | ntc3 > 200) = NaN;
 end
+
+% ---- Clipping fisico globale (valori fuori range = NaN) ------------------
+tempMotor(tempMotor   < -40  | tempMotor   > 200)    = NaN;
+tempInverter(tempInverter < -40 | tempInverter > 150) = NaN;
+tempIGBT(tempIGBT     < -40  | tempIGBT     > 200)   = NaN;
+voltage(voltage       < -50  | voltage       > 650)   = NaN;  % bus DC: -50..650 V
+speed(abs(speed)      > 30000)                        = NaN;
+power_W(abs(power_W)  > 100000)                       = NaN;
+pedal(pedal < 0 | pedal > 100)                        = NaN;  % pedale: 0..100 %
 
 % =========================================================================
 % FIGURA 1 - Temperature
@@ -134,7 +294,11 @@ legend('Location', 'best'); hold off;
 
 subplot(3,1,3);
 hold on; grid on;
-plot(tempo, torque, 'g', 'LineWidth', 1.5, 'DisplayName', 'Coppia');
+plot(tempo, torque, 'g', 'LineWidth', 1.5, 'DisplayName', 'Coppia misurata');
+if hasTorqueControl
+    plot(tempo, torqueSetpoint, 'b--', 'LineWidth', 1.2, 'DisplayName', 'Setpoint');
+    plot(tempo, torqueLimitDyn, 'r:',  'LineWidth', 1.2, 'DisplayName', 'Limite dinamico');
+end
 title('Coppia Motore'); xlabel('Tempo (s)'); ylabel('Coppia (Nm)');
 legend('Location', 'best'); hold off;
 
@@ -203,16 +367,30 @@ title('Codici Errore'); xlabel('Tempo (s)'); ylabel('Codice');
 legend('Location', 'best'); hold off;
 
 subplot(nRows,1,spIdx); spIdx = spIdx + 1;
+% --- Status Word: tutti i bit b8-b15 come segnali digitali 0/1 impilati ---
+sw_bit_masks = [256, 512, 1024, 2048, 4096, 8192, 16384, 32768];
+sw_bit_names = {'SysRdy(b8)','Err(b9)','Warn(b10)','QDCon(b11)',...
+                'DCon(b12)','QInvOn(b13)','InvOn(b14)','Der(b15)'};
+sw_colors    = {[0 0.45 0.74],[0.85 0.33 0.10],[0.49 0.18 0.56],...
+                [0 0.75 0.75],[0.47 0.67 0.19],[0.64 0.08 0.18],...
+                [0.93 0.69 0.13],[0.30 0.30 0.30]};
+sw_offset    = 1.3;   % separazione verticale tra i bit
 hold on; grid on;
-stairs(tempo, bitand(statusWord, 256),  'b',  'LineWidth', 1.0, 'DisplayName', 'SystemReady (b8)');
-stairs(tempo, bitand(statusWord, 512),  'r',  'LineWidth', 1.0, 'DisplayName', 'Error (b9)');
-stairs(tempo, bitand(statusWord, 1024), 'm',  'LineWidth', 1.0, 'DisplayName', 'Warn (b10)');
-stairs(tempo, bitand(statusWord, 32768),'k',  'LineWidth', 1.0, 'DisplayName', 'Derating (b15)');
-title('Status Word — bit significativi'); xlabel('Tempo (s)'); ylabel('bit × valore');
-legend('Location', 'best'); hold off;
+sw_u32 = uint32(statusWord);
+for k = 1:8
+    bit_01 = double(bitand(sw_u32, uint32(sw_bit_masks(k))) > 0) + (k-1)*sw_offset;
+    stairs(tempo, bit_01, 'Color', sw_colors{k}, 'LineWidth', 1.2, ...
+           'DisplayName', sw_bit_names{k});
+end
+yticks((0:7)*sw_offset + 0.5);
+yticklabels(sw_bit_names);
+ylim([-0.2, 8*sw_offset]);
+title('Status Word — bit b8-b15 (0/1, impilati)');
+xlabel('Tempo (s)'); ylabel('Bit');
+legend('Location', 'eastoutside', 'NumColumns', 1); hold off;
 
 subplot(nRows,1,spIdx);
 hold on; grid on;
 stairs(tempo, statusWord, 'k', 'LineWidth', 1.2, 'DisplayName', 'StatusWord (raw)');
-title('Status Word (raw hex)'); xlabel('Tempo (s)'); ylabel('Valore');
+title('Status Word (valore grezzo)'); xlabel('Tempo (s)'); ylabel('Valore');
 legend('Location', 'best'); hold off;
