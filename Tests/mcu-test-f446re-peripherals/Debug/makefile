@@ -61,7 +61,7 @@ main-build: mcu-test-f446re-peripherals.elf secondary-outputs
 
 # Tool invocations
 mcu-test-f446re-peripherals.elf mcu-test-f446re-peripherals.map: $(OBJS) $(USER_OBJS) C:\Users\zinga\Documents\.UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\Tests\mcu-test-f446re-peripherals\STM32F446RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "mcu-test-f446re-peripherals.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\zinga\Documents\.UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\Tests\mcu-test-f446re-peripherals\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu-test-f446re-peripherals.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+	arm-none-eabi-gcc -o "mcu-test-f446re-peripherals.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\zinga\Documents\.UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\Tests\mcu-test-f446re-peripherals\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu-test-f446re-peripherals.map" -Wl,--gc-sections -static -u _printf_float --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

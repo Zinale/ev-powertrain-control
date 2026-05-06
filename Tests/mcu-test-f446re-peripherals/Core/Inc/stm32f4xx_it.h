@@ -60,6 +60,7 @@ void DMA1_Stream5_IRQHandler(void);
 void DMA1_Stream6_IRQHandler(void);
 void ADC_IRQHandler(void);
 void CAN1_RX0_IRQHandler(void);
+void TIM2_IRQHandler(void);
 void USART2_IRQHandler(void);
 void EXTI15_10_IRQHandler(void);
 void DMA2_Stream0_IRQHandler(void);

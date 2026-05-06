@@ -118,8 +118,8 @@ volatile uint32_t     g_can2_rx_cnt = 0;
  *                                  mode CIRCULAR fissato in USER CODE TIM2_MspInit 1)
  * --------------------------------------------------------------------- */
 #define NUM_DENTI      22.0f
-#define CIRC_RUOTA_M    1.8f              /* circonferenza ruota [m]       */
-#define IC_BUF_SIZE    16u
+#define CIRC_RUOTA_M    1.2f              /* circonferenza ruota [m]       */
+#define IC_BUF_SIZE    32u
 
 /* hdma_tim2_ch1 → dichiarato da CubeMX nella sezione non-USER CODE       */
 
@@ -133,6 +133,10 @@ uint16_t          g_timeout_ch3  = 0;
 volatile float    g_rpm1      = 0.0f;
 volatile float    g_rpm2      = 0.0f;
 volatile float    g_speed_kmh = 0.0f;
+
+/* Contatori di debug: salgono ad ogni dente rilevato su PA0 / PB10 */
+volatile uint32_t g_edge_cnt_ch1  = 0;   /* fronti su TIM2_CH1 (PA0)  */
+volatile uint32_t g_edge_cnt_ch3  = 0;   /* fronti su TIM2_CH3 (PB10) */
 
 /* logging tick: globale per visibilità in debug */
 uint32_t          g_log_tick  = 0;
@@ -292,8 +296,10 @@ int main(void)
     f.FilterActivation     = ENABLE;
     f.SlaveStartFilterBank = 14;
     HAL_CAN_ConfigFilter(&hcan1, &f);
-    if (HAL_CAN_Start(&hcan1) != HAL_OK) { Error_Handler(); }
-    HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
+    if (HAL_CAN_Start(&hcan1) != HAL_OK)
+      Serial_Log("CAN1 Start FAIL\r\n");
+    else
+      HAL_CAN_ActivateNotification(&hcan1, CAN_IT_RX_FIFO0_MSG_PENDING);
   }
 
   /* -----------------------------------------------------------------------
@@ -312,8 +318,10 @@ int main(void)
     f.FilterActivation     = ENABLE;
     f.SlaveStartFilterBank = 14;
     HAL_CAN_ConfigFilter(&hcan2, &f);
-    if (HAL_CAN_Start(&hcan2) != HAL_OK) { Error_Handler(); }
-    HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
+    if (HAL_CAN_Start(&hcan2) != HAL_OK)
+      Serial_Log("CAN2 Start FAIL\r\n");
+    else
+      HAL_CAN_ActivateNotification(&hcan2, CAN_IT_RX_FIFO0_MSG_PENDING);
   }
 
   /* -----------------------------------------------------------------------
@@ -321,6 +329,8 @@ int main(void)
    * --------------------------------------------------------------------- */
   HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, g_ic_buf_ch1, IC_BUF_SIZE);
   HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_3, g_ic_buf_ch3, IC_BUF_SIZE);
+  /* abilita interrupt CC1: toggle LD2 ad ogni fronte catturato su PA0 */
+  //__HAL_TIM_ENABLE_IT(&htim2, TIM_IT_CC1);
 
   Serial_Log("=== Nucleo F446RE test start ===\r\n");
 
@@ -380,6 +390,8 @@ int main(void)
 
       if (curr_idx != g_last_idx_ch1)
       {
+        g_edge_cnt_ch1++;   /* nuovo fronte rilevato su CH1 */
+        HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);  /* toggle LED verde per visibilità */
         /* ultimi due timestamp catturati in ordine circolare */
         uint16_t i_new  = (uint16_t)((curr_idx - 1u + IC_BUF_SIZE) % IC_BUF_SIZE);
         uint16_t i_prev = (uint16_t)((curr_idx - 2u + IC_BUF_SIZE) % IC_BUF_SIZE);
@@ -396,7 +408,7 @@ int main(void)
       else
       {
         if (g_timeout_ch1 < 0xFFFFu) g_timeout_ch1++;
-        if (g_timeout_ch1 > 10u) g_rpm1 = 0.0f;   /* ~100 ms → ruota ferma */
+        if (g_timeout_ch1 > 500u) g_rpm1 = 0.0f;  /* ~5 s → ruota ferma */  
       }
     }
 
@@ -409,6 +421,8 @@ int main(void)
 
       if (curr_idx != g_last_idx_ch3)
       {
+        g_edge_cnt_ch3++;   /* nuovo fronte rilevato su CH3 */
+
         uint16_t i_new  = (uint16_t)((curr_idx - 1u + IC_BUF_SIZE) % IC_BUF_SIZE);
         uint16_t i_prev = (uint16_t)((curr_idx - 2u + IC_BUF_SIZE) % IC_BUF_SIZE);
 
@@ -422,7 +436,7 @@ int main(void)
       else
       {
         if (g_timeout_ch3 < 0xFFFFu) g_timeout_ch3++;
-        if (g_timeout_ch3 > 10u) g_rpm2 = 0.0f;
+        if (g_timeout_ch3 > 500u) g_rpm2 = 0.0f;  /* ~5 s → ruota ferma */
       }
     }
 
@@ -439,10 +453,9 @@ int main(void)
     if (now - g_log_tick >= 200u)
     {
       g_log_tick = now;
-      Serial_Log("ADC[%4d,%4d,%4d,%4d] RPM1=%6.1f RPM2=%6.1f V=%5.1f km/h RX1=%u RX2=%u\r\n",
-                 (int)g_adc[0], (int)g_adc[1], (int)g_adc[2], (int)g_adc[3],
+      Serial_Log("RPM1=%6.1f RPM2=%6.1f V=%5.1f km/h | edges CH1=%lu CH3=%lu\r\n",
                  (double)g_rpm1, (double)g_rpm2, (double)g_speed_kmh,
-                 (unsigned int)g_can1_rx_cnt, (unsigned int)g_can2_rx_cnt);
+                 (unsigned long)g_edge_cnt_ch1, (unsigned long)g_edge_cnt_ch3);
     }
 
     /* kick watchdog (timeout IWDG ≈ 1 s) */
@@ -862,6 +875,14 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM2 && htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+  {
+    HAL_GPIO_TogglePin(LD2_GPIO_Port, LD2_Pin);
+  }
+}
 
 /* USER CODE END 4 */
 
