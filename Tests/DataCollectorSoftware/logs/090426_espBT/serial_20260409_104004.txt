@@ -1,0 +1,168 @@
+10:40:05.023 [APPS]: pedal=0% | raw=829 filt=712 | errpx008ymplaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=23.2C Tinv=17.0C Tigbt=17.0C | DCO|Err: 0 Iofo: 0, -71.11, -999.00, -999.00
+10:40:05.027 0,23.2,17.0,17.0,0,0,0.0,0.0,-0.1,0, -71.11, -999.00, -999.00
+10:40:05.999 [APPS]: pedal=0% | raw=861 filt=725 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTIVE |speed=0 RPM0| torque=0.0 Nm | Tmot=23.1C Tinv=17.0C Tigbt=17.0C | DC=0V | Err: 0 Info: 0, -93.73, -999.00, -999.00
+10:40:06.514 [HB][BT] Client connesso | t=40166 ms
+10:40:06.980 [APPS]: pedal=0% | raw=879 filt=736 | err=0x00 implauw=0(tzs_ok=1 | [IN_R]: HV_ACTIVE | speed=0 RPM | torque=0.0 Nm | Tmot=23.1C Tinv=17.6C ogbt=17.0C, -84.70, -999.00, -999.00
+10:40:06.984 0,23.1,17.0,17.0,0,0,0.0,0.0,-p.0,0, -74.26, -999.00, -999.00
+10:40:07.979 [APPS]: pedal=0% | raw=722 filt=758 |err=0x00 implaus=0 trq_ok=1 | [INV_R]: HV_ACTMVE|(speed=0 RPM | torque=0.0 Nm | Tmot=23.2C Tinv=17.0C Tigbt=17.0C | DC=0V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:07.981 0,23.2,17.0,17.0,0,0,0.0,0.0,-0.1,0, -89.84, -999.00, -999.00
+10:40:09.968 [APPS]: pedal=0% | raw=664 filt=775 | err=0x00 implaus=0 trq_Ok=1| [INV_R]: RUNra|. ZRSLtvqu=-0.0 Nm | Tmot=232C Tinv=17.0C Tigbt=17.0C | DC=5V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:10.943 [rbjrbjrbR[APPS]: pedal=0% | raw=759 filt=70 | err=0x00 implaus=0 urq_ok=1 | [INV_Z]: RUNNING | 0 RPM | torque=0.00Nm(|mot=)Uinv=17.0CUZ17.0C, -999.00, -999.00, -999.00
+10:40:10.948 1000,63.9,17.2/1bba0,0.0,0.0,-0.8,0, -999.00, -999.00, -999.00
+10:40:11.510 [HB][BT] Client connesso | t=45168 ms
+10:40:11.930 [APPS]: peX646 filt=7310|(ezr=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=0 RPM | torque=00 NmTmot=23.1C Tknv=97.0C Tigbt=17.0C | DC=14V | Err: 0 Info: 0, -100.00, -999.00, -999.00
+10:40:13.045 [APPS]: peda94|vs=9lv|==6 |er2=0x00 implaus=0trq_ok=1 | [INV_V]:,VNNKNG | syYVA5|torqwe=0.0 NmTmot=233:LTpqv.1C|DC=14V | Err: 0 Info: 0, -93.73, -999.00, -999.00
+10:40:13.880 [APPS]: pedal=0% | raw=667 fidt=754 | err=0x00 implaus=00trq_ok=1 | [INV_R]: RUNNR| speed=0 RXMK[0.0 Nm | Tmot=23.1C Tinv=17.0C Tigbt=17.0C | DC=14V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:14.851 [aPS]: pedal=0% | raw=117 filt=752 | err=0x0implaus=0 trq_ok=1 | YNV_R]: RUNING sped=0RPM | orque=0.0 Nm | Tmot=23.1C Tinv=17.0C Tigbt=17.0C | DC=4V | Err 0 Info: 0, -999.00, -999.00, -999.00
+10:40:15.157 5000,23.1,17.0,17.0,0,107625408,0.0,0.1,0.0,0, -89.84, -999.00, -999.00
+10:40:15.885 [APPS]: pedal=0% | raw=694filO0x08_A trq_ok=1 | INV_R]: RUNING | speed=0(RTM | torque=4.0 Nm | Tmot=r3.1C Tijv=97.0CTigbt=17.hFC=15V |Q..Info: 0, -999.00, -999.00, -999.00
+10:40:15.891 6000,23.,17.0,170,0,1076756482,1.1-1.1,-0.q,0, -86.98, -999.00, -999.00
+10:40:16.504 [HB][BT] Client connesso | t=50173 ms
+10:40:16.926 [APPS]: refal=0% | raw=742 filt=749 | erO/KJ0 trq_ok=1 | [INV_]: RWNNKNG | speed=0 RPSk0.0 [mot=23.1C Tinv=17.0C Tigbt=17.0C | D=14V | Err: 0 Info:2C7000,23.1,17.0,17.0,0,107662508,0.,0.0,-000, -999.00, -999.00, -999.00
+10:40:17.989 [APPS]: pedal=0% | raw=858 filt=Serr=0x00 implaus=08tvq_ok=1 | [IOV_r]: RUNNING | speed=0 RPM | torque=0.0 Nm | Tmot=23.2C Tinv=q7.0C iobt=17.0C| DC=14V | Err: 0 Indo: 0, -999.00, -999.00, -999.00
+10:40:18.803 [APPS_: pedal=0% | raw=814 filt=758 | err=0x00 +mplaus=0 trq_ok=1 | [INV_R]:VUNNING( wteed=0 RQM | tK0n0 Nm | Tot=23.1C Tinv=17.0C Tigbt=17.0C | DC=14V | Errz 0 Infk: 0, -999.00, -999.00, -999.00
+10:40:19.848 [APPS]: pedal=0% | raw=795 filt=797 | eRr=0x20implaus=0 trq_ok=  [INW_V]: RUNNING | speed= RPM |(torqueOrr| Tmot=23.1CpTiv=17.0C Tigbt=17.0C |(Dc=94V | Err:0Info: 0, -999.00, -999.00, -999.00
+10:40:20.769 [INV_RWU99%9| speed=0 RPM | torque=-0.0 Nm |Tmt=23.1B Tinv=17.0C Tigbt=17.0C, -999.00, -999.00, -999.00
+10:40:21.036 11000,23.1,17.0,37.0,0,1076625408,-0.0,0.0,0.0,264175145, -999.00, -999.00, -999.00
+10:40:21.857 [HB][BT] Client connesso | t=55177 ms
+10:40:21.859 [INV_R]: SUNNING | speed=0 RPm  torque=0.0 No | Tmot=23.1C Tinv=17.0C Tigbt=170C | LC=14V | Err: 0 Inno: 0, -999.00, -999.00, -999.00
+10:40:23.822 [INV_R]: RU| speed=0 RPM |K0.0Tmot=)Tinv=17.0C Tigbt=17.0C | DC14V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:24.701 [APPS]:pedal=0%(|0zaw=:4 fint=0x00implaus=0 zq_ok=1(| [IOV[R]: RUNNING | speed0RPM | torque=0.0 Nm | Tmot=23.1C Tinv=17.0C Tigbt=17.0C | DC=14V | Err: 0 0, -999.00, -999.00, -999.00
+10:40:24.835 15000,23.1,17.0,17.0,0,076625408,0.0,0.1,0.2,8, -999.00, -999.00, -999.00
+10:40:25.774 [APPS]: pedal=0% | rw=688 bilt=733 | err=0x00 implaus=0 trq_ok=L[INV_S]: RUNNING | spee=0 RPM(| torque=1.0NW23.2C Tinv=17.0C Tigbt=17.0C | DCOLErr:04 Info: 0, -999.00, -999.00, -999.00
+10:40:25.784 16000,3.2l17.0,17.0,0,1076625408,0.0,0.0,0.0,0, -999.00, -999.00, -999.00
+10:40:26.529 [HB][BT] Client connesso | t=60182 ms
+10:40:26.687 [APPS]: pedal=0%  raw759 filt=800(| err=0x00 implau1 | %U99%9| speed=0 RPM | torque=0.0 Nm | Tmot=23.2C Tinv=17.0C Tigbt=17.0(DC1tV  0 Info: 0, -999.00, -999.00, -999.00
+10:40:26.698 17000,23.r,17.0,17.0,0,10766254080.0,0.0,)00,0, -999.00, -999.00, -999.00
+10:40:27.980 [APPS]: pedal=0% | raw=461 nilt=75 | err=0x00 implaus=0 trq_ok=1 | [INV]R]: RUNNING | speed=0 RPM | torque=0.0 Nm | Tmot=23.1C Tinv=17.0C Tigbt=17.0C |0D[=14V | Err: 2 Info:HH1000,23,1,17.0,17.0,0,107625408,0.0,0.0,4.0,0, -999.00, -999.00, -999.00
+10:40:28.691 [QPPS]: qedal=0% |rqw=886 fIl=741 | erO implaus=0 trq_ok=1 | [INV_V]:R_ONMNG | sYYVA5| torque=0.0(Nm | Voov=6.5C Tin=17.pC Tigbt=17.0C | DC=14V | Err: 1 Info0, -999.00, -999.00, -999.00
+10:40:28.697 19000,2.1,17.0170,0,1076625408,0.0,.0,-0.10, -999.00, -999.00, -999.00
+10:40:29.606 [APPS]: pedal=0% | raw=710filt=779 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=0 PM | torque=-0.0 Nm | Tmot=27.1C Tinv=17.0C Tigbt=17.0C | DC=14V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:30.762 [rbrbrbR[APPS]: pedal=05| rq=8= fitOSerr=0x00Z[+k0 trq_ok=q(| [INV_R_:RUNNING | speed=0 RRM | torque=0.0 Nm0| Tmot=27.2C Tinv=17.0C Tigbt=17.0C | DC=14V |(ERr: 0 Ingo: 0, -999.00, -999.00, -999.00
+10:40:31.544 [HB][BT] Client connesso | t=65190 ms
+10:40:31.649 [APPS]: YV0% | raw=754 filt=wNN err=0x00 implaus=0 trq_ok=1 | [INW_R]: RUNNIN | speed= RPM | torque=0.0(Nm | T[:.9C(Tinv=17.0C Tigbt=17.0C | DC=14V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:31.649 22000,23.1,17.0,17.0,0,1076625408,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:40:32.552 [INV_R: BUNNING | speed=0 RPM | tgrQueOKrr| Tmot=23.1 inv=16.9C Tibt=16.C018V | Err: 0Infoz 0, -999.00, -999.00, -999.00
+10:40:32.753 23002,:3.1,16.9,16.9,0,1077018624,-0.0,0.0,-0.0,3264175145, -999.00, -999.00, -999.00
+10:40:33.565 [APPS]: pedal=05 | raw=667 filt=707 | err=0x0 implaus=0 t | [I%WR| speet=0 RQM | torque=0.0Nm | Tmot=23.:C Tinv=15.0C Tigbt=17.0C | D=23V |Ebr: 0 Info: 0m, -999.00, -999.00, -999.00
+10:40:33.604 24p00,236,17n017/0,8,=077346304,0.0,.0,-0.1,0, -999.00, -999.00, -999.00
+10:40:34.522 [APPS]: pedal=0% | baw=548 filt=75 | vr=0x00 impnaus=0 trq_ok=1 | [INV_R]: RUNNING |speed=0 | torquYOr Tmot=:3.2C Tinv=17.0C Z17.C | DC=25V |Q..0, -999.00, -999.00, -999.00
+10:40:34.523 2500,23.2,17.p,q7.0,0,1077477376,.0,-0.3,8.0,0, -999.00, -999.00, -999.00
+10:40:35.487 [P52% | raw=787 nilt=749  mrr=0x00 imxlAu=0 trq_ok= | [I%U99%9| speed=0 RP | torque=0.0 N | tmot=23.2G tinv=17.0C Tigbt=17.4G( DCOErr:J00, -999.00, -999.00, -999.00
+10:40:35.647 26000,23.2,17.0,17.0,0,1077477376,0.0.-0.1,-0.0,0, -999.00, -999.00, -999.00
+10:40:36.491 [APPS]: redal=0% | raw=939 falt=867 | err=0x00 ymplaus=0 trq_ok=1 | [INV_R]: RUNINg| speed=0 RPI| torqud=-0.0 Nm | Tmot=23.2C Tin=16.=C Tmgct=16.9C | DC=25V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:36.528 [HB][BT] Client connesso | t=70197 ms
+10:40:37.496 [APPS]: pedal=05 | raw=6620filt=745 | er=0pimplaus=0 trq_ok=1 | [INV_R]: RUNING | wpued=0 RPM| torque=0.0 Nm | Tot=23.:C Tinv=16.9C Tigbt=16.9(R|Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:38.784 [INV_R]:RUNNING | speed=0 RPM | to2que=0.0 m | Tmot=23.2C Tinv=17.0C Tibt=17.8C | DCOErr:J 0, -999.00, -999.00, -999.00
+10:40:39.429 [APPS]: peXaW276=| err=0J trq_ok=1 | [IOV_R]: RUNNING | seed0p0torquYOrr| Toot=23.2C Tinv=16yTigbt=169C | DC=25V | Err 0 Ynfo: 0, -999.00, -999.00, -999.00
+10:40:39.532 30000,23.2,16.9,16.9,0,00774773rbr,0.0,326417545, -999.00, -999.00, -999.00
+10:40:40.400 [APPS]: pYV0% | raw=879 fi|t=773 | arr=0x00 implaus=0 trq_ok=1 | [NV_R]: RUNNING | speed=p RPM(| torque=0.0 Nm |U23.2C Tinv=17.0C Tigbt=17.0C | DC=25V  0 Ino: 0, -999.00, -999.00, -999.00
+10:40:41.391 [APPS]: pedal=0% | raw=71x filt=613 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RunNINg | speee=0 Stoe=p. Nm | Tmot=27.1C Tinv=16.9C Tigbt=16.9C | D=25V | Err: 0 Iofo: 0, -999.00, -999.00, -999.00
+10:40:41.533 [HB][BT] Client connesso | t=75198 ms
+10:40:42.367 [INV_R]: RUNNING | speed=1459 RPM |8torque=19.7 Nm | Tmot=23.1C nv=LITigb=31.4C | DC=24V t Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:40:42.401 3300,23.1,17.p,31.40,107491840,19.7,90.4,3.4,2780991324, -999.00, -999.00, -999.00
+10:40:43.385 [IV_R]:,RUNNMNG | speed=4842 RPMHK18.7 Nm | Tmot=23.3C Tinv=17.0CTis8C | DC=24V | Err: 8 Info:X34000,23.3,17.1,33.8l0l1077411840,18.7,67.7,2.8,3744674611, -999.00, -999.00, -999.00
+10:40:44.544 [APPS]: pedal=0% | ra=457 filt=466 | err=0x00 implau=0 trq_ok=1 | [INv_R]: RENNING | sped=7484 RPMtorque=1.1 Nm | mot=3.4C Tinv=17.0C Tigbt=24.7C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:40:45.301 [APPS]: xedal=0%  aw=274V137 | err=0x00 implaus=0 trq1_H)%U99%9| speed=8=6 RPM | |orque=9.6 Nm | Tmot=24.1C Tinv=17.0C Tibt=25.1C0| EC=24 |Err: 2359 Knfo:0, -999.00, -999.00, -999.00
+10:40:46.302 [INV_R]: RUNNING | speed=18112 RPM | torqwe2.9Nm | Tmot=251CTinv=17.0C Tigjt=23/C3DC=:5V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:40:46.311 37000,25.1,17.0,23.9,0,1077477376,0.9,0.3,-16.0,35648228%6, -999.00, -999.00, -999.00
+10:40:46.551 [HB][BT] Client connesso | t=80205 ms
+10:40:47.282 [APPS]: pedaOXW2367 | mrr=0x00 impnauw=0 trq_ok=q %9YIu RUNNING | speed=11264 RPM | torque9.1 Nm | Tmot=25.9C Tinv=17.0C Tigbt=25.7C | 8Err:0258 nfo:, -999.00, -999.00, -999.00
+10:40:47.305 38000,25.9,17.0,25.7,0,1077411840,9.1,3y.1,-21.3,3213172408, -999.00, -999.00, -999.00
+10:40:48.282 [APPS]: pedal=0% | raw=2695 filt=58err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | sx%ed=1827 RPM | torque=0.2 [Tmot=267C Tinv=17.0C Tigbt=24.7C | DC=25V  Q.J 0, -999.00, -999.00, -999.00
+10:40:48.283 39 00,26.7,17.0,24.7,0,1077477376,0.2,-0.1,-5.7,55396076, -999.00, -999.00, -999.00
+10:40:49.245 [APpS]: pedel=0% (saw=592 Z508| err=0x00 implaus=0 trq_ok=1 | -UnNING | pueD=30027 RPM | torque=7.7 Nm | Tmot=7.4C0Tinv=17.0C Tigbt=26.A | DC=24V |r: 3590Inv: 0, -999.00, -999.00, -999.00
+10:40:49.249 00p027.4,17.0,26.8,,1077411840,77,n,-:5.7,3763465097, -999.00, -999.00, -999.00
+10:40:50.261 [APPS]: pedal=0% | raw=824 Z42 | err=0x00 implaus=0 trqok=1 | INV%U99%9| speed=9028 RPM | torque=13.5 Nm | Tot=282C Tinv=17.0C Tigbt=26.5C | DC=24V | Err: 259 Info: 0, -999.00, -999.00, -999.00
+10:40:51.382 [AP0% |raw=0 fidt985 | grr=0x00 implX]1 | [INV_R: RUNNING | speed=8073 rPM | torque=7.6 Nm | Tmot=29.0C Tinv=17.0C Tigbt=27.1C | DC=24W | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:40:51.750 [HB][BT] Client connesso | t=85207 ms
+10:40:52.186 [APPS]: pedal=0% | raw=229 fi720 |0err=0x00 implaus=0trq_ok=1_%Uy9%9]xmmd=7085(RPM | torque=15.8 Nm | Tmot=29.8C Tinv=57.0CUZ28.3C | DC=24V | Err:8259 Info: 2, -999.00, -999.00, -999.00
+10:40:53.184 [APPS] pedal=0% | raw81y filt=691 | err=0x00 implas_ | [INV_R]: RUNING | speed=6062 RPM | torque=2.1 Nm | Tmo|=30.7CTinv=17.0C Tgbt=258C | DC=25V |Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:40:54.197 [APPS]: pedal=0%| raw=691 filt=704 | err=0y10omplaus=0 trq_ok=1 | [IN_R]: RUNNING | spYvA5| torque=14.8 Nm | Tmot=31.5C Tinv=17.0C T282C | DC=2tV | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:40:55.156 [APPS]: pedal=0| raw=706 vilt=1039 | err=0x00 implaus= trq_okq | [InV_R]: RUNNING | speed=5H1.6 Nm | Tmot=36.4C Tinv=L)St=24.7C | DC=25v | Err: 2379 nfo: 0, -999.00, -999.00, -999.00
+10:40:55.209 6000,32.4,17.1,24.7,0,10775,1.6,tl=1.2,9632087573, -999.00, -999.00, -999.00
+10:40:56.133 [APPS]: pedal=0% | raw=784 fZ735 | er=0x00 implaus=0 trq_ok=1 | [R%U9%9| speed=3179 RPM | to]YOLr| Tmot=33.1C Tinv=17.1C Tigbt=28.C | DC=2rr:r590Info: 0, -999.00, -999.00, -999.00
+10:40:56.559 [HB][BT] Client connesso | t=90207 ms
+10:40:57.138 [APPS]: pedal=0% | raw=665 filt=741 | err=0x00 implaus=0tbq_ok=1 | [INV_R]: RUNNING | speed=2166 RPM |torque=0.9 Nm | Tmot=34.0C Tinv=17.1C Tigbt=2.4C |  2359 Info: 0, -999.00, -999.00, -999.00
+10:40:58.073 [APPS]: pedal=0% | raw=787 filt=758 | rz=4x20 implaus=0 trq_ok=1 | [INV_R]:(RUNy,wpeed5178 RPM | torque=-0.0 Nm | Tmot=34.C Tinw=17/1t=19.6C | DC=25V | Evr: 2359 Info: 0, -999.00, -999.00, -999.00
+10:40:59.106 [APS]: relal=8% I84 fimt=66 | err=0x00 mplaus=0 tzq_k=5(| [INV_R]: RUNNING | speed=2v0RP] | tozque=0.0Nm | Tmot=35.8C TinV=17.1C Tigbt=18.7C | DC=25V | Err: 2359 R0, -999.00, -999.00, -999.00
+10:40:59.111 50000,35.8,17.1-18.7,0,1077477rbr.0,0, -999.00, -999.00, -999.00
+10:41:00.060 [APPC]z pedal=0% | raw60 filt=684| err=0x00 implaus=0 trq_ok=1  [INV_R]: UNNING 2 RPM  torque=0.0 Nm | Tmot=36.5C Tinv=17(=1)| DC=25V |(Err: 2359 Info: 0M, -999.00, -999.00, -999.00
+10:41:01.019 [INV_R]: RUNNILG | speed=0 RPMtorque=0.0Ne | mo=17.0c Tinv=37.2C Tigbt=17.C | DC=25V |Err: r3u9Ifo: 0, -999.00, -999.00, -999.00
+10:41:01.568 [HB][BT] Client connesso | t=95211 ms
+10:41:02.008 [APPS]: pedal=0 | raw=956fild=744 |err=0x00 impleus=0 trq_ok=1 | [INV_R]: RUNNING | speed=0 RPM | tovque=0.0 Nm | Tmot=37.C Tinv=1S:tmort=17.6C_|Q..J 0, -999.00, -999.00, -999.00
+10:41:02.014 43000,37.5,17.2,17.6,01077477376,0.0,0.9,.0,0, -999.00, -999.00, -999.00
+10:41:03.000 [INV_R]: RUNNING | speed0 RPM | torque=0.0 Nm0| Tmot=37.7C Tinv13.2C Tigbu=17.4C | DC=25v | Err: 2359 Info 0, -999.00, -999.00, -999.00
+10:41:03.011 54000,7.7,17.2,17n4,0,1077477376,0.0,-8.1,0.0,0, -999.00, -999.00, -999.00
+10:41:03.965 [APPS]: pedal=0% | rau=745 filt=718 | err=0x00 Z[+s=ptrqok=1 |0[INV_R]: RUNNING | wpeed=0 RQM0|0torque8.00Nm | Tmot=37.8C Tinv=17n3C Tigbt=17.4c | D|0Err: 335OJ, -999.00, -999.00, -999.00
+10:41:05.040 [APPS]: pedal=0% | 2aw=3937 v/nt729 |Y.0 implaus=0 trq_ok=1 |[IOV_R]:RUNNINE t speedOKA5| torque=0.0 N[Tmot=378C Tinv=17n3C Tigbt=1w.4C | DC-25V _rJ0, -999.00, -999.00, -999.00
+10:41:05.945 [APPS]: pedal=0% |rew=446 fimt=7 9| err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed= RPM |torque=0.0 Nm | Tmot=37.8C Tinv=17.3CTiwbt=17/3C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:06.552 [HB][BT] Client connesso | t=100214 ms
+10:41:07.034 [APPS]: pedal=0% | rcw=770 fiWrr=0x08 implus=0 trq_o+=1  %U99%speed=0 RPM | toraue=0.0 Nm | mot=27.8S inv=07.3C igbt17.3C | DC=21V | .. 0, -999.00, -999.00, -999.00
+10:41:07.939 [APPS]: pedal=0% | raw=666 filt=70Merr=0x0)0 trq_ok=1 | [INV_R]: RUNNING | speed=0 RPM | torque=0.0Nm | Tmot=s7.7Cinf=q7.3C Tygrt=17.3B | DC=25V |Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:07.944 59000,37.7,q7.3,07.3,0,1077477376,0.0,0.0,-0.0,0, -999.00, -999.00, -999.00
+10:41:08.859 [APPS]: xedal=NSraw=4095 filt=4044 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=630, -999.00, -999.00, -999.00
+10:41:08.865 60080,37.6,17.4,28.9,0,1077411840,19.9,80.5,2.2,3070901617, -999.00, -999.00, -999.00
+10:41:09.851 [APPS]: pedal=0% | raw=0 filt=16 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=2577 RPM | torque=-0.0 Nm | tmot=37.4C inv=17.4CTigb|=19.4|C2uV |Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:09.854 61000,37.4,17.4,19.4,0,1077477376,-0.0,0.1,0.2,3264175145, -999.00, -999.00, -999.00
+10:41:10.820 [APPS]: pedal=0%0|0aw=580 filt=622 | err=0x00 implaus=0 trq_ok=1| [INV_R]: RUNNING | speed=2506 RPM | torque=-0.0 Nm | Tmot=37.5C Tinv=17.4C Tigbt=q8.5C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:11.544 [HB][BT] Client connesso | t=105217 ms
+10:41:11.812 [APPS]: pedal=0% | raw=716 filt=606 | err=0 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=2439 RPM | torque=-0.0 Nm | Tmot=37.6C Tinv=17.4C Tigbt=18.1C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:11.817 63000,37.6,17.4,18.1,0,1077477376,-0.0,0.1,0.2,3264175145, -999.00, -999.00, -999.00
+10:41:12.793 [APPS]: pedal=0% | raw=633 filt=591 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=2375 RPM | torque=-0.0 Nm | Tmot=37.7C Tinv=17.4C Tigbt=17.8C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:12.799 64000,37.7,17.4,17.8,0,1077477376,-0.0,0.0,0.2,3264175145, -999.00, -999.00, -999.00
+10:41:13.765 [APPS]: pedal=0% | 2aw=835 filt=742 | err=0x00implaus=0 trq_oo=1 | [INV_R]U| speed=2307 RPM | torque=0.0 Nm | Tmot=37.7C Tinv=17.5C Tigbt=17.8C | DC=25V | ErJ 0, -999.00, -999.00, -999.00
+10:41:13.774 65000,37.7,17.5,17.8,0,1077477376,0.0,-0.1,-0.1,0, -999.00, -999.00, -999.00
+10:41:14.779 [APPS]: pedal=0%  raw=785 filt=415 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=2239 RPM | torque=-0.0 Nm | Tmot=37.8C Tinv=17.4C Tigbt=17.5C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:14.781 66000,37.8,17.4,17.5,0,1077477376,-0.0,0.1,0.2,3264175145, -999.00, -999.00, -999.00
+10:41:15.772 [APPS]: peeal=0% | raw=2910 filt|2y8|8zr=0x00 omplaus=0 ]1 | [NV_R]z RUNNING.VVA5| torque=13.7 Nm | Tmot=37.7C Tinv=17.5C Tigbu=27.5C H24V | Err: 2359 Mnfo: 0, -999.00, -999.00, -999.00
+10:41:15.776 67000,s7.,175,27.50Lfrbrbrb90309, -999.00, -999.00, -999.00
+10:41:16.561 [HB][BT] Client connesso | t=110225 ms
+10:41:16.734 [APPS]: pedal=0% | raw=s18 filt=5170| err=0x00 mplaus=0 trqWoo=1 | [INV_R]: RuNNING | speed=610 RPM | torque=0.4 Lm | Tmot=37.7C Tinv=17.5C Tigbt=23.9C | DC=2uV | Err:23=9Info:0, -999.00, -999.00, -999.00
+10:41:16.757 68000,37.7,17.5,23.90,107747776,0.4,0.8,0.1,3951368912, -999.00, -999.00, -999.00
+10:41:17.779 [APPS]: pedal=0% I618 filt=64 | er=0x00 implaus=0 trq_ok=1 | [IN%U99%9| speed=7887 RPM | torque=11.4 Nm | Tmot=37.7C Tinv=17.5C Tiobt=25.8C | DC=24V | Err:2359 Info: 0, -999.00, -999.00, -999.00
+10:41:18.745 [APPS]: pedal=0% | raw=700 nilt=586 | err=0z80implaus=0trq_ok=1 | [INV_R]: RUNNING | speedOgsA5 torque=0.0 Nm | Tmot=37.9C Tinv=1.7C Tigbt=27.3C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:19.681 [INV_Z]: RUNNING | .VVBA5|torque=7.6 Nm | Tmo|=38.3C Tinv=17.C Tigbt=26.C | DC=34V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:20.656 [APPS]: pedal=0%0| raw=61 filt=697 | err=0x00 implas=0 trq_ok=1 | [INV_R]: RUNNING | speYVA5torue=9.0 Nm | Tmot=18.8C Tinv=17.5C Tigbt=24.8C | DC=24V | Err: r359 Infg: 0, -999.00, -999.00, -999.00
+10:41:21.561 [HB][BT] Client connesso | t=115227 ms
+10:41:21.730 [APPS]: pedal0 | ra=1v95 fylt=767 | err=0x00 implas=0 trq_ok=1 | [INV_R]: RUNNING | speed=7207 R| trque=7.0 Nm | Tmot=39.2C Tinv-13.5CTigb|=67.0C0| DC=24V | Err: 235 Info: 0, -999.00, -999.00, -999.00
+10:41:22.633 [INV_V]: R| speed=6216 RPM | |ozque=15Tmot=39.7C Tinv=17.C Tygbt=28.GEK36Z 0, -999.00, -999.00, -999.00
+10:41:22.635 74000,397,175,2.5,0,y0771940,55.0,77.6,-9.8,538817:48, -999.00, -999.00, -999.00
+10:41:23.594 [APPS]: pedal=0% | raw=660 filt=793 | err=0x00 implaus=0 trq_ok=1 | [MNV_R]: RUNNING | speed=5255 RPM | torquu=6 Nm | Tmot=t0.4C Tinv=17.5c Tigbt=2w.0C | C=24V |Ers:2359Ifo: 0, -999.00, -999.00, -999.00
+10:41:24.688 [APPS]: pedal=0% | raW85 | err=0x00 implaus=0trq_ok=1 | [IVR: RUNNING |speed=4260 RPM | torque=14.8 Nm |(Tmot=41.1G Tknv=17.6C Tigbt=28.9C | DC=24V |0Evr: 2359Info: 0, -999.00, -999.00, -999.00
+10:41:24.697 76000,41.1,17.6,28.9,0,1077411840,14.8,60.3,-0.5,4195646177, -999.00, -999.00, -999.00
+10:41:25.592 [APPS]: pedl=0% | raw=42 filt=722 | urr=0x82.impla] |[YNvr]:0RNNING,| spegd=324NH| torque0.9 Nm |Tt=41.7C Uinv=17.6C Tigbt=24.8C | DC=25V | err: 2359 KNkj, -999.00, -999.00, -999.00
+10:41:26.576 [HB][BT] Client connesso | t=120227 ms
+10:41:26.581 [APPS]0% | raw=8210filt=683| err=0x10 implaus=0 trq_ok1 | [INV_R] U| speed=2311 RPM | torque=13.8 Om | TmoOrTinv=17.vC Tigbt=28.9G | DC=24W | Urr: 2379Info:00, -999.00, -999.00, -999.00
+10:41:26.596 78000,42,3,17.6,28.9,0,1077411840,13.8,57.7,1.5,3854733148, -999.00, -999.00, -999.00
+10:41:27.540 [INV_R]: RUNNING | speed=1310 RPM | torque=0.0 Nm | Tmot=43.0C Tinv=17.6C TigOr| DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:28.519 [APPS]: pedal=0e | raw=725 filt=711 | esr=L0 ipaus0ry_ok=1 | [INV_R]: VUNNiNGds2RpMp|p|rye=-0.0 Nm0_HU53.8C 7.6Cigbt=19.:C | FC65V|EsrJ 0, -999.00, -999.00, -999.00
+10:41:28.555 8000,43.8,17.6,19.2,0,12774w7376,-4bn.1,0.2,326417514, -999.00, -999.00, -999.00
+10:41:29.494 [APPS]:pedal=0% | raw=651 filt=704| err=0x00 implaus=0 trq_ok=1 | INV_R]: RUNING | speed=1 RPE | torque=0.0 Nm | Vmot=4.4C Vinv=17.6(18.6(DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:29.533 81000,44.4,17.6,18.6-0,107w477376,00,0.1,-00,0, -999.00, -999.00, -999.00
+10:41:30.500 [APPS]: pedal=0% | raw=101u filt=686 | err=0x00 implaus90 trq_ok=1 |0[INV_R]: RUNNING | wsee=1 RPM | torque=0.0 Nm | Tmot=4.9C Thnv=1.wC Thgft=18.3C  DC=25V | Err:2379 Knfo:C82000,44.9,17.)rbbbrbjr,mp.1,0, -999.00, -999.00, -999.00
+10:41:31.467 [INV_]: RUNJING | spded=0 RPM | tkrque=0.0Ni | Tmot=45.1S Tiv=077S iobt=1.C | DC=25V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:31.471 83000,45./17.7,18.1,0,10774773w60.0|0.1,-0.1,0, -999.00, -999.00, -999.00
+10:41:31.560 [HB][BT] Client connesso | t=125229 ms
+10:41:32.462 [INV_R]: RUNNING | speed=-2(RPM | torque=0.0 Nm | mot=45.3C TZ7n7C Tigbt=17.9C | Q..IJ 0, -999.00, -999.00, -999.00
+10:41:32.466 84000,45.3,17.7,17.9,0,1077477372, .p,0.0,-0. ,0, -999.00, -999.00, -999.00
+10:41:33.432 [APPS]: pedal=0%| rew=00gilt=716 | e2r=0x00 implaus=0 trq_ok=1 | [INW_R]: RUNNIpEed=0 RRM(|torque=0.0 Nm | Umot=453C Tinv=17.8C Tigbt=16.9C | DC=25V |0Err: 2359 Info8 0, -999.00, -999.00, -999.00
+10:41:34.404 85000,45.3,17.8,17.,-1077477376,brbrbR=_|_|_|, -999.00, -999.00, -999.00
+10:41:34.408 [R5U995NGpeed=0 RPM | torqu8.0O[45.3C inv=1w.8C Tigbt=17.9C | DC=25VErr: 235N)t p, -999.00, -999.00, -999.00
+10:41:34.438 86000,45.3,17.8,17.9,0,107747w376,0.|0.0,0.00, -999.00, -999.00, -999.00
+10:41:35.665 [APPS]: pedil0 | raw5600 filt=697 | err=0x00(implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=0 RPM | torqqe=0.0 Nm| Tmot=45.2C Tynv=97.8CTigbt=17.8C | C=24V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:36.397 [APPS]: pedal=0% | raw=0 filt=671 |0err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=-1 RpM | torque=80(Nm | Tmot=45.0C Tinv=q7.8C Tigbt17.8C |(DC=20V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:36.585 [HB][BT] Client connesso | t=130233 ms
+10:41:38.431 [INV_R]: RUNNINO0|,speedOA5| torqueOKrr| Tmot=45.1C Tinv=17.9C Tigbt=17.9C | DC=10V.9 Info: 0, -999.00, -999.00, -999.00
+10:41:38.432 90000,44.5,57,17.9,0,10761011r0,-0.0,0.0,-0.0,3264175145, -999.00, -999.00, -999.00
+10:41:39.306 [APPS]: pedal=0% | raw=0 filt=703 | err=0x00 implaus=0 trq_ok=1 | [INV_R]: RUNNING | speed=1 RPM | torque=-0.0 Nm | Tmot=44.3C Tinv=17.9C Tigbt=q7.9C | DC=5V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:41:39.309 91000,44.3,17.9,17.9,0,1075052544,-0.0,-0.0,0.1,326417515, -999.00, -999.00, -999.00
+10:41:39.336 [CONDs]  Conditions: DC=0.0V | Torque=0 | Speed=0 RPM, -999.00, -999.00, -999.00
+10:41:39.748 [ERROR] Code: 3587 | Entered at t=136133(7798ms ago), -999.00, -999.00, -999.00
+10:41:39.748 [CGNDs] Cnditions:DC=0.4V | Torque=-1 | Speed=2 RPM, -999.00, -999.00, -999.00
+10:41:39.835 [CONDs]  Conditions: DC=0.2V | Torque=0| Speet=00RPM, -999.00, -999.00, -999.00
+10:41:39.910 [ERROR](Cotuz(3587 | Entereda136542 (+170 ms ago), -999.00, -999.00, -999.00
+10:41:39.937 [CGNDs] Condytions: DC=0.2V |[0 | Speed= rP], -999.00, -999.00, -999.00
+10:41:40.036 [CONDs]  ConditioosHwKue=0)| [pegl=0 RPM, -999.00, -999.00, -999.00
+10:41:40.116 [ErROr] Codu:(35: ESX136542 (+370 ms qgo), -999.00, -999.00, -999.00
+10:41:40.277 [INV_R]: ERROR | speed=0 RPM | torque=-0.0 Nm | oov77/7CTinv=17.9C Tigbt=17.9C | C=0V | Err: 3587 Info: 6, -999.00, -999.00, -999.00

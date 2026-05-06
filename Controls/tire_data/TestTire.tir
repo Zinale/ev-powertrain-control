@@ -2,7 +2,7 @@
 FILE_TYPE                ='tir'
 FILE_VERSION             = 3.0
 FILE_FORMAT              ='ASCII'
-! File generato e corretto per MATLAB/Simulink
+! : COMMENT :              File generato da MATLAB fitting
 $----------------------------------------------------------------units
 [UNITS]
 LENGTH                   ='meter'
@@ -13,28 +13,24 @@ TIME                     ='second'
 $-----------------------------------------------------------------model
 [MODEL]
 PROPERTY_FILE_FORMAT     ='PAC2002'
-USE_MODE                 = 14       $ Forza laterale + Momento allineante (senza dinamica dei fianchi)
-VNT_MIN                  = 1.0      $ Velocità minima di riferimento
+USE_MODE                 = 1
 $------------------------------------------------------------dimensions
 [DIMENSION]
-UNLOADED_RADIUS          = 0.2032     $ Raggio libero [cite: 3]
-WIDTH                    = 0.1524     $ Larghezza battistrada [cite: 3]
-ASPECT_RATIO             = 0.50       $ Rapporto d'aspetto [cite: 4]
-RIM_RADIUS               = 0.1270     $ Raggio cerchio [cite: 3]
-RIM_WIDTH                = 0.1778     $ Larghezza cerchio [cite: 3]
+UNLOADED_RADIUS          = 0.2032     $ (16"/2) in metri
+WIDTH                    = 0.1524     $ 6.0" in metri
+ASPECT_RATIO             = 0.50       $ Altezza spalla / Larghezza (3"/6")
+RIM_RADIUS               = 0.1270     $ (10"/2) in metri
+RIM_WIDTH                = 0.1778     $ Esempio: Cerchio da 7" in metri
 $--------------------------------------------------------------inertia
 [INERTIA]
-MASS                     = 5.2        $ Massa gomma [cite: 4]
-IXX                      = 0.35       $ Momento d'inerzia diametrale [cite: 4]
-IYY                      = 0.55       $ Momento d'inerzia polare [cite: 4]
+MASS                     = 5.2        $ Peso approssimativo in kg (circa 11.5 lbs)
+IXX                      = 0.35       $ DA VERIFICARE (Momento diametrale)
+IYY                      = 0.55       $ DA VERIFICARE (Momento polare)
 $-------------------------------------------------------------parameter
 [VERTICAL]
-FNOMIN                   = 1112.0     $ Forza nominale [cite: 5]
-VERTICAL_STIFFNESS       = 120000     $ Rigidezza verticale [cite: 6]
-VERTICAL_DAMPING         = 50         $ Smorzamento verticale [cite: 6]
-BREFF                    = 8.4        $ Fattore di raggio efficace (default)
-DREFF                    = 0.27       $ Fattore di raggio efficace (default)
-FREFF                    = 0.07       $ Fattore di raggio efficace (default)
+FNOMIN                   = 1112.000000    $ (Lascia FZ0 com'è nel codice)
+VERTICAL_STIFFNESS       = 120000     $ DA VERIFICARE (Rigidezza verticale N/m)
+VERTICAL_DAMPING         = 50         $ Smorzamento verticale Ns/m
 $--------------------------------------------------------------scaling
 [SCALING_COEFFICIENTS]
 LFZO                     = 1
@@ -48,21 +44,35 @@ LEY                      = 1
 LKY                      = 1
 $-------------------------------------------------------------LATERAL_FORCE
 [LATERAL_COEFFICIENTS]
-PCY1                     = 1.80950   $ Shape factor [cite: 8]
-PDY1                     = 2.63285   $ Peak friction [cite: 8]
-PDY2                     = -0.49999  $ Variation with load [cite: 9]
-PDY3                     = 9.99822   $ Variation with camber [cite: 9]
-PKY1                     = -21.27292 $ Cornering stiffness [cite: 9]
-PKY2                     = 0.77835   $ Load variation [cite: 10]
-PKY3                     = -0.22203  $ Camber variation [cite: 10]
-PEY1                     = 1.68127   $ Curvature factor [cite: 10]
-PEY2                     = 0.14432   $ Load variation [cite: 10]
-PEY3                     = -0.02731  $ Camber variation [cite: 10]
-PEY4                     = -2.72135  $ Camber variation [cite: 11]
-PHY1                     = -0.00502  $ Horizontal shift [cite: 11]
-PHY2                     = -0.00932  $ Load variation [cite: 11]
-PHY3                     = -0.20696  $ Camber variation [cite: 11]
-PVY1                     = -0.08608  $ Vertical shift [cite: 11]
-PVY2                     = 0.01447   $ Load variation [cite: 12]
-PVY3                     = -1.65332  $ Camber variation [cite: 12]
-PVY4                     = -1.39340  $ Camber/load variation [cite: 12]
+PCY1                     =    1.80950
+PDY1                     =    2.63285
+PDY2                     =   -0.49999
+PDY3                     =    9.99822
+PKY1                     =  -21.27292
+PKY2                     =    0.77835
+PKY3                     =   -0.22203
+PEY1                     =    1.68127
+PEY2                     =    0.14432
+PEY3                     =   -0.02731
+PEY4                     =   -2.72135
+PHY1                     =   -0.00502
+PHY2                     =   -0.00932
+PHY3                     =   -0.20696
+PVY1                     =   -0.08608
+PVY2                     =    0.01447
+PVY3                     =   -1.65332
+PVY4                     =   -1.39340
+$----------------------------------------------------------------long_slip
+[LONG_SLIP_RANGE]
+FREE_RADIUS              = 0.2032    $ Raggio libero [cite: 3]
+$---------------------------------------------------------------longitudinal
+[LONGITUDINAL_COEFFICIENTS]
+PCX1                     = 1.5       $ Coefficiente di forma [cite: 7]
+PDX1                     = 2.0       $ Attrito di picco [cite: 7]
+$-----------------------------------------------------------------bottoming
+[BOTTOMING_CURVE]
+$ Nessun dato richiesto per ora, ma la sezione aiuta il parser
+$-----------------------------------------------------------------operational
+[OPERATIONAL_SPECIFICATIONS]
+VXLOW                    = 1.0       $ Velocità minima per calcolo slip [cite: 1]
+ROAD_CONDITION           = 1.0       $ Condizione strada standard

@@ -14,3 +14,4 @@ Controls/docs/Perception, Deep Learning, and ADAS Workflows for Formula Student 
 /Controls/.specstory
 /Tests/mcu-test-f446re-peripherals/.specstory
 .pio/
+/.vscode

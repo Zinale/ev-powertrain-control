@@ -1,0 +1,2 @@
+../Core/Src/Drive/Regen.c:22:6:Regen_ShouldUseRegen	14
+../Core/Src/Drive/Regen.c:89:9:Regen_CalculateTorque	9

@@ -35,11 +35,12 @@ Cl       = -1;
 
 rid_ratio   = 14.5;    % Rapporto di riduzione [-]
 rid_eff     = 0.95;    % Efficienza riduttore  [-]
-R_wheel     = 0.225;   % Raggio ruota          [m]
+R_wheel     = 0.2032;   % Raggio ruota          [m]
 
 steer_ratio = 1/4.2;   % Steering ratio [rad_ruota / rad_volante]
 
-
+camber_rear = -1;
+pa_rear_wheel = 82700;      %12psi [Pa]
 
 
 %% -- Mappa Pedale (lookup table) ------------------------------------------
@@ -109,6 +110,8 @@ g               = 9.81;     %[m/s^2]
 
 Kus             = 0.00;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
 mu              = 1.6;      %Coefficiente di attrito strada-ruota
+gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
+scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
 
 
 %% -- Parametri TUNABLE per codegen (Simulink.Parameter) ------------------

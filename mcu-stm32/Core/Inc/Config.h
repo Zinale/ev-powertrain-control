@@ -37,12 +37,20 @@ extern "C" {
  * UART4 only (no verbose text). Designed for bench logging
  * through ESP32 → WiFi → Python script.
  *
- * STM32 CSV column order (left inverter):
- *   TempMotor[°C], TempInverter[°C], TempIGBT[°C],
- *   Speed[RPM], CurrentMotor[A], TorqueMotor[Nm], PedalPerc[%]
+ * FEATHER_LOCAL — MCU invia 17 campi, Feather appende NTC1/2/3 → 20 colonne totali:
+ *   Time_s, TempMotor, TempInverter, TempIGBT, Voltage, Speed,
+ *   Iq, Id, TorqueMotor, PedalPerc,
+ *   StatusWord, ErrCode, ErrInfo1,
+ *   PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W,
+ *   NTC1, NTC2, NTC3
  *
- * ESP32 appends: NTC1, NTC2, NTC3
- * Python script appends: Timestamp
+ * ESP32_REMOTE — MCU invia 20 campi, ESP32 appende NTC1/2/3 → 23 colonne totali:
+ *   Time_ms, TempMotor, TempInverter, TempIGBT, Voltage, Speed,
+ *   Iq, Id, TorqueMotor, PedalPerc, InvState, ErrCode, StatusWord, ErrInfo1,
+ *   PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W, TorqueSetpoint, TorqueLimitDyn,
+ *   NTC1, NTC2, NTC3
+ *
+ * UART4 baud rate: 9600 (corrisponde a UART_BAUD nel firmware Feather e SERIAL2_BAUD nell'ESP32)
  * ========================================================= */
 #define DATA_COLLECT_MODE
 
@@ -55,7 +63,7 @@ extern "C" {
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -233,7 +241,7 @@ extern "C" {
 
 //#define ANTI_NEG_WHILESTOPPED
 //#define REGEN_FORCE_ENABLE   /**< Debug override: bypasses all regen stages — comment out for normal operation */
-#define REGEN_ENABLED              0U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED              1U     /**< 1 = enabled, 0 = disabled */
 #define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
 #if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)
     #error "REVERSE_TORQUE_ENABLED cannot be true when REGEN_ENABLED is true, to avoid conflicting negative torque sources. Please disable one of them in Config.h."
@@ -246,7 +254,7 @@ extern "C" {
         #define REGEN_MODE_BALANCED        1U   /**< 75% of max regen torque (default) */
         #define REGEN_MODE_AGGRESSIVE      2U   /**< 100% of max regen torque */
         
-        #define REGEN_CURRENT_MODE         REGEN_MODE_BALANCED
+        #define REGEN_CURRENT_MODE         REGEN_MODE_CONSERVATIVE
         
         /* Battery safety limits — adapt to bench DC bus voltage!
          * Race config (540V:  REGEN_PBATT_MAX_W = 54000, NOMINAL_V = 540
@@ -260,7 +268,7 @@ extern "C" {
 
         /* Pedal threshold and hysteresis: below threshold regen can activate.
          * Hysteresis avoids traction/regen toggling near the crossing point. */
-        #define REGEN_PEDAL_THRESHOLD_PCT   40U      /**< Regen candidate when pedal < 25% */
+        #define REGEN_PEDAL_THRESHOLD_PCT   10U      /**< Regen candidate when pedal < 25% */
         #define REGEN_PEDAL_HYST_PCT        3U       /**< +/- hysteresis band around threshold */
         
         /* Motor speed thresholds */

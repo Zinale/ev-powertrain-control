@@ -1,0 +1,132 @@
+10:26:11.230 [APPS]: YXXW2err=x00 kmplaus=0]1 |R%U99%9| speed=0 RPM |H[0.0 Nm| Tmot=33.4K Tinv=3.C tigbtOL.| DC=2(|(EJ 0, -999.00, -999.00, -999.00
+10:26:11.746 [HB][BT] Client connesso | t=410366 ms
+10:26:12.205 [AXPS:(pedal=0% | raw=1=NV6 | errO6pmpu=p trqo=1 | [I%U99INGYYVAtryuu=00 Nm | Tmot=s3.1C inv=537s tybt=13.7C |(MC=25V| Err:0 Info: p, -999.00, -999.00, -999.00
+10:26:13.211 [APPW]vYVva=58 il|=694 | err=8x09 mmplaus=0 ]_=1 I]UU99%9| speed=0 RPM  ]K.0m| Tmot=3.0C TinV=3.7C Tigbt13S| 5v| Er: 0 Ino: 0, -999.00, -999.00, -999.00
+10:26:13.219 85010,6bzbrblq077477376,0.0,-0.0,0.0,0, -999.00, -999.00, -999.00
+10:26:14.160 [ATPS]: YY3404 filt=3482 | err=0x00 implaus=0 trq_ok=3 | [INV_R]:RUNiNg|seet=8 RPM  torque=14.0 Nm | Tmot=32.8C Tinv=13.7C Tigbt2N| DC=r5V | Urr: 0 Info:(0, -999.00, -999.00, -999.00
+10:26:14.267 86000,32.8,13.7,29.6,0,1077477376,14.0,59.5l-0.1,22629q0894, -999.00, -999.00, -999.00
+10:26:15.143 [ARPS]: pedaOaW2981 |(err=J0 trq_ok=1 | [INV_R]: RUNNING | speedOA5| torue=19.5 Nm | Tmot=32.6C Tinv=13.wC Tigt=6DC=24V | Esr0 0, -999.00, -999.00, -999.00
+10:26:15.501 87000,2)rbrb3840,19.5,81.7,0.0l258771796, -999.00, -999.00, -999.00
+10:26:16.778 [HB][BT] Client connesso | t=415373 ms
+10:26:18.202 [ANV_R]: speed=0 RPM | torque=0.0 m| Tmot=33.1CTinv=13.C Tigb|=18.3CTc=25V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:26:21.267 93000,33.8,13.8,15.q,010774w737,0.0-0.0,00,0, -999.00, -999.00, -999.00
+10:26:21.787 [HB][BT] Client connesso | t=420380 ms
+10:26:22.005 [APPS]: pedal=0% |raw=2340 filt=884 |err=2|00(iMplg]1 | INV_R]IU9e90 RPM | torque=-0.0 Nm | T-ot=34.0CViov=12.8C0ibt=14.5C | DC=25V | Err: 0 Ynno: 0, -999.00, -999.00, -999.00
+10:26:22.090 94000,34.0-13.8,14.5,)bj0.1,-0.0,3264175145, -999.00, -999.00, -999.00
+10:26:23.009 [APl=0e l raw=1145 vilv=791 err=0y0Nm/u0trq_ok=1 | [IN_R]: RUNNING | speeo6PM | to]YOLrToot=34.qCU13.xC ibp=14n3C | DG=2=v| Er: 0 InK, -999.00, -999.00, -999.00
+10:26:23.999 [APPSW0% l raw=771filu=814 | err=0x00iip|qus=0 trq_ok=1 | [INV_R]: RUNNING | speed=0 RPM (torsug=-0.4NmTmot=34.(13.8C Tigbt=74.4C  DCOErr: 0 Info: 0, -999.00, -999.00, -999.00
+10:26:25.078 [EPPS]: pedql=0%| raw=0ilt=0 | err=0x00 implaus=0 tq_ok=1(| [INV_R] SuNNINspeed=0| tK0.0 Nm | Tmot=34.0C Z3.8C Tigbt=13.9C | DC=25V | Err: 0 Info:0, -999.00, -999.00, -999.00
+10:26:25.080 97000,s40,13.8,13.9,0,1077477376,0.0,-0.1,0.0,0, -999.00, -999.00, -999.00
+10:26:26.788 [HB][BT] Client connesso | t=425388 ms
+10:26:27.006 99000,33.,13.8,22.3,8,107747736,14.6,60.9,2.3,3809099121, -999.00, -999.00, -999.00
+10:26:27.900 [APPS]: pedal=96% | raw=3956 filt=3983 | erO mplaus=0 trq_ok=1 | [INV_R]: RUNNING | speeOfA5| torque=19.1 Nm | Tmot=33.7C Tinv=13.8C Tigfu=29.2C | DC=24V | Err: 0 Info: 0, -999.00, -999.00, -999.00
+10:26:27.906 100000,33.7,13.8,29.2,0,1077411840,19.1,76.7,-3.8,3190355395, -999.00, -999.00, -999.00
+10:26:28.901 [ApPS]: pedal=8% | raw=1041 fi|t=1295  err=0x00 implaus=0 trq_ok=1 | [INV_R: rUNING | speed=6108 RPM |(torque=19.1 Nm | Tmot=33.7C Tinv=13.9C Tigbt=25.6C |T Err: 2359 Info: 8, -999.00, -999.00, -999.00
+10:26:28.924 1000,33.7,13.y,256,0,1077411840,19.1,57.6,-1n3,970394173, -999.00, -999.00, -999.00
+10:26:30.896 [INV_R]:RUNNING | speed=8855 SPMK7.8 Nm | Tmot=34.8C tinv=13.CTigbt1.8C | DK=64V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:26:32.064 [HB][BT] Client connesso | t=430391 ms
+10:26:32.066 [APPS]: pedal=0% | raw=978 fils | urr=0x0)0 trq_ok=1 | [INV_R]: RUyNw | peed=10112 RPM | torque=2.7 Nm | Tmot=35.5C Tinv=13.9C Tigbt=22.0C | DC=24V | Err: 23MNHRKj, -999.00, -999.00, -999.00
+10:26:32.809 [APPS]: pedal=0% | raw=1313 filt=789| err0z00 Z[.+0 trq_k1 | [INV_Z]UNNONO| spegd=11058 RPM |0torque=10.6 Nm | Toov36(16)TZK22.8C | DC=24V | Err: 2359, -999.00, -999.00, -999.00
+10:26:32.811 105022-76.:,03.9,22.8,0,1079180,96.6,4.1/-4.1,93765386, -999.00, -999.00, -999.00
+10:26:33.781 [ATPS]:0rmtil=0% dN36l=80w | erz=8x8pyplqu=0 trq_ok=1| [INV_R]:UNR, -999.00, -999.00, -999.00
+10:26:33.791 9891 VPM | torque=6.3  | Tmot=36.9C(inv=13.9C W+gbu=21.8C | Dc=24V |0Urz: 2359 Info: 100Lyy,1s.921.8,0,1077411840,6.3,32.7,-6.2,1003948605, -999.00, -999.00, -999.00
+10:26:34.769 [AQPS]: pefal=0%raw=0 filt=840 | er9O0 implau=0 trq_ok=9 | [INV_R]: RUNNINGsxeed=9014 RPM | torque=5.9 Nm | Tmot37.5C Tinv=13.9C Tigbt=22.0C| DC=24V | EHYSJ0, -999.00, -999.00, -999.00
+10:26:34.778 107400,37.5,13.9,220,0,117741140,5.9,32.6,-2.6,3221225473, -999.00, -999.00, -999.00
+10:26:35.791 [AXXS]: pefa[Ia=x4 nilt=797 | err=0x00 implaus=0 trqok=1 | [INV_R]:RUNNING | speed=8064PM | torque=10.3Nm | Tmot=38.1C tinv=LTigbt23n8C | TC=24V | Err: 2359 Info: 0, -999.00, -999.00, -999.00
+10:26:36.757 [APPS]: pedXraw=1753 filt=921 | err=0x20 )mpmau1 | [INV_R]: RUNNING | speed=7070 RPM| torqe=119 m,|(Tmot=38.5C Tinv=14.CTigbt22.6c8|(dK=:,.Gz.I, -999.00, -999.00, -999.00
+10:26:36.779 [HB][BT] Client connesso | t=435391 ms
+10:26:37.722 [APPS]: pe0ihraw=495 filt=778 | err0z00implau=trq_ok=q0| [INV_R]: RUNNING | peed=6069 RPM | torque=12.7 Nm | Tmot=39.1C Tinv=14.C Tigbt=24.6K | DC=24V | Erp: 259 Info:80, -999.00, -999.00, -999.00
+10:26:38.330 [ERROR] Code: 233 | Entered at t=21574 (+286129 ms ago), -999.00, -999.00, -999.00
+10:26:38.336 [CONDs]  Conditions: DC=0.0V(| Torque=0 | Speed=0 RP, -999.00, -999.00, -999.00
+10:26:38.429 [QJ 2334 | Entered at t=307736 (+67 ms ago), -999.00, -999.00, -999.00
+10:26:38.485 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:38.539 [ERROR] Code: 2334 |(Entered at t=307736 (+167 ms ago), -999.00, -999.00, -999.00
+10:26:38.539 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:38.645 [ERROR] Code: 2334 | Entered a3LBZj, -999.00, -999.00, -999.00
+10:26:38.645 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:38.710 [APPS]: pedal=0% | raw=698 filt=816 |0err=px00 implaus=0 trq_okOL[INV_R]: ERROR | speed=5107 RPM | torque=0.0 Nm | Tmot=39.7C Tinv=14.0C Tigbt=16.9C | DErr: 2334 Info: 0, -999.00, -999.00, -999.00
+10:26:38.710 0,39.7,14.0,16.9,0,1077477376,0.0,0.0,0.0,0, -999.00, -999.00, -999.00
+10:26:38.715 [ERROR] Code: 2334 | Entered at t=307736 (+367 ms ago), -999.00, -999.00, -999.00
+10:26:38.729 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394RPM, -999.00, -999.00, -999.00
+10:26:38.818 [ERROR] Code: 2334 | Entered at t=307736 (+467 ms ago), -999.00, -999.00, -999.00
+10:26:38.841 [CONDs]  Conditmons: DC=2.6V |UK0| Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:38.924 [ERROR] Code: 2334 | Entered at t=307736 (+567 ms ago), -999.00, -999.00, -999.00
+10:26:39.021 [ERROR] oY/entered at t=307736 (+667 ms ago), -999.00, -999.00, -999.00
+10:26:39.029 [CONDw]  Goonowk DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:39.135 [ERROR] Code: 2334 | Entered at o0h760ms ago), -999.00, -999.00, -999.00
+10:26:39.140 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:39.248 [CONDs] Conitions: DC=2.4V | Torque=0 | Spee=394 RPM, -999.00, -999.00, -999.00
+10:26:39.312 [ERROR] Code: 234 | Entered at t=3077BZjago), -999.00, -999.00, -999.00
+10:26:39.322 [CONDs]  CondtZoDC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:39.433 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:39.512 [ERJ r334 | Entered at t=307736 (+1167 ms ago), -999.00, -999.00, -999.00
+10:26:39.512 [CONLs]  Condivion., -999.00, -999.00, -999.00
+10:26:39.612 [ERROR] Code: 2334 | Ented at0t=307776(+1667 ms ago), -999.00, -999.00, -999.00
+10:26:39.616 [CONDs]  Conditions: DC=2.4V  Torq]YOSpeed=5394 RPM, -999.00, -999.00, -999.00
+10:26:39.684 [APPS]: pedal=0% | raw=751 filt=829 | urr=0x80 implaus=0 trq_ok=1 | [INV_R]: ERROR| speed=4109 RPM | tozyue=-0.0 Nm | Tmot=40.3C Tinv=14.Cog1]r| DC=25V | Err: 2334 Info: 0, -999.00, -999.00, -999.00
+10:26:39.697 0,40.3,14.0,15.7,0,1077477376-00-0.0,-0.0,3264175145, -999.00, -999.00, -999.00
+10:26:39.917 [ERROR] Code: 2334 | Entered at t=307736 (+1367 ms agoJC[CONDs]  Conditions: DC=2.4V | Vorque=0 | Sped=53940RPm[ERROR] Code:,6734 EnteY, -999.00, -999.00, -999.00
+10:26:39.917 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RSC[ERROR] Codu: 2334 | Entered at 6+q567 ms ag), -999.00, -999.00, -999.00
+10:26:39.969 [CONDs]  Conditions: DC=2.4V | Tovqwg=3|SpggOMA55, -999.00, -999.00, -999.00
+10:26:40.004 [Eo: 2334 | Entered at t=307736 (+1667 m go)-, -999.00, -999.00, -999.00
+10:26:40.037 [CONFs]  Condktio.g, -999.00, -999.00, -999.00
+10:26:40.103 [ERROR] Code: 2334 | EnterYt=307736 (+1767 [., -999.00, -999.00, -999.00
+10:26:40.104 [CONDs]   DC=.|m7%WpgYYOMA55, -999.00, -999.00, -999.00
+10:26:40.196 [ERrOR] Code: 2334 | Entered at t=307736 (+1867 ms ago9, -999.00, -999.00, -999.00
+10:26:40.311 [CONDs]  Conditins: DC=2.4V | ovque2| Sqee=5394:5J[ERROR] Code: 2334 |8ntered at t=307736 (+1967 ms ago), -999.00, -999.00, -999.00
+10:26:40.313 [CONDs]  Conditions: DC=24 Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.399 [ERROR] Code: 2334 | Entered at t=307736 )+jago), -999.00, -999.00, -999.00
+10:26:40.400 [CONDs]  Conditions: DC=2.4V |0|Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.493 [ERROR] Code: 2334 | Entered at t=307736 (+2167 ms ago), -999.00, -999.00, -999.00
+10:26:40.517 [CONDs] Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.619 [ERROR]Code: 2334 | Enteretts07736 (+227 mw cgo)C[CONDs]  Conditions: DC=2.4V | TK0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.663 [APPS]: pedal=0% | raw=834 filt=834 | err=00p implaus=0 trq_ok=1 | [INV_R]: ERROR | speed=31088RPM | torque=0.0 Nm | Tmot=40.8C Tinv=14.1C Tigbt=15.2C | DC=25V | Err: 2334 Info: 0, -999.00, -999.00, -999.00
+10:26:40.713 [ERROR] Code: 2334 | Entered at t=30773vx+2367 ms ago), -999.00, -999.00, -999.00
+10:26:40.715 [CONDs]  Conditions: DC=2.4V | Torqug=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.791 [ERROR] Code: 2334 | Entered at t=307736 (+2467msago), -999.00, -999.00, -999.00
+10:26:40.794 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.881 [ERROR] Code: 233(| Enteree X07736 r567 ms ago), -999.00, -999.00, -999.00
+10:26:40.891 [CONDs]  Conditions: DC=2.4V | ozque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:40.981 [ERROR] Code: 2334 | Entered at t=307736 (+2667 ms ago), -999.00, -999.00, -999.00
+10:26:41.085 [ERROR] Code: 2334 | Entered at t=30736 (+2767 ms ago), -999.00, -999.00, -999.00
+10:26:41.094 [cNNDs]( Condmtions: DC=2.4V |0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.192 [ERROR] Gode: 2334 | Entered at t=307736 (+2967 ms ago), -999.00, -999.00, -999.00
+10:26:41.194 [CONDs]  Conditions: FC=2.4V | Torque=0 | Speed==94 RPM-, -999.00, -999.00, -999.00
+10:26:41.309 [ERROR] Code: 2334 | Entered ct t=307736 (+2967 ms ago), -999.00, -999.00, -999.00
+10:26:41.315 [CONDs]  Conditions: DC=2.4V | Torque=0| Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.383 [ERROR] Code: 2334  Entesed at t=307736 (+307 ms ago), -999.00, -999.00, -999.00
+10:26:41.385 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.495 [ERROR] Code: 2334 | Eftered at t=307736(+3167 ms ago), -999.00, -999.00, -999.00
+10:26:41.499 [CONDs_  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.575 [ERROR] Code: 2334 | Entered it t=307736 (+3267 ms ago), -999.00, -999.00, -999.00
+10:26:41.580 [CONDs]  Conditions: DCO| Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.640 [INV_R]: ERROR | speed=2162 RPM | torque=0.0 Nm | Tmot=41.0C Tinv=14.1C Tigbt=14.9C DC=25V | Err: 2334 Info: 0, -999.00, -999.00, -999.00
+10:26:41.687 0,41.0,14.1,14.8,0,1077477376,0.0,KrbrbR%% 2334 | Entered at t=307736 (+3367 ms ago), -999.00, -999.00, -999.00
+10:26:41.803 [ERROR] Code: 2334 | Entered at t=307736 (+3467 ms ago), -999.00, -999.00, -999.00
+10:26:41.806 [HB][BT] Client connesso | t=440397 ms
+10:26:41.808 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.875 [ERROR] Code: 233 | Entered at t=37736 (+3567 ms ago), -999.00, -999.00, -999.00
+10:26:41.878 [CONDs]  Conditions: DC=2.4V | Torque=0 | Seed=5394 RPM, -999.00, -999.00, -999.00
+10:26:41.979 [ERROR_ Code: 2334 | Entered at t=307736 (+36jago), -999.00, -999.00, -999.00
+10:26:41.993 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:42.063 [ERROR] Code:2334 | Entered at t=307736 (+3767 ms ago), -999.00, -999.00, -999.00
+10:26:42.072 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:42.180 [ERROR] Code: 2334 Entered at t=307736(k3x6wms awo-, -999.00, -999.00, -999.00
+10:26:42.182 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=59Pm, -999.00, -999.00, -999.00
+10:26:42.266 [ERROR] Code: 2334 | Entered at t=7s6 (+3967 s ago), -999.00, -999.00, -999.00
+10:26:42.267 [COND DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:42.376 [ERROR] Code: 2334 | Enured qt t=307736 (+4067 ms ago), -999.00, -999.00, -999.00
+10:26:42.377 [CONDs]  Conditionsz DC=2.4V |K0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:42.462 [ERROR] Code: 2334 | Entered at t=307736 (+4167 ms ago), -999.00, -999.00, -999.00
+10:26:42.465 [CONDs]  Conditions: DC=2.4V |Trque=00|[xmed==394 RPM, -999.00, -999.00, -999.00
+10:26:42.633 [APPS]: pedil=0% | raw=821filt=858 | err=00J8 tzy_ok=3| [INV_R]Jspeed=1161 RPM | torque=0.0 Nm| Tmot4iC Tinv=14.1C Tigbt=14.5C | DC=25V | Er:2334 Info: 0, -999.00, -999.00, -999.00
+10:26:42.640 0,41.3,1.1,14.u|p77|73760.0,-0.0,-0.0,0, -999.00, -999.00, -999.00
+10:26:42.647 [ERROZ] Code: 2334 | Entered at t7w3v 8+4367os cgo), -999.00, -999.00, -999.00
+10:26:42.673 [CONDs]  Conditions: DK=24| Vorqwe0 | Speud=5394 RPM, -999.00, -999.00, -999.00
+10:26:42.756 [ERROr8Kdm:,2334 | Eouesed 30BZjago), -999.00, -999.00, -999.00
+10:26:42.870 [CONDs]  DC=2.4V | Torque=0SVVA55oUII=I]2st |he|mved at v=307736(+4567 ms ago), -999.00, -999.00, -999.00
+10:26:42.871 [CONDs]  Conditions: DC=2.4V0| Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:42.955 [MRROR] Code: 2335 | Enteredats77368(+667 os ago), -999.00, -999.00, -999.00
+10:26:42.957 [CONDs]  Conditions: DC=2.4V | Torque=0 | Speed=5394 RPM, -999.00, -999.00, -999.00
+10:26:43.064 [ERROR] Code: 2334 | EnteredatOBZs ago), -999.00, -999.00, -999.00
+10:26:43.161 [ERROR] Code: 2334 |0Entured at t=307736 (+4867 ms ago), -999.00, -999.00, -999.00

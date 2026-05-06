@@ -6,7 +6,7 @@ disp("Caricamento del modello Simulink in corso...");
 load_system("peacockElettricaSimulink.slx");
 
 disp("Lettura del file FSAE_Tire_Combined.tir...");
-tm = tireModel.import("data/FSAE_Tire_Combined.tir");
+tm = tireModel.import("tire_data/TestTire2.tir");
 
 disp("Esportazione dei parametri nel blocco Simulink...");
 set(tm, "peacockElettricaSimulink/Combined Slip Wheel 2DOF", ...
