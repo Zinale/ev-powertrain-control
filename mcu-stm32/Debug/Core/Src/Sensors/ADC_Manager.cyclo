@@ -1,0 +1,5 @@
+../Core/Src/Sensors/ADC_Manager.c:23:6:ADC_Manager_Init	2
+../Core/Src/Sensors/ADC_Manager.c:39:6:ADC_Manager_ConversionComplete	3
+../Core/Src/Sensors/ADC_Manager.c:54:6:ADC_Manager_GetBuffer	2
+../Core/Src/Sensors/ADC_Manager.c:64:6:ADC_Manager_GetAPPS	2
+../Core/Src/Sensors/ADC_Manager.c:80:6:ADC_Manager_GetSteering	2

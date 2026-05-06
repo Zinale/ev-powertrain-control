@@ -1,7 +1,7 @@
 /**
  * @file data_logger.c
  * @author Alessandro Zingaretti | Polimarche Racing Team - UNIVPM
- * @brief Data Logger Task periodic UART5 diagnostic output for the MCU-ECU
+ * @brief Data Logger Task periodic UART4 diagnostic output for the MCU-ECU
  *
 
  *  Data Logger Task
@@ -40,10 +40,11 @@ extern CAN_HandleTypeDef hcan2;
  */
 #ifdef DATA_COLLECT_MODE
     #if (DATA_COLLECT_BACKEND == DATA_COLLECT_BACKEND_FEATHER_LOCAL)
-        /* Feather logger is connected on UART5: keep UART5 strictly data-only. */
-        #define LOGGER_CHANNEL      LOG_CH_UART5
+        /* Feather logger is connected on UART4: keep UART4 strictly data-only. */
+        #define LOGGER_CHANNEL      LOG_CH_UART4
     #else
-        #define LOGGER_CHANNEL      LOG_CH_BOTH
+        /* ESP32_REMOTE: UART4 goes directly to the ESP32 bridge. */
+        #define LOGGER_CHANNEL      LOG_CH_UART4
     #endif
     #define LOGGER_TASK_PERIOD_MS   DATA_COLLECT_PERIOD_MS  
 #else
@@ -82,6 +83,11 @@ void DataLoggerTask(void)
     /* CMSIS-RTOS: osDelayUntil expects an ABSOLUTE tick */
     uint32_t next_wake          = osKernelGetTickCount();
     const uint32_t period_ticks = MS_TO_TICKS(LOGGER_TASK_PERIOD_MS);
+
+    /* Startup beacon: confirms DataLoggerTask is alive and UART4 DMA works.
+     * If this line is received the hardware path is functional.             */
+    Serial_Log(LOG_CH_UART4, "[BOOT] DataLogger started t=%lu\r\n",
+               (unsigned long)HAL_GetTick());
 
     for (;;)
     {
@@ -203,9 +209,16 @@ void DataLoggerTask(void)
                         s_feather_logging_active = 0U;
                     } else {
                         const uint32_t elapsed_ms = HAL_GetTick() - s_feather_start_tick_ms;
+                        /*
+                         * CSV line — colonne (Feather appende NTC1,NTC2,NTC3 dopo):
+                         *   Time_s, TempMotor, TempInverter, TempIGBT, Voltage,
+                         *   Speed, Iq, Id, TorqueMotor, PedalPerc,
+                         *   StatusWord, ErrCode, ErrInfo1,
+                         *   PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W
+                         */
                         Serial_Log(LOGGER_CHANNEL,
-                            "%.1f,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u\n",
-                                elapsed_ms / 1000.0f,
+                            "%.1f,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u,%u,%u,%lu,%ld,%ld,%ld,%lu\n",
+                            elapsed_ms / 1000.0f,
                             (float)dc_inv->motor_temp_degC    / 10.0f,
                             (float)dc_inv->inverter_temp_degC / 10.0f,
                             (float)dc_inv->igbt_temp_degC     / 10.0f,
@@ -214,7 +227,14 @@ void DataLoggerTask(void)
                             (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
                             (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
                             (float)dc_inv->torque_value * TORQUE_SCALE_FACTOR,
-                            apps_copy.final_percent);
+                            apps_copy.final_percent,
+                            (unsigned)dc_inv->status_word,
+                            (unsigned)dc_inv->error_code,
+                            (unsigned long)dc_inv->error_info_1,
+                            (long)dc_inv->phase_u_current,
+                            (long)dc_inv->phase_v_current,
+                            (long)dc_inv->phase_w_current,
+                            (unsigned long)dc_inv->actual_power);
                     }
                 }
             #else
@@ -249,10 +269,12 @@ void DataLoggerTask(void)
                 /*
                  * CSV line — column order must match the Python script header:
                  *   ElapsedMs, TempMotor, TempInverter, TempIGBT, Voltage,
-                 *   Speed, Iq, Id, TorqueMotor, PedalPerc
+                 *   Speed, Iq, Id, TorqueMotor, PedalPerc, InvState, ErrCode,
+                 *   StatusWord, ErrInfo1, PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W,
+                 *   TorqueSetpoint, TorqueLimitDyn
                  */
                 Serial_Log(LOGGER_CHANNEL,
-                    "%lu,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u\n",
+                    "%lu,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u,%d,%u,%u,%lu,%ld,%ld,%ld,%lu,%d,%d\n",
                     (unsigned long)elapsed_ms,
                     (float)dc_inv->motor_temp_degC    / 10.0f,
                     (float)dc_inv->inverter_temp_degC / 10.0f,
@@ -262,7 +284,17 @@ void DataLoggerTask(void)
                     (float)dc_inv->raw_torque_current * Iq_SCALE_FACTOR,
                     (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
                     (float)dc_inv->torque_value * TORQUE_SCALE_FACTOR,
-                    apps_copy.final_percent);
+                    apps_copy.final_percent,
+                    (int)dc_inv->state,
+                    (unsigned)dc_inv->error_code,
+                    (unsigned)dc_inv->status_word,
+                    (unsigned long)dc_inv->error_info_1,
+                    (long)dc_inv->phase_u_current,
+                    (long)dc_inv->phase_v_current,
+                    (long)dc_inv->phase_w_current,
+                    (unsigned long)dc_inv->actual_power,
+                    (int)dc_inv->torque_request,
+                    (int)torque_lim_copy);
             #endif
 #else
             /* ---- State-aware serial output ------------------------------------------ */
@@ -325,6 +357,18 @@ void DataLoggerTask(void)
                         inv_l_copy.actual_power,
                         HAL_GetTick() - inv_l_copy.last_rx_timestamp_ms);
 
+                    Serial_Log(LOGGER_CHANNEL,
+                        "[SW_L ] 0x%04X | SysRdy=%d Err=%d Warn=%d QDCon=%d DCon=%d QInvOn=%d InvOn=%d Der=%d\r\n",
+                        inv_l_copy.status_word,
+                        !!(inv_l_copy.status_word & INV_STAT_SYSTEM_READY),
+                        !!(inv_l_copy.status_word & INV_STAT_ERROR),
+                        !!(inv_l_copy.status_word & INV_STAT_WARN),
+                        !!(inv_l_copy.status_word & INV_STAT_QUIT_DC_ON),
+                        !!(inv_l_copy.status_word & INV_STAT_DC_ON),
+                        !!(inv_l_copy.status_word & INV_STAT_QUIT_INV_ON),
+                        !!(inv_l_copy.status_word & INV_STAT_INVERTER_ON),
+                        !!(inv_l_copy.status_word & INV_STAT_DERATING));
+
                     if (inv_l_copy.state == INV_STATE_ERROR)
                     {
                         Serial_Log(LOGGER_CHANNEL,
@@ -355,6 +399,18 @@ void DataLoggerTask(void)
                         inv_r_copy.dc_bus_voltage,
                         inv_r_copy.actual_power,
                         HAL_GetTick() - inv_r_copy.last_rx_timestamp_ms);
+
+                    Serial_Log(LOGGER_CHANNEL,
+                        "[SW_R ] 0x%04X | SysRdy=%d Err=%d Warn=%d QDCon=%d DCon=%d QInvOn=%d InvOn=%d Der=%d\r\n",
+                        inv_r_copy.status_word,
+                        !!(inv_r_copy.status_word & INV_STAT_SYSTEM_READY),
+                        !!(inv_r_copy.status_word & INV_STAT_ERROR),
+                        !!(inv_r_copy.status_word & INV_STAT_WARN),
+                        !!(inv_r_copy.status_word & INV_STAT_QUIT_DC_ON),
+                        !!(inv_r_copy.status_word & INV_STAT_DC_ON),
+                        !!(inv_r_copy.status_word & INV_STAT_QUIT_INV_ON),
+                        !!(inv_r_copy.status_word & INV_STAT_INVERTER_ON),
+                        !!(inv_r_copy.status_word & INV_STAT_DERATING));
 
                     if (inv_r_copy.state == INV_STATE_ERROR)
                     {

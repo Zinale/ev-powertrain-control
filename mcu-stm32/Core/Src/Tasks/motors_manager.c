@@ -123,6 +123,8 @@ uint16_t s_error_r_dc_voltage = 0U;
 int16_t  s_error_r_torque     = 0;
 int16_t  s_error_r_speed      = 0;
 
+uint8_t pedal_percent;
+
 void MotorsManagerTask(void)
 {
     uint32_t next_wake          = osKernelGetTickCount();
@@ -136,11 +138,14 @@ void MotorsManagerTask(void)
          *  1 — Read APPS output under mutex 
          */
         Mutex_APPS_Lock();
-        uint8_t pedal_percent = g_apps.torque_allowed ? g_apps.final_percent : 0U;
+        pedal_percent = g_apps.torque_allowed ? g_apps.final_percent : 0U;
         pedal_percent = (pedal_percent > 90U) ? 100U : pedal_percent; /* sanity cap */
-        /* Deadzone and snap are already handled by APPS.c (APPS_DEADZONE_PERCENT).
-         * Do NOT apply a second deadzone here — it would conflict with an uncalibrated
-         * potentiometer and cause torque to remain at maximum even with pedal released. */
+        /* NOTE: The lower cap (< 20 → 0) has been removed.
+         * Deadzone is already handled by APPS.c (APPS_DEADZONE_PERCENT = 30%).
+         * Applying a second hard snap here creates an artificial step at 20% that
+         * breaks the regen hysteresis latch: pedal_percent jumps between 0 (regen)
+         * and >exit_thr (traction) every 10 ms cycle, causing uncontrolled torque
+         * oscillation when REGEN_ENABLED is active. */
         bool torque_allowed = g_apps.torque_allowed && MCU_IsTorqueAllowed();
         bool apps_implausibility = g_apps.implausibility_active;
 

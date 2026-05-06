@@ -1,0 +1,15 @@
+../Core/Src/Sensors/APPS.c:31:13:sort_array	4
+../Core/Src/Sensors/APPS.c:47:17:apply_median_filter	4
+../Core/Src/Sensors/APPS.c:73:17:apply_moving_average	4
+../Core/Src/Sensors/APPS.c:97:17:apply_filter	1
+../Core/Src/Sensors/APPS.c:106:16:normalize_to_percent	5
+../Core/Src/Sensors/APPS.c:146:13:check_sensor_mismatch	5
+../Core/Src/Sensors/APPS.c:185:13:check_out_of_range	6
+../Core/Src/Sensors/APPS.c:212:13:check_reset_condition	3
+../Core/Src/Sensors/APPS.c:225:13:run_plausibility_checks	5
+../Core/Src/Sensors/APPS.c:275:6:APPS_Init	1
+../Core/Src/Sensors/APPS.c:296:6:APPS_Update	3
+../Core/Src/Sensors/APPS.c:327:6:APPS_SetCalibration	3
+../Core/Src/Sensors/APPS.c:337:6:APPS_ForceReset	1
+../Core/Src/Sensors/APPS.c:351:9:APPS_GetPercent	1
+../Core/Src/Sensors/APPS.c:357:9:APPS_GetSensorPercent	2

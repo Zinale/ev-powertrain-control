@@ -1,0 +1,7 @@
+../Core/Src/Safety/MCU_State.c:21:13:set_state	16	static
+../Core/Src/Safety/MCU_State.c:34:6:MCU_State_Update	24	static
+../Core/Src/Safety/MCU_State.c:123:13:MCU_State_Get	4	static
+../Core/Src/Safety/MCU_State.c:128:10:MCU_State_GetEntryTick	4	static
+../Core/Src/Safety/MCU_State.c:133:6:MCU_IsTorqueAllowed	4	static
+../Core/Src/Safety/MCU_State.c:138:6:MCU_IsSerialEnabled	4	static
+../Core/Src/Safety/MCU_State.c:144:13:MCU_State_ToString	16	static

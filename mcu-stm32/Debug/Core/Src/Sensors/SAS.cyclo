@@ -1,0 +1,10 @@
+../Core/Src/Sensors/SAS.c:28:13:sort_array	4
+../Core/Src/Sensors/SAS.c:44:17:apply_median_filter	3
+../Core/Src/Sensors/SAS.c:67:17:apply_moving_average	3
+../Core/Src/Sensors/SAS.c:89:17:apply_filter	1
+../Core/Src/Sensors/SAS.c:98:16:adc_to_angle	4
+../Core/Src/Sensors/SAS.c:143:13:check_out_of_range	5
+../Core/Src/Sensors/SAS.c:165:6:SAS_Init	1
+../Core/Src/Sensors/SAS.c:189:6:SAS_Update	2
+../Core/Src/Sensors/SAS.c:213:6:SAS_SetCalibration	1
+../Core/Src/Sensors/SAS.c:226:6:SAS_ForceReset	1

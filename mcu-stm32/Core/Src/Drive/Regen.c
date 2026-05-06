@@ -21,6 +21,14 @@ static bool s_regen_latch[3] = {false, false, false};
 
 bool Regen_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent)
 {
+
+    /*
+    if (pedal_percent <= REGEN_PEDAL_THRESHOLD_PCT && inv->speed_rpm > (int16_t)REGEN_SPEED_MIN_RPM) {
+        // Below threshold: always allow regen (if speed is high enough, checked in the latch logic below)
+        return true;
+    }
+    */
+
     if (inv == NULL || inv->node_id == 0U || inv->node_id >= 3U) {
         return false;
     }
@@ -30,12 +38,7 @@ bool Regen_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent)
         return false;
     }
 
-    if (pedal_percent <= REGEN_PEDAL_THRESHOLD_PCT && inv->speed_rpm > (int16_t)REGEN_SPEED_MIN_RPM) {
-        /* Below threshold: always allow regen (if speed is high enough, checked in the latch logic below) */
-        return true;
-    }
 
-    return false;
 
     /* Speed hysteresis on latch RESET:
      *   - Latch CAN DEACTIVATE only when speed drops below REGEN_SPEED_CRITICAL_RPM
@@ -98,18 +101,6 @@ int16_t Regen_CalculateTorque(int16_t speed_rpm, uint8_t pedal_percent, uint16_t
         return 0;
     }
     
-    /* Safety: if motor effectively stopped, no regeneration.
-     * Use the LOWER guard band (90% of CRITICAL), NOT
-     * REGEN_SPEED_CRITICAL_RPM, to stay CONSISTENT with the
-     * latch reset threshold in Regen_ShouldUseRegen(). */
-    const int16_t speed_hard_stop = (int16_t)(REGEN_SPEED_CRITICAL_RPM * 9U / 10U); 
-    if (abs(speed_rpm) <= speed_hard_stop) {
-        return 0;
-    }
-    
-    if (speed_rpm < 10) {
-        return 0;
-    }
     
     /*  STAGE 1: Pedal-dependent linear ramping */
     /* T_req = -T_max_regen * (1 - pedal_pct / threshold)  [NEGATIVE = braking] */

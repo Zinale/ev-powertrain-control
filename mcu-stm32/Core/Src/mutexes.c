@@ -12,8 +12,10 @@
  *  - mutex_SAS        : SAS steering sensor data protection
  *  - mutex_INVERTER_L : Left inverter structure protection
  *  - mutex_INVERTER_R : Right inverter structure protection
- *  - mutex_UART5      : UART5 serial communication protection
+ *  - mutex_UART4      : UART4 serial communication protection (ESP32)
+ *  - mutex_UART3      : UART3 serial communication protection (PC)
  *  - mutex_CAN1       : CAN1 bus access protection
+ *  - mutex_CAN2       : CAN2 bus access protection
  */
 
 #include "mutexes.h"
@@ -30,9 +32,8 @@ extern osMutexId_t mutex_APPSHandle;
 extern osMutexId_t mutex_SASHandle;
 extern osMutexId_t mutex_INVERTER_LHandle;
 extern osMutexId_t mutex_INVERTER_RHandle;
-extern osMutexId_t mutex_UART5Handle;
+extern osMutexId_t mutex_UART4Handle;
 extern osMutexId_t mutex_UART3Handle;
-extern osMutexId_t mutex_UART6Handle;
 extern osMutexId_t mutex_CAN1Handle;
 extern osMutexId_t mutex_CAN2Handle;
 
@@ -101,19 +102,19 @@ void Mutex_INVERTER_R_Unlock(void)
 }
 
 /* =============================================================================
- *  UART5 MUTEX
+ *  UART4 MUTEX
  * ============================================================================= */
 
-void Mutex_UART5_Lock(void)
+void Mutex_UART4_Lock(void)
 {
-    if (mutex_UART5Handle != NULL)
-        osMutexAcquire(mutex_UART5Handle, osWaitForever);
+    if (mutex_UART4Handle != NULL)
+        osMutexAcquire(mutex_UART4Handle, osWaitForever);
 }
 
-void Mutex_UART5_Unlock(void)
+void Mutex_UART4_Unlock(void)
 {
-    if (mutex_UART5Handle != NULL)
-        osMutexRelease(mutex_UART5Handle);
+    if (mutex_UART4Handle != NULL)
+        osMutexRelease(mutex_UART4Handle);
 }
 
 /* =============================================================================
@@ -130,22 +131,6 @@ void Mutex_UART3_Unlock(void)
 {
     if (mutex_UART3Handle != NULL)
         osMutexRelease(mutex_UART3Handle);
-}
-
-/* =============================================================================
- *  UART6 MUTEX
- * ============================================================================= */
-
-void Mutex_UART6_Lock(void)
-{
-    if (mutex_UART6Handle != NULL)
-        osMutexAcquire(mutex_UART6Handle, osWaitForever);
-}
-
-void Mutex_UART6_Unlock(void)
-{
-    if (mutex_UART6Handle != NULL)
-        osMutexRelease(mutex_UART6Handle);
 }
 
 /* =============================================================================
@@ -190,9 +175,8 @@ bool Mutex_IsInitialized(void)
            (mutex_SASHandle        != NULL) &&
            (mutex_INVERTER_LHandle != NULL) &&
            (mutex_INVERTER_RHandle != NULL) &&
-           (mutex_UART5Handle      != NULL) &&
+           (mutex_UART4Handle      != NULL) &&
            (mutex_UART3Handle      != NULL) &&
-           (mutex_UART6Handle      != NULL) &&
            (mutex_CAN1Handle       != NULL) &&
            (mutex_CAN2Handle       != NULL);
 }

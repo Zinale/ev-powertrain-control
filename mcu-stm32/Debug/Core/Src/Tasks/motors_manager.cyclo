@@ -1,0 +1,7 @@
+../Core/Src/Tasks/motors_manager.c:128:6:MotorsManagerTask	10
+../Core/Src/Tasks/motors_manager.c:453:6:InvertersManage_GetErrorSnapshot	2
+../Core/Src/Tasks/motors_manager.c:462:6:InvertersManage_GetErrorSnapshotRight	2
+../Core/Src/Tasks/motors_manager.c:471:6:InvertersManage_GetTimingStats	1
+../Core/Src/Tasks/motors_manager.c:482:6:InvertersManage_GetLeft	2
+../Core/Src/Tasks/motors_manager.c:487:6:InvertersManage_GetRight	2
+../Core/Src/Tasks/motors_manager.c:492:6:InvertersManage_GetControlSignals	3

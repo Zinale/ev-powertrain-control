@@ -28,17 +28,13 @@ void Mutex_INVERTER_L_Unlock(void);
 void Mutex_INVERTER_R_Lock(void);
 void Mutex_INVERTER_R_Unlock(void);
 
-/* ---- UART5 --------------------------------------------------------------- */
-void Mutex_UART5_Lock(void);
-void Mutex_UART5_Unlock(void);
+/* ---- UART4 --------------------------------------------------------------- */
+void Mutex_UART4_Lock(void);
+void Mutex_UART4_Unlock(void);
 
 /* ---- UART3 --------------------------------------------------------------- */
 void Mutex_UART3_Lock(void);
 void Mutex_UART3_Unlock(void);
-
-/* ---- UART6 --------------------------------------------------------------- */
-void Mutex_UART6_Lock(void);
-void Mutex_UART6_Unlock(void);
 
 /* ---- CAN1 ---------------------------------------------------------------- */
 void Mutex_CAN1_Lock(void);

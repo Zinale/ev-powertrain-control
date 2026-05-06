@@ -33,9 +33,9 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
 #define CAN1_SCALE_FACTOR            10U     /**< 1 unit = 0.1% Mn */
 
 /* Torque limits [unit: 0.1% Mn] */
-#define TORQUE_SETPOINT_MAX         2100U   /**< Maximum setpoint = 150% Mn */
-#define TORQUE_LIMIT_POS            2100U   /**< Positive limit accelerating */
-#define TORQUE_LIMIT_NEG           (-2100)  /**< Negative limit (regen braking) */
+#define TORQUE_SETPOINT_MAX         2050U   /**< Maximum setpoint = 150% Mn */
+#define TORQUE_LIMIT_POS            2050   /**< Positive limit accelerating */
+#define TORQUE_LIMIT_NEG           (-2050)  /**< Negative limit (regen braking) */
 
 /* Torque rate limiter */
 #define TORQUE_RATE_LIMIT_PER_MS    10U     /**< Max variation per ms [0.1% Mn] */

@@ -1,7 +1,7 @@
 /**
  * @file data_logger.h
  * @author Alessandro Zingaretti | Polimarche Racing Team - UNIVPM
- * @brief Data logger task - periodic debug output over UART5
+ * @brief Data logger task - periodic debug output over UART4
  */
 
 #ifndef DATA_LOGGER_H
@@ -15,7 +15,7 @@ extern "C" {
 
 
 /**
- * @brief FreeRTOS task: prints vehicle state on UART5 at 10 Hz and
+ * @brief FreeRTOS task: prints vehicle state on UART4 at 10 Hz and
  *        transmits CAN2 telemetry packets (0x002, 0x003, 0x006, 0x108, 0x250, 0x251).
  *
  * Displays:

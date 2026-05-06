@@ -1,0 +1,2 @@
+../Core/Src/Tasks/data_logger.c:75:19:DataLogger_GetMotorState	1
+../Core/Src/Tasks/data_logger.c:81:6:DataLoggerTask	13

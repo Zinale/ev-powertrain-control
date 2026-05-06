@@ -20,12 +20,11 @@ extern "C" {
  * Serial logging enable/disable
  *
  * Comment out a define to completely silence that UART channel.
- * The corresponding Serial5_Log / Serial3_Log calls compile to
+ * The corresponding Serial4_Log / Serial3_Log calls compile to
  * a single (void)format statement — no code generated, no CPU cost.
  * ========================================================= */
-#define SERIAL5_LOG_ENABLED   /**< UART5 — external device */
-#define SERIAL3_LOG_ENABLED   /**< UART3 — PC  */
-#define SERIAL6_LOG_ENABLED   /**< UART6 — external device */
+#define SERIAL4_LOG_ENABLED   /**< UART4 — ESP32 bridge */
+#define SERIAL3_LOG_ENABLED   /**< UART3 — PC via STLink VCOM */
 
 
 #define R2D_BYPASS   /**< Comment out to require real R2D from CAN2 */
@@ -35,7 +34,7 @@ extern "C" {
  * DATA COLLECTION MODE
  *
  * When defined, data_logger outputs a SINGLE CSV line on
- * UART5 only (no verbose text). Designed for bench logging
+ * UART4 only (no verbose text). Designed for bench logging
  * through ESP32 → WiFi → Python script.
  *
  * STM32 CSV column order (left inverter):
@@ -48,15 +47,15 @@ extern "C" {
 #define DATA_COLLECT_MODE
 
 /** Sampling period [ms] when DATA_COLLECT_MODE is active */
-#define DATA_COLLECT_PERIOD_MS      1000U
+#define DATA_COLLECT_PERIOD_MS      500U
 
 /* Data collection backend selection:
- * - ESP32_REMOTE  : STM32 keeps normal CSV/debug stream over UART5
+ * - ESP32_REMOTE  : STM32 keeps normal CSV/debug stream over UART4
  * - FEATHER_LOCAL : STM32 drives Feather logging protocol ([START]/[STOP])
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -174,7 +173,7 @@ extern "C" {
 
 /** Control-loop period used by the inverter task [ms].  Keep in sync
  *  with INVERTERS_TASK_PERIOD_MS in inverters_manage.c.              */
-#define CONTROL_LOOP_PERIOD_MS      10U
+#define CONTROL_LOOP_PERIOD_MS      40U
 
 /* =========================================================
  * Inverter bench configuration
@@ -233,7 +232,7 @@ extern "C" {
 
 
 //#define ANTI_NEG_WHILESTOPPED
-#define REGEN_FORCE_ENABLE
+//#define REGEN_FORCE_ENABLE   /**< Debug override: bypasses all regen stages — comment out for normal operation */
 #define REGEN_ENABLED              0U     /**< 1 = enabled, 0 = disabled */
 #define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
 #if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)

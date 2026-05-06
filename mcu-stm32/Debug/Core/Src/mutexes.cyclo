@@ -1,0 +1,17 @@
+../Core/Src/mutexes.c:44:6:Mutex_APPS_Lock	2
+../Core/Src/mutexes.c:50:6:Mutex_APPS_Unlock	2
+../Core/Src/mutexes.c:60:6:Mutex_SAS_Lock	2
+../Core/Src/mutexes.c:66:6:Mutex_SAS_Unlock	2
+../Core/Src/mutexes.c:76:6:Mutex_INVERTER_L_Lock	2
+../Core/Src/mutexes.c:82:6:Mutex_INVERTER_L_Unlock	2
+../Core/Src/mutexes.c:92:6:Mutex_INVERTER_R_Lock	2
+../Core/Src/mutexes.c:98:6:Mutex_INVERTER_R_Unlock	2
+../Core/Src/mutexes.c:108:6:Mutex_UART4_Lock	2
+../Core/Src/mutexes.c:114:6:Mutex_UART4_Unlock	2
+../Core/Src/mutexes.c:124:6:Mutex_UART3_Lock	2
+../Core/Src/mutexes.c:130:6:Mutex_UART3_Unlock	2
+../Core/Src/mutexes.c:140:6:Mutex_CAN1_Lock	2
+../Core/Src/mutexes.c:146:6:Mutex_CAN1_Unlock	2
+../Core/Src/mutexes.c:156:6:Mutex_CAN2_Lock	2
+../Core/Src/mutexes.c:162:6:Mutex_CAN2_Unlock	2
+../Core/Src/mutexes.c:172:6:Mutex_IsInitialized	9

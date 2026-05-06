@@ -1,0 +1,2 @@
+../Core/Src/Safety/watchdog.c:13:6:Watchdog_Init	4	static
+../Core/Src/Safety/watchdog.c:19:6:Watchdog_Refresh	8	static

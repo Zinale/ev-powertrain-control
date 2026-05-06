@@ -1,0 +1,5 @@
+../Core/Src/Tasks/data_manager.c:57:6:DataReadings_Init	1
+../Core/Src/Tasks/data_manager.c:65:6:DataManagerTask	9
+../Core/Src/Tasks/data_manager.c:151:6:Readings_GetAppsRaw	1
+../Core/Src/Tasks/data_manager.c:165:6:Readings_GetApps	2
+../Core/Src/Tasks/data_manager.c:171:6:Readings_GetSAS	2

@@ -1,0 +1,3 @@
+../Core/Src/Drive/ErrorRecovery.c:40:26:ErrorRecovery_GetCtx	16	static
+../Core/Src/Drive/ErrorRecovery.c:48:6:ErrorRecovery_Process	80	static
+../Core/Src/Drive/ErrorRecovery.c:117:6:ErrorRecovery_Reset	16	static
