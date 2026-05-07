@@ -1,12 +1,5 @@
 clear; clc;
 
-% =========================================================================
-%  setupParams.m  —  Parametri globali DriveController
-%  Esegui questo script PRIMA di simulare o generare codice.
-%  I parametri contrassegnati con [TUNABLE] possono essere modificati
-%  a runtime tramite Simulink.Parameter con StorageClass 'ExportedGlobal'.
-% =========================================================================
-
 %% -- Motore ---------------------------------------------------------------
 T_peak      = 21.0;    % Coppia di picco    [Nm]
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
@@ -37,10 +30,18 @@ rid_ratio   = 14.5;    % Rapporto di riduzione [-]
 rid_eff     = 0.95;    % Efficienza riduttore  [-]
 R_wheel     = 0.2032;   % Raggio ruota          [m]
 
+
+
 steer_ratio = 1/4.2;   % Steering ratio [rad_ruota / rad_volante]
 
 camber_rear = -1;
 pa_rear_wheel = 82700;      %12psi [Pa]
+camber_front = -1.5;         % Camber anteriore [gradi] (solitamente più negativo del post.)
+pa_front_wheel = 82700;      % Pressione anteriore 12psi [Pa]
+
+brake_bias_f = 0.60;         % Ripartizione frenata all'anteriore (es. 60%)
+brake_bias_r = 1 - brake_bias_f; % Ripartizione frenata al posteriore (40%)
+
 
 
 %% -- Mappa Pedale (lookup table) ------------------------------------------
@@ -87,9 +88,9 @@ tvc_V_off        = 2.0;    % Velocità massima disattivazione TVC [m/s]
 tvc_throttle_on        = 3.0;    % Acceleratore minimo x attivazione TVC [m/s]
 
 %% -- Slip Controller — PI -------------------------------------------------
-slip_Kp         = 1;   % [TUNABLE]
-slip_Ki         = 1;    % [TUNABLE]
-slip_ref        = 0.0;    % Slip ratio di riferimento [-]  [TUNABLE]
+slip_Kp         = 2.5;   % [TUNABLE]
+slip_Ki         = 0.05;    % [TUNABLE]
+slip_ref        = 0.2;    % Slip ratio di riferimento [-]  [TUNABLE]
 slip_up_sat     = 1.0;
 slip_low_sat     = 0.0;
 slip_V_min      = 0.5;     % Velocità sotto cui disabilitare TCS [m/s]
@@ -112,7 +113,7 @@ Kus             = 0.00;     %Gradiente di sottosterzo x yaw_th modello Bicycle D
 mu              = 1.6;      %Coefficiente di attrito strada-ruota
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
-
+scale_factor_front = ones(27, 1); % Scale factors per Magic Formula anteriore
 
 %% -- Parametri TUNABLE per codegen (Simulink.Parameter) ------------------
 % Necessario solo se si genera codice C con Embedded Coder.
