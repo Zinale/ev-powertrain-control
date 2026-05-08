@@ -19,6 +19,11 @@
 /* Latch regen selection per node_id to avoid mode chattering near pedal threshold. */
 static bool s_regen_latch[3] = {false, false, false};
 
+/* Peak-current window timer — tracks continuous regen engagement time.
+ * Resets whenever the driver is NOT requesting regen (pedal up / speed too low). */
+static uint32_t s_ibatt_peak_start_ms = 0U;
+static bool     s_ibatt_timer_active  = false;
+
 bool Regen_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent)
 {
 
@@ -94,10 +99,12 @@ int16_t Regen_CalculateTorque(int16_t speed_rpm, uint8_t pedal_percent, uint16_t
     #endif
 
     if (pedal_percent >= REGEN_PEDAL_THRESHOLD_PCT) {
+        s_ibatt_timer_active = false;
         return 0;
     }
 
     if(speed_rpm < REGEN_SPEED_CRITICAL_RPM) {
+        s_ibatt_timer_active = false;
         return 0;
     }
     
@@ -139,7 +146,40 @@ int16_t Regen_CalculateTorque(int16_t speed_rpm, uint8_t pedal_percent, uint16_t
     
     /* Apply voltage reduction to the torque calculated so far */
     torque_stage2_nm *= voltage_factor;
-    
+
+
+    /*  STAGE 5: Battery charge-current limit (BMS constraint)  */
+    /*
+     * Relationship between battery current, torque and speed:
+     *
+     *   P_batt  = T_motor * omega          [W]
+     *   I_batt  = P_batt  / V_dc           [A]
+     *   T_lim   = I_lim   * V_dc / omega   [Nm]
+     *
+     * Two-phase window timed from the onset of continuous regen engagement:
+     *   t <  REGEN_IBATT_PEAK_DURATION_MS  →  I_lim = REGEN_IBATT_PEAK_A  (burst)
+     *   t >= REGEN_IBATT_PEAK_DURATION_MS  →  I_lim = REGEN_IBATT_CONT_A  (sustained)
+     *
+     * The timer resets when regen is not requested (pedal up or speed too low),
+     * so the full burst window is available again at the next regen onset.
+     */
+    if (!s_ibatt_timer_active) {
+        s_ibatt_peak_start_ms = HAL_GetTick();
+        s_ibatt_timer_active  = true;
+    }
+    uint32_t regen_elapsed_ms = HAL_GetTick() - s_ibatt_peak_start_ms;
+    float i_lim_A = (regen_elapsed_ms < REGEN_IBATT_PEAK_DURATION_MS)
+                    ? (float)REGEN_IBATT_PEAK_A
+                    : (float)REGEN_IBATT_CONT_A;
+
+    /* dc_voltage is in [V]; omega_rad_s already computed in Stage 3 */
+    float torque_ibatt_lim_nm = (i_lim_A * (float)dc_voltage) / omega_rad_s;
+
+    /* torque_stage2_nm is negative; clamp its lower bound */
+    if (torque_stage2_nm < -torque_ibatt_lim_nm) {
+        torque_stage2_nm = -torque_ibatt_lim_nm;
+    }
+
 
     /* CAN_unit = (Nm / MOTOR_NOMINAL_TORQUE_NM) * 1000 */
     int16_t torque_can_units = (int16_t)((torque_stage2_nm / MOTOR_NOMINAL_TORQUE_NM) * 1000.0f);

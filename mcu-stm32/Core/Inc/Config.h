@@ -52,10 +52,10 @@ extern "C" {
  *
  * UART4 baud rate: 9600 (corrisponde a UART_BAUD nel firmware Feather e SERIAL2_BAUD nell'ESP32)
  * ========================================================= */
-#define DATA_COLLECT_MODE
+//#define DATA_COLLECT_MODE
 
 /** Sampling period [ms] when DATA_COLLECT_MODE is active */
-#define DATA_COLLECT_PERIOD_MS      500U
+#define DATA_COLLECT_PERIOD_MS      1000U
 
 /* Data collection backend selection:
  * - ESP32_REMOTE  : STM32 keeps normal CSV/debug stream over UART4
@@ -63,7 +63,7 @@ extern "C" {
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -241,7 +241,7 @@ extern "C" {
 
 //#define ANTI_NEG_WHILESTOPPED
 //#define REGEN_FORCE_ENABLE   /**< Debug override: bypasses all regen stages — comment out for normal operation */
-#define REGEN_ENABLED              1U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED              0U     /**< 1 = enabled, 0 = disabled */
 #define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
 #if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)
     #error "REVERSE_TORQUE_ENABLED cannot be true when REGEN_ENABLED is true, to avoid conflicting negative torque sources. Please disable one of them in Config.h."
@@ -254,17 +254,17 @@ extern "C" {
         #define REGEN_MODE_BALANCED        1U   /**< 75% of max regen torque (default) */
         #define REGEN_MODE_AGGRESSIVE      2U   /**< 100% of max regen torque */
         
-        #define REGEN_CURRENT_MODE         REGEN_MODE_CONSERVATIVE
+        #define REGEN_CURRENT_MODE         REGEN_MODE_AGGRESSIVE
         
         /* Battery safety limits — adapt to bench DC bus voltage!
          * Race config (540V:  REGEN_PBATT_MAX_W = 54000, NOMINAL_V = 540
          * Bench  (350V):      REGEN_PBATT_MAX_W = 35000, NOMINAL_V = 350  */
         #define REGEN_PBATT_MAX_W           35000U   /**< Battery max regen power [W] (350V × 100A) */
-        #define REGEN_DC_BUS_NOMINAL_V      350U     /**< DC bus nominal voltage [V] */
+        #define REGEN_DC_BUS_NOMINAL_V      540U     /**< DC bus nominal voltage [V] */
         /* DC Bus Derating limits (to be kept slightly below AMK hard limits) */
         /*View the configuration of AIPEX PRO files ID 32798-3 and 32798-7*/
-        #define REGEN_DC_DERATE_START_V     400U   /**< Above this: start reducing regen torque */
-        #define REGEN_DC_DERATE_END_V       420U   /**< Above this: NO regen torque */
+        #define REGEN_DC_DERATE_START_V     570U   /**< Above this: start reducing regen torque */
+        #define REGEN_DC_DERATE_END_V       600U   /**< Above this: NO regen torque */
 
         /* Pedal threshold and hysteresis: below threshold regen can activate.
          * Hysteresis avoids traction/regen toggling near the crossing point. */
@@ -277,6 +277,22 @@ extern "C" {
         
         /* Logging */
         #define REGEN_LOG_ENABLED           1U       /**< Log regen events to serial */
+
+        /* BMS charge-current limits
+         * In the complete vehicle the BMS communicates these over CAN; here they
+         * are hardcoded as fallback for bench testing without a real BMS.
+         *
+         * The battery pack can absorb a burst of REGEN_IBATT_PEAK_A for up to
+         * REGEN_IBATT_PEAK_DURATION_MS, then the limit drops permanently to
+         * REGEN_IBATT_CONT_A until regen is deactivated (pedal up / speed drop).
+         *
+         * Formula used in Regen Stage 5:
+         *   I_batt = T_motor * omega / V_dc   [A]
+         *   T_lim  = I_lim * V_dc / omega     [Nm]
+         */
+        #define REGEN_IBATT_PEAK_A              21U    /**< Burst charge current [A]      */
+        #define REGEN_IBATT_CONT_A              14U    /**< Continuous charge current [A] */
+        #define REGEN_IBATT_PEAK_DURATION_MS    4000U  /**< Burst window duration [ms]    */
     #endif
 #endif
 
@@ -291,125 +307,43 @@ extern "C" {
 
 
 /* =========================================================
- * DEBUG MAX TEST
+ * THROTTLE SIMULATION MODE
  *
- * When enabled, MotorsManagerTask runs a one-shot test sequence
- * bypassing ALL normal safety limits:
- *   - APPS plausibility / torque_allowed gate
- *   - TORQUE_SETPOINT_MAX cap
- *   - Torque rate-limiter
- *   - Dynamic power limit (Motor_CalculateDynamicTorqueLimit)
- *   - Regen speed/pedal guards
+ * When enabled, MotorsManagerTask sources pedal_percent from the
+ * pre-recorded throttle_sim[] table (throttle_data.h) instead of
+ * the physical APPS ADC.  The ADC is used ONLY as a start condition:
+ * the driver pushes the pedal above THROTTLE_SIM_TRIGGER_PCT to launch
+ * one full playback pass, then releases it.
  *
- * The sequence is ARMED when the inverter enters INV_STATE_RUNNING.
- * TRIGGERED when APPS exceeds AUTOTEST_APPS_TRIGGER_PCT.
- * Once triggered, the cycle runs to completion and CANNOT be aborted mid-run.
- * After completion the state machine returns to IDLE — multiple back-to-back
- * launches are possible.  The pedal must drop below
- * (TRIGGER_PCT - RETRIGGER_HYST_PCT) before a new trigger is accepted,
- * preventing accidental re-fire while the pedal is still held high.
+ * The OFFICIAL control loop (Motor_ProcessInverterControl, with all
+ * regen/power/rate-limiter safety) runs unmodified on the simulated data.
+ * torque_allowed is forced to MCU_IsTorqueAllowed() during playback
+ * (APPS plausibility gate bypassed since there is no real pedal signal).
  *
- * Two presets are available (select via AUTOTEST_PRESET):
+ * Sequence:
+ *   IDLE    — ADC must first drop below (TRIGGER_PCT - RETRIGGER_HYST_PCT)
+ *             to re-arm, then rise above TRIGGER_PCT to launch playback.
+ *   RUNNING — each control-loop tick advances throttle_sim[index++];
+ *             when index reaches end of array the SM returns to IDLE.
  *
- *   Preset 1 — DRIVE → REGEN + COOLDOWN (AUTOTEST_PRESET_DRIVE_REGEN)
- *     Phase 1 (DRIVE):    injects +DRIVE_TORQUE_PCT % Mn for DRIVE_DURATION_MS.
- *     Phase 2 (REGEN):    injects -REGEN_TORQUE_PCT % Mn for REGEN_DURATION_MS.
- *     Phase 3 (COOLDOWN): zero torque for COOLDOWN_MS (locked, cannot abort).
- *     → returns to IDLE (re-triggerable).
+ * Sampling rate: one array entry per CONTROL_LOOP_PERIOD_MS tick.
+ * throttle_sim[] was generated at 40 ms / sample => matches default period.
  *
- *   Preset 2 — REVERSE only (AUTOTEST_PRESET_REVERSE)
- *     Phase 1 (REVERSE):  injects -REVERSE_TORQUE_PCT % Mn for REVERSE_DURATION_MS.
- *     → returns to IDLE (re-triggerable).
- *     (No regen phase — pure negative torque / reverse.)
- *
- * Error recovery (INV_STATE_ERROR) is still handled normally —
- * the override only activates while the inverter is RUNNING.
- *
- * *** FOR BENCH / LAB USE ONLY — NEVER enable in the vehicle! ***
+ * *** FOR BENCH / LAB USE ONLY ***
  * ========================================================= */
 
+//#define THROTTLE_SIM_MODE   /**< Uncomment to enable throttle-table simulation */
 
-//#define AUTOTEST   /**< Uncomment to enable the max-debug test sequence */
+#ifdef THROTTLE_SIM_MODE
+    #warning "THROTTLE_SIM_MODE active — pedal_percent sourced from throttle_sim[], ADC = trigger only"
 
-#ifdef AUTOTEST
-    #warning "AUTOTEST is active — all torque safety limits bypassed!"
+    /** ADC pedal threshold [% of g_apps.final_percent] that starts playback. */
+    #define THROTTLE_SIM_TRIGGER_PCT          50U
 
-    /* -----------------------------------------------------------------------
-     * TEST PRESET SELECTION
-     *   1 (DRIVE_REGEN) : APPS-triggered drive → regen → cooldown sequence
-     *   2 (REVERSE)     : APPS-triggered negative-torque only (no regen)
-     * ----------------------------------------------------------------------- */
-    #define AUTOTEST_PRESET_DRIVE_REGEN   1U   /**< Preset 1: drive→regen+cooldown */
-    #define AUTOTEST_PRESET_REVERSE       2U   /**< Preset 2: reverse torque only  */
+    /** Re-arm hysteresis [%]: ADC must drop below (TRIGGER_PCT - this) after a run. */
+    #define THROTTLE_SIM_RETRIGGER_HYST_PCT   15U
 
-    #define AUTOTEST_PRESET               AUTOTEST_PRESET_DRIVE_REGEN
-
-    /** APPS pedal threshold [%] that triggers the test sequence.
-     *  Push the pedal above this level to start a cycle. */
-    #define AUTOTEST_APPS_TRIGGER_PCT     85U
-
-    /** Re-arm hysteresis [%]: pedal must drop below (TRIGGER_PCT - this value)
-     *  after a completed cycle before the next trigger is accepted. */
-    #define AUTOTEST_APPS_RETRIGGER_HYST_PCT  10U
-
-    /* --- Common: COOLDOWN (both presets) ----------------------------------- */
-
-    /** Cooldown duration [ms] at end of any cycle — zero torque, cannot be aborted. */
-    #define AUTOTEST_COOLDOWN_MS          1000U
-    
-    //***************************************************************** */
-    /* --- PRESET 1: DRIVE -> REGEN -> COOLDOWN -------------------------------- */
-
-    /** Traction torque [% of Mn].  Values > 100 exceed AMK nominal (stress). */
-    #define AUTOTEST_DRIVE_TORQUE_PCT     200U
-
-    /** Duration of the traction phase [ms]. */
-    #define AUTOTEST_DRIVE_DURATION_MS    5000U
-
-    /** Regenerative braking torque magnitude [% of Mn]. Applied as negative. */
-    #define AUTOTEST_REGEN_TORQUE_PCT     150U
-
-    /** Duration of the regen phase [ms]. */
-    #define AUTOTEST_REGEN_DURATION_MS    4000U
-
-    //***************************************************************** */
-    /* --- PRESET 2: REVERSE -> COOLDOWN -------------------------------------- */
-
-    /** Reverse torque magnitude [% of Mn]. Injected as negative torque. */
-    #define AUTOTEST_REVERSE_TORQUE_PCT   50U
-
-    /** Duration of the reverse phase [ms]. */
-    #define AUTOTEST_REVERSE_DURATION_MS  3000U
-
-    /* -----------------------------------------------------------------------
-     * Derived CAN units  (AMK scale: 1 unit = 0.1 % Mn)
-     *   e.g.  200 % Mn drive  →  +2000 CAN units
-     *          50 % Mn regen  →   -500 CAN units
-     *          20 % Mn reverse→   -200 CAN units
-     * ----------------------------------------------------------------------- */
-    #define AUTOTEST_DRIVE_TORQUE_CAN \
-        ((int16_t)((int32_t)(AUTOTEST_DRIVE_TORQUE_PCT) * 10))
-    #define AUTOTEST_REGEN_TORQUE_CAN \
-        ((int16_t)(-((int32_t)(AUTOTEST_REGEN_TORQUE_PCT) * 10)))
-    #define AUTOTEST_REVERSE_TORQUE_CAN \
-        ((int16_t)(-((int32_t)(AUTOTEST_REVERSE_TORQUE_PCT) * 10)))
-
-    #if ((AUTOTEST_PRESET != AUTOTEST_PRESET_DRIVE_REGEN) && \
-         (AUTOTEST_PRESET != AUTOTEST_PRESET_REVERSE))
-        #error "Invalid AUTOTEST_PRESET — choose DRIVE_REGEN(1) or REVERSE(2)"
-    #endif
-
-    /* Consistency warnings: AUTOTEST bypasses all normal guards, so these
-     * combinations are intentionally allowed — but make them visible. */
-    #if (AUTOTEST_PRESET == AUTOTEST_PRESET_DRIVE_REGEN) && !REGEN_ENABLED
-        #warning "AUTOTEST DRIVE_REGEN: regen phase will fire even though REGEN_ENABLED=0 (bypass is intentional)"
-    #endif
-
-    #if (AUTOTEST_PRESET == AUTOTEST_PRESET_REVERSE) && !REVERSE_TORQUE_ENABLED
-        #warning "AUTOTEST REVERSE: negative torque will be injected even though REVERSE_TORQUE_ENABLED=0 (bypass is intentional)"
-    #endif
-
-#endif /* AUTOTEST */
+#endif /* THROTTLE_SIM_MODE */
 
 #ifdef __cplusplus
 }

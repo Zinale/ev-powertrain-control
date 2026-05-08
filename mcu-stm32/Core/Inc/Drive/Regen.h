@@ -8,6 +8,7 @@
  *   - Stage 2: Speed-dependent fade-out
  *   - Stage 3: Battery power limit
  *   - Stage 4: DC bus voltage derating
+ *   - Stage 5: BMS charge-current limit (peak/continuous window)
  *   - Latch-based hysteresis to prevent mode chattering
  */
 
@@ -46,10 +47,12 @@ bool Regen_ShouldUseRegen(const Inverter_t *inv, uint8_t pedal_percent);
  *   2. Speed fade-out:  k_vel = min(1, speed / speed_min)
  *   3. Power limit:     |T| <= P_batt_max / omega
  *   4. DC bus derating: soft-clip at high voltage
+ *   5. Current limit:   |T| <= I_lim * V_dc / omega
+ *                       (I_lim = PEAK for first 4 s, then CONT)
  *
  * @param speed_rpm     Current motor speed [RPM]
  * @param pedal_percent Current pedal position [0-100%]
- * @param dc_voltage    Current DC bus voltage [0.1V]
+ * @param dc_voltage    Current DC bus voltage [V]
  * @return Regenerative torque [0.1% Mn] (negative value)
  */
 int16_t Regen_CalculateTorque(int16_t speed_rpm,

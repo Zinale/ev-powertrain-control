@@ -33,7 +33,7 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
 #define CAN1_SCALE_FACTOR            10U     /**< 1 unit = 0.1% Mn */
 
 /* Torque limits [unit: 0.1% Mn] */
-#define TORQUE_SETPOINT_MAX         2050U   /**< Maximum setpoint = 150% Mn */
+#define TORQUE_SETPOINT_MAX         2050U   /**< Maximum setpoint = 205% Mn */
 #define TORQUE_LIMIT_POS            2050   /**< Positive limit accelerating */
 #define TORQUE_LIMIT_NEG           (-2050)  /**< Negative limit (regen braking) */
 
@@ -48,7 +48,7 @@ extern uint32_t g_can_rx_count;        /**< Received CAN messages from inverter 
 #define MOTOR_MAX_CURRENT_A         105.0f  /**< Maximum current [A] */
 #define MOTOR_EFFICIENCY            0.98f   /**< Estimated efficiency ~95% */
 
-#define MOTOR_MAX_SPEED_RPM         16000U  /**< Maximum speed [RPM] */
+#define MOTOR_MAX_SPEED_RPM         18000U  /**< Maximum speed [RPM] */
 
 /* 
  * REGENERATIVE BRAKING PARAMETERS 

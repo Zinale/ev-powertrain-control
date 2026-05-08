@@ -72,24 +72,46 @@ def main():
                         line = line.strip()
                         
                         if line:
-                            print(f"Ricevuto: {line}", flush=True)
-                            if "ERROR" in line or "Conditions" in line or "(" in line or ")" in line or "|" in line or ":" in line:
+                            # Ignora le righe di debug, inclusa la connessione del bridge
+                            if "ESP32 Bridge" in line or "ERROR" in line or "Conditions" in line or "(" in line or ")" in line or "|" in line or ":" in line:
+                                print(f"[INFO] Riga di debug ignorata: {line}")
                                 continue
                             
                             row = [val.strip() for val in line.split(',')]
 
-                            # Decode and print status-word bits for live debug
+                            # 1° CONTROLLO: Numero di colonne corretto
+                            EXPECTED_COLS = 23
+                            if len(row) != EXPECTED_COLS:
+                                print(f"[WARNING] Riga ignorata (colonne errate {len(row)}/{EXPECTED_COLS}): {line}")
+                                continue
+
+                            # 2° CONTROLLO: I dati devono essere numerici (evita "0*0" o simili)
+                            is_valid = True
+                            parsed_row = []
+                            for val in row:
+                                try:
+                                    # Proviamo a convertire in float per verifica
+                                    parsed_val = float(val)
+                                    parsed_row.append(parsed_val)
+                                except ValueError:
+                                    is_valid = False
+                                    break
+                            
+                            if not is_valid:
+                                print(f"[WARNING] Riga ignorata (caratteri non numerici): {line}")
+                                continue
+
+                            
+                            # Se passa i controlli, possiamo scrivere nel CSV (usiamo i dati originali testuali o quelli convertiti)
+                            writer.writerow(row)
+                            file.flush()
+                            
+                            # Decode and print status-word bits
                             try:
-                                sw_val = int(row[_SW_COL_IDX])
+                                sw_val = int(float(row[_SW_COL_IDX]))
                                 print(f"  [SW] {decode_status_word(sw_val)}", flush=True)
                             except (IndexError, ValueError):
                                 pass
-
-                            delta_time = (datetime.datetime.now() - start_time).total_seconds()
-                            #row.append(delta_time)
-
-                            writer.writerow(row)
-                            file.flush()
                             
                 except socket.timeout:
                     timeout_counter += 1

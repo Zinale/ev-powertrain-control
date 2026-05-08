@@ -84,7 +84,7 @@ static void decode_sm2(Inverter_t *inv, const uint8_t data[8]) {
  * @brief Decode Status Message 3 directly into inverter
  */
 static void decode_sm3(Inverter_t *inv, const uint8_t data[8]) {
-    inv->dc_bus_voltage = unpack_u16(data[0], data[1]) / 10U;
+    inv->dc_bus_voltage = unpack_u16(data[0], data[1]); /* AMK SM3: raw value in [V]*/
     inv->raw_magnetizing_current = unpack_u16(data[2], data[3]);
     inv->phase_u_current = (int32_t)unpack_u32(data[4], data[5], data[6], data[7]);
 }

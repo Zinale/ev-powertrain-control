@@ -6,8 +6,8 @@
 // =========================== Config ===========================
 // UART from control unit: Feather M4 default Serial1 pins
 // RX = D0, TX = D1
-static const uint32_t USB_BAUD = 115200;
-static const uint32_t UART_BAUD = 115200;   // deve corrispondere a UART4 baud rate del MCU STM32
+static const uint32_t USB_BAUD = 9600;
+static const uint32_t UART_BAUD = 9600;   // deve corrispondere a UART4 baud rate del MCU STM32
 
 // NTC parameters (same model used in your ESP32 sketch)
 #define B 3435.0f
@@ -92,10 +92,8 @@ bool openNewLogFile(const String& requestedPath = "") {
   }
 
   if (activeLogFile.size() == 0) {
-    //CSV HEADER
-    //writer.writerow(['TempMotor','TempInverter','TempIGBT','Voltage','Speed','Id','Iq','TorqueMotor','PedalPerc','NTC1', 'NTC2', 'NTC3',"Time_s"])
-
-    activeLogFile.println("Time_s,TempMotor,TempInverter,TempIGBT,Voltage,Speed,Iq,Id,TorqueMotor,PedalPerc,StatusWord,ErrCode,ErrInfo1,PhaseU_mA,PhaseV_mA,PhaseW_mA,Power_W,NTC1,NTC2,NTC3");
+    //CSV HEADER — must match STM32 Feather CSV output + NTC columns appended here
+    activeLogFile.println("Time_ms,TempMotor,TempInverter,TempIGBT,Voltage,Speed,Iq,Id,TorqueMotor,PedalPerc,InvState,ErrCode,StatusWord,ErrInfo1,PhaseU_mA,PhaseV_mA,PhaseW_mA,Power_W,TorqueSetpoint,TorqueLimitDyn,NTC1,NTC2,NTC3");
     activeLogFile.flush();
   }
 

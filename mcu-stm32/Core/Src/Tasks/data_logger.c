@@ -211,14 +211,15 @@ void DataLoggerTask(void)
                         const uint32_t elapsed_ms = HAL_GetTick() - s_feather_start_tick_ms;
                         /*
                          * CSV line — colonne (Feather appende NTC1,NTC2,NTC3 dopo):
-                         *   Time_s, TempMotor, TempInverter, TempIGBT, Voltage,
-                         *   Speed, Iq, Id, TorqueMotor, PedalPerc,
-                         *   StatusWord, ErrCode, ErrInfo1,
-                         *   PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W
+                         *   Time_ms, TempMotor, TempInverter, TempIGBT, Voltage,
+                         *   Speed, Iq, Id, TorqueMotor, PedalPerc, InvState, ErrCode,
+                         *   StatusWord, ErrInfo1,
+                         *   PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W,
+                         *   TorqueSetpoint, TorqueLimitDyn
                          */
                         Serial_Log(LOGGER_CHANNEL,
-                            "%.1f,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u,%u,%u,%lu,%ld,%ld,%ld,%lu\n",
-                            elapsed_ms / 1000.0f,
+                            "%lu,%.1f,%.1f,%.1f,%d,%d,%.1f,%.1f,%.1f,%u,%d,%u,%u,%lu,%ld,%ld,%ld,%lu,%d,%d\n",
+                            (unsigned long)elapsed_ms,
                             (float)dc_inv->motor_temp_degC    / 10.0f,
                             (float)dc_inv->inverter_temp_degC / 10.0f,
                             (float)dc_inv->igbt_temp_degC     / 10.0f,
@@ -228,13 +229,16 @@ void DataLoggerTask(void)
                             (float)dc_inv->raw_magnetizing_current * Id_SCALE_FACTOR,
                             (float)dc_inv->torque_value * TORQUE_SCALE_FACTOR,
                             apps_copy.final_percent,
-                            (unsigned)dc_inv->status_word,
+                            (int)dc_inv->state,
                             (unsigned)dc_inv->error_code,
+                            (unsigned)dc_inv->status_word,
                             (unsigned long)dc_inv->error_info_1,
                             (long)dc_inv->phase_u_current,
                             (long)dc_inv->phase_v_current,
                             (long)dc_inv->phase_w_current,
-                            (unsigned long)dc_inv->actual_power);
+                            (unsigned long)dc_inv->actual_power,
+                            (int)dc_inv->torque_request,
+                            (int)torque_lim_copy);
                     }
                 }
             #else
