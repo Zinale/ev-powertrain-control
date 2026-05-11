@@ -1,7 +1,7 @@
 clear; clc;
 
 %% -- Motore ---------------------------------------------------------------
-T_peak      = 21;    % Coppia di picco    [Nm]
+T_peak      = 17;    % Coppia di picco    [Nm]
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
 w_engine    = 0.005;    %w motore (1/w_engine*s +1) 
 mot_max_rpm = 20000;   % Giri massimi motore [rpm]
@@ -11,12 +11,12 @@ derating_off_thresh = 20;
 %% -- Veicolo --------------------------------------------------------------
 n_wheels_f  = 2;
 n_wheels_r  = 2;
-mass        = 320;     % Massa vettura + pilota [kg]
+mass        = 300 ;     % Massa vettura + pilota [kg]
 Iz          = 120;     % Momento inerzia yaw    [kg·m²]
 l_f         = 0.775;   % Distanza CG-asse ant.  [m]
 l_r         = 0.775;   % Distanza CG-asse post. [m]
 wheelbase   = l_f + l_r; %Passo del veicolo [m]
-h_o         =0.35;      %Distanza verticale centro di massa [m]
+h_o         = 0.35;      %Distanza verticale centro di massa [m]
 track_width_f = 1.2;     % Carreggiata anteriore [m]
 track_width_r = 1.2;     % Carreggiata posteriore [m]
 track_width = sqrt(track_width_r^2 + track_width_f^2);
@@ -90,11 +90,11 @@ tvc_throttle_on        = 3.0;    % Acceleratore minimo x attivazione TVC [m/s]
 
 
 %% -- Slip Controller (TCS) — Architettura SOTTRATTIVA ---------------------
-slip_Kp         = 35.0;   % [TUNABLE]
-slip_Ki         = 15.0;    % [TUNABLE]
+slip_Kp         = 50.0;   % [TUNABLE]
+slip_Ki         = 40.0;    % [TUNABLE]
 slip_Kd         = 10.0;    % [TUNABLE] 
-slip_filt_N     = 20;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
-slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+slip_filt_N     = 10;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.10;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
 slip_up_sat     = T_peak; % Saturazione superiore PI [Nm]
 slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
 slip_bc_coeff   = 1.0;    % CoefficienteBack-Calculation PID [TUNABLE]
@@ -103,8 +103,9 @@ slip_V_min      = 0.3;    % Velocità sotto cui disabilitare TCS [m/s] — abbas
 %% -- Launch Control — Torque Ramp Limiter ---------------------------------
 % Limita la derivata di T_req in uscita dalla pedal map.
 
-launch_V_thresh = 8.0; %[m/s]
-launch_ramp_rate = 100.0;   %[N/s]
+launch_V_thresh = 5.0; %[m/s]
+launch_ramp_rate = 150.0;   %[N/s]
+nominal_ramp_rate = 150.0; 
     
 %% -- Rigenerazione (specchio del codice STM32) ----------------------------
 % Valori sincronizzati con Config.h e BaseControlMotor.h (bench configuration)
