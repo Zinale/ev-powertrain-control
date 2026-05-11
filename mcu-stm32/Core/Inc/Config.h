@@ -241,7 +241,7 @@ extern "C" {
 
 //#define ANTI_NEG_WHILESTOPPED
 //#define REGEN_FORCE_ENABLE   /**< Debug override: bypasses all regen stages — comment out for normal operation */
-#define REGEN_ENABLED              0U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED              1U     /**< 1 = enabled, 0 = disabled */
 #define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
 #if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)
     #error "REVERSE_TORQUE_ENABLED cannot be true when REGEN_ENABLED is true, to avoid conflicting negative torque sources. Please disable one of them in Config.h."

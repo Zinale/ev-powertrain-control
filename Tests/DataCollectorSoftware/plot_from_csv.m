@@ -242,14 +242,14 @@ if hasNTC
     ntc3(ntc3 < -40 | ntc3 > 200) = NaN;
 end
 
-% ---- Clipping fisico globale (valori fuori range = NaN) ------------------
-tempMotor(tempMotor   < -40  | tempMotor   > 200)    = NaN;
-tempInverter(tempInverter < -40 | tempInverter > 150) = NaN;
-tempIGBT(tempIGBT     < -40  | tempIGBT     > 200)   = NaN;
-voltage(voltage       < -50  | voltage       > 650)   = NaN;  % bus DC: -50..650 V
-speed(abs(speed)      > 30000)                        = NaN;
-power_W(abs(power_W)  > 100000)                       = NaN;
-pedal(pedal < 0 | pedal > 100)                        = NaN;  % pedale: 0..100 %
+% ---- Clamping fisico globale (valori fuori range → clampati al limite) ---
+tempMotor    = max(-40, min(200,  tempMotor));
+tempInverter = max(-40, min(150,  tempInverter));
+tempIGBT     = max(-40, min(200,  tempIGBT));
+voltage      = max(-50, min(650,  voltage));    % bus DC: -50..650 V
+speed(abs(speed) > 30000) = sign(speed(abs(speed) > 30000)) .* 30000;
+power_W      = max(-100000, min(100000, power_W));
+pedal        = max(0,   min(100,  pedal));      % pedale: 0..100 %
 
 % =========================================================================
 % FIGURA 1 - Temperature
@@ -279,27 +279,34 @@ end
 % FIGURA 2 - Segnali motore
 % =========================================================================
 figure('Name', ['Segnali Motore - ' filename]);
-subplot(3,1,1);
+subplot(4,1,1);
 hold on; grid on;
 plot(tempo, speed, 'b', 'LineWidth', 1.5, 'DisplayName', 'Speed');
 title('Velocità Motore'); xlabel('Tempo (s)'); ylabel('RPM');
 legend('Location', 'best'); hold off;
 
-subplot(3,1,2);
+subplot(4,1,2);
 hold on; grid on;
 plot(tempo, iq, 'r',  'LineWidth', 1.5, 'DisplayName', 'Iq');
 plot(tempo, id, 'b',  'LineWidth', 1.5, 'DisplayName', 'Id');
 title('Correnti Iq / Id'); xlabel('Tempo (s)'); ylabel('Corrente (A)');
 legend('Location', 'best'); hold off;
 
-subplot(3,1,3);
+subplot(4,1,3);
 hold on; grid on;
 plot(tempo, torque, 'g', 'LineWidth', 1.5, 'DisplayName', 'Coppia misurata');
 if hasTorqueControl
-    plot(tempo, torqueSetpoint, 'b--', 'LineWidth', 1.2, 'DisplayName', 'Setpoint');
     plot(tempo, torqueLimitDyn, 'r:',  'LineWidth', 1.2, 'DisplayName', 'Limite dinamico');
 end
 title('Coppia Motore'); xlabel('Tempo (s)'); ylabel('Coppia (Nm)');
+legend('Location', 'best'); hold off;
+
+subplot(4,1,4);
+hold on; grid on;
+if hasTorqueControl
+    plot(tempo, torqueSetpoint, 'b--', 'LineWidth', 1.2, 'DisplayName', 'Setpoint richiesto');
+end
+title('Setpoint Coppia'); xlabel('Tempo (s)'); ylabel('Coppia (Nm)');
 legend('Location', 'best'); hold off;
 
 % =========================================================================

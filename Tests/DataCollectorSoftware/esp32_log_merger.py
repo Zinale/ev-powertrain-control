@@ -19,10 +19,11 @@ Filtro rumore (Savitzky-Golay, default: on):
 
 Uso
 ---
-    python esp32_log_merger.py <cartella_log>
-    python esp32_log_merger.py <cartella_log> -o merged.csv
+    python esp32_log_merger.py <cartella_log>              # un CSV pulito per file (default)
+    python esp32_log_merger.py <cartella_log> --merge      # unisce tutto in un solo CSV
+    python esp32_log_merger.py <cartella_log> -o out.csv --merge
     python esp32_log_merger.py <cartella_log> --no-filter --no-round-time
-    python esp32_log_merger.py <cartella_log> --separate   # un CSV per file
+    python esp32_log_merger.py <singolo_file.csv>
 
 Requisiti
 ---------
@@ -157,7 +158,7 @@ COLUMNS = [
 # polyorder controlla quanto il filtro segue le variazioni rapide.
 # ---------------------------------------------------------------------------
 FILTER_CFG: dict[str, tuple[int, int]] = {
-    # (window_length, polyorder) — window in num. campioni (1 campione = 500 ms)
+    # (window_length, polyorder) — window in num. campioni (1 campione = 1000 ms)
     "PhaseU_mA":    (7, 2),   # correnti di fase: più rumorose, window moderata
     "PhaseV_mA":    (7, 2),
     "PhaseW_mA":    (7, 2),
@@ -186,19 +187,59 @@ INT_COLUMNS = {"InvState", "ErrCode", "StatusWord", "ErrInfo1",
                "PedalPerc", "TorqueSetpoint", "TorqueLimitDyn"}
 
 # ---------------------------------------------------------------------------
-# Limiti fisici per canale: (min, max)  →  valori fuori range → NaN
+# Limiti fisici per canale: (min, max)  →  valori fuori range → clampati
+#
+# Temperature
+#   TempMotor      : AMK motore, range operativo 0–150 °C (max assoluto 200 °C)
+#   TempInverter   : modulo potenza inverter, limite AMK ~100 °C
+#   TempIGBT       : giunzione IGBT, limite di derating AMK ~100 °C
+#   NTC1/2/3       : sonde esterne NTC, range generico -40..200 °C
+#
+# Elettriche / meccaniche
+#   Voltage        : bus DC pacco batterie, range operativo -50..600 V
+#   Speed          : AMK DD5 n_max ≈ 20000 RPM
+#   Iq / Id        : correnti d-q in A; picco AMK DD5 ≈ ±200 A
+#   PhaseU/V/W_mA  : correnti di fase in mA; ±200 A = ±200 000 mA
+#   TorqueMotor    : coppia misurata (Nm); AMK DD5 picco ≈ ±25 Nm
+#   TorqueSetpoint : setpoint coppia richiesto (Nm), stesso range
+#   TorqueLimitDyn : limite dinamico coppia (Nm), solo positivo 0..25 Nm
+#   Power_W        : potenza meccanica/elettrica in W; 4×25 Nm×2000 rad/s ≈ ±35 kW
+#   PedalPerc      : posizione pedale acceleratore 0–100 %
+#
+# Digitali / stato
+#   InvState       : -1 (OFF) … 5 (ERROR) per protocollo firmware MCU
+#   ErrCode        : codice errore AMK a 16 bit, 0–65535
+#   StatusWord     : parola di stato AMK a 16 bit, 0–65535
+#   ErrInfo1       : informazione errore AMK a 16 bit, 0–65535
 # ---------------------------------------------------------------------------
 PHYSICAL_LIMITS: dict[str, tuple[float, float]] = {
-    "PedalPerc":    (  0.0,  100.0),   # percentuale pedale 0–100 %
-    "Voltage":      (-50.0,  650.0),   # bus DC
-    "TempMotor":    (0,  200.0),
-    "TempInverter": (0,  100.0),
-    "TempIGBT":     (0,  100.0),
-    "NTC1":         (0,  200.0),
-    "NTC2":         (0,  200.0),
-    "NTC3":         (0,  200.0),
-    "Speed":        (0, 20000.0),
-    "Power_W":      (-5000.0, 35000.0),
+    # Temperature (°C)
+    "TempMotor":      (  -40.0,   200.0),
+    "TempInverter":   (  -40.0,   100.0),
+    "TempIGBT":       (  -40.0,   100.0),
+    "NTC1":           (  -40.0,   200.0),
+    "NTC2":           (  -40.0,   200.0),
+    "NTC3":           (  -40.0,   200.0),
+    # Elettriche (tensione / corrente / potenza)
+    "Voltage":        (  -50.0,   600.0),
+    "Iq":             ( -150,   150.0),
+    "Id":             ( -150,   150.0),
+    "PhaseU_mA":      (-150_000.0, 150_000.0),
+    "PhaseV_mA":      (-150_000.0, 150_000.0),
+    "PhaseW_mA":      (-150_000.0, 150_000.0),
+    "Power_W":        (-35_000.0,  35_000.0),
+    # Meccaniche
+    "Speed":          (     -5000, 20_000.0),
+    "TorqueMotor":    (   -25.0,    25.0),
+    "TorqueSetpoint": (   -2100,    2100),
+    "TorqueLimitDyn": (     -25,    25.0),
+    # Pedale
+    "PedalPerc":      (     0.0,   100.0),
+    # Stato / codici (protezione da overflow/corruzione UART)
+    "InvState":       (    -1.0,     5.0),
+    "ErrCode":        (     0.0, 65535.0),
+    "StatusWord":     (     0.0, 65535.0),
+    "ErrInfo1":       (     0.0, 65535.0),
 }
 
 
@@ -418,10 +459,10 @@ def load_single_file(path: Path) -> pd.DataFrame:
 # Post-processing comune
 # ===========================================================================
 
-def round_time_ms(df: pd.DataFrame, step: int = 500) -> pd.DataFrame:
+def round_time_ms(df: pd.DataFrame, step: int = 1000) -> pd.DataFrame:
     """
     Arrotonda Time_ms al multiplo di `step` più vicino.
-    Utile per compensare il jitter BT (es. 501 → 500, 1501 → 1500).
+    Utile per compensare il jitter BT (es. 1010 → 1000, 2005 → 2000).
     Lascia invariati i Time_ms = 0 (pre-sync inverter).
     """
     df = df.copy()
@@ -466,6 +507,27 @@ def drop_duplicates_time(df: pd.DataFrame) -> pd.DataFrame:
 _TIME_RESET_THRESHOLD_MS = 5_000
 
 
+def _restore_digit_drop(raw_t: float, t_max: float, tolerance_ms: float = 5000.0) -> float | None:
+    """
+    Verifica se raw_t è un timestamp a cui manca una cifra decimale iniziale
+    (digit-drop UART: es. 178938 → 78938, 215938 → 15938).
+    Se il valore "ripristinato" cade entro tolerance_ms dopo t_max,
+    lo restituisce; altrimenti restituisce None.
+    """
+    if raw_t <= 0:
+        return None
+    n_digits = len(str(int(raw_t)))
+    power = 10 ** n_digits
+    # Prova il blocco di cifra iniziale che rende il candidato ≥ t_max
+    for leading in range(int(t_max / power), int(t_max / power) + 3):
+        if leading < 0:
+            continue
+        candidate = raw_t + leading * power
+        if 0 <= candidate - t_max <= tolerance_ms:
+            return candidate
+    return None
+
+
 def enforce_time_monotone(
     df: pd.DataFrame,
     reset_threshold: int = _TIME_RESET_THRESHOLD_MS,
@@ -474,10 +536,13 @@ def enforce_time_monotone(
     Assicura che Time_ms sia strettamente crescente all'interno di ogni
     SourceFile, nell'ordine in cui le righe compaiono nel file originale.
 
-    Due casi di non-monotonicità:
-      - Caduta grande (> reset_threshold ms):
+    Tre casi di non-monotonicità:
+      - Digit-drop UART (es. 178938 → 78938):
+          Un singolo byte perso fa sembrare il timestamp arretrato di ~10^n ms.
+          Viene corretto il solo timestamp anomalo; l'offset rimane invariato.
+      - Caduta grande (> reset_threshold ms), non digit-drop:
           riconnessione ESP32 → il contatore MCU è ripartito da zero.
-          Aggiunge un offset pari a (max_precedente + 500 ms) in modo che
+          Aggiunge un offset pari a (max_precedente + 1000 ms) in modo che
           i dati del nuovo segmento continuino senza salti indietro.
       - Caduta piccola (≤ reset_threshold ms):
           timestamp UART corrotto → la riga viene scartata.
@@ -493,6 +558,7 @@ def enforce_time_monotone(
 
     n_reset = 0
     n_corrupt = 0
+    n_digit_fix = 0
 
     for sf in group_labels.unique():
         positions = group_labels[group_labels == sf].index.tolist()
@@ -511,12 +577,19 @@ def enforce_time_monotone(
             if t_adj < t_max:
                 drop = t_max - t_adj
                 if drop > reset_threshold:
-                    # Riconnessione: allunga la linea temporale
-                    offset = t_max + 500.0 - raw_t
+                    # Prima controlla se è un digit-drop (singolo byte UART perso)
+                    corrected = _restore_digit_drop(raw_t + offset, t_max)
+                    if corrected is not None:
+                        df.at[pos, "Time_ms"] = corrected
+                        t_max = corrected
+                        n_digit_fix += 1
+                        continue
+                    # Vero reset MCU / riconnessione: allunga la linea temporale
+                    offset = t_max + 1000.0 - raw_t
                     t_adj = raw_t + offset
                     n_reset += 1
                 else:
-                    # Timestamp UART corrotto: scarta la riga
+                    # Timestamp UART corrotto (piccolo jitter): scarta la riga
                     keep[pos] = False
                     n_corrupt += 1
                     continue
@@ -524,6 +597,8 @@ def enforce_time_monotone(
             df.at[pos, "Time_ms"] = t_adj
             t_max = max(t_max, t_adj)
 
+    if n_digit_fix:
+        print(f"  [TIME] {n_digit_fix} timestamp corretti (digit-drop UART: cifra iniziale ripristinata)")
     if n_reset:
         print(f"  [TIME] {n_reset} riconnessione/i rilevata/e: Time_ms offsettato per continuità")
     if n_corrupt:
@@ -538,21 +613,25 @@ def enforce_time_monotone(
 
 def apply_physical_limits(df: pd.DataFrame) -> pd.DataFrame:
     """
-    Imposta NaN sui valori fuori dal range fisico definito in PHYSICAL_LIMITS.
-    Opera in-place su una copia del DataFrame.
+    Clampla i valori fuori dal range fisico definito in PHYSICAL_LIMITS
+    al rispettivo limite minimo o massimo consentito.
+    I valori NaN (sentinella, lacune) non vengono toccati.
+    Opera su una copia del DataFrame.
     """
     df = df.copy()
     n_clipped = 0
     for col, (lo, hi) in PHYSICAL_LIMITS.items():
         if col not in df.columns:
             continue
-        mask = df[col].notna() & ((df[col] < lo) | (df[col] > hi))
-        n_out = mask.sum()
+        mask_lo = df[col].notna() & (df[col] < lo)
+        mask_hi = df[col].notna() & (df[col] > hi)
+        n_out = mask_lo.sum() + mask_hi.sum()
         if n_out:
-            df.loc[mask, col] = np.nan
+            df.loc[mask_lo, col] = lo
+            df.loc[mask_hi, col] = hi
             n_clipped += n_out
     if n_clipped:
-        print(f"  [CLIP] {n_clipped} valori fuori range fisico → NaN")
+        print(f"  [CLIP] {n_clipped} valori fuori range fisico → clampati al limite")
     return df
 
 
@@ -564,35 +643,56 @@ def apply_filter(df: pd.DataFrame) -> pd.DataFrame:
     """
     Applica Savitzky-Golay ai canali analogici rumorosi.
     Sovrascrive le colonne originali con i valori filtrati (nessuna ridondanza).
-    I NaN vengono interpolati per il calcolo del filtro,
-    poi ripristinati nel risultato.
+    Il filtro viene applicato PER SEGMENTO: i gap temporali > GAP_THRESHOLD_MS
+    vengono trattati come discontinuità; le finestre del filtro non "attraversano"
+    mai un buco dati, evitando transizioni spurie.
+    I NaN vengono interpolati solo all'interno del segmento, poi ripristinati.
     """
+    GAP_THRESHOLD_MS = 5000  # gap > 5 s = segmento separato
+
     df = df.copy()
     filtered_cols = []
 
+    # --- Calcola i confini dei segmenti continui --------------------------
+    time_arr = pd.to_numeric(df["Time_ms"], errors="coerce").to_numpy(dtype=float)
+    diffs = np.diff(time_arr)
+    # indici di inizio di ogni nuovo segmento (il primo è sempre 0)
+    breaks = np.where((diffs > GAP_THRESHOLD_MS) | np.isnan(diffs))[0] + 1
+    seg_starts = np.concatenate([[0], breaks])
+    seg_ends   = np.concatenate([breaks, [len(df)]])
+    segments   = list(zip(seg_starts.tolist(), seg_ends.tolist()))
+
+    if len(segments) > 1:
+        print(f"  [FILTER] {len(segments)} segmenti continui rilevati (gap > {GAP_THRESHOLD_MS} ms)")
+
+    # --- Applica il filtro su ogni segmento per ogni colonna ---------------
     for col, (win, poly) in FILTER_CFG.items():
         if col not in df.columns:
             continue
 
-        series = df[col].astype(float)
-        nan_mask = series.isna()
-        valid_count = (~nan_mask).sum()
+        series = df[col].astype(float).copy()
 
-        if valid_count < win:
-            # Troppo pochi dati: lascia la colonna invariata
-            filtered_cols.append(col)
-            continue
+        for seg_start, seg_end in segments:
+            seg = series.iloc[seg_start:seg_end]
+            nan_mask = seg.isna()
+            valid_count = (~nan_mask).sum()
 
-        # Interpolazione lineare per gestire i NaN durante il filtro
-        series_interp = series.interpolate(method="linear", limit_direction="both")
-        filtered_values = savgol_filter(
-            series_interp.to_numpy().astype(float),
-            window_length=win,
-            polyorder=poly,
-        )
-        result = pd.Series(filtered_values, index=df.index)
-        result[nan_mask] = np.nan          # ripristina i NaN originali
-        df[col] = result                   # sovrascrive l'originale
+            if valid_count < win:
+                # Segmento troppo corto: lascia invariato
+                continue
+
+            # Interpolazione lineare per gestire i NaN interni al segmento
+            seg_interp = seg.interpolate(method="linear", limit_direction="both")
+            filtered_values = savgol_filter(
+                seg_interp.to_numpy().astype(float),
+                window_length=win,
+                polyorder=poly,
+            )
+            result = pd.Series(filtered_values, index=seg.index)
+            result[nan_mask] = np.nan          # ripristina i NaN originali
+            series.iloc[seg_start:seg_end] = result.values
+
+        df[col] = series
         filtered_cols.append(col)
 
     if filtered_cols:
@@ -621,13 +721,13 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--no-filter", action="store_true",
                    help="Disabilita il filtro Savitzky-Golay.")
     p.add_argument("--no-round-time", action="store_true",
-                   help="Non arrotondare Time_ms al multiplo di 500 ms.")
+                   help="Non arrotondare Time_ms al multiplo di 1000 ms.")
     p.add_argument("--no-dedup", action="store_true",
                    help="Non rimuovere righe duplicate su Time_ms.")
-    p.add_argument("--separate", action="store_true",
+    p.add_argument("--merge", action="store_true",
                    help=(
-                       "Produce un CSV pulito per ogni file di input "
-                       "invece di un unico file unificato."
+                       "Unisce tutti i file della cartella in un unico CSV. "
+                       "Per default ogni file viene elaborato separatamente."
                    ))
     p.add_argument("--sort", action="store_true", default=True,
                    help="Ordina per Time_ms (default: True).")
@@ -648,7 +748,7 @@ def process_df(df: pd.DataFrame, args: argparse.Namespace) -> pd.DataFrame:
     if args.sort:
         df.sort_values("Time_ms", inplace=True, ignore_index=True)
 
-    # Clipping fisico: rimuove valori fuori range (es. pedale > 100, Voltage > 650)
+    # Clamping fisico: porta i valori fuori range al limite (es. pedale > 100 → 100, Voltage > 650 → 650)
     df = apply_physical_limits(df)
 
     if not args.no_filter:
@@ -684,9 +784,10 @@ def main() -> None:
 
         df = process_df(df, args)
         out_path = args.output or (input_path.parent / (input_path.stem + "_clean.csv"))
-        df.to_csv(out_path, index=False, float_format="%.4f")
+        df_out = df.drop(columns=[c for c in ("Source", "SourceFile") if c in df.columns])
+        df_out.to_csv(out_path, index=False, float_format="%.4f")
         print(f"\n✓ Salvato: {out_path}")
-        print(f"  {len(df)} righe × {len(df.columns)} colonne")
+        print(f"  {len(df_out)} righe × {len(df_out.columns)} colonne")
         return
 
     if not input_path.is_dir():
@@ -694,54 +795,56 @@ def main() -> None:
 
     folder = input_path
 
-    # ── Modalità: un CSV pulito per file ────────────────────────────────────
-    if args.separate:
-        print(f"\nModalità SEPARATA – elaboro ogni file in {folder}\n")
-        out_dir = folder
-        processed = 0
+    # ── Modalità: merge unico (--merge) ─────────────────────────────────────
+    if args.merge:
+        print(f"\nModalità MERGE – carico tutti i log da: {folder}\n")
+        df = load_folder(folder)
 
-        for path in sorted(folder.iterdir()):
-            name_lower = path.name.lower()
-            is_wifi = path.suffix.lower() == ".csv" and name_lower.startswith("dati_sensori")
-            is_bt   = path.suffix.lower() == ".txt" and name_lower.startswith("serial")
-            if not (is_wifi or is_bt):
-                continue
+        time_range = (
+            f"{df['Time_ms'].min():.0f} – {df['Time_ms'].max():.0f} ms"
+            if df["Time_ms"].notna().any() else "N/A"
+        )
+        print(f"  Intervallo Time_ms: {time_range}")
 
-            label = "WiFi" if is_wifi else "BT"
-            print(f"  [{label}] {path.name}")
-            df = load_single_file(path)
-            if df.empty:
-                print(f"    → Nessun dato valido, file saltato.")
-                continue
+        df = process_df(df, args)
 
-            df = process_df(df, args)
-            out_path = out_dir / (path.stem + "_clean.csv")
-            df.to_csv(out_path, index=False, float_format="%.4f")
-            print(f"    → {len(df)} righe → {out_path.name}\n")
-            processed += 1
+        out_path = args.output or (folder / f"merged_{folder.name}_{ts_str}.csv")
+        df_out = df.drop(columns=[c for c in ("Source", "SourceFile") if c in df.columns])
+        df_out.to_csv(out_path, index=False, float_format="%.4f")
 
-        if processed == 0:
-            sys.exit("Nessun file di log trovato.")
-        print(f"✓ Elaborati {processed} file.")
+        print(f"\n✓ Salvato: {out_path}")
+        print(f"  {len(df_out)} righe × {len(df_out.columns)} colonne")
         return
 
-    # ── Modalità: merge unico ───────────────────────────────────────────────
-    print(f"\nCaricamento log da: {folder}\n")    # folder è già risolto sopra
-    df = load_folder(folder)
+    # ── Modalità default: un CSV pulito per file ─────────────────────────────
+    print(f"\nElaborazione singoli file in: {folder}\n")
+    out_dir = folder
+    processed = 0
 
-    time_range = (
-        f"{df['Time_ms'].min():.0f} – {df['Time_ms'].max():.0f} ms"
-        if df["Time_ms"].notna().any() else "N/A"
-    )
-    print(f"  Intervallo Time_ms: {time_range}")
+    for path in sorted(folder.iterdir()):
+        name_lower = path.name.lower()
+        is_wifi = path.suffix.lower() == ".csv" and name_lower.startswith("dati_sensori")
+        is_bt   = path.suffix.lower() == ".txt" and name_lower.startswith("serial")
+        if not (is_wifi or is_bt):
+            continue
 
-    df = process_df(df, args)
+        label = "WiFi" if is_wifi else "BT"
+        print(f"  [{label}] {path.name}")
+        df = load_single_file(path)
+        if df.empty:
+            print(f"    → Nessun dato valido, file saltato.")
+            continue
 
-    out_path = args.output or (folder / f"merged_{folder.name}_{ts_str}.csv")
-    df.to_csv(out_path, index=False, float_format="%.4f")
+        df = process_df(df, args)
+        out_path = out_dir / (path.stem + "_clean.csv")
+        df_out = df.drop(columns=[c for c in ("Source", "SourceFile") if c in df.columns])
+        df_out.to_csv(out_path, index=False, float_format="%.4f")
+        print(f"    → {len(df_out)} righe → {out_path.name}\n")
+        processed += 1
 
-    print(f"\n✓ Salvato: {out_path}")
-    print(f"  {len(df)} righe × {len(df.columns)} colonne")
+    if processed == 0:
+        sys.exit("Nessun file di log trovato.")
+    print(f"✓ Elaborati {processed} file.")
 
 
 if __name__ == "__main__":
