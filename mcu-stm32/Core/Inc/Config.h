@@ -55,7 +55,7 @@ extern "C" {
 //#define DATA_COLLECT_MODE
 
 /** Sampling period [ms] when DATA_COLLECT_MODE is active */
-#define DATA_COLLECT_PERIOD_MS      1000U
+#define DATA_COLLECT_PERIOD_MS      500U
 
 /* Data collection backend selection:
  * - ESP32_REMOTE  : STM32 keeps normal CSV/debug stream over UART4
@@ -63,7 +63,7 @@ extern "C" {
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -198,10 +198,10 @@ extern "C" {
  * - Dual motor:
  *     RIGHT_PRESENT=1, LEFT_PRESENT=1, RIGHT_CONTROL=1, LEFT_CONTROL=1
  * ========================================================= */
-#define INVERTER_RIGHT_PRESENT                 1U
-#define INVERTER_LEFT_PRESENT                  0U
-#define INVERTER_RIGHT_TORQUE_CONTROL_ENABLED  1U
-#define INVERTER_LEFT_TORQUE_CONTROL_ENABLED   0U
+#define INVERTER_RIGHT_PRESENT                 0U
+#define INVERTER_LEFT_PRESENT                  1U
+#define INVERTER_RIGHT_TORQUE_CONTROL_ENABLED  0U
+#define INVERTER_LEFT_TORQUE_CONTROL_ENABLED   1U
 
 /* DATA_COLLECT inverter selection:
  * 0 = AUTO (if only one side is control-enabled, pick that side; otherwise RIGHT)
@@ -241,7 +241,7 @@ extern "C" {
 
 //#define ANTI_NEG_WHILESTOPPED
 //#define REGEN_FORCE_ENABLE   /**< Debug override: bypasses all regen stages — comment out for normal operation */
-#define REGEN_ENABLED              1U     /**< 1 = enabled, 0 = disabled */
+#define REGEN_ENABLED              0U     /**< 1 = enabled, 0 = disabled */
 #define REVERSE_TORQUE_ENABLED          0U     /**< 1 = allow negative torque from pedal, 0 = pedal only commands positive torque (regen disabled) */
 #if (REVERSE_TORQUE_ENABLED && REGEN_ENABLED)
     #error "REVERSE_TORQUE_ENABLED cannot be true when REGEN_ENABLED is true, to avoid conflicting negative torque sources. Please disable one of them in Config.h."

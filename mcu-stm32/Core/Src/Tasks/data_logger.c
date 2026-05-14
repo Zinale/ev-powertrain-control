@@ -346,12 +346,13 @@ void DataLoggerTask(void)
 
                     // -- Inverter LEFT ---------------------------------------------------
                     Serial_Log(LOGGER_CHANNEL,
-                        "[INV_L] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%dV pwr=%luW lastRx=%lu ms\r\n",
+                        "[INV_L] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d sp=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%uV pwr=%luW lastRx=%lu ms\r\n",
                         HAL_GetTick(),
                         Inverter_GetStateName(inv_l_copy.state),
                         inv_l_copy.status_word,
                         inv_l_copy.speed_rpm,
-                        inv_l_copy.torque_value * TORQUE_SCALE_FACTOR,
+                        (int)(inv_l_copy.torque_value * TORQUE_SCALE_FACTOR),
+                        (int)inv_l_copy.torque_request,
                         inv_l_copy.raw_torque_current * Iq_SCALE_FACTOR,
                         inv_l_copy.raw_magnetizing_current * Id_SCALE_FACTOR,
                         (float)inv_l_copy.motor_temp_degC    / 10.0f,
@@ -389,12 +390,13 @@ void DataLoggerTask(void)
 
                     // -- Inverter RIGHT --------------------------------------------------
                     Serial_Log(LOGGER_CHANNEL,
-                        "[INV_R] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%dV pwr=%luW lastRx=%lu ms\r\n",
+                        "[INV_R] t=%lu | state=%s sw=0x%04X speed=%d RPM torque=%d sp=%d Iq=%.1f Id=%.1f T_mot=%.1fC T_inv=%.1fC T_igbt=%.1fC DC=%uV pwr=%luW lastRx=%lu ms\r\n",
                         HAL_GetTick(),
                         Inverter_GetStateName(inv_r_copy.state),
                         inv_r_copy.status_word,
                         inv_r_copy.speed_rpm,
-                        inv_r_copy.torque_value * TORQUE_SCALE_FACTOR,
+                        (int)(inv_r_copy.torque_value * TORQUE_SCALE_FACTOR),
+                        (int)inv_r_copy.torque_request,
                         inv_r_copy.raw_torque_current * Iq_SCALE_FACTOR,
                         inv_r_copy.raw_magnetizing_current * Id_SCALE_FACTOR,
                         (float)inv_r_copy.motor_temp_degC    / 10.0f,

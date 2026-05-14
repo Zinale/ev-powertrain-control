@@ -226,22 +226,27 @@ void Motor_ProcessInverterControl(CAN_HandleTypeDef *hcan,
     } else {
         /* Zero torque request (pedal released, no regen).
          *
-         * Keep lim_pos open as long as the motor is spinning in either direction,
-         * so the AMK can actively brake back to 0 RPM and — critically — prevent
-         * a runaway in the negative direction caused by inertia overshooting 0.
-         * Without lim_pos > 0, once the motor drifts negative the AMK has no
-         * authority to recover: both limits are 0, torque_setpoint is 0, so the
-         * motor accelerates freely in reverse driven by back-EMF coupling.
+         * Pure coast: both limits = 0, velocity_target = 0.
          *
-         * lim_neg is kept at 0: we never want the inverter to pull negative torque
-         * autonomously when the pedal is released (no regen enabled here). */
-        if (inv->speed_rpm != 0) {
-            effective_limit_pos = TORQUE_LIMIT_POS;
-            effective_limit_neg = 0;
-        } else {
-            effective_limit_pos = 0;
-            effective_limit_neg = 0;
-        }
+         * RATIONALE FOR CHANGE (2025-05): The previous logic kept lim_pos = TORQUE_LIMIT_POS
+         * when speed != 0, hoping the AMK speed controller would "actively brake to 0 RPM".
+         * This is dangerous: in AMK KIST CAN the AMK_TargetVelocity (Byte 2-3) is a VELOCITY
+         * setpoint, so velocity_target=0 with lim_pos open causes the AMK internal speed PID
+         * to apply positive corrective torque whenever speed is negative.
+         * If the encoder polarity is effectively inverted (e.g. after gearbox installation that
+         * changed the motor orientation), this corrective torque drives the motor MORE negative
+         * instead of back toward 0 → RUNAWAY to -7000 RPM as observed on bench (2025-05-12).
+         *
+         * With both limits = 0:
+         *  - The AMK speed controller output is clamped to 0 → true coast.
+         *  - At high speed (back-EMF > Vbus), body diodes provide natural regenerative braking.
+         *  - The motor decelerates only by friction and back-EMF, no risk of active runaway.
+         *
+         * If controlled coasting to zero (without encoder polarity fix) is needed, the correct
+         * approach is to enable REGEN (REGEN_ENABLED = 1) with proper lim_neg, not to leave
+         * lim_pos open with velocity_target = 0. */
+        effective_limit_pos = 0;
+        effective_limit_neg = 0;
     }
 
     InverterCommandMsg1_t cmd = Inverter_BuildCommand(
