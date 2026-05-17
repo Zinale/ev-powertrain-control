@@ -1,12 +1,16 @@
 clear; clc;
 
 %% -- Motore ---------------------------------------------------------------
-T_peak      = 17;    % Coppia di picco    [Nm]
+T_peak      = 21;    % Coppia di picco    [Nm]
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
 w_engine    = 0.005;    %w motore (1/w_engine*s +1) 
 mot_max_rpm = 20000;   % Giri massimi motore [rpm]
 derating_on_thresh = 19;
 derating_off_thresh = 20;
+
+rising_slew_rate_torque = 50;
+falling_slew_rate_torque = -500;
+
 
 %% -- Veicolo --------------------------------------------------------------
 n_wheels_f  = 2;
@@ -25,7 +29,11 @@ Izz         = 200;      %Yaw polar inerzia [kg*m^2]
 
 Af          = 1.1;      %Area longitudinale drag [m^2] 
 Cd          = 1.3;      
-Cl       = -1;
+Cl       = 1.0;
+
+aero_bal_r = 0.5;       % % di downforce sul posteriore (es. 50%)
+K_roll_rear = 0.5;      % % di rigidezza a rollio sul posteriore (es. 50%)
+
 
 rid_ratio   = 14.5;    % Rapporto di riduzione [-]
 rid_eff     = 0.95;    % Efficienza riduttore  [-]
@@ -67,11 +75,15 @@ tvc_low_sat   = -15;
 T_headroom_max = 8.0;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
 T_headroom_k   = 10.0;  % Guadagno proporzionale          [TUNABLE]
 %% -- SLC — PID  --------------------------------------------------------
-slc_Kp      = 0.457;     % [TUNABLE]
-slc_Ki      = 9.01;     % [TUNABLE]
+% slc_Kp      = 2.057;     % [TUNABLE]
+% slc_Ki      = 10.01;     % [TUNABLE]
+% slc_Kp      = 0.7057;     % [TUNABLE]
+% slc_Ki      = 1.01;     % [TUNABLE]
+slc_Kp      = 0;     % [TUNABLE]
+slc_Ki      = 0;     % [TUNABLE]
 slc_Kd      = 0;    % [TUNABLE]
-slc_up_sat   = 17;
-slc_low_sat   = -17;
+slc_up_sat   = T_peak;
+slc_low_sat   = -T_peak;
 
 
 %% --yaw_th ------------------------------------------------------
@@ -90,22 +102,23 @@ tvc_throttle_on        = 3.0;    % Acceleratore minimo x attivazione TVC [m/s]
 
 
 %% -- Slip Controller (TCS) — Architettura SOTTRATTIVA ---------------------
-slip_Kp         = 50.0;   % [TUNABLE]
-slip_Ki         = 40.0;    % [TUNABLE]
-slip_Kd         = 10.0;    % [TUNABLE] 
+slip_Kp         = 210.0;   % [TUNABLE]
+slip_Ki         = 200.0;    % [TUNABLE]
+slip_Kd         = 6.0;    % [TUNABLE] 
 slip_filt_N     = 10;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
-slip_ref        = 0.10;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
-slip_up_sat     = T_peak; % Saturazione superiore PI [Nm]
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 30; % Saturazione superiore PI [Nm]
 slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
-slip_bc_coeff   = 1.0;    % CoefficienteBack-Calculation PID [TUNABLE]
-slip_V_min      = 0.3;    % Velocità sotto cui disabilitare TCS [m/s] — abbassato per attivazione anticipata
+slip_bc_coeff   = 1.5;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 2;    % Velocità sotto cui disabilitare TCS [m/s] 
 
 %% -- Launch Control — Torque Ramp Limiter ---------------------------------
 % Limita la derivata di T_req in uscita dalla pedal map.
 
 launch_V_thresh = 5.0; %[m/s]
-launch_ramp_rate = 150.0;   %[N/s]
-nominal_ramp_rate = 150.0; 
+launch_ramp_rate = 1000.0;   %[N/s]
+nominal_ramp_rate = 1000.0; 
     
 %% -- Rigenerazione (specchio del codice STM32) ----------------------------
 % Valori sincronizzati con Config.h e BaseControlMotor.h (bench configuration)
@@ -141,9 +154,10 @@ air_temp        = 300;      % Temperatura ambiente [K]
 v0_speed        = 0.00;        %Velocità Vx iniziale [m/s] 
 pressure        = 101325; %[Pa]
 g               = 9.81;     %[m/s^2]
+rho = 1.225;            % Densità aria [kg/m^3]
 
 Kus             = 0.00;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
-mu              = 1.6;      %Coefficiente di attrito strada-ruota
+mu              = 1.5;      %Coefficiente di attrito strada-ruota
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
 scale_factor_front = ones(27, 1); % Scale factors per Magic Formula anteriore
