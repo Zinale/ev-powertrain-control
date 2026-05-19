@@ -8,7 +8,7 @@ mot_max_rpm = 20000;   % Giri massimi motore [rpm]
 derating_on_thresh = 19;
 derating_off_thresh = 20;
 
-rising_slew_rate_torque = 50;
+rising_slew_rate_torque = 100;
 falling_slew_rate_torque = -500;
 
 
@@ -35,13 +35,13 @@ aero_bal_r = 0.5;       % % di downforce sul posteriore (es. 50%)
 K_roll_rear = 0.5;      % % di rigidezza a rollio sul posteriore (es. 50%)
 
 
-rid_ratio   = 14.5;    % Rapporto di riduzione [-]
-rid_eff     = 0.95;    % Efficienza riduttore  [-]
+rid_ratio   = 15;    % Rapporto di riduzione [-]
+rid_eff     = 0.8;    % Efficienza riduttore  [-]
 R_wheel     = 0.2032;   % Raggio ruota          [m]
 
 
 
-steer_ratio = 1/4.2;   % Steering ratio [rad_ruota / rad_volante]
+steer_ratio = 4.2;   % Steering ratio [rad_ruota / rad_volante]
 
 camber_rear = -1;
 pa_rear_wheel = 82700;      %12psi [Pa]
@@ -53,27 +53,21 @@ brake_bias_r = 1 - brake_bias_f; % Ripartizione frenata al posteriore (40%)
 
 
 
-%% -- Mappa Pedale (lookup table) ------------------------------------------
-% Mappatura esponenziale: risposta docile a bassi input, aggressiva al massimo
-% Input:  throttle grezzo [0..100] %
-% Output: throttle normalizzato [0..1] da moltiplicare per T_peak
-pedal_alpha   = 1;   % Esponente curva (1=lineare, >1=esponenziale)  [TUNABLE]
-pedal_bp      = (0:10:100)';                          % Breakpoints [%]
-pedal_map     = (pedal_bp / 100) .^ pedal_alpha;      % Valori normalizzati [0..1]
-% Nel blocco Simulink: usare "1-D Lookup Table" con pedal_bp, pedal_map
+
 
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
-tvc_Kp      = 22;     % [TUNABLE]
-tvc_Ki      = 35;     % [TUNABLE]
+tvc_Kp      = 100;     % [TUNABLE]
+tvc_Ki      = 0;     % [TUNABLE]
 tvc_Kd      = 0;    % [TUNABLE]
-tvc_sat_dMz = 16.0;    % Saturazione uscita PID [Nm]  (+-)
-tvc_up_sat   = 15;
-tvc_low_sat   = -15;
+tvc_sat_dMz = 17.0;    % Saturazione uscita PID [Nm]  (+-)
+tvc_up_sat   = T_peak; % Limite per-motore (il clamp reale è Saturation Dynamic con Tmax_RL)
+tvc_low_sat   = 0;     % Nessuna coppia negativa in trazione (regen è percorso separato)
+tvc_tr      =1.1;
 
 % Allocator ------------------------------------------------------
 T_headroom_max = 8.0;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
-T_headroom_k   = 10.0;  % Guadagno proporzionale          [TUNABLE]
+T_headroom_k   = 1.0;  % Guadagno proporzionale          [TUNABLE]
 %% -- SLC — PID  --------------------------------------------------------
 % slc_Kp      = 2.057;     % [TUNABLE]
 % slc_Ki      = 10.01;     % [TUNABLE]
@@ -87,23 +81,27 @@ slc_low_sat   = -T_peak;
 
 
 %% --yaw_th ------------------------------------------------------
-angle_limit = 2;
+angle_limit_d = 2;   %[°]
 
 
 
-%% -- Mode Manager — soglie ------------------------------------------------
-tvc_D_thresh     = 0.052;  % Soglia sterzo per attivare TVC [rad]  [TUNABLE]
-tvc_D_thresh_off     = 0.03;  % Soglia sterzo per disattivare TVC [rad]  [TUNABLE]
-tvc_yaw_thresh   = 0.1;    % Soglia yaw error per attivare TVC [rad/s]  [TUNABLE]
-tvc_yaw_thresh_off   = 0.05;    % Soglia yaw error per disattivareTVC [rad/s]  [TUNABLE]
-tvc_V_on         = 4.0;    % Velocità minima attivazione TVC [m/s]
-tvc_V_off        = 2.0;    % Velocità massima disattivazione TVC [m/s]
-tvc_throttle_on        = 3.0;    % Acceleratore minimo x attivazione TVC [m/s]
+%% -- Mode Manager — soglie (2 stati: IDLE_ / TVC_) ------------------------
+% IDLE_→TVC_: [V > tvc_V_on && Throttle > tvc_throttle_on && brake == 0]
+% TVC_→IDLE_: [brake > 0 || V <= tvc_V_off]
+tvc_V_on        = 4.0;   % Velocità minima attivazione TVC  [m/s]  [TUNABLE]
+tvc_V_off       = 2.0;   % Velocità disattivazione TVC      [m/s]  [TUNABLE]
+tvc_throttle_on = 3.0;   % Throttle minimo attivazione TVC  [%]    [TUNABLE]
+% Soglie sterzo/yaw non usate nel Mode Manager (TVC sempre attivo quando V>V_on)
+% Mantenute per log/CAN o eventuale reimplementazione futura
+tvc_D_thresh        = 0.060;  % [rad]
+tvc_D_thresh_off    = 0.03;   % [rad]
+tvc_yaw_thresh      = 0.08;    % [rad/s]
+tvc_yaw_thresh_off  = 0.04;   % [rad/s]
 
 
 %% -- Slip Controller (TCS) — Architettura SOTTRATTIVA ---------------------
-slip_Kp         = 210.0;   % [TUNABLE]
-slip_Ki         = 200.0;    % [TUNABLE]
+slip_Kp         = 230.0;   % [TUNABLE]
+slip_Ki         = 150.0;    % [TUNABLE]
 slip_Kd         = 6.0;    % [TUNABLE] 
 slip_filt_N     = 10;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
 slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
@@ -111,7 +109,17 @@ overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip
 slip_up_sat     = 30; % Saturazione superiore PI [Nm]
 slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
 slip_bc_coeff   = 1.5;    % CoefficienteBack-Calculation PID [TUNABLE]
-slip_V_min      = 2;    % Velocità sotto cui disabilitare TCS [m/s] 
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+%% -- Mappa Pedale (lookup table) ------------------------------------------
+% Mappatura esponenziale: risposta docile a bassi input, aggressiva al massimo
+% Input:  throttle grezzo [0..100] %
+% Output: throttle normalizzato [0..1] da moltiplicare per T_peak
+pedal_alpha   = 1;   % Esponente curva (1=lineare, >1=esponenziale)  [TUNABLE]
+pedal_bp      = (0:10:100)';                          % Breakpoints [%]
+pedal_map     = (pedal_bp / 100) .^ pedal_alpha;      % Valori normalizzati [0..1]
+deathzone_APP = 5; % % sul valore 0-100
+% Nel blocco Simulink: usare "1-D Lookup Table" con pedal_bp, pedal_map
 
 %% -- Launch Control — Torque Ramp Limiter ---------------------------------
 % Limita la derivata di T_req in uscita dalla pedal map.
