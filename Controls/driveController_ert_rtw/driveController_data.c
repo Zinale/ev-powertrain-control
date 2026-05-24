@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'driveController'.
  *
- * Model version                  : 1.1
+ * Model version                  : 1.13
  * Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
- * C/C++ source code generated on : Fri May  1 20:55:48 2026
+ * C/C++ source code generated on : Sat May 23 16:55:46 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -21,7 +21,21 @@
 
 /* Invariant block signals (default storage) */
 const ConstB_driveController_T driveController_ConstB = {
-  0.0                                  /* '<S3>/Constant' */
+  0.0F                                 /* '<S9>/Constant' */
+};
+
+/* Constant parameters (default storage) */
+const ConstP_driveController_T driveController_ConstP = {
+  /* Computed Parameter: uDLookupTable_tableData
+   * Referenced by: '<S1>/1-D Lookup Table'
+   */
+  { 0.0F, 0.1F, 0.2F, 0.3F, 0.4F, 0.5F, 0.6F, 0.7F, 0.8F, 0.9F, 1.0F },
+
+  /* Computed Parameter: uDLookupTable_bp01Data
+   * Referenced by: '<S1>/1-D Lookup Table'
+   */
+  { 0.0F, 10.0F, 20.0F, 30.0F, 40.0F, 50.0F, 60.0F, 70.0F, 80.0F, 90.0F, 100.0F
+  }
 };
 
 /*

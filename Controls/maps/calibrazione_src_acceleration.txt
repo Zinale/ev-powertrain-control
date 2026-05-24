@@ -1,0 +1,186 @@
+=================================================
+riduttore al 98%
+=================================================
+
+
+slip_Kp         = 90.0;   % [TUNABLE]
+slip_Ki         = 65.0;    % [TUNABLE]
+slip_Kd         = 2;    % [TUNABLE] 
+slip_filt_N     = 110;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+5.158
+
+
+
+slip_Kp         = 90.0;   % [TUNABLE]
+slip_Ki         = 75.0;    % [TUNABLE]
+slip_Kd         = 2;    % [TUNABLE] 
+slip_filt_N     = 40;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+5.193
+
+
+
+
+slip_Kp         = 85.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 1.4;    % [TUNABLE] 
+slip_filt_N     = 30;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+5.137
+
+
+
+
+slip_Kp         = 90.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 2;    % [TUNABLE] 
+slip_filt_N     = 30;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+5.124
+
+
+
+
+slip_Kp         = 90.0;   % [TUNABLE]
+slip_Ki         = 70.0;    % [TUNABLE]
+slip_Kd         = 2.5;    % [TUNABLE] 
+slip_filt_N     = 30;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.16;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.13;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 12;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+5.286
+
+
+
+--> PIU INSTABILI --> 
+
+
+slip_Kp         = 180.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 2;    % [TUNABLE] 
+slip_filt_N     = 30;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.892
+
+
+slip_Kp         = 190.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 2;    % [TUNABLE] 
+slip_filt_N     = 60;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.12;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.844
+
+
+
+slip_Kp         = 190.0;   % [TUNABLE]
+slip_Ki         = 130.0;    % [TUNABLE]
+slip_Kd         = 5;    % [TUNABLE] 
+slip_filt_N     = 40;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.17;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.10;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.818
+
+
+slip_Kp         = 190.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 5;    % [TUNABLE] 
+slip_filt_N     = 40;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.17;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.10;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.789
+
+
+
+slip_Kp         = 220.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 4;    % [TUNABLE] 
+slip_filt_N     = 40;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.17;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.10;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.765
+
+
+
+slip_Kp         = 260.0;   % [TUNABLE]
+slip_Ki         = 100.0;    % [TUNABLE]
+slip_Kd         = 2;    % [TUNABLE] 
+slip_filt_N     = 40;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.17;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.10;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.705
+
+
+
+slip_Kp         = 195.0;   % [TUNABLE]
+slip_Ki         = 120.0;    % [TUNABLE]
+slip_Kd         = 3;    % [TUNABLE] 
+slip_filt_N     = 25;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_ref        = 0.17;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
+overslip_factor = 1.10;   % Fattore di sovraspinta per far innescare lo slip 
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
+slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
+slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
+
+4.942
