@@ -37,11 +37,12 @@ extern "C" {
  * UART4 only (no verbose text). Designed for bench logging
  * through ESP32 → WiFi → Python script.
  *
- * FEATHER_LOCAL — MCU invia 17 campi, Feather appende NTC1/2/3 → 20 colonne totali:
- *   Time_s, TempMotor, TempInverter, TempIGBT, Voltage, Speed,
+ * FEATHER_LOCAL — MCU invia 20 campi, Feather appende NTC1/2/3 → 23 colonne totali:
+ *   Time_ms, TempMotor, TempInverter, TempIGBT, Voltage, Speed,
  *   Iq, Id, TorqueMotor, PedalPerc,
- *   StatusWord, ErrCode, ErrInfo1,
+ *   InvState, ErrCode, StatusWord, ErrInfo1,
  *   PhaseU_mA, PhaseV_mA, PhaseW_mA, Power_W,
+ *   TorqueSetpoint, TorqueLimitDyn,
  *   NTC1, NTC2, NTC3
  *
  * ESP32_REMOTE — MCU invia 20 campi, ESP32 appende NTC1/2/3 → 23 colonne totali:
@@ -52,10 +53,10 @@ extern "C" {
  *
  * UART4 baud rate: 9600 (corrisponde a UART_BAUD nel firmware Feather e SERIAL2_BAUD nell'ESP32)
  * ========================================================= */
-//#define DATA_COLLECT_MODE
+#define DATA_COLLECT_MODE
 
 /** Sampling period [ms] when DATA_COLLECT_MODE is active */
-#define DATA_COLLECT_PERIOD_MS      500U
+#define DATA_COLLECT_PERIOD_MS      100U
 
 /* Data collection backend selection:
  * - ESP32_REMOTE  : STM32 keeps normal CSV/debug stream over UART4
@@ -63,7 +64,7 @@ extern "C" {
  */
 #define DATA_COLLECT_BACKEND_ESP32_REMOTE   1U
 #define DATA_COLLECT_BACKEND_FEATHER_LOCAL  2U
-#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_ESP32_REMOTE
+#define DATA_COLLECT_BACKEND                DATA_COLLECT_BACKEND_FEATHER_LOCAL
 
 #if ((DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_ESP32_REMOTE) && \
      (DATA_COLLECT_BACKEND != DATA_COLLECT_BACKEND_FEATHER_LOCAL))
@@ -198,10 +199,10 @@ extern "C" {
  * - Dual motor:
  *     RIGHT_PRESENT=1, LEFT_PRESENT=1, RIGHT_CONTROL=1, LEFT_CONTROL=1
  * ========================================================= */
-#define INVERTER_RIGHT_PRESENT                 0U
-#define INVERTER_LEFT_PRESENT                  1U
-#define INVERTER_RIGHT_TORQUE_CONTROL_ENABLED  0U
-#define INVERTER_LEFT_TORQUE_CONTROL_ENABLED   1U
+#define INVERTER_RIGHT_PRESENT                 1U
+#define INVERTER_LEFT_PRESENT                  0U
+#define INVERTER_RIGHT_TORQUE_CONTROL_ENABLED  1U
+#define INVERTER_LEFT_TORQUE_CONTROL_ENABLED   0U
 
 /* DATA_COLLECT inverter selection:
  * 0 = AUTO (if only one side is control-enabled, pick that side; otherwise RIGHT)
