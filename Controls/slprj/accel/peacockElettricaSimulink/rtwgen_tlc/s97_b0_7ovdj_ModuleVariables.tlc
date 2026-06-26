@@ -1,0 +1,10 @@
+%implements s97_b0_7ovdj_ModuleVariables "C"
+
+%function ModuleVariables(block) Output
+
+%<TLC_STR_CTX(0)>\
+%<TLC_STR_CTX(1)>\
+%<TLC_STR_CTX(2)>\
+%<TLC_STR_CTX(3)>\
+%<TLC_STR_CTX(4)>\
+%endfunction
