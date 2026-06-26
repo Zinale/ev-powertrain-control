@@ -156,8 +156,6 @@ for mc_ = {'Source', 'SourceFile'}
 end
 
 % --- Rimuovi righe con Time_ms non crescente (riconnessioni / timestamp UART corrotti) ---
-% Nota: esp32_log_merger.py fa già questo; il blocco seguente è un fallback
-%       per i file caricati direttamente senza passare per il merger.
 tColFilt = find(strcmpi(data.Properties.VariableNames, 'Time_ms'), 1);
 if ~isempty(tColFilt)
     t_raw_filt = data.(data.Properties.VariableNames{tColFilt});
