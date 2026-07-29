@@ -1,4 +1,4 @@
-clear; clc;
+clear; clc; close all;
 
 %% -- Motore ---------------------------------------------------------------
 T_peak      = 21;    % Coppia di picco    [Nm]
@@ -9,6 +9,9 @@ derating_on_thresh = 19;
 derating_off_thresh = 20;
 
 V_dc = 540;
+I_discharge_max = 80;       %Ampere
+I_charge_max    = 21;       %Ampere
+
 
 rising_slew_rate_torque = 100;
 falling_slew_rate_torque = -500;
@@ -17,8 +20,7 @@ falling_slew_rate_torque = -500;
 %% -- Veicolo --------------------------------------------------------------
 n_wheels_f  = 2;
 n_wheels_r  = 2;
-mass        = 300 ;     % Massa vettura + pilota [kg]
-Iz          = 120;     % Momento inerzia yaw    [kg·m²]
+mass        = 320 ;     % Massa vettura + pilota [kg]
 l_f         = 0.775;   % Distanza CG-asse ant.  [m]
 l_r         = 0.775;   % Distanza CG-asse post. [m]
 wheelbase   = l_f + l_r; %Passo del veicolo [m]
@@ -34,7 +36,7 @@ Cd          = 1.3;
 Cl       = 1.0;
 
 aero_bal_r = 0.5;       % % di downforce sul posteriore (es. 50%)
-K_roll_rear = 0.5;      % % di rigidezza a rollio sul posteriore (es. 50%)
+K_roll_rear = 0.45;      % % di rigidezza a rollio sul posteriore (es. 50%)
 
 
 rid_ratio   = 15;    % Rapporto di riduzione [-]
@@ -63,17 +65,17 @@ num_pads = 2;
 
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
-tvc_Kp      = 650;     % [TUNABLE]
-tvc_Ki      = 250;     % [TUNABLE]
-tvc_Kd      = 8;    % [TUNABLE]
-tvc_sat_dMz = 350;    % Saturazione uscita PID [Nm]  (+-)
-tvc_tr      =6.0;
+tvc_Kp      = 600;     % [TUNABLE]
+tvc_Ki      = 10;     % [TUNABLE]
+tvc_Kd      = 0.5;    % [TUNABLE]
+tvc_sat_dMz = 200;    % Saturazione uscita PID [Nm]  (+-)
+tvc_tr      =7.0;
 tvc_bc      = 4;
 tvc_N_filter = 30;
 
 % Allocator ------------------------------------------------------
-T_headroom_max = 3.0;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
-T_headroom_k   = 7.0;  % Guadagno proporzionale          [TUNABLE]
+T_headroom_max = 4.5;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
+T_headroom_k   = 8.0;  % Guadagno proporzionale          [TUNABLE]
 rpm_safe_threshold = 100;
 
 
@@ -96,9 +98,9 @@ angle_limit_d = 1;   %[°]
 
 
 
-%% -- Mode Manager — soglie (2 stati: IDLE_ / TVC_) ------------------------
-% IDLE_→TVC_: [V > tvc_V_on && Throttle > tvc_throttle_on && brake == 0]
-% TVC_→IDLE_: [brake > 0 || V <= tvc_V_off]
+%% -- Mode Manager - soglie (2 stati: IDLE_ / TVC_) ------------------------
+% IDLE_->TVC_: [V > tvc_V_on && Throttle > tvc_throttle_on && brake == 0]
+% TVC_->IDLE_: [brake > 0 || V <= tvc_V_off]
 tvc_V_on        = 4.0;   % Velocità minima attivazione TVC  [m/s]  [TUNABLE]
 tvc_V_off       = 2.0;   % Velocità disattivazione TVC      [m/s]  [TUNABLE]
 tvc_throttle_on = 3.0;   % Throttle minimo attivazione TVC  [%]    [TUNABLE]
@@ -116,7 +118,7 @@ slip_Kd         = 0.8;    % [TUNABLE]
 slip_filt_N     = 80;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
 slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
 overslip_factor = 1.01;   % Fattore di sovraspinta per far innescare lo slip 
-slip_up_sat     = 18; % Saturazione superiore PI [Nm]
+slip_up_sat     = 25; % Saturazione superiore PI [Nm]
 slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
 slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
 slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s] 
@@ -134,7 +136,6 @@ slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s]
 % slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
 % slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
 %% -- Mappa Pedale (lookup table) ------------------------------------------
-% Mappatura esponenziale: risposta docile a bassi input, aggressiva al massimo
 % Input:  throttle grezzo [0..100] %
 % Output: throttle normalizzato [0..1] da moltiplicare per T_peak
 pedal_alpha   = 1;   % Esponente curva (1=lineare, >1=esponenziale)  [TUNABLE]
@@ -162,11 +163,11 @@ nominal_ramp_rate = 1000.0;
 % Formula coppia limite per potenza:   T_P_lim = (P_batt_max/2)   / omega_mot
 
 % regen_T_max         = T_rated/2;   % Coppia regen massima per motore [Nm] (50% Mn = 4.9)  [TUNABLE]
-regen_T_max         = 5;
-regen_pedal_thr     = 10.0;      % Soglia pedale ingresso regen [%]  — da Config.h
+regen_T_max         = 9;
+regen_pedal_thr     = 5.0;      % Soglia pedale ingresso regen [%]  — da Config.h
 regen_pedal_hyst    = 3.0;       % Isteresi pedale [%]               — da Config.h
 regen_speed_min_rpm = 4000;      % Velocità fade-out regen [rpm]     — da Config.h
-regen_speed_crit_rpm= 2000;      % Velocità no-regen [rpm]           — da Config.h
+regen_speed_crit_rpm= 1000;      % Velocità no-regen [rpm]           — da Config.h
 regen_I_peak_A      = 21.0;      % Corrente batteria peak  [A] TOTALE — da Config.h
 regen_I_cont_A      = 14.0;      % Corrente batteria cont  [A] TOTALE — da Config.h
 regen_I_peak_dur_s  = 4.0;       % Durata finestra peak    [s]        — da Config.h
@@ -181,6 +182,7 @@ tau_V_filter    = 0.02;    % Costante filtro LP su velocità ruote [s]
 
 
 %% -- Simulazione -------------------------------------------------
+a_lat_max       = 5;        %m/s^2
 Ts              = 0.01;    % Sample time controller [s]  — 100 Hz
 air_temp        = 300;      % Temperatura ambiente [K]         
 v0_speed        = 0.00;        %Velocità Vx iniziale [m/s] 
