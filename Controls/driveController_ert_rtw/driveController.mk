@@ -2,8 +2,8 @@
 ## Makefile generated for component 'driveController'. 
 ## 
 ## Makefile     : driveController.mk
-## Generated on : Sat May 23 16:55:58 2026
-## Final product: $(RELATIVE_PATH_TO_ANCHOR)/driveController.exe
+## Generated on : Fri Jul 31 11:03:24 2026
+## Final product: $(RELATIVE_PATH_TO_ANCHOR)/driveController.elf
 ## Product type : executable
 ## 
 ###########################################################################
@@ -32,15 +32,15 @@ MODEL_HAS_DYNAMICALLY_LOADED_SFCNS = 0
 RELATIVE_PATH_TO_ANCHOR   = ..
 COMPILER_COMMAND_FILE     = driveController_comp.rsp
 CMD_FILE                  = driveController.rsp
-C_STANDARD_OPTS           = -fwrapv
-CPP_STANDARD_OPTS         = -fwrapv
+C_STANDARD_OPTS           = 
+CPP_STANDARD_OPTS         = 
 
 ###########################################################################
 ## TOOLCHAIN SPECIFICATIONS
 ###########################################################################
 
-# Toolchain Name:          MinGW64 | gmake (64-bit Windows)
-# Supported Version(s):    14.x
+# Toolchain Name:          GNU Tools for STM32
+# Supported Version(s):    
 # ToolchainInfo Version:   2026a
 # Specification Revision:  1.0
 # 
@@ -48,25 +48,27 @@ CPP_STANDARD_OPTS         = -fwrapv
 # Macros assumed to be defined elsewhere
 #-------------------------------------------
 
-# C_STANDARD_OPTS
-# CPP_STANDARD_OPTS
-# MINGW_ROOT
-# MINGW_C_STANDARD_OPTS
+# TARGET_LOAD_CMD_ARGS
+# TARGET_LOAD_CMD
+# MW_GNU_ARM_STM32_PATH
+# FDATASECTIONS_FLG
 
 #-----------
 # MACROS
 #-----------
 
-WARN_FLAGS            = -Wall -W -Wwrite-strings -Winline -Wstrict-prototypes -Wnested-externs -Wpointer-arith -Wcast-align -Wno-stringop-overflow
-WARN_FLAGS_MAX        = $(WARN_FLAGS) -Wcast-qual -Wshadow
-CPP_WARN_FLAGS        = -Wall -W -Wwrite-strings -Winline -Wpointer-arith -Wcast-align -Wno-stringop-overflow
-CPP_WARN_FLAGS_MAX    = $(CPP_WARN_FLAGS) -Wcast-qual -Wshadow
-MW_EXTERNLIB_DIR      = $(MATLAB_ROOT)/extern/lib/win64/mingw64
-SHELL                 = %SystemRoot%/system32/cmd.exe
+LIBGCC                    = ${shell $(MW_GNU_ARM_STM32_PATH)/arm-none-eabi-gcc ${CFLAGS} -print-libgcc-file-name}
+LIBC                      = ${shell $(MW_GNU_ARM_STM32_PATH)/arm-none-eabi-gcc ${CFLAGS} -print-file-name=libc.a}
+LIBM                      = ${shell $(MW_GNU_ARM_STM32_PATH)/arm-none-eabi-gcc ${CFLAGS} -print-file-name=libm.a}
+PRODUCT_NAME_WITHOUT_EXTN = $(basename $(PRODUCT))
+PRODUCT_BIN               = $(PRODUCT_NAME_WITHOUT_EXTN).bin
+PRODUCT_HEX               = $(PRODUCT_NAME_WITHOUT_EXTN).hex
+CPFLAGS                   = -O binary
+SHELL                     = %SystemRoot%/system32/cmd.exe
 
 TOOLCHAIN_SRCS = 
 TOOLCHAIN_INCS = 
-TOOLCHAIN_LIBS = -lws2_32
+TOOLCHAIN_LIBS = -lm
 
 FORMAT_FOR_ECHO_CMD              = $(strip $(subst >,^>,\
 	$(subst <,^<,\
@@ -85,29 +87,41 @@ ADD_QUOTES                       = $(foreach aPath,$1,"$(aPath)")
 # BUILD TOOL COMMANDS
 #------------------------
 
-# C Compiler: GNU C Compiler
-CC_PATH = $(MINGW_ROOT)
-CC = "$(CC_PATH)/gcc"
+# Assembler: GNU ARM Assembler
+AS_PATH = $(MW_GNU_ARM_STM32_PATH)
+AS = "$(AS_PATH)/arm-none-eabi-gcc"
 
-# Linker: GNU Linker
-LD_PATH = $(MINGW_ROOT)
-LD = "$(LD_PATH)/g++"
+# C Compiler: GNU ARM C Compiler
+CC_PATH = $(MW_GNU_ARM_STM32_PATH)
+CC = "$(CC_PATH)/arm-none-eabi-gcc"
 
-# C++ Compiler: GNU C++ Compiler
-CPP_PATH = $(MINGW_ROOT)
-CPP = "$(CPP_PATH)/g++"
+# Linker: GNU ARM Linker
+LD_PATH = $(MW_GNU_ARM_STM32_PATH)
+LD = "$(LD_PATH)/arm-none-eabi-g++"
 
-# C++ Linker: GNU C++ Linker
-CPP_LD_PATH = $(MINGW_ROOT)
-CPP_LD = "$(CPP_LD_PATH)/g++"
+# C++ Compiler: GNU ARM C++ Compiler
+CPP_PATH = $(MW_GNU_ARM_STM32_PATH)
+CPP = "$(CPP_PATH)/arm-none-eabi-g++"
 
-# Archiver: GNU Archiver
-AR_PATH = $(MINGW_ROOT)
-AR = "$(AR_PATH)/ar"
+# C++ Linker: GNU ARM C++ Linker
+CPP_LD_PATH = $(MW_GNU_ARM_STM32_PATH)
+CPP_LD = "$(CPP_LD_PATH)/arm-none-eabi-g++"
+
+# Archiver: GNU ARM Archiver
+AR_PATH = $(MW_GNU_ARM_STM32_PATH)
+AR = "$(AR_PATH)/arm-none-eabi-ar"
 
 # MEX Tool: MEX Tool
 MEX_PATH = $(MATLAB_ARCH_BIN)
 MEX = "$(MEX_PATH)/mex"
+
+# Binary Converter: Binary Converter
+OBJCOPYPATH = $(MW_GNU_ARM_STM32_PATH)
+OBJCOPY = "$(OBJCOPYPATH)/arm-none-eabi-objcopy"
+
+# Hex Converter: Hex Converter
+OBJCOPYPATH = $(MW_GNU_ARM_STM32_PATH)
+OBJCOPY = "$(OBJCOPYPATH)/arm-none-eabi-objcopy"
 
 # Download: Download
 DOWNLOAD =
@@ -116,14 +130,16 @@ DOWNLOAD =
 EXECUTE = $(PRODUCT)
 
 # Builder: GMAKE Utility
-MAKE_PATH = $(MINGW_ROOT)
-MAKE = "$(MAKE_PATH)/mingw32-make.exe"
+MAKE_PATH = %MATLAB%\bin\win64
+MAKE = "$(MAKE_PATH)/gmake"
 
 
 #-------------------------
 # Directives/Utilities
 #-------------------------
 
+ASDEBUG             = -g
+AS_OUTPUT_FLAG      = -o
 CDEBUG              = -g
 C_OUTPUT_FLAG       = -o
 LDDEBUG             = -g
@@ -135,7 +151,7 @@ OUTPUT_FLAG         = -o
 ARDEBUG             =
 STATICLIB_OUTPUT_FLAG =
 MEX_DEBUG           = -g
-RM                  = @del
+RM                  = @del /f/q
 ECHO                = @echo
 MV                  = @move
 RUN                 =
@@ -145,23 +161,43 @@ RUN                 =
 #----------------------------------------
 
 ARFLAGS              = ruvs
-CFLAGS               = -c $(MINGW_C_STANDARD_OPTS) -m64 -Wno-error=incompatible-pointer-types -Wno-error=stringop-overflow \
+ASFLAGS              = -MMD -MP -MF"$(@:%.s.o=%.s.dep)" -MT"$@"  \
+                       -Wall \
+                       -x assembler-with-cpp \
+                       $(ASFLAGS_ADDITIONAL) \
+                       $(DEFINES) \
+                       $(INCLUDES) \
+                       -c
+OBJCOPYFLAGS_BIN     = -O binary $(PRODUCT) $(PRODUCT_BIN)
+CFLAGS               = $(FDATASECTIONS_FLG) \
+                       -Wall \
+                       -c \
+                       -MMD -MP -MF"$(@:%.c.o=%.c.dep)" -MT"$@"  \
                        -O0
-CPPFLAGS             = -c $(CPP_STANDARD_OPTS) -m64 -Wno-error=incompatible-pointer-types -Wno-error=stringop-overflow \
+CPPFLAGS             = -std=gnu++14 \
+                       -fno-rtti \
+                       -fno-exceptions \
+                       $(FDATASECTIONS_FLG) \
+                       -Wall \
+                       -c \
+                       -MMD -MP -MF"$(@:%.cpp.o=%.cpp.dep)" -MT"$@"  \
                        -O0
-CPP_LDFLAGS          =  -static -m64
-CPP_SHAREDLIB_LDFLAGS  = -shared -Wl,--no-undefined \
-                         -Wl,--out-implib,$(basename $(PRODUCT)).lib
+CPP_LDFLAGS          = -Wl,--gc-sections \
+                       -Wl,-Map="$(PRODUCT_NAME).map" \
+                       -Wl,--print-memory-usage
+CPP_SHAREDLIB_LDFLAGS  =
 DOWNLOAD_FLAGS       =
 EXECUTE_FLAGS        =
-LDFLAGS              =  -static -m64
+OBJCOPYFLAGS_HEX     = -O ihex $(PRODUCT) $(PRODUCT_HEX)
+LDFLAGS              = -Wl,--gc-sections \
+                       -Wl,-Map="$(PRODUCT_NAME).map" \
+                       -Wl,--print-memory-usage
 MEX_CPPFLAGS         =
 MEX_CPPLDFLAGS       =
 MEX_CFLAGS           =
 MEX_LDFLAGS          =
-MAKE_FLAGS           = -j $(MAX_MAKE_JOBS) -l $(MAX_MAKE_LOAD_AVG) -Oline -f $(MAKEFILE)
-SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined \
-                       -Wl,--out-implib,$(basename $(PRODUCT)).lib
+MAKE_FLAGS           = -f $(MAKEFILE)
+SHAREDLIB_LDFLAGS    =
 
 
 
@@ -169,7 +205,7 @@ SHAREDLIB_LDFLAGS    = -shared -Wl,--no-undefined \
 ## OUTPUT INFO
 ###########################################################################
 
-PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/driveController.exe
+PRODUCT = $(RELATIVE_PATH_TO_ANCHOR)/driveController.elf
 PRODUCT_TYPE = "executable"
 BUILD_TYPE = "Top-Level Standalone Executable"
 
@@ -188,7 +224,7 @@ INCLUDES = $(INCLUDES_BUILDINFO)
 DEFINES_BUILD_ARGS = -DCLASSIC_INTERFACE=0 -DALLOCATIONFCN=0 -DTERMFCN=1 -DONESTEPFCN=1 -DMAT_FILE=0 -DMULTI_INSTANCE_CODE=0 -DINTEGER_CODE=0 -DMT=0
 DEFINES_CUSTOM = 
 DEFINES_OPTS = -DTID01EQ=0
-DEFINES_STANDARD = -DMODEL=driveController -DNUMST=2 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
+DEFINES_STANDARD = -DMODEL=driveController -DNUMST=3 -DNCSTATES=0 -DHAVESTDIO -DMODEL_HAS_DYNAMICALLY_LOADED_SFCNS=0
 
 DEFINES = $(DEFINES_BUILD_ARGS) $(DEFINES_CUSTOM) $(DEFINES_OPTS) $(DEFINES_STANDARD)
 
@@ -206,9 +242,9 @@ ALL_SRCS = $(SRCS) $(MAIN_SRC)
 ## OBJECTS
 ###########################################################################
 
-OBJS = driveController.obj driveController_data.obj rtGetNaN.obj rt_nonfinite.obj
+OBJS = driveController.c.o driveController_data.c.o rtGetNaN.c.o rt_nonfinite.c.o
 
-MAIN_OBJ = ert_main.obj
+MAIN_OBJ = ert_main.c.o
 
 ALL_OBJS = $(OBJS) $(MAIN_OBJ)
 
@@ -271,17 +307,32 @@ MEX_CFLAGS += $(MEX_Compiler_BASIC)
 ###########################################################################
 
 
-MINGW_C_STANDARD_OPTS = $(C_STANDARD_OPTS)
+ALL_DEPS:=$(patsubst %.o,%.dep,$(ALL_OBJS))
+all:
+
+ifndef DISABLE_GCC_FUNCTION_DATA_SECTIONS
+FDATASECTIONS_FLG := -ffunction-sections -fdata-sections
+endif
+
+
+
+-include codertarget_assembly_flags.mk
+-include ../codertarget_assembly_flags.mk
+-include ../../codertarget_assembly_flags.mk
+-include mw_gnu_tools_for_stm32_path.mk
+-include ../mw_gnu_tools_for_stm32_path.mk
+-include ../../mw_gnu_tools_for_stm32_path.mk
+-include $(ALL_DEPS)
 
 
 ###########################################################################
 ## PHONY TARGETS
 ###########################################################################
 
-.PHONY : all build buildobj clean info prebuild download execute
+.PHONY : all build buildobj clean info prebuild postbuild download execute
 
 
-all : build
+all : build postbuild
 	@echo $(call FORMAT_FOR_ECHO,### Successfully generated all binary outputs.)
 
 
@@ -295,7 +346,16 @@ buildobj : prebuild $(OBJS) $(PREBUILT_OBJS)
 prebuild : 
 
 
-download : $(PRODUCT)
+postbuild : $(PRODUCT)
+	@echo $(call FORMAT_FOR_ECHO,### Invoking postbuild tool Binary Converter ...)
+	$(OBJCOPY) $(OBJCOPYFLAGS_BIN)
+	@echo $(call FORMAT_FOR_ECHO,### Done invoking postbuild tool.)
+	@echo $(call FORMAT_FOR_ECHO,### Invoking postbuild tool Hex Converter ...)
+	$(OBJCOPY) $(OBJCOPYFLAGS_HEX)
+	@echo $(call FORMAT_FOR_ECHO,### Done invoking postbuild tool.)
+
+
+download : postbuild
 
 
 execute : download
@@ -314,7 +374,7 @@ execute : download
 
 $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 	@echo $(call FORMAT_FOR_ECHO,### Creating standalone executable "$(PRODUCT)" ...)
-	$(LD) $(LDFLAGS) -o $(PRODUCT) @$(CMD_FILE) -Wl,--start-group $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS) -Wl,--end-group
+	$(LD) $(LDFLAGS) -o $(PRODUCT) @$(CMD_FILE) $(SYSTEM_LIBS) $(TOOLCHAIN_LIBS)
 	@echo $(call FORMAT_FOR_ECHO,### Created: "$(PRODUCT)")
 
 
@@ -326,247 +386,219 @@ $(PRODUCT) : $(OBJS) $(PREBUILT_OBJS) $(MAIN_OBJ)
 # SOURCE-TO-OBJECT
 #---------------------
 
-%.obj : %.c
+%.c.o : %.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cpp
+%.cpp.o : %.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cc
+%.cpp.o : %.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cp
+%.cpp.o : %.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.cxx
+%.cpp.o : %.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : %.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : %.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : %.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : %.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : %.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c
+%.c.o : $(RELATIVE_PATH_TO_ANCHOR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
+%.cpp.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cc
+%.cpp.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cp
+%.cpp.o : $(RELATIVE_PATH_TO_ANCHOR)/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.cxx
+%.cpp.o : $(RELATIVE_PATH_TO_ANCHOR)/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(RELATIVE_PATH_TO_ANCHOR)/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(RELATIVE_PATH_TO_ANCHOR)/%.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(RELATIVE_PATH_TO_ANCHOR)/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.obj : $(START_DIR)/%.c
+%.c.o : $(START_DIR)/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cpp
+%.cpp.o : $(START_DIR)/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cc
+%.cpp.o : $(START_DIR)/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cp
+%.cpp.o : $(START_DIR)/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.cxx
+%.cpp.o : $(START_DIR)/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(START_DIR)/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(START_DIR)/%.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.obj : $(START_DIR)/driveController_ert_rtw/%.c
+%.c.o : $(START_DIR)/driveController_ert_rtw/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.cpp
+%.cpp.o : $(START_DIR)/driveController_ert_rtw/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.cc
+%.cpp.o : $(START_DIR)/driveController_ert_rtw/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.cp
+%.cpp.o : $(START_DIR)/driveController_ert_rtw/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.cxx
+%.cpp.o : $(START_DIR)/driveController_ert_rtw/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(START_DIR)/driveController_ert_rtw/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(START_DIR)/driveController_ert_rtw/%.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(START_DIR)/driveController_ert_rtw/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c
+%.c.o : $(MATLAB_ROOT)/rtw/c/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cpp
+%.cpp.o : $(MATLAB_ROOT)/rtw/c/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cc
+%.cpp.o : $(MATLAB_ROOT)/rtw/c/src/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cp
+%.cpp.o : $(MATLAB_ROOT)/rtw/c/src/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.cxx
+%.cpp.o : $(MATLAB_ROOT)/rtw/c/src/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(MATLAB_ROOT)/rtw/c/src/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(MATLAB_ROOT)/rtw/c/src/%.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/rtw/c/src/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.obj : $(MATLAB_ROOT)/simulink/src/%.c
+%.c.o : $(MATLAB_ROOT)/simulink/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cpp
+%.cpp.o : $(MATLAB_ROOT)/simulink/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cc
+%.cpp.o : $(MATLAB_ROOT)/simulink/src/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cp
+%.cpp.o : $(MATLAB_ROOT)/simulink/src/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.cxx
+%.cpp.o : $(MATLAB_ROOT)/simulink/src/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(MATLAB_ROOT)/simulink/src/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(MATLAB_ROOT)/simulink/src/%.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/simulink/src/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c
+%.c.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cpp
+%.cpp.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cpp
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cc
+%.cpp.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cc
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cp
+%.cpp.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.C
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cxx
+%.cpp.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.cxx
 	$(CPP) $(CPPFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.CPP
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.s
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.c++
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
+%.s.o : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.S
+	$(AS) $(ASFLAGS) -o "$@" "$<"
 
 
-%.obj : $(MATLAB_ROOT)/toolbox/simulink/blocks/src/%.C
-	$(CPP) $(CPPFLAGS) -o "$@" "$<"
-
-
-driveController.obj : $(START_DIR)/driveController_ert_rtw/driveController.c
+driveController.c.o : $(START_DIR)/driveController_ert_rtw/driveController.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-driveController_data.obj : $(START_DIR)/driveController_ert_rtw/driveController_data.c
+driveController_data.c.o : $(START_DIR)/driveController_ert_rtw/driveController_data.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-ert_main.obj : $(START_DIR)/driveController_ert_rtw/ert_main.c
+ert_main.c.o : $(START_DIR)/driveController_ert_rtw/ert_main.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-rtGetNaN.obj : $(START_DIR)/driveController_ert_rtw/rtGetNaN.c
+rtGetNaN.c.o : $(START_DIR)/driveController_ert_rtw/rtGetNaN.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
-rt_nonfinite.obj : $(START_DIR)/driveController_ert_rtw/rt_nonfinite.c
+rt_nonfinite.c.o : $(START_DIR)/driveController_ert_rtw/rt_nonfinite.c
 	$(CC) $(CFLAGS) -o "$@" "$<"
 
 
@@ -593,6 +625,7 @@ info :
 	@echo $(call FORMAT_FOR_ECHO,### MODELREF_LIBS = $(MODELREF_LIBS))
 	@echo $(call FORMAT_FOR_ECHO,### SYSTEM_LIBS = $(SYSTEM_LIBS))
 	@echo $(call FORMAT_FOR_ECHO,### TOOLCHAIN_LIBS = $(TOOLCHAIN_LIBS))
+	@echo $(call FORMAT_FOR_ECHO,### ASFLAGS = $(ASFLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### CFLAGS = $(CFLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### LDFLAGS = $(LDFLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### SHAREDLIB_LDFLAGS = $(SHAREDLIB_LDFLAGS))
@@ -604,6 +637,8 @@ info :
 	@echo $(call FORMAT_FOR_ECHO,### MEX_CPPFLAGS = $(MEX_CPPFLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### MEX_LDFLAGS = $(MEX_LDFLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### MEX_CPPLDFLAGS = $(MEX_CPPLDFLAGS))
+	@echo $(call FORMAT_FOR_ECHO,### OBJCOPYFLAGS_BIN = $(OBJCOPYFLAGS_BIN))
+	@echo $(call FORMAT_FOR_ECHO,### OBJCOPYFLAGS_HEX = $(OBJCOPYFLAGS_HEX))
 	@echo $(call FORMAT_FOR_ECHO,### DOWNLOAD_FLAGS = $(DOWNLOAD_FLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### EXECUTE_FLAGS = $(EXECUTE_FLAGS))
 	@echo $(call FORMAT_FOR_ECHO,### MAKE_FLAGS = $(MAKE_FLAGS))
@@ -613,6 +648,9 @@ clean :
 	$(ECHO) "### Deleting all derived files ..."
 	$(RM) $(subst /,\,$(PRODUCT))
 	$(RM) $(subst /,\,$(ALL_OBJS))
+	$(RM) *.c.dep
+	$(RM) *.cpp.dep
+	$(RM) *.s.dep
 	$(ECHO) "### Deleted all derived files."
 
 

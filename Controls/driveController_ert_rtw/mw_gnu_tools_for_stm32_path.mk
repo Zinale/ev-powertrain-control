@@ -1,0 +1,1 @@
+MW_GNU_ARM_STM32_PATH = C:/ProgramData/MATLAB/R2026a/stm32b/3P.instrset/gnuarm-stm32.instrset/win/bin

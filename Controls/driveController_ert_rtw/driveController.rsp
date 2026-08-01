@@ -1,5 +1,5 @@
-driveController.obj
-driveController_data.obj
-ert_main.obj
-rtGetNaN.obj
-rt_nonfinite.obj
+driveController.c.o
+driveController_data.c.o
+ert_main.c.o
+rtGetNaN.c.o
+rt_nonfinite.c.o

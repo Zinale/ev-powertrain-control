@@ -1,6 +1,0 @@
-%implements s169_b0_4kp2k_8_ModuleVariables "C"
-
-%function ModuleVariables(block) Output
-
-%<TLC_STR_CTX(0)>\
-%endfunction

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'driveController'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.16
  * Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
- * C/C++ source code generated on : Sat May 23 16:55:46 2026
+ * C/C++ source code generated on : Fri Jul 31 11:03:13 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -21,21 +21,40 @@
 
 /* Invariant block signals (default storage) */
 const ConstB_driveController_T driveController_ConstB = {
-  0.0F                                 /* '<S9>/Constant' */
+  0.0                                  /* '<S8>/Constant' */
 };
 
 /* Constant parameters (default storage) */
 const ConstP_driveController_T driveController_ConstP = {
-  /* Computed Parameter: uDLookupTable_tableData
-   * Referenced by: '<S1>/1-D Lookup Table'
+  /* Expression: pedal_map
+   * Referenced by: '<S2>/1-D Lookup Table'
    */
-  { 0.0F, 0.1F, 0.2F, 0.3F, 0.4F, 0.5F, 0.6F, 0.7F, 0.8F, 0.9F, 1.0F },
+  { 0.0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0 },
 
-  /* Computed Parameter: uDLookupTable_bp01Data
-   * Referenced by: '<S1>/1-D Lookup Table'
+  /* Expression: pedal_bp
+   * Referenced by: '<S2>/1-D Lookup Table'
    */
-  { 0.0F, 10.0F, 20.0F, 30.0F, 40.0F, 50.0F, 60.0F, 70.0F, 80.0F, 90.0F, 100.0F
-  }
+  { 0.0, 10.0, 20.0, 30.0, 40.0, 50.0, 60.0, 70.0, 80.0, 90.0, 100.0 },
+
+  /* Expression: [1,1,0]
+   * Referenced by: '<Root>/1-D Lookup Table'
+   */
+  { 1.0, 1.0, 0.0 },
+
+  /* Expression: [0,3,12]
+   * Referenced by: '<Root>/1-D Lookup Table'
+   */
+  { 0.0, 3.0, 12.0 },
+
+  /* Expression: [0,0,1]
+   * Referenced by: '<S8>/1-D Lookup Table'
+   */
+  { 0.0, 0.0, 1.0 },
+
+  /* Expression: [0,steering_deadband,5]
+   * Referenced by: '<S8>/1-D Lookup Table'
+   */
+  { 0.0, 2.0, 5.0 }
 };
 
 /*

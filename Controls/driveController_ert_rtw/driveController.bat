@@ -1,9 +1,7 @@
 
-call "setup_mingw.bat"
-
 cd .
 
-if "%1"=="" ("%MINGW_ROOT%\mingw32-make.exe"  -j 4 -l 4 -Oline -f driveController.mk all) else ("%MINGW_ROOT%\mingw32-make.exe"  -j 4 -l 4 -Oline -f driveController.mk %1)
+if "%1"=="" ("Z:\.Programmi\MATLAB26a\bin\win64\gmake"  -f driveController.mk all) else ("Z:\.Programmi\MATLAB26a\bin\win64\gmake"  -f driveController.mk %1)
 @if errorlevel 1 goto error_exit
 
 exit /B 0

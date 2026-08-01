@@ -1,15 +1,18 @@
 clear; clc; close all;
 
 %% -- Motore ---------------------------------------------------------------
-T_peak      = 21;    % Coppia di picco    [Nm]
+T_peak      = 20;    % Coppia di picco    [Nm]
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
 w_engine    = 0.005;    %w motore (1/w_engine*s +1) 
 mot_max_rpm = 20000;   % Giri massimi motore [rpm]
 derating_on_thresh = 19;
 derating_off_thresh = 20;
 
-V_dc = 540;
-I_discharge_max = 80;       %Ampere
+V_dc                = 540;       % Tensione nominale DC bus [V]  (bench; race = 540)
+V_dc_p                = Simulink.Parameter(V_dc);
+V_dc_p.StorageClass = 'ExportedGlobal';
+
+I_discharge_max = 90;       %Ampere
 I_charge_max    = 21;       %Ampere
 
 
@@ -36,7 +39,7 @@ Cd          = 1.3;
 Cl       = 1.0;
 
 aero_bal_r = 0.5;       % % di downforce sul posteriore (es. 50%)
-K_roll_rear = 0.45;      % % di rigidezza a rollio sul posteriore (es. 50%)
+K_roll_rear = 0.6;      % % di rigidezza a rollio sul posteriore (es. 50%)
 
 
 rid_ratio   = 15;    % Rapporto di riduzione [-]
@@ -52,7 +55,7 @@ pa_rear_wheel = 82700;      %12psi [Pa]
 camber_front = -1.5;         % Camber anteriore [gradi] (solitamente più negativo del post.)
 pa_front_wheel = 82700;      % Pressione anteriore 12psi [Pa]
 
-brake_bias_f = 0.60;         % Ripartizione frenata all'anteriore (es. 60%)
+brake_bias_f = 0.40;         % Ripartizione frenata all'anteriore (es. 60%)
 brake_bias_r = 1 - brake_bias_f; % Ripartizione frenata al posteriore (40%)
 
 
@@ -65,21 +68,21 @@ num_pads = 2;
 
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
-tvc_Kp      = 600;     % [TUNABLE]
-tvc_Ki      = 10;     % [TUNABLE]
-tvc_Kd      = 0.5;    % [TUNABLE]
-tvc_sat_dMz = 200;    % Saturazione uscita PID [Nm]  (+-)
-tvc_tr      =7.0;
-tvc_bc      = 4;
-tvc_N_filter = 30;
+tvc_Kp      = 650;     % [TUNABLE]
+tvc_Ki      = 150;     % [TUNABLE]
+tvc_Kd      = 100;    % [TUNABLE]
+tvc_sat_dMz = 700;    % Saturazione uscita PID [Nm]  (+-)
+tvc_tr      =5;
+tvc_bc      = 17;
+tvc_N_filter = 25;
 
 % Allocator ------------------------------------------------------
-T_headroom_max = 4.5;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
-T_headroom_k   = 8.0;  % Guadagno proporzionale          [TUNABLE]
+T_headroom_max = 9;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
+T_headroom_k   = 13.0;  % Guadagno proporzionale          [TUNABLE]
 rpm_safe_threshold = 100;
 
 
-steering_deadband = 2;   % °sterzo
+steering_deadband = 1;   % °sterzo
 
 %% -- SLC — PID  --------------------------------------------------------
 % slc_Kp      = 2.057;     % [TUNABLE]
@@ -112,7 +115,7 @@ tvc_yaw_thresh_off  = 0.04;   % [rad/s]
 e_yaw_deadzone      = 0.03;
 
 %% -- Slip Controller (TCS) — Architettura SOTTRATTIVA ---------------------
-slip_Kp         = 50.0;   % [TUNABLE]
+slip_Kp         = 50.0;   % 50 [TUNABLE]
 slip_Ki         = 13.0;    % [TUNABLE]
 slip_Kd         = 0.8;    % [TUNABLE] 
 slip_filt_N     = 80;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
@@ -172,7 +175,6 @@ regen_I_peak_A      = 21.0;      % Corrente batteria peak  [A] TOTALE — da Con
 regen_I_cont_A      = 14.0;      % Corrente batteria cont  [A] TOTALE — da Config.h
 regen_I_peak_dur_s  = 4.0;       % Durata finestra peak    [s]        — da Config.h
 regen_P_batt_max_W  = 35000;     % Potenza regen massima   [W] TOTALE — da Config.h (bench 350V)
-V_dc                = 540;       % Tensione nominale DC bus [V]  (bench; race = 540)
 ay_limit = 15.0; % [m/s^2] Inizia a tagliare regen a circa 1.5g
 
 %% -- Filtri ---------------------------------------------------------------
@@ -190,11 +192,13 @@ pressure        = 101325; %[Pa]
 g               = 9.81;     %[m/s^2]
 rho = 1.225;            % Densità aria [kg/m^3]
 
-Kus             = 0.00;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
+Kus             = 0.03;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
 mu              = 1.5;      %Coefficiente di attrito strada-ruota
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
 scale_factor_front = ones(27, 1); % Scale factors per Magic Formula anteriore
+
+auto_speed = 0;             %auto_speed = 0 -> Auto Throttle and Auto Brake; 1 Manual.
 
 %% -- Parametri TUNABLE per codegen (Simulink.Parameter) ------------------
 % Necessario solo se si genera codice C con Embedded Coder.

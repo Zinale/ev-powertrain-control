@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'driveController'.
  *
- * Model version                  : 1.13
+ * Model version                  : 1.16
  * Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
- * C/C++ source code generated on : Sat May 23 16:55:46 2026
+ * C/C++ source code generated on : Fri Jul 31 11:03:13 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M
@@ -80,7 +80,7 @@ int main(int argc, const char *argv[])
   driveController_initialize();
 
   /* Attach rt_OneStep to a timer or interrupt service routine with
-   * period 0.01 seconds (base rate of the model) here.
+   * period 0.001 seconds (base rate of the model) here.
    * The call syntax for rt_OneStep is
    *
    *  rt_OneStep();
