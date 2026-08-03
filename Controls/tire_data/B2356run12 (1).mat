@@ -1,0 +1,33 @@
+% 1. Recupera i dati dal Workspace
+vars = whos; 
+filename = 'tireData.xml';
+
+% 2. Crea il documento XML
+docNode = com.mathworks.xml.XMLUtils.createDocument('Tydex');
+tydexRoot = docNode.getDocumentElement;
+tydexRoot.setAttribute('version', '1.0');
+
+% 3. Itera su ogni variabile e crea i nodi
+for i = 1:length(vars)
+    varName = vars(i).name;
+    varData = eval(varName);
+
+    % Crea l'elemento per la variabile
+    varElement = docNode.createElement('Variable');
+    varElement.setAttribute('name', varName);
+    varElement.setAttribute('type', vars(i).class);
+
+    % Se è un vettore o matrice, converti in stringa
+    if isnumeric(varData)
+        strData = num2str(varData(:)'); % Appiattisce e converte in stringa
+        varElement.appendChild(docNode.createTextNode(strData));
+    elseif ischar(varData)
+        varElement.appendChild(docNode.createTextNode(varData));
+    end
+
+    tydexRoot.appendChild(varElement);
+end
+
+% 4. Salva il file su disco
+xmlwrite(filename, docNode);
+fprintf('Conversione completata! File salvato come: %s\n', filename);

@@ -1,0 +1,10 @@
+%implements s96_b0_p3cal_ModuleVariables "C"
+
+%function ModuleVariables(block) Output
+
+%<TLC_STR_CTX(0)>\
+%<TLC_STR_CTX(1)>\
+%<TLC_STR_CTX(2)>\
+%<TLC_STR_CTX(3)>\
+%<TLC_STR_CTX(4)>\
+%endfunction

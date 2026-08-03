@@ -1,0 +1,7 @@
+%implements s96_b0_p3cal_ModuleConstants "C"
+
+%function ModuleConstants(block) Output
+
+#define peacockElettricaSimulink_period (0.0005)
+#define peacockElettricaSimulink_period_c (0.05)
+%endfunction

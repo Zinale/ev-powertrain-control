@@ -1,7 +1,7 @@
 clear; clc; close all;
 
 %% -- Motore ---------------------------------------------------------------
-T_peak      = 20;    % Coppia di picco    [Nm]
+T_peak      = 18;    % Coppia di picco    [Nm]
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
 w_engine    = 0.005;    %w motore (1/w_engine*s +1) 
 mot_max_rpm = 20000;   % Giri massimi motore [rpm]
@@ -23,7 +23,7 @@ falling_slew_rate_torque = -500;
 %% -- Veicolo --------------------------------------------------------------
 n_wheels_f  = 2;
 n_wheels_r  = 2;
-mass        = 320 ;     % Massa vettura + pilota [kg]
+mass        = 350 ;     % Massa vettura + pilota [kg]
 l_f         = 0.775;   % Distanza CG-asse ant.  [m]
 l_r         = 0.775;   % Distanza CG-asse post. [m]
 wheelbase   = l_f + l_r; %Passo del veicolo [m]
@@ -32,14 +32,14 @@ track_width_f = 1.2;     % Carreggiata anteriore [m]
 track_width_r = 1.2;     % Carreggiata posteriore [m]
 track_width = (track_width_r + track_width_f)/2;
 
-Izz         = 200;      %Yaw polar inerzia [kg*m^2]
+Izz         = 150;      %Yaw polar inerzia [kg*m^2]
 
 Af          = 1.1;      %Area longitudinale drag [m^2] 
 Cd          = 1.3;      
 Cl       = 1.0;
 
-aero_bal_r = 0.5;       % % di downforce sul posteriore (es. 50%)
-K_roll_rear = 0.6;      % % di rigidezza a rollio sul posteriore (es. 50%)
+aero_bal_r = 0.50;       % % di downforce sul posteriore (es. 50%)
+K_roll_rear = 0.4;      % % di rigidezza a rollio sul posteriore (es. 50%)
 
 
 rid_ratio   = 15;    % Rapporto di riduzione [-]
@@ -50,9 +50,11 @@ R_wheel     = 0.2032;   % Raggio ruota          [m]
 
 steer_ratio = 4.2;   % Steering ratio [rad_ruota / rad_volante]
 
-camber_rear = -1;
+camber_rear = 1;   %  
+camber_front = 1.5;         % Camber anteriore [gradi]   
+camber_rear_rad = camber_rear * (pi/180);
+camber_front_rad = camber_front * (pi/180);
 pa_rear_wheel = 82700;      %12psi [Pa]
-camber_front = -1.5;         % Camber anteriore [gradi] (solitamente più negativo del post.)
 pa_front_wheel = 82700;      % Pressione anteriore 12psi [Pa]
 
 brake_bias_f = 0.40;         % Ripartizione frenata all'anteriore (es. 60%)
@@ -68,21 +70,24 @@ num_pads = 2;
 
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
-tvc_Kp      = 650;     % [TUNABLE]
-tvc_Ki      = 150;     % [TUNABLE]
-tvc_Kd      = 100;    % [TUNABLE]
-tvc_sat_dMz = 700;    % Saturazione uscita PID [Nm]  (+-)
+tvc_Kp      = 700;     % [TUNABLE]
+tvc_Ki      = 180;     % [TUNABLE]
+tvc_Kd      = 25;    % [TUNABLE]
+% tvc_Kp      = 0;     % [TUNABLE]
+% tvc_Ki      = 0;     % [TUNABLE]
+% tvc_Kd      = 0;    % [TUNABLE]
+tvc_sat_dMz = 710;    % Saturazione uscita PID [Nm]  (+-)
 tvc_tr      =5;
 tvc_bc      = 17;
-tvc_N_filter = 25;
+tvc_N_filter = 30;
 
 % Allocator ------------------------------------------------------
-T_headroom_max = 9;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
+T_headroom_max = 7;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
 T_headroom_k   = 13.0;  % Guadagno proporzionale          [TUNABLE]
 rpm_safe_threshold = 100;
 
 
-steering_deadband = 1;   % °sterzo
+steering_deadband = 1;   % °sterz
 
 %% -- SLC — PID  --------------------------------------------------------
 % slc_Kp      = 2.057;     % [TUNABLE]
@@ -115,13 +120,13 @@ tvc_yaw_thresh_off  = 0.04;   % [rad/s]
 e_yaw_deadzone      = 0.03;
 
 %% -- Slip Controller (TCS) — Architettura SOTTRATTIVA ---------------------
-slip_Kp         = 50.0;   % 50 [TUNABLE]
-slip_Ki         = 13.0;    % [TUNABLE]
-slip_Kd         = 0.8;    % [TUNABLE] 
-slip_filt_N     = 80;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
+slip_Kp         = 15.0;   % 50 [TUNABLE]
+slip_Ki         = 22.0;    % [TUNABLE]
+slip_Kd         = 1.5;    % [TUNABLE] 
+slip_filt_N     = 50;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
 slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
 overslip_factor = 1.01;   % Fattore di sovraspinta per far innescare lo slip 
-slip_up_sat     = 25; % Saturazione superiore PI [Nm]
+slip_up_sat     = 21; % Saturazione superiore PI [Nm]
 slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
 slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
 slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s] 
@@ -192,8 +197,8 @@ pressure        = 101325; %[Pa]
 g               = 9.81;     %[m/s^2]
 rho = 1.225;            % Densità aria [kg/m^3]
 
-Kus             = 0.03;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
-mu              = 1.5;      %Coefficiente di attrito strada-ruota
+Kus             = 0.0005;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
+mu              = 1.1;      %Coefficiente di attrito strada-ruota
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
 scale_factor_front = ones(27, 1); % Scale factors per Magic Formula anteriore

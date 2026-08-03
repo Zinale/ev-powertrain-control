@@ -1,0 +1,93 @@
+[MDI_HEADER]
+FILE_TYPE                ='tir'
+FILE_VERSION             = 3.0
+FILE_FORMAT              ='ASCII'
+! : COMMENT :              File generato da MATLAB fitting
+$----------------------------------------------------------------units
+[UNITS]
+LENGTH                   ='meter'
+FORCE                    ='newton'
+ANGLE                    ='radians'
+MASS                     ='kg'
+TIME                     ='second'
+$-----------------------------------------------------------------model
+[MODEL]
+PROPERTY_FILE_FORMAT     ='PAC2002'
+USE_MODE                 = 3
+VXLOW                    = 1.0
+LONGVL                   = 11.176  
+NOMPRES                  = 82737  
+PRESMAX                  = 96526  
+PRESMIN                  = 55158   
+FZMAX                    = 1112.0 
+FZMIN                    = 222.0
+KPUMAX                   = 1.0
+KPUMIN                   = -1.0
+ALPMAX                   = 0.2094 
+ALPMIN                   = -0.2094 
+CAMMIN                   = -0.0698 
+CAMMAX                   = 0.0698
+$------------------------------------------------------------dimensions
+[DIMENSION]
+UNLOADED_RADIUS          = 0.2032     $ (16"/2) in metri
+WIDTH                    = 0.1524     $ 6.0" in metri
+ASPECT_RATIO             = 0.50       $ Altezza spalla / Larghezza (3"/6")
+RIM_RADIUS               = 0.1270     $ (10"/2) in metri
+RIM_WIDTH                = 0.1778     $ Esempio: Cerchio da 7" in metri
+$--------------------------------------------------------------inertia
+[INERTIA]
+MASS                     = 5.2        $ Peso approssimativo in kg (circa 11.5 lbs)
+IXX                      = 0.35       $ DA VERIFICARE (Momento diametrale)
+IYY                      = 0.55       $ DA VERIFICARE (Momento polare)
+$-------------------------------------------------------------parameter
+[VERTICAL]
+FNOMIN                   = 1112.000000    $ (Lascia FZ0 com'è nel codice)
+VERTICAL_STIFFNESS       = 120000     $ DA VERIFICARE (Rigidezza verticale N/m)
+VERTICAL_DAMPING         = 50         $ Smorzamento verticale Ns/m
+$--------------------------------------------------------------scaling
+[SCALING_COEFFICIENTS]
+LFZO                     = 1
+LCX                      = 1
+LMUX                     = 1
+LEX                      = 1
+LKX                      = 1
+LCY                      = 1
+LMUY                     = 1
+LEY                      = 1
+LKY                      = 1
+$-------------------------------------------------------------LATERAL_FORCE
+[LATERAL_COEFFICIENTS]
+PCY1                     =    1.80950
+PDY1                     =    2.63285
+PDY2                     =   -0.49999
+PDY3                     =    9.99822
+PKY1                     =  -21.27292
+PKY2                     =    0.77835
+PKY3                     =   -0.22203
+PEY1                     =    1.68127
+PEY2                     =    0.14432
+PEY3                     =   -0.02731
+PEY4                     =   -2.72135
+PHY1                     =    0
+PHY2                     =    0
+PHY3                     =    0
+PVY1                     =    0
+PVY2                     =    0
+PVY3                     =    0
+PVY4                     =    0
+[LONGITUDINAL_COEFFICIENTS]
+PCX1                     =    1.98430
+PDX1                     =    1.00347
+PDX2                     =   -0.99198
+PDX3                     =    0.00566
+PKX1                     =   14.41148
+PKX2                     =   12.31364
+PKX3                     =   -2.82405
+PEX1                     =   -1.36507
+PEX2                     =    0.87772
+PEX3                     =   -0.57209
+PEX4                     =    0.01475
+PHX1                     =    0.00178
+PHX2                     =   -0.02561
+PVX1                     =    0.09914
+PVX2                     =    0.04065
