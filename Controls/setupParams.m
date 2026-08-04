@@ -70,23 +70,23 @@ num_pads = 2;
 
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
-tvc_Kp      = 700;     % [TUNABLE]
-tvc_Ki      = 180;     % [TUNABLE]
-tvc_Kd      = 25;    % [TUNABLE]
+tvc_Kp      = 400;     % [TUNABLE]
+tvc_Ki      = 150;     % [TUNABLE]
+tvc_Kd      = 80;    % [TUNABLE]
 % tvc_Kp      = 0;     % [TUNABLE]
 % tvc_Ki      = 0;     % [TUNABLE]
 % tvc_Kd      = 0;    % [TUNABLE]
 tvc_sat_dMz = 710;    % Saturazione uscita PID [Nm]  (+-)
 tvc_tr      =5;
 tvc_bc      = 17;
-tvc_N_filter = 30;
+tvc_N_filter = 40;
 
 % Allocator ------------------------------------------------------
 T_headroom_max = 7;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
 T_headroom_k   = 13.0;  % Guadagno proporzionale          [TUNABLE]
 rpm_safe_threshold = 100;
 
-
+beta_dot_threshold = 0.3;   %TUNABLE - custom anche da dash
 steering_deadband = 1;   % °sterz
 
 %% -- SLC — PID  --------------------------------------------------------
@@ -149,7 +149,7 @@ slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s]
 pedal_alpha   = 1;   % Esponente curva (1=lineare, >1=esponenziale)  [TUNABLE]
 pedal_bp      = (0:10:100)';                          % Breakpoints [%]
 pedal_map     = (pedal_bp / 100) .^ pedal_alpha;      % Valori normalizzati [0..1]
-deathzone_APP = 5; % % sul valore 0-100
+deathzone_APP = 1; % % sul valore 0-100
 % Nel blocco Simulink: usare "1-D Lookup Table" con pedal_bp, pedal_map
 
 %% -- Launch Control — Torque Ramp Limiter ---------------------------------
@@ -197,7 +197,7 @@ pressure        = 101325; %[Pa]
 g               = 9.81;     %[m/s^2]
 rho = 1.225;            % Densità aria [kg/m^3]
 
-Kus             = 0.0005;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
+Kus             = -0.0005;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
 mu              = 1.1;      %Coefficiente di attrito strada-ruota
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni

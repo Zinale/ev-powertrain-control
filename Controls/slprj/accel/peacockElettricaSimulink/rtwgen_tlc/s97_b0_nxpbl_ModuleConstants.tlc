@@ -1,4 +1,4 @@
-%implements s96_b0_p3cal_ModuleConstants "C"
+%implements s97_b0_nxpbl_ModuleConstants "C"
 
 %function ModuleConstants(block) Output
 
