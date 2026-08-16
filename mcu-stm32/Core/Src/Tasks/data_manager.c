@@ -41,7 +41,7 @@ extern SAS_Data_t  g_sas;
 #include <stdint.h>
 #include <string.h>
 
-#define READINGS_TASK_PERIOD_MS  4U   /**< Task period: 4 ms → 0.25 kHz        */
+#define READINGS_TASK_PERIOD_MS  5U   /**< Task period: 5 ms → 0.2 kHz        */
 
 /** Convert ms to RTOS ticks (portable, requires kernel already started) */
 #define MS_TO_TICKS(ms) ((uint32_t)((ms) * osKernelGetTickFreq() / 1000U))

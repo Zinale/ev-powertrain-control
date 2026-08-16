@@ -1,90 +1,154 @@
-% Generatore Tracciato Virtuale FSAE Endurance 
-%clear; clc; close all;
+%% Generatore Tracciato FSAE Endurance (Track 2 - Con Plot & STL)
+% Commentati clear/close all per non chiudere la finestra durante l'InitFcn di Simulink
+% clear; clc; close all;
 
 % --- Parametri Regolamento FSAE ---
-track_width = 4.0;         % [m] Larghezza minima carreggiata
-slalom_spacing = 10.0;     % [m] Spaziatura coni slalom (tra 9m e 15m)
-ay_max = 1.1 * 9.81;       % [m/s^2] Accelerazione laterale massima stimata
-v_max_straight = 28;       % [m/s] Velocità massima limitata per rettilinei lunghi (~100 km/h)
+track_width    = 3.0;        % [m]
+slalom_spacing = 14.0;       % [m]
+ay_max         = 1.2 * 9.81; % [m/s^2]
+ax_max_accel   = 0.8 * 9.81; % [m/s^2]
+ax_max_brake   = 1.4 * 9.81; % [m/s^2]
+v_max_straight = 22.0;       % [m/s]
 
-% 1. Definizione Waypoints (Con rettilineo di partenza rigorosamente dritto lungo +X)
+% 1. Waypoints Track 2 (Con raccordo pulito a (0,0) lungo +X)
 WP = [
-     -20,   0;     % Pre-start (Garantisce allineamento Y=0)
-       0,   0;     % Start / Finish (X=0, Y=0, Yaw = 0 deg)
-      50,   1;     % Fine rettilineo principale (Perfettamente dritto Y=0)
+     -20,   0;     % Raccordo ingresso rettilineo
+       0,   0;     % Start / Finish
+      50,   0;     % Fine rettilineo principale
       90,  25;     % Curva veloce
-      90,  75;     % Breve rettilineo
-      65, 115;     % Ingresso Tornante
+      90,  75;     % Allungo
+      65, 115;     % Tornante Dx
       40, 125;     % Apice Tornante
       15, 115;     % Uscita Tornante
       15,  65;     % Discesa
      -10,  30;     % Raccordo
-     -50,  30;     % Allungo interno
-     -90,   0;     % Curvone di ritorno
-     -90, -60;     % Rettilineo di ritorno (zona Slalom)
-     -40, -80;     % Curva finale
-     -20,   0      % Ritorno al pre-start
+     -50,  30;     % Misto interno
+     -90,   0;     % Curvone
+     -90, -60;     % Zona Slalom
+     -40, -75;     % Curva finale
+     -20,   0      % Chiusura
 ]';
 
-% Interpolazione spline fluida
-spline_path = cscvn(WP);
-t = linspace(spline_path.breaks(1), spline_path.breaks(end), 1500);
+% 2. Interpolazione Spline Periodica e ricampionamento ds = 0.2m
+spline_path = cscvn([WP, WP(:, 2)]);
+t = linspace(spline_path.breaks(1), spline_path.breaks(end-1), 3500);
 path = fnval(spline_path, t);
 
-X_ref = path(1,:);
-Y_ref = path(2,:);
+ds_calc = [0, sqrt(diff(path(1,:)).^2 + diff(path(2,:)).^2)];
+s_cum = cumsum(ds_calc);
+s_uniform = 0:0.2:s_cum(end);
 
-% FORZATURA STRUTTURALE: I primi metri attorno all'origine (tra X = -20 e X = 40)
-% vengono forzati a Y=0 per annullare qualsiasi minima curvatura introdotta dalla spline
-straight_start_idx = find(X_ref >= -20 & X_ref <= 45 & Y_ref < 5 & Y_ref > -5);
-Y_ref(straight_start_idx) = 0;
+X_ref = interp1(s_cum, path(1,:), s_uniform, 'spline');
+Y_ref = interp1(s_cum, path(2,:), s_uniform, 'spline');
 
-% 2. Generazione Sezione Slalom
+straight_idx = find(X_ref >= -10 & X_ref <= 45 & abs(Y_ref) < 2.5);
+Y_ref(straight_idx) = 0;
+
+% 3. Slalom con Finestra di Hanning
 slalom_idx = find(X_ref < -85 & Y_ref < -10 & Y_ref > -50);
-s_slalom = Y_ref(slalom_idx);
-X_ref(slalom_idx) = X_ref(slalom_idx) + 1.8 * sin(2*pi*(s_slalom) / (2*slalom_spacing));
+if ~isempty(slalom_idx)
+    s_sl = Y_ref(slalom_idx);
+    s_norm = abs(s_sl - s_sl(1));
+    hann_win = sin(linspace(0, pi, length(slalom_idx))).^2;
+    slalom_wave = 1.6 * sin(2 * pi * s_norm / (2 * slalom_spacing));
+    X_ref(slalom_idx) = X_ref(slalom_idx) + (hann_win .* slalom_wave);
+end
 
-% 3. Calcolo Curvatura (kappa) e Profilo di Velocità (V_ref)
-dX = gradient(X_ref);
-dY = gradient(Y_ref);
-ddX = gradient(dX);
-ddY = gradient(dY);
+% 4. Profilo Dinamico e Segnali
+ds_array = sqrt(diff(X_ref).^2 + diff(Y_ref).^2);
+s_ref = [0, cumsum(ds_array)];
 
-% Formula della curvatura
-curvature = abs(dX.*ddY - dY.*ddX) ./ (dX.^2 + dY.^2).^(3/2);
-curvature(isnan(curvature)) = 0;
-curvature(curvature < 1e-4) = 1e-4; 
+dX  = gradient(X_ref, s_ref);
+dY  = gradient(Y_ref, s_ref);
+ddX = gradient(dX, s_ref);
+ddY = gradient(dY, s_ref);
 
-% Calcolo velocità limite in curva
-V_ref = sqrt(ay_max ./ curvature);
-V_ref = min(V_ref, v_max_straight); 
-V_ref = movmean(V_ref, 30);         
-
-% 4. Render del Tracciato
+curvature = abs(dX .* ddY - dY .* ddX) ./ max((dX.^2 + dY.^2).^(3/2), 1e-6);
+curvature(curvature < 1e-4) = 1e-4;
 theta = atan2(dY, dX);
+psi_ref = unwrap(theta);
+
+V_lat = min(sqrt(ay_max ./ curvature), v_max_straight);
+
+V_fwd = zeros(size(V_lat));
+V_fwd(1) = 0;
+for i = 2:length(V_lat)
+    ds = s_ref(i) - s_ref(i-1);
+    V_fwd(i) = min(V_lat(i), sqrt(V_fwd(i-1)^2 + 2 * ax_max_accel * ds));
+end
+
+V_ref = zeros(size(V_lat));
+V_ref(end) = V_fwd(end);
+for i = length(V_lat)-1:-1:1
+    ds = s_ref(i+1) - s_ref(i);
+    V_ref(i) = min(V_fwd(i), sqrt(V_ref(i+1)^2 + 2 * ax_max_brake * ds));
+end
+V_ref = movmean(V_ref, 7);
+
+% 5. Coni Laterali
 Nx = -sin(theta);
-Ny = cos(theta);
+Ny =  cos(theta);
 
-% Posizione dei margini della pista (Coni)
-X_left = X_ref + (track_width/2) * Nx;
-Y_left = Y_ref + (track_width/2) * Ny;
-X_right = X_ref - (track_width/2) * Nx;
-Y_right = Y_ref - (track_width/2) * Ny;
+X_left  = X_ref + (track_width / 2) * Nx;
+Y_left  = Y_ref + (track_width / 2) * Ny;
+X_right = X_ref - (track_width / 2) * Nx;
+Y_right = Y_ref - (track_width / 2) * Ny;
 
-% Plot grafico
-figure('Name', 'FSAE Endurance Track Render', 'Color', 'w', 'Position', [100, 100, 800, 600]);
-plot(X_ref, Y_ref, 'k--', 'LineWidth', 1.5); hold on;
-plot(X_left, Y_left, 'b.', 'MarkerSize', 8);        % Coni blu (sinistra)
-plot(X_right, Y_right, 'r.', 'MarkerSize', 8);      % Coni rossi/arancio (destra)
-plot(X_ref(slalom_idx), Y_ref(slalom_idx), 'm-', 'LineWidth', 2); % Slalom
-plot(WP(1,:), WP(2,:), 'yo', 'MarkerSize', 5, 'MarkerFaceColor','g'); % Waypoints
+cone_idx = 1:round(3.0 / 0.2):length(X_ref);
+cones_left  = [X_left(cone_idx)',  Y_left(cone_idx)'];
+cones_right = [X_right(cone_idx)', Y_right(cone_idx)'];
 
-% Individua l'indice di partenza esatto (X=0) e traccia la freccia di Start
-start_idx = find(abs(X_ref) == min(abs(X_ref(X_ref >= 0 & Y_ref == 0))), 1);
-quiver(X_ref(start_idx), Y_ref(start_idx), dX(start_idx), dY(start_idx), 15, 'g', 'LineWidth', 2, 'MaxHeadSize', 2);
+% Struttura Unificata per Simulink
+trackData.s     = s_ref';
+trackData.X     = X_ref';
+trackData.Y     = Y_ref';
+trackData.psi   = psi_ref';
+trackData.V     = V_ref';
+trackData.kappa = curvature';
+trackData.Ltot  = s_ref(end);
 
+% 6. Render e Visualizzazione Grafica Mappa
+figure('Name', 'FSAE Endurance Track 2', 'Color', 'w', 'Position', [100, 100, 900, 650]);
+plot(X_ref, Y_ref, 'k--', 'LineWidth', 1.3); hold on;
+plot(cones_left(:,1),  cones_left(:,2),  'b^', 'MarkerFaceColor', 'b', 'MarkerSize', 5);
+plot(cones_right(:,1), cones_right(:,2), 'r^', 'MarkerFaceColor', 'r', 'MarkerSize', 5);
+plot(WP(1,:), WP(2,:), 'yo', 'MarkerFaceColor', 'g', 'MarkerSize', 6);
+quiver(0, 0, 12, 0, 0, 'g', 'LineWidth', 2.5, 'MaxHeadSize', 0.8);
 axis equal; grid on;
-title('FSAE Virtual Endurance Track');
 xlabel('X [m]'); ylabel('Y [m]');
-legend('Traiettoria Ideale (X\_ref, Y\_ref)', 'Coni Blu (SX)', 'Coni Rossi (DX)', ...
-       'Sezione Slalom', 'Waypoints', 'Vettore Partenza (+X)', 'Location', 'best');
+title('FSAE Endurance Circuit - Track 2');
+legend('Traiettoria Ideale', 'Coni SX (Blu)', 'Coni DX (Rossi)', 'Waypoints', 'Start (+X)', 'Location', 'best');
+drawnow; % Forza l'aggiornamento grafico immediato
+
+% 7. Generazione Mesh STL per Simulink 3D (Unreal Engine)
+cone_h = 0.5; cone_r = 0.175; n_sides = 12;
+th_c = linspace(0, 2*pi, n_sides+1); th_c(end) = [];
+v_base = [cone_r * cos(th_c)', cone_r * sin(th_c)', zeros(n_sides, 1)];
+v_apex = [0, 0, cone_h];
+single_cone_verts = [v_base; v_apex];
+
+faces = [];
+for k = 1:n_sides
+    k_next = mod(k, n_sides) + 1;
+    faces = [faces; k, k_next, n_sides+1];
+end
+
+verts_all_L = []; faces_all_L = [];
+for i = 1:size(cones_left, 1)
+    offset_idx = size(verts_all_L, 1);
+    v_shifted = single_cone_verts + [cones_left(i, 1), -cones_left(i, 2), 0];
+    verts_all_L = [verts_all_L; v_shifted];
+    faces_all_L = [faces_all_L; faces + offset_idx];
+end
+stlwrite(triangulation(faces_all_L, verts_all_L), 'cones_left.stl');
+
+verts_all_R = []; faces_all_R = [];
+for i = 1:size(cones_right, 1)
+    offset_idx = size(verts_all_R, 1);
+    v_shifted = single_cone_verts + [cones_right(i, 1), -cones_right(i, 2), 0];
+    verts_all_R = [verts_all_R; v_shifted];
+    faces_all_R = [faces_all_R; faces + offset_idx];
+end
+stlwrite(triangulation(faces_all_R, verts_all_R), 'cones_right.stl');
+
+disp('Track 2 caricato: Mappa visualizzata e STL generati!');

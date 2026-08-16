@@ -1,9 +1,9 @@
 clear; clc; close all;
 
 %% -- Motore ---------------------------------------------------------------
-T_peak      = 18;    % Coppia di picco    [Nm]
+T_peak      = 21;    % Coppia di picco    [Nm]
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
-w_engine    = 0.005;    %w motore (1/w_engine*s +1) 
+w_engine    = 0.001;    %w motore (1/w_engine*s +1) 
 mot_max_rpm = 20000;   % Giri massimi motore [rpm]
 derating_on_thresh = 19;
 derating_off_thresh = 20;
@@ -12,7 +12,7 @@ V_dc                = 540;       % Tensione nominale DC bus [V]  (bench; race = 
 V_dc_p                = Simulink.Parameter(V_dc);
 V_dc_p.StorageClass = 'ExportedGlobal';
 
-I_discharge_max = 90;       %Ampere
+I_discharge_max = 500;       %Ampere
 I_charge_max    = 21;       %Ampere
 
 
@@ -23,7 +23,7 @@ falling_slew_rate_torque = -500;
 %% -- Veicolo --------------------------------------------------------------
 n_wheels_f  = 2;
 n_wheels_r  = 2;
-mass        = 350 ;     % Massa vettura + pilota [kg]
+mass        = 300 ;     % Massa vettura + pilota [kg]
 l_f         = 0.775;   % Distanza CG-asse ant.  [m]
 l_r         = 0.775;   % Distanza CG-asse post. [m]
 wheelbase   = l_f + l_r; %Passo del veicolo [m]
@@ -38,12 +38,12 @@ Af          = 1.1;      %Area longitudinale drag [m^2]
 Cd          = 1.3;      
 Cl       = 1.0;
 
-aero_bal_r = 0.50;       % % di downforce sul posteriore (es. 50%)
+aero_bal_r = 0.70;       % % di downforce sul posteriore (es. 50%)
 K_roll_rear = 0.4;      % % di rigidezza a rollio sul posteriore (es. 50%)
 
 
 rid_ratio   = 15;    % Rapporto di riduzione [-]
-rid_eff     = 0.80;    % Efficienza riduttore  [-]
+rid_eff     = 0.95;    % Efficienza riduttore  [-]
 R_wheel     = 0.2032;   % Raggio ruota          [m]
 
 
@@ -71,19 +71,28 @@ num_pads = 2;
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
 tvc_Kp      = 400;     % [TUNABLE]
-tvc_Ki      = 150;     % [TUNABLE]
-tvc_Kd      = 80;    % [TUNABLE]
+tvc_Ki      = 110;     % [TUNABLE]
+tvc_Kd      = 50;    % [TUNABLE]
+tvc_sat_dMz = 700;    % Saturazione uscita PID [Nm]  (+-)
+
+% Parametri TVC Ricalibrati per stabilità
+% tvc_Kp       = 120.0;   % Ridotto da 400 a 120 per evitare sovrasterzo indotto
+% tvc_Ki       = 15.0;    % Ridotto da 110 a 15 (l'integrale creava accumulo di fase in curva)
+% tvc_Kd       = 8.0;     % Ridotto da 50 a 8
+% tvc_sat_dMz  = 250.0;   % Limitato a 250 Nm (invece di 700 Nm)
+
 % tvc_Kp      = 0;     % [TUNABLE]
 % tvc_Ki      = 0;     % [TUNABLE]
 % tvc_Kd      = 0;    % [TUNABLE]
-tvc_sat_dMz = 710;    % Saturazione uscita PID [Nm]  (+-)
 tvc_tr      =5;
 tvc_bc      = 17;
-tvc_N_filter = 40;
+tvc_N_filter = 35;
+
+
 
 % Allocator ------------------------------------------------------
-T_headroom_max = 7;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
-T_headroom_k   = 13.0;  % Guadagno proporzionale          [TUNABLE]
+T_headroom_max = 6;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
+T_headroom_k   = 10.0;  % Guadagno proporzionale          [TUNABLE]
 rpm_safe_threshold = 100;
 
 beta_dot_threshold = 0.3;   %TUNABLE - custom anche da dash
@@ -123,6 +132,9 @@ e_yaw_deadzone      = 0.03;
 slip_Kp         = 15.0;   % 50 [TUNABLE]
 slip_Ki         = 22.0;    % [TUNABLE]
 slip_Kd         = 1.5;    % [TUNABLE] 
+% slip_Kp         = 0;   % 50 [TUNABLE]
+% slip_Ki         = 0;    % [TUNABLE]
+% slip_Kd         = 0;    % [TUNABLE] 
 slip_filt_N     = 50;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
 slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
 overslip_factor = 1.01;   % Fattore di sovraspinta per far innescare lo slip 
@@ -133,12 +145,12 @@ slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s]
 
 
 %Acceleration MAP
-% slip_Kp         = 190.0;   % [TUNABLE]
-% slip_Ki         = 120.0;    % [TUNABLE]
-% slip_Kd         = 5;    % [TUNABLE] 
+% slip_Kp         = 40.0;   % [TUNABLE]
+% slip_Ki         = 50.0;    % [TUNABLE]
+% slip_Kd         = 10;    % [TUNABLE] 
 % slip_filt_N     = 40;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
 % slip_ref        = 0.17;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
-% overslip_factor = 1.10;   % Fattore di sovraspinta per far innescare lo slip 
+% overslip_factor = 1.045;   % Fattore di sovraspinta per far innescare lo slip 
 % slip_up_sat     = 21; % Saturazione superiore PI [Nm]
 % slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
 % slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
@@ -172,7 +184,7 @@ nominal_ramp_rate = 1000.0;
 
 % regen_T_max         = T_rated/2;   % Coppia regen massima per motore [Nm] (50% Mn = 4.9)  [TUNABLE]
 regen_T_max         = 9;
-regen_pedal_thr     = 5.0;      % Soglia pedale ingresso regen [%]  — da Config.h
+regen_pedal_thr     = 4.0;      % Soglia pedale ingresso regen [%]  — da Config.h
 regen_pedal_hyst    = 3.0;       % Isteresi pedale [%]               — da Config.h
 regen_speed_min_rpm = 4000;      % Velocità fade-out regen [rpm]     — da Config.h
 regen_speed_crit_rpm= 1000;      % Velocità no-regen [rpm]           — da Config.h
@@ -197,13 +209,20 @@ pressure        = 101325; %[Pa]
 g               = 9.81;     %[m/s^2]
 rho = 1.225;            % Densità aria [kg/m^3]
 
-Kus             = -0.0005;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
-mu              = 1.1;      %Coefficiente di attrito strada-ruota
+Kus             = 0.0000;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
+mu              = 1.14;      %Coefficiente di attrito strada-ruota
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
 scale_factor_front = ones(27, 1); % Scale factors per Magic Formula anteriore
+% Assegna il moltiplicatore di attrito per l'asse anteriore
+scale_factor_front(3) = mu; % LMUX (Friction peak longitudinale X)
+scale_factor_front(9) = mu; % LMUY (Friction peak laterale Y)
 
-auto_speed = 0;             %auto_speed = 0 -> Auto Throttle and Auto Brake; 1 Manual.
+% Assegna il moltiplicatore di attrito per l'asse posteriore
+scale_factor_rear(3)  = mu;  % LMUX (Friction peak longitudinale X)
+scale_factor_rear(9)  = mu;  % LMUY (Friction peak laterale Y)
+
+%auto_speed = 0;             %auto_speed = 0 -> Auto Throttle and Auto Brake; 1 Manual.
 
 %% -- Parametri TUNABLE per codegen (Simulink.Parameter) ------------------
 % Necessario solo se si genera codice C con Embedded Coder.
