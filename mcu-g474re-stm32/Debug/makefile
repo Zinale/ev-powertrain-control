@@ -9,8 +9,17 @@ RM := rm -rf
 
 # All of the sources participating in the build are defined here
 -include sources.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS_V2/subdir.mk
+-include Middlewares/Third_Party/FreeRTOS/Source/subdir.mk
 -include Drivers/STM32G4xx_HAL_Driver/Src/subdir.mk
 -include Core/Startup/subdir.mk
+-include Core/Src/Tasks/subdir.mk
+-include Core/Src/Sensors/subdir.mk
+-include Core/Src/Control/Simulink/subdir.mk
+-include Core/Src/Control/subdir.mk
+-include Core/Src/Connectivity/subdir.mk
 -include Core/Src/subdir.mk
 -include objects.mk
 
@@ -60,8 +69,8 @@ all: main-build
 main-build: mcu-g474re-stm32.elf secondary-outputs
 
 # Tool invocations
-mcu-g474re-stm32.elf mcu-g474re-stm32.map: $(OBJS) $(USER_OBJS) C:\Users\zinga\Documents\.UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\mcu-g474re-stm32\STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "mcu-g474re-stm32.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"C:\Users\zinga\Documents\.UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\mcu-g474re-stm32\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu-g474re-stm32.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+mcu-g474re-stm32.elf mcu-g474re-stm32.map: $(OBJS) $(USER_OBJS) E:\UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\mcu-g474re-stm32\STM32G474RETX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "mcu-g474re-stm32.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m4 -T"E:\UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\mcu-g474re-stm32\STM32G474RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="mcu-g474re-stm32.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 

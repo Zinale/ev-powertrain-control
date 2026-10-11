@@ -1,0 +1,106 @@
+Configuration	mcu-g474re-stm32
+STM32CubeMX 	6.18.1
+Date	08/31/2026
+MCU	STM32G474RETx
+
+
+
+PERIPHERALS	MODES	FUNCTIONS	PINS
+ADC1	IN5 Single-ended	ADC1_IN5	PB14
+ADC1	IN11 Single-ended	ADC1_IN11	PB12
+ADC1	IN12 Single-ended	ADC1_IN12	PB1
+ADC1	IN14 Single-ended	ADC1_IN14	PB11
+FDCAN1	Activated	FDCAN1_RX	PA11
+FDCAN1	Activated	FDCAN1_TX	PA12
+FDCAN2	Activated	FDCAN2_RX	PB5
+FDCAN2	Activated	FDCAN2_TX	PB6
+LPUART1	Asynchronous	LPUART1_RX	PA3
+LPUART1	Asynchronous	LPUART1_TX	PA2
+SYS	Serial Wire	SYS_JTCK-SWCLK	PA14
+SYS	Serial Wire	SYS_JTMS-SWDIO	PA13
+SYS	TIM6	SYS_VS_tim6	VP_SYS_VS_tim6
+SYS	Dead Battery Signals disabled	SYS_VS_DBSignals	VP_SYS_VS_DBSignals
+TIM2	Internal Clock	TIM2_VS_ClockSourceINT	VP_TIM2_VS_ClockSourceINT
+TIM2	Input Capture direct mode	TIM2_CH2	PB3
+TIM2	Input Capture direct mode	TIM2_CH3	PB10
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+14	PA2	LPUART1_TX	
+17	PA3	LPUART1_RX	
+25	PB1	ADC1_IN12	ADC1_BS
+30	PB10	TIM2_CH3	TIM2_WSS_FR
+33	PB11	ADC1_IN14	ADC1_APPS1
+34	PB12	ADC1_IN11	ADC1_APPS2
+36	PB14	ADC1_IN5	ADC1_SAS
+45	PA11	FDCAN1_RX	FDCAN_MOTOR_RX
+46	PA12	FDCAN1_TX	FDCAN_MOTOR_TX
+49	PA13	SYS_JTMS-SWDIO	T_SWDIO
+50	PA14	SYS_JTCK-SWCLK	T_SWCLK
+56	PB3	TIM2_CH2	TIM2_WSS_FL
+58	PB5	FDCAN2_RX	FDCAN_MAIN_RX
+59	PB6	FDCAN2_TX	FDCAN_MAIN_TX
+PERIPHERALS	MODES	FUNCTIONS	PINS
+ADC1	IN5 Single-ended	ADC1_IN5	PB14
+ADC1	IN11 Single-ended	ADC1_IN11	PB12
+ADC1	IN12 Single-ended	ADC1_IN12	PB1
+ADC1	IN14 Single-ended	ADC1_IN14	PB11
+FDCAN1	Activated	FDCAN1_RX	PA11
+FDCAN1	Activated	FDCAN1_TX	PA12
+FDCAN2	Activated	FDCAN2_RX	PB5
+FDCAN2	Activated	FDCAN2_TX	PB6
+LPUART1	Asynchronous	LPUART1_RX	PA3
+LPUART1	Asynchronous	LPUART1_TX	PA2
+SYS	Serial Wire	SYS_JTCK-SWCLK	PA14
+SYS	Serial Wire	SYS_JTMS-SWDIO	PA13
+SYS	TIM6	SYS_VS_tim6	VP_SYS_VS_tim6
+SYS	Dead Battery Signals disabled	SYS_VS_DBSignals	VP_SYS_VS_DBSignals
+TIM2	Internal Clock	TIM2_VS_ClockSourceINT	VP_TIM2_VS_ClockSourceINT
+TIM2	Input Capture direct mode	TIM2_CH2	PB3
+TIM2	Input Capture direct mode	TIM2_CH3	PB10
+
+
+
+Pin Nb	PINs	FUNCTIONs	LABELs
+14	PA2	LPUART1_TX	
+17	PA3	LPUART1_RX	
+25	PB1	ADC1_IN12	ADC1_BS
+30	PB10	TIM2_CH3	TIM2_WSS_FR
+33	PB11	ADC1_IN14	ADC1_APPS1
+34	PB12	ADC1_IN11	ADC1_APPS2
+36	PB14	ADC1_IN5	ADC1_SAS
+45	PA11	FDCAN1_RX	FDCAN_MOTOR_RX
+46	PA12	FDCAN1_TX	FDCAN_MOTOR_TX
+49	PA13	SYS_JTMS-SWDIO	T_SWDIO
+50	PA14	SYS_JTCK-SWCLK	T_SWCLK
+56	PB3	TIM2_CH2	TIM2_WSS_FL
+58	PB5	FDCAN2_RX	FDCAN_MAIN_RX
+59	PB6	FDCAN2_TX	FDCAN_MAIN_TX
+
+
+
+SOFTWARE PROJECT
+
+Project Settings : 
+Project Name : mcu-g474re-stm32
+Project Folder : E:\UNIVPM\PolimarcheRacingTeam\EV-POWERTRAIN-CONTROL\ev-powertrain-control\mcu-g474re-stm32
+Toolchain / IDE : STM32CubeIDE
+Firmware Package Name and Version : STM32Cube FW_G4 V1.6.3
+
+
+Code Generation Settings : 
+STM32Cube MCU packages and embedded software packs : Copy only the necessary library files
+Generate peripheral initialization as a pair of '.c/.h' files per peripheral : No
+Backup previously generated files when re-generating : No
+Delete previously generated files when not re-generated : Yes
+Set all free pins as analog (to optimize the power consumption) : No
+
+
+Toolchains Settings : 
+Compiler Optimizations : 
+
+
+
+
+

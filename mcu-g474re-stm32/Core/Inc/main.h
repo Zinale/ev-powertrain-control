@@ -57,25 +57,30 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define USER_BUTTON_Pin GPIO_PIN_13
-#define USER_BUTTON_GPIO_Port GPIOC
-#define USER_BUTTON_EXTI_IRQn EXTI15_10_IRQn
-#define LPUART1_TX_Pin GPIO_PIN_2
-#define LPUART1_TX_GPIO_Port GPIOA
-#define LPUART1_RX_Pin GPIO_PIN_3
-#define LPUART1_RX_GPIO_Port GPIOA
-#define USER_LED_Pin GPIO_PIN_5
-#define USER_LED_GPIO_Port GPIOA
-#define ADC1_p3_Pin GPIO_PIN_1
-#define ADC1_p3_GPIO_Port GPIOB
-#define ADC1_p4_Pin GPIO_PIN_11
-#define ADC1_p4_GPIO_Port GPIOB
-#define ADC1_p2_Pin GPIO_PIN_12
-#define ADC1_p2_GPIO_Port GPIOB
-#define ADC1_p1_Pin GPIO_PIN_14
-#define ADC1_p1_GPIO_Port GPIOB
+#define ADC1_BS_Pin GPIO_PIN_1
+#define ADC1_BS_GPIO_Port GPIOB
+#define TIM2_WSS_FR_Pin GPIO_PIN_10
+#define TIM2_WSS_FR_GPIO_Port GPIOB
+#define ADC1_APPS1_Pin GPIO_PIN_11
+#define ADC1_APPS1_GPIO_Port GPIOB
+#define ADC1_APPS2_Pin GPIO_PIN_12
+#define ADC1_APPS2_GPIO_Port GPIOB
+#define ADC1_SAS_Pin GPIO_PIN_14
+#define ADC1_SAS_GPIO_Port GPIOB
+#define FDCAN_MOTOR_RX_Pin GPIO_PIN_11
+#define FDCAN_MOTOR_RX_GPIO_Port GPIOA
+#define FDCAN_MOTOR_TX_Pin GPIO_PIN_12
+#define FDCAN_MOTOR_TX_GPIO_Port GPIOA
 #define T_SWDIO_Pin GPIO_PIN_13
 #define T_SWDIO_GPIO_Port GPIOA
+#define T_SWCLK_Pin GPIO_PIN_14
+#define T_SWCLK_GPIO_Port GPIOA
+#define TIM2_WSS_FL_Pin GPIO_PIN_3
+#define TIM2_WSS_FL_GPIO_Port GPIOB
+#define FDCAN_MAIN_RX_Pin GPIO_PIN_5
+#define FDCAN_MAIN_RX_GPIO_Port GPIOB
+#define FDCAN_MAIN_TX_Pin GPIO_PIN_6
+#define FDCAN_MAIN_TX_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 

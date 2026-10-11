@@ -68,30 +68,6 @@ void ADC_Manager_ConversionComplete(ADC_HandleTypeDef *hadc);
  */
 bool ADC_Manager_GetBuffer(ADC_Buffer_t *buffer);
 
-/**
- * @brief Get raw value of a single channel
- * @param channel Channel index (0 to ADC_NUM_CHANNELS-1)
- * @return Raw ADC value, 0 if channel is invalid
- */
-uint16_t ADC_Manager_GetChannel(uint8_t channel);
-
-/**
- * @brief Get array of APPS channels
- * @param[out] apps_values Array of APPS_NUM_SENSORS elements to fill
- */
-void ADC_Manager_GetAPPS(uint16_t apps_values[APPS_NUM_SENSORS]);
-
-/**
- * @brief Get steering channel value
- * @param[out] steering_value Pointer to value to fill
- */
-void ADC_Manager_GetSteering(uint16_t *steering_value);
-
-/**
- * @brief Check if new data is available
- * @return true if new data since last call
- */
-bool ADC_Manager_IsNewDataAvailable(void);
 
 
 #ifdef __cplusplus
