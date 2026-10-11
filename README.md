@@ -1,406 +1,189 @@
-# MCU (Motor Control Unit) - Peacock Elettrica ⚡
+# EV Powertrain Control - Peacock Elettrica
 
-This repository contains the Motor Control Unit firmware for the Polimarche Racing Team electric vehicle. It includes code for managing dual AMK inverters via CAN Bus, reading sensors via ADC with DMA, FSAE-compliant safety logic, single-pedal regenerative braking, and vehicle dynamics models in MATLAB/Simulink. The board used is the STM32 Nucleo-F756ZG.
+Vehicle Control Unit (VCU) firmware, vehicle dynamics controls (MATLAB/Simulink) and AMK inverter configuration for **Peacock Elettrica**, the Formula SAE electric car of the **Polimarche Racing Team** (UNIVPM).
 
-> **Note:** This repository covers only the **MCU** and the MATLAB/Simulink vehicle dynamics models. The ECU (sensor acquisition board) has been moved to its own repository.
+> **Working repository.** This is the development repository (`Zinale/ev-powertrain-control`).
+> A full-history mirror lives in the team organization. The content will later be split into separate repositories (VCU firmware, vehicle controls, inverter configuration); until then, this repository is the reference.
 
-## Features
-- ✅ **AMK Inverter Control**: Full state machine (IDLE → LV → HV → READY → RUNNING) with AMK 8.2.6 error recovery sequence and automatic retry logic.
-- ✅ **Regenerative Braking**: Four-stage single-pedal regen with speed fade-out, battery power limit, and DC bus voltage derating.
-- ✅ **FSAE Safety Compliance**: APPS plausibility checks (T11.8.9, T11.8.10) and MCU state machine with torque interlock.
-- ✅ **ADC with DMA**: Continuous multi-channel reading (APPS1, APPS2, Steering) without CPU overhead.
-- ✅ **Dual CAN Bus**: CAN1 for inverter protocol, CAN2 for vehicle telemetry (dashboard, BMS, IMU, R2D).
-- ✅ **Signal Filtering**: Median + Moving Average cascade on APPS and SAS for noise rejection.
-- ✅ **FreeRTOS Real-Time Architecture**: 1 kHz motor control task, 1 kHz sensor task, 10 Hz logging task.
-- ✅ **Vehicle Dynamics Models**: MATLAB/Simulink models for slip control, torque vectoring, and straight-line control.
+---
 
-## 🔗 Repository Structure
+## Contents
 
-The repository is organized into three main sections: **mcu-stm32** (STM32 firmware), **Controls** (MATLAB/Simulink models), and **Tests** (bench test infrastructure and data).
+| Folder | Status | What it contains |
+|---|---|---|
+| `mcu-g474re-stm32/` | **Active** | VCU firmware for STM32G474RE (STM32CubeIDE, FreeRTOS, FDCAN) with the Simulink-generated `driveController` |
+| `Controls/` | **Active** | Simulink vehicle model, `driveController` model, parameter scripts, tracks and plot tools |
+| `AIPEX/` | Active | AMK inverter configurations and AIPEX PRO scope templates |
+| `Documents/` | Reference | Datasheets, AMK manuals, FS Rules 2026, sensor and board documentation |
+| `Tests/` | Reference | Bench and test projects (data collectors, Nucleo F756ZG test unit, ESP32 link, backups) |
+| `mcu-g474re-stm32-old/` | Legacy | First G474RE project, superseded by `mcu-g474re-stm32/` |
+| `mcu-stm32/` | Legacy | Previous MCU on Nucleo-F756ZG (CAN at 1 Mbit/s, `Config.h` build modes). Do not use for new work |
+| `Regen_Pedal_Behavior.md` | Reference | Regen pedal behaviour tables (deadzone, latch, speed thresholds) |
 
-```
-├── mcu-stm32/                       # STM32F756ZG firmware (main project)
-│   ├── mcu-stm32.ioc                # STM32CubeMX configuration
-│   └── Core/
-│       ├── Inc/                     # Headers organized by subsystem
-│       │   ├── Config.h             # Build modes, feature flags, parameters
-│       │   ├── Communication/       # CAN bus & UART serial
-│       │   ├── Drive/               # Inverter, torque control, regen, error recovery
-│       │   ├── Safety/              # MCU state machine, device state, watchdog
-│       │   ├── Sensors/             # ADC/DMA, APPS, steering angle
-│       │   └── Tasks/               # FreeRTOS task definitions
-│       └── Src/                     # Implementations (mirrors Inc/ structure)
-│
-├── Controls/                        # MATLAB/Simulink vehicle dynamics models
-│   ├── SlipControl/                 # Traction/slip ratio control
-│   ├── StraightLineControl/         # Straight-line stability
-│   └── TorqueVectoring/             # Torque vectoring with 3D car model
-│
-├── AIPEX/                           # AMK inverter configuration files (.aipex)
-│   ├── FIXED_speed/                 # Speed control mode configurations
-│   ├── FREE_torque/                 # Torque control mode configurations
-│   ├── Scope Templates/             # AipexPRO oscilloscope templates
-│   └── Errors/                      # Error log files
-│
-├── Documents/                       # Datasheets, manuals, AipexPRO guides
-│
-├── Tests/                           # Test infrastructure & bench data
-│   ├── DataCollectorSoftware/       # Python/MATLAB data logging & analysis
-│   ├── ControlUnit_Nucleo_F756ZG/   # Alternative board test project
-│   ├── ESP32-WIFI-BT-communication/ # Wireless telemetry via ESP32
-│   ├── FeatherDataCollectorBancoMotori/ # Feather CAN data logger
-│   └── FixedCan - Banco Loccioni/   # Last bench test in Speed-Control mode
-│
-└── Regen_Pedal_Behavior.md          # Detailed regen pedal behavior documentation
-```
+---
 
-### MCU (Motor Control Unit)
-The firmware on the STM32F756ZG manages AMK inverter control in real time:
-- **Drive modules**: AMK state machine, torque control loop, error recovery, regenerative braking
-- **Sensor acquisition**: DMA-based ADC reading, APPS and steering processing
-- **CAN communication**: Inverter setpoints on CAN1, vehicle telemetry on CAN2
-- **Safety**: MCU state machine with torque interlock, APPS plausibility, watchdog
+## 1. VCU firmware (`mcu-g474re-stm32/`)
 
-### Controls
-MATLAB/Simulink models developed to study and simulate vehicle dynamics:
-- **SlipControl**: Traction/slip ratio control algorithms
-- **StraightLineControl**: Straight-line torque distribution
-- **TorqueVectoring**: Full torque vectoring model with 3D vehicle dynamics
+### Hardware
 
-### Tests
-Development, bench testing, and data collection infrastructure:
-- **DataCollectorSoftware**: Python CSV logger + MATLAB analysis scripts
-- **ControlUnit_Nucleo_F756ZG**: Alternative MCU implementation for testing
-- **ESP32-WIFI-BT-communication**: Wireless data streaming from bench
-- **FixedCan - Banco Loccioni**: Last bench test configuration (Speed-Control mode, Loccioni dyno)
+| Item | Value |
+|---|---|
+| MCU | STM32G474RET6 (Nucleo-G474RE), 170 MHz |
+| Toolchain | STM32CubeIDE / STM32CubeMX (`mcu-g474re-stm32.ioc`) |
+| RTOS | FreeRTOS (CMSIS-RTOS v2) |
+| FDCAN1 "MOTOR" | PA11 RX / PA12 TX, classic CAN 500 kbit/s, AMK inverters |
+| FDCAN2 "MAIN" | PB5 RX / PB6 TX, classic CAN 500 kbit/s, vehicle bus (BMS, Dash, PDM, SDC, IMU, LEM CAB500) |
+| ADC1 | APPS1 (PB11), APPS2 (PB12), SAS steering (PB14), brake sensor (PB1) |
+| TIM2 | Wheel speed sensors FL (PB3, CH2) and FR (PB10, CH3) |
+| LPUART1 | PA2 / PA3, 115200 baud, debug serial |
+| IWDG | Prescaler 16, reload 2500 (about 1.25 s), refreshed by DataManager |
 
-## 🏗️ Detailed Control Unit Structure
-
-The control unit implementation is located in `mcu-stm32/`. The architecture follows a modular design with feature-specific subfolders. Subfolders within `Inc/` contain headers (.h), while subfolders within `Src/` provide the corresponding sources (.c).
+### Source layout
 
 ```
-└── mcu-stm32/
-    ├── mcu-stm32.ioc                  # STM32CubeMX configuration file
-    └── Core/
-        ├── Inc/
-        │   ├── Config.h               # Build modes, feature flags, all parameters
-        │   ├── Communication/
-        │   │   ├── Can.h              # CAN1 (inverters) + CAN2 (vehicle) TX/RX
-        │   │   └── Serial.h           # DMA UART logging (UART3, UART5, UART6)
-        │   ├── Drive/
-        │   │   ├── Inverter.h         # AMK state machine + CAN message decode
-        │   │   ├── BaseControlMotor.h # Torque control loop, rate limiting, LEDs
-        │   │   ├── ErrorRecovery.h    # AMK 8.2.6 error reset state machine
-        │   │   └── Regen.h            # 4-stage regenerative braking
-        │   ├── Safety/
-        │   │   ├── MCU_State.h        # System state machine (INIT→READY→RUNNING/ERROR)
-        │   │   ├── device_state.h     # Device state tracking
-        │   │   └── watchdog.h         # IWDG refresh
-        │   ├── Sensors/
-        │   │   ├── ADC_Manager.h      # Centralized DMA ADC handling
-        │   │   ├── APPS.h             # Accelerator Pedal Position Sensors (FSAE T11.8)
-        │   │   └── SAS.h              # Steering Angle Sensor with filtering
-        │   └── Tasks/
-        │       ├── motors_manager.h   # 1 kHz inverter control task
-        │       ├── data_manager.h     # 1 kHz sensor sampling task
-        │       └── data_logger.h      # 10 Hz UART/CAN2 telemetry task
-        └── Src/
-            ├── Communication/
-            │   ├── Can.c
-            │   └── Serial.c
-            ├── Drive/
-            │   ├── Inverter.c
-            │   ├── BaseControlMotor.c
-            │   ├── ErrorRecovery.c
-            │   └── Regen.c
-            ├── Safety/
-            │   ├── MCU_State.c
-            │   ├── device_state.c
-            │   └── watchdog.c
-            ├── Sensors/
-            │   ├── ADC_Manager.c
-            │   ├── APPS.c
-            │   └── SAS.c
-            ├── Tasks/
-            │   ├── motors_manager.c
-            │   ├── data_manager.c
-            │   └── data_logger.c
-            └── main.c
+mcu-g474re-stm32/Core/
+├── Inc/ , Src/
+│   ├── main.c, app_freertos.c        CubeMX init, task and mutex creation
+│   ├── shared_data.*                 VehicleData_t shared structure + vehicle FSM states
+│   ├── mutexes.*                     mutex_VehicleData, LPUART1, FDCAN1_MOTOR, FDCAN2_MAIN
+│   ├── runtime_stats.*               CPU load per task (DWT based)
+│   ├── Connectivity/  Can.*, Serial.*            CAN IDs, RX/TX, IMU config, serial
+│   ├── Control/       inverter.*, motor_control.*, error_recovery.*,
+│   │                  plausibility.*, drive_profiles.*, control_config.h
+│   │   └── Simulink/  driveController.* (Embedded Coder output, do not edit by hand)
+│   ├── Sensors/       adc_manager.*, apps.*, sas.*, bs.*, wss.*, filters.*
+│   └── Tasks/         data_manager.c, drive_logic.c, data_logger.c
+└── Startup/startup_stm32g474retx.s
 ```
 
-## 🧪 Build Modes & Testing
+### FreeRTOS tasks
 
-The project supports different build modes configured in `Config.h`. This allows testing with limited hardware availability.
+| Task | Rate | Priority | Role |
+|---|---|---|---|
+| `DataManager` | 200 Hz (5 ms) | High | Reads ADC (APPS, SAS, brake), wheel speeds, CAN RX from inverters and vehicle bus; refreshes the watchdog |
+| `DriveLogic` | 100 Hz (10 ms) | High | Vehicle FSM, R2D, plausibility checks, drive profiles, one `driveController_step()` per cycle, torque setpoints to the inverters |
+| `DataLogger` | 10 Hz (100 ms) | Low | Telemetry and diagnostic frames on FDCAN2, runtime statistics every about 5 s |
 
-### Test Mode: Single ADC (`TEST_MODE_SINGLE_ADC`)
-Enable when only **ADC1 CH0 (PA0)** is available:
+### Vehicle state machine
 
-```c
-// In Config.h — uncomment to enable:
-#define TEST_MODE_SINGLE_ADC
+`INIT` → `READY` → `RUNNING`, with `IMPLAUSIBILITY`, `CAR_ERROR` (CAN timeout of Inverter / BMS / Dash / PDM / IMU) and `ERROR`.
+
+### Control modes (`Control/control_config.h`)
+
+| Define | Meaning |
+|---|---|
+| `CONTROL_MODE_PASS_THROUGH` | Same torque left and right, no torque vectoring |
+| `CONTROL_MODE_SIMPLE_TVC` | Simple torque vectoring proportional to the steering angle |
+| `CONTROL_MODE_SIMULINK` | Full Simulink controller (yaw / TVC, slip control, grip estimator, regen) **(current setting)** |
+
+Other switches in the same file: `INVERTER_LEFT_PRESENT`, `INVERTER_RIGHT_PRESENT`, `BENCH_TEST_MODE` (bypasses R2D arm conditions and TS shutdown).
+
+> ⚠️ `BENCH_TEST_MODE` is currently set to `1U`. Set it to `0U` before running on the car.
+
+### Plausibility checks (`Control/plausibility.h`)
+
+11 debounced checks, reported as a bitmask on CAN `0x007`:
+APPS/brake (EV.4.7), APPS disagreement, sensor range, over-power, over-current vs BMS limit, torque greater than pedal request, regen while accelerating, drive while braking, motor overspeed, DC bus voltage window, emulated pack fuse I²t (pack current from LEM CAB500, `0x3C2`).
+
+### Drive profiles (`Control/drive_profiles.*`)
+
+The steering wheel sends the engine map (ECO / NORMAL / GAS) and the parameter byte on `0x106`. `DriveProfiles_Update()` maps them to torque peak, regen level and the gains of regen, slip control, TVC and understeer gradient that are pushed into the Simulink model, together with the BMS current limits and the DC bus voltage.
+
+### CAN summary
+
+**FDCAN1 (inverters)**: AMK node 1 = right, node 2 = left. Setpoints `0x183 + node`, actual values from `0x282 + node` onwards (see `Can.h`).
+
+**FDCAN2 RX**: `0x001` BMS error, `0x004`/`0x005` PDM errors, `0x100-0x102` IMU, `0x103` BMS, `0x106` Dash R2D / map / parameters, `0x107` SDC status, `0x3C2` LEM CAB500 current.
+
+**FDCAN2 TX**:
+
+| ID | Content | To |
+|---|---|---|
+| `0x002` / `0x003` | Inverter right / left error code and info | Dash, telemetry |
+| `0x006` | MCU errors and status byte | Dash |
+| `0x007` | Plausibility bitmask (U16 BE) | Telemetry |
+| `0x104` | Wheel speeds, car speed, FSM state, R2D armed / active | Dash, PDM |
+| `0x105` | Front brake pressure, brake light state | Dash, PDM |
+| `0x108` | APPS final, APPS1, APPS2, steering angle | Telemetry |
+| `0x109` / `0x110` / `0x111` | Control debug (torque, yaw, lambda, slip, grip estimator) | Telemetry |
+| `0x250` / `0x251` | Inverter right / left real-time data | Telemetry |
+
+Endianness: `0x104`, `0x105`, `0x007`, `0x109-0x111` are big-endian (as in the DBC); the other MCU TX frames are little-endian.
+
+### Build and flash
+
+1. Open STM32CubeIDE and import `mcu-g474re-stm32/` as an existing project.
+2. If you change pins or peripherals, edit `mcu-g474re-stm32.ioc` and regenerate. Keep your code inside the `USER CODE` blocks.
+3. Check `control_config.h` (control mode, inverters present, `BENCH_TEST_MODE`).
+4. Build the `Debug` configuration and flash through the on-board ST-LINK.
+5. `variables-for-debug.PNG` shows the useful Live Expressions for debugging.
+
+---
+
+## 2. Vehicle controls (`Controls/`)
+
+MATLAB / Simulink environment for vehicle simulation and controller design.
+
+| Item | Description |
+|---|---|
+| `peacockElettricaSimulink.slx` | Full vehicle model: 3DOF dual-track body, tyres, AMK motors, Pure Pursuit driver |
+| `driveController.slx` | Controller model used for code generation (TVC, slip control, grip estimator, torque allocation, regen) |
+| `driveController_ert_rtw/` | Embedded Coder output (copied into `mcu-g474re-stm32/Core/.../Control/Simulink/`) |
+| `AMK_Derating.slx`, `remake.slx` | Supporting models |
+| `setupParams.m`, `setupParamsSingle.m` | Vehicle and controller parameters (`Simulink.Parameter`, ExportedGlobal) |
+| `tracks/` | `acceleration.m`, `skidpad.m`, `track1-3.m`, cone meshes |
+| `plot_*.m`, `list_logsout_signals.m` | Plot tools for simulation results |
+| `tireFit.m`, `tireSetup.m`, `FSAE_Tire_Combined*.tir`, `tire_data/` | Tyre model fitting |
+| `PedalMap/`, `maps/`, `regen_fcn.m`, `pure_pursuit.m` | Pedal maps, regen function, path follower |
+| `docs/`, `images/` | MathWorks guides, design PDFs (acceleration, skidpad, free lap), screenshots |
+| `old/`, `esempi/`, `bases/` | Old versions and examples |
+
+### Typical workflow
+
+1. Run `setupParams.m`.
+2. Choose a track script in `tracks/` and run `peacockElettricaSimulink.slx`.
+3. Analyse results with the `plot_*.m` scripts; results go in `lap_data_simulations/`.
+4. When the controller changes, generate code from `driveController.slx` with Embedded Coder and copy the generated files into the firmware `Control/Simulink/` folder. Keep parameter names aligned with `drive_profiles.c`.
+
+---
+
+## 3. AMK inverter configuration (`AIPEX/`)
+
+| Folder | Content |
+|---|---|
+| `Invs_Configs/` | Inverter parameter configurations |
+| `FIXED_speed/`, `FREE_torque/` | Bench test setups (fixed speed, free torque) |
+| `Errors/` | Inverter error records |
+| `Scope Templates/` | AIPEX PRO oscilloscope templates |
+
+Tool: AMK AIPEX PRO. Licence and access data are **not** stored in this repository; ask the Software Division lead.
+
+---
+
+## 4. Documents and tests
+
+- `Documents/`: AMK manuals (control loop, diagnostics, CAN messages, KW-R25 parameters, field weakening), motor datasheets and STEP files, APPS, brake sensor, IMU Aviorace, CAN transceiver, Nucleo-G474RE, FS Rules 2026.
+- `Tests/`: `DataCollectorSoftware`, `FeatherDataCollectorBancoMotori`, `FixedCan - Banco Loccioni`, `ESP32-WIFI-BT-communication`, `ControlUnit_Nucleo_F756ZG`, `Backups`, sample logs and pinout images.
+
+---
+
+## Related
+
+- Regen pedal behaviour: [`Regen_Pedal_Behavior.md`](Regen_Pedal_Behavior.md)
+- Component specifications (CCU, PDM, Dashboard, ...) are kept in the team Teams / Trello.
+
+## Clone
+
+```bash
+git clone https://github.com/Zinale/ev-powertrain-control.git
 ```
 
-**Effects:**
-- Uses only 1 ADC channel instead of 3
-- APPS sensor 2 is simulated (duplicates sensor 1 value)
-- Sensor mismatch plausibility check **disabled** (can't verify with 1 sensor)
-- Range check **disabled**
-- Deadzone 30% still active for realistic pedal behavior
+## Authors
 
-### Test Mode: Full (`TEST_MODE_FULL`)
-Enable for bench testing with all ADC channels but relaxed safety thresholds:
+- **Alessandro Zingaretti**, Head of Software Division, Polimarche Racing Team, UNIVPM
 
-```c
-// In Config.h — uncomment to enable:
-#define TEST_MODE_FULL
-```
+## Contacts
 
-**Effects:**
-- All 3 ADC channels active (APPS1, APPS2, Steering)
-- Implausibility threshold relaxed to 20% (instead of 10%)
-- Implausibility timeout extended to 500 ms (instead of 100 ms)
-
-### Production Mode (`RELEASE_MODE`)
-Comment out all test modes for full FSAE compliance:
-
-```c
-// In Config.h — comment out all test modes:
-//#define TEST_MODE_SINGLE_ADC
-//#define TEST_MODE_FULL
-#define RELEASE_MODE
-```
-
-**Effects:**
-- All 3 ADC channels active
-- Full APPS plausibility check: mismatch >10% for >100 ms → shutdown
-- Full range check (open/short circuit detection)
-- Deadzone 30% active
-- All FSAE safety rules enforced
-
-## 🎮 Module Descriptions
-
-### APPS (Accelerator Pedal Position Sensors)
-Located in `Sensors/APPS.h` and `Sensors/APPS.c`:
-- **Dual sensor reading**: Two redundant potentiometers with independent transfer functions
-- **Signal filtering**: Median filter (11 samples) + Moving Average (40 samples) cascade
-- **Normalization**: Converts raw ADC values to 0–100% pedal position
-- **FSAE Plausibility checks**:
-  - **T11.8.9**: Sensor mismatch >10% for >100 ms → motor shutdown
-  - **T11.8.10**: Auto-reset when pedal returns below 5%
-  - **Out-of-range detection**: Open/short circuit with ADC bounds checking
-
-### ADC Manager
-Located in `Sensors/ADC_Manager.h` and `Sensors/ADC_Manager.c`:
-- **DMA circular mode**: Continuous multi-channel ADC without CPU intervention
-- **Thread-safe access**: Getter functions for other modules
-- **Channels**: APPS1 (PA0), APPS2 (PA1), Steering (PC3)
-
-### Inverter Control
-Located in `Drive/Inverter.h` and `Drive/Inverter.c`:
-- **AMK state machine**: IDLE → LV_ACTIVE → HV_ACTIVE → READY → RUNNING
-- **CAN message decoding**: Status words (SM1–SM5), speed, torque, temperatures, power
-- **AMK protocol**: Control word bits for enable, DC activation, error reset
-
-### Error Recovery
-Located in `Drive/ErrorRecovery.h` and `Drive/ErrorRecovery.c`:
-- **AMK 8.2.6 sequence**: `bInverterOn=0` → `bErrorReset=1` (50 ms hold) → `bErrorReset=0` (falling edge triggers reset)
-- **Retry logic**: Up to 5 automatic recovery attempts with 100 ms cooldown between tries
-- **Per-inverter context**: Independent recovery state for each motor node
-
-### Base Control Motor
-Located in `Drive/BaseControlMotor.h` and `Drive/BaseControlMotor.c`:
-- **Dynamic torque limiting**: AMK formula based on speed and DC bus voltage (`M = P / (2π × N/60)`)
-- **Rate limiting**: Smooth torque transitions (10 units per ms)
-- **Status LED management**: Visual feedback for error and running states
-
-### Regenerative Braking
-Located in `Drive/Regen.h` and `Drive/Regen.c`:
-- **4-stage calculation**: Pedal-dependent → speed fade-out → battery power limit → DC bus derating
-- **Latch hysteresis**: Entry/exit thresholds to prevent regen chattering at low speed
-- **Configurable intensity**: CONSERVATIVE / BALANCED / AGGRESSIVE modes in `Config.h`
-
-### CAN Communication
-Located in `Communication/Can.h` and `Communication/Can.c`:
-- **CAN1**: Inverter protocol — setpoints TX at 1 kHz, status RX at 1 kHz
-- **CAN2**: Vehicle telemetry — BMS, IMU, R2D RX; error snapshots and sensor data TX
-- **Hardware**: SN65HVD230 CAN transceiver (×2)
-
-### Serial Communication
-Located in `Communication/Serial.h` and `Communication/Serial.c`:
-- **DMA-based transmission**: Non-blocking TX on UART3, UART5, UART6
-- **Per-channel enable**: Each UART can be independently enabled/disabled in `Config.h`
-- **Mutex-protected**: Thread-safe printf-style logging from FreeRTOS tasks
-
-## ⏱️ FreeRTOS Task Architecture
-
-The system uses FreeRTOS with three dedicated tasks. All shared data is protected via FreeRTOS mutexes.
-
-### Task Overview
-
-| Task               | Period  | Responsible for                                           |
-|--------------------|---------|-----------------------------------------------------------|
-| `MotorsManagerTask` | 10 ms  | Inverter state machine, torque command, error recovery, regen |
-| `DataManagerTask`  | 4 ms    | ADC reading, APPS/SAS processing, sensor filtering        |
-| `DataLoggerTask`   | 100 ms  | UART serial output and CAN2 telemetry                     |
-
-### Motors Manager Task (10 ms)
-The core control loop executed every 10 ms:
-
-```c
-void MotorsManagerTask(void *argument)
-{
-    for (;;)
-    {
-        // 1. Read sensor data (pedal %, steering %)
-        // 2. For each inverter:
-        //    a. Decode CAN status (Inverter_ProcessReceivedMessage)
-        //    b. Run state machine + error recovery (Motor_ProcessInverterControl)
-        //    c. If RUNNING: compute torque setpoint with regen + rate limit
-        //    d. Send CAN command (Inverter_BuildCommand + Can_SendInverterCommand)
-        osDelay(INVERTERS_TASK_PERIOD_MS);
-    }
-}
-```
-
-### Data Manager Task (4 ms)
-Runs ADC acquisition and sensor processing every 1 ms:
-
-```c
-void DataManagerTask(void *argument)
-{
-    for (;;)
-    {
-        // 1. Read DMA ADC buffer (ADC_Manager_GetValues)
-        // 2. Process APPS (APPS_Process) — filtering + plausibility
-        // 3. Process SAS  (SAS_Process)  — filtering + normalization
-        // 4. Update MCU state machine
-        osDelay(1);
-    }
-}
-```
-
-### Data Logger Task (100 ms)
-Outputs diagnostics and telemetry every 100 ms:
-
-```c
-void DataLoggerTask(void *argument)
-{
-    for (;;)
-    {
-        // 1. Log inverter data via UART (Serial_Log)
-        // 2. Transmit CAN2 telemetry messages (APPS%, steering%, inverter data, errors)
-        osDelay(100);
-    }
-}
-```
-
-## 🛠️ Commands & Installation
-
-### MCU Control Unit (STM32)
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/PolimarcheRacingTeam/ev-powertrain-control.git
-   ```
-2. **Open the project with STM32CubeIDE**
-3. **Navigate to `mcu-stm32/`** (the main firmware project)
-4. **Select build mode** in `Core/Inc/Config.h` (see Build Modes section)
-5. **Compile and upload** to the Nucleo-F756ZG board
-6. **Monitor serial output** at 115200 baud (e.g., using Termite or PuTTY on UART3)
-
-### AMK Inverter Configuration (AIPEX)
-
-1. **Install AipexPRO** (refer to `Documents/AipexPRO/`)
-2. **Load configuration** from `AIPEX/FREE_torque/` (torque control) or `AIPEX/FIXED_speed/` (speed control)
-3. **Connect to AMK inverter** via CAN bus
-4. **Use scope templates** from `AIPEX/Scope Templates/` for live monitoring
-
-### Data Collection (Bench / Tests)
-
-1. **Navigate to `Tests/DataCollectorSoftware/`**
-2. **Run the Python logger** `csv_socket_logger.py` — streams CSV data from ESP32 over Wi-Fi
-3. **Analyze data** using `analyze_test_log.m` in MATLAB
-
-## 🔧 Hardware Configuration
-
-### STM32F756ZG Peripherals
-(see `mcu-stm32/mcu-stm32.ioc` for full CubeMX configuration)
-
-- **ADC1**: 3-channel DMA circular mode — APPS1 (PA0), APPS2 (PA1), Steering (PC3)
-- **CAN1**: Inverter communication at 1 Mbit/s (SN65HVD230 transceiver)
-- **CAN2**: Vehicle telemetry at 500 kbit/s (SN65HVD230 transceiver)
-- **UART3**: PC debug serial at 115200 baud (DMA TX)
-- **UART5**: Data logger / ESP32 at 115200 baud (DMA TX)
-- **UART6**: External device (DMA TX)
-- **GPIO**: LD2 (green), LD3 (red) status LEDs; R2D signal input
-
-### CAN Bus Hardware
-- **Transceiver**: SN65HVD230 (3.3 V compatible), ×2 for CAN1 + CAN2
-- **Baud Rates**: CAN1 @ 1 Mbit/s (AMK inverter), CAN2 @ 500 kbit/s (vehicle)
-- **Termination**: 120 Ω at both ends of each bus
-
-### AMK Motor & Inverter
-- **Motor**: AMK DD series — 9.8 Nm nominal, 21 Nm peak, 16000 RPM max
-- **Inverter**: AMK KW-R25 — CAN-based torque control
-- **CAN node IDs**: Right inverter = 1 (0x184/0x284), Left inverter = 2 (0x185/0x285)
-
-## 🏎️ FSAE Rules Compliance
-
-### APPS Plausibility (T11.8.9)
-- Dual redundant sensors with independent transfer functions
-- If sensor mismatch exceeds 10% for more than 100 ms → motor power immediately cut
-- Configurable in `APPS.h`:
-  ```c
-  #define APPS_IMPLAUSIBILITY_THRESHOLD_PERCENT   10U   // Difference threshold [%]
-  #define APPS_IMPLAUSIBILITY_TIMEOUT_MS          100U  // Time before failure [ms]
-  ```
-
-### APPS Reset (T11.8.10)
-- After an implausibility event, torque cannot be restored until the pedal returns below 5%
-- Prevents unintended torque restoration after driver removes foot
-
-### Out-of-Range Detection (EV.4.7)
-- Each ADC channel checked for open-circuit (value too low) and short-circuit (value too high)
-- Detection uses configurable ADC margin counts
-- Fault triggers shutdown independently from plausibility check
-
-## 📚 Documentation References
-
-### Internal Documentation
-- **AMK Inverter**: `Documents/` — AipexPRO guides, training materials, password info
-- **Regen behavior**: `Regen_Pedal_Behavior.md` — full pedal-speed regen interaction map
-- **MCU Configuration**: `mcu-stm32/mcu-stm32.ioc` — STM32CubeMX project configuration
-
-### FSAE Rules Reference
-- **Formula SAE Rules**: [FSAE Online](https://www.fsaeonline.com/)
-- **T11.8.9 / T11.8.10**: APPS sensor plausibility and reset conditions
-- **EV.4.7**: Accelerator pedal position sensor requirements
-
-### External Resources
-
-- **NUCLEO F756ZG**:  
-  📄 [Pinout](https://os.mbed.com/platforms/ST-Nucleo-F756ZG/)
-
-- **SN65HVD230 CAN Transceiver**:  
-  🎞️ [Video Tutorial 1](https://youtu.be/KHNRftBa1Vc?si=2C673-Au-6wTgh2l)  
-  🎞️ [Video Tutorial 2](https://www.youtube.com/watch?v=-lcrrRrKdFg)
-
-- **STM32 ADC with DMA**:  
-  🎞️ [Video Tutorial](https://www.youtube.com/watch?v=zipjCtiHYr8)  
-  📄 [In-depth Guide](https://deepbluembedded.com/stm32-adc-multi-channel-scan-continuous-mode-dma-poll-examples/)
-
-- **AMK Motor & Inverter**:  
-  📄 [AipexPRO Documentation](Documents/AipexPRO/)
-
-## 👥 Authors
-
-- **Alessandro Zingaretti** — *Polimarche Racing Team, UNIVPM*
-
-## 👀 Interested in Learning More?
-
-If you have any questions, would like to discuss this project further, or are interested in potential collaboration opportunities, please feel free to connect with us:
-
-- LinkedIn: [polimarcheracingteam](https://www.linkedin.com/company/polimarcheracingteam/posts/?feedView=all)
+- LinkedIn: [polimarcheracingteam](https://www.linkedin.com/company/polimarcheracingteam/) | [Alessandro Zingaretti](https://www.linkedin.com/in/alessandro-zingaretti/)
 - Instagram: [polimarcheracingteam](https://www.instagram.com/polimarcheracingteam/)
 - Email: [formulasae@sm.univpm.it](mailto:formulasae@sm.univpm.it)
-
