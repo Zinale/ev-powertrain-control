@@ -2,13 +2,15 @@
 %clear; clc; close all;
 
 % --- Parametri Regolamento FSAE ---
-track_width     = 3.0;        % [m] Larghezza pista
+track_width     = 5.0;        % [m] Larghezza pista
+%% 
 slalom_spacing  = 15.0;       % [m] Spaziatura slalom
 slalom_amplitude = 1.1; % [m] Ampiezza ridotta da 1.5m a 1.1m (traiettoria morbida)
-ay_max          = 0.8 * 9.81; % [m/s^2]
-ax_max_accel    = 0.8 * 9.81; % [m/s^2]
-ax_max_brake    = 0.9 * 9.81; % [m/s^2]
-v_max_straight  = 22.0;       % [m/s] (~80 km/h)
+ay_max          = 1 * 9.81; % [m/s^2]
+
+ax_max_accel    = 1 * 9.81; % [m/s^2]
+ax_max_brake    = 0.8 * 9.81; % [m/s^2]
+v_max_straight  = 25.0;       % [m/s] (~80 km/h)
 
 % 1. Definizione Punti (Start fisso in 0,0)
 WP_loop = [
@@ -49,16 +51,29 @@ Y_ref = interp1(s_cum, path(2,:), s_uniform, 'spline');
 straight_idx = find(X_ref >= -5 & X_ref <= 45 & abs(Y_ref) < 3);
 Y_ref(straight_idx) = 0;
 
-% 3. Sezione Slalom 
+% 3. Sezione Slalom
+% I coni definiscono la geometria del cancelletto (ampiezza piena,
+% rappresentativa del regolamento); la traiettoria ideale che il
+% veicolo insegue e' invece piu' dolce (ampiezza ridotta): un pilota
+% reale non segue il centro di ogni cancelletto, ma taglia con una
+% linea piu' larga e piatta, sfruttando la corsia residua. Le due
+% curve sono quindi tenute distinte, pur condividendo lo stesso Y_ref.
+slalom_gate_amplitude = 1.5;   % [m] ampiezza dei coni (vincolo regolamentare)
+slalom_line_amplitude = 0.6;   % [m] ampiezza della traiettoria guidata ("linea larga")
+
 slalom_idx = find(X_ref < -90 & Y_ref < -5 & Y_ref > -45);
+X_ref_gates = X_ref;   % copia: verra' usata SOLO per posizionare i coni
 if ~isempty(slalom_idx)
     s_sl = Y_ref(slalom_idx);
     s_norm = abs(s_sl - s_sl(1));
-    hann_win = sin(linspace(0, pi, length(slalom_idx))).^2; % Raccordo C^inf
-    slalom_wave = slalom_amplitude * sin(2 * pi * s_norm / (2 * slalom_spacing));
-    X_ref(slalom_idx) = X_ref(slalom_idx) + (hann_win .* slalom_wave);
-end
+    hann_win = sin(linspace(0, pi, length(slalom_idx))).^2;
 
+    gate_wave = slalom_gate_amplitude * sin(2 * pi * s_norm / (2 * slalom_spacing));
+    line_wave = slalom_line_amplitude * sin(2 * pi * s_norm / (2 * slalom_spacing));
+
+    X_ref_gates(slalom_idx) = X_ref_gates(slalom_idx) + (hann_win .* gate_wave);
+    X_ref(slalom_idx)       = X_ref(slalom_idx)       + (hann_win .* line_wave);
+end
 
 % 4. Calcolo Dinamico: Heading, Curvatura e Profilo Velocità
 ds_array = sqrt(diff(X_ref).^2 + diff(Y_ref).^2);
@@ -69,7 +84,8 @@ dY  = gradient(Y_ref, s_ref);
 ddX = gradient(dX, s_ref);
 ddY = gradient(dY, s_ref);
 
-curvature = abs(dX .* ddY - dY .* ddX) ./ max((dX.^2 + dY.^2).^(3/2), 1e-6);
+curvature_signed = (dX .* ddY - dY .* ddX) ./ max((dX.^2 + dY.^2).^(3/2), 1e-6);
+curvature = abs(curvature_signed);
 curvature(curvature < 1e-4) = 1e-4;
 theta = atan2(dY, dX);
 psi_ref = unwrap(theta);
@@ -97,13 +113,19 @@ for i = length(V_lat)-1:-1:1
 end
 V_ref = movmean(V_ref, 7);
 
-% 5. Coni Laterali
-Nx = -sin(theta);
-Ny =  cos(theta);
+% Tangente della geometria dei coni (puo' differire dalla tangente
+% della linea guidata solo all'interno dello slalom)
+dX_gates = gradient(X_ref_gates, s_ref);
+dY_gates = gradient(Y_ref, s_ref);
+theta_gates = atan2(dY_gates, dX_gates);
 
-X_left  = X_ref + (track_width / 2) * Nx;
+% 5. Coni Laterali
+Nx = -sin(theta_gates);
+Ny =  cos(theta_gates);
+
+X_left  = X_ref_gates + (track_width / 2) * Nx;
 Y_left  = Y_ref + (track_width / 2) * Ny;
-X_right = X_ref - (track_width / 2) * Nx;
+X_right = X_ref_gates - (track_width / 2) * Nx;
 Y_right = Y_ref - (track_width / 2) * Ny;
 
 cone_idx = 1:round(3.0 / 0.2):length(X_ref);
@@ -116,15 +138,16 @@ trackData.X     = X_ref';
 trackData.Y     = Y_ref';
 trackData.psi   = psi_ref';
 trackData.V     = V_ref';
-trackData.kappa = curvature';
+trackData.kappa = curvature_signed';  
 trackData.Ltot  = s_ref(end);
+trackData.is_closed = true;    % giro che si richiude su se stesso
 
 % Coordinate Coni 3D per Unreal Engine
 cones_left_pos  = [cones_left,  zeros(size(cones_left, 1), 1)];
 cones_right_pos = [cones_right, zeros(size(cones_right, 1), 1)];
 
 % 7. Plot
-figure('Name', 'FSAE Endurance Track', 'Color', 'w', 'Position', [100, 100, 900, 650]);
+figure('Name', 'Formula Student Endurance Track', 'Color', 'w', 'Position', [100, 100, 900, 650]);
 plot(X_ref, Y_ref, 'k--', 'LineWidth', 1.3); hold on;
 plot(cones_left(:,1),  cones_left(:,2),  'b^', 'MarkerFaceColor', 'b', 'MarkerSize', 5);
 plot(cones_right(:,1), cones_right(:,2), 'r^', 'MarkerFaceColor', 'r', 'MarkerSize', 5);
@@ -132,7 +155,7 @@ plot(WP_loop(1,:), WP_loop(2,:), 'yo', 'MarkerFaceColor', 'g', 'MarkerSize', 6);
 quiver(0, 0, 12, 0, 0, 'g', 'LineWidth', 2.5, 'MaxHeadSize', 0.8);
 axis equal; grid on;
 xlabel('X [m]'); ylabel('Y [m]');
-title('FSAE Endurance Circuit');
+title('Formula Student Endurance Track');
 legend('Ideal Trajectory', 'Left Cones(Blu)', 'Right Cones (Red)', 'Waypoints', 'Start');
 
 

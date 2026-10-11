@@ -2,14 +2,13 @@
 % clear; clc; close all;
 
 % --- Regolamento D5 ---
-track_width    = 3.0;         % [m] Larghezza minima carreggiata (3.0 m)
+track_width    = 4.0;         % [m] Larghezza minima carreggiata (3.0 m)
 L_accel        = 75.0;        % [m] Lunghezza prova  (Start -> Finish)
 L_runout       = 60.0;        % [m] Spazio di arresto / Runout dopo il traguardo
 L_total        = L_accel + L_runout; % [m] 135 m totali di rettilineo
 cone_spacing   = 5.0;         % [m] Spaziatura coni lungo il rettilineo (~5 m)
 
-ax_max_accel   = 1.1 * 9.81;  % [m/s^2] Max accelerazione longitudinale in trazione
-ax_max_brake   = 1.4 * 9.81;  % [m/s^2] Max decelerazione per arresto nel runout
+ax_max_accel   = 1.0*1.1 * 9.81;  % [m/s^2] Max accelerazione longitudinale in trazione
 v_max_top      = 35.0;        % [m/s] (~126 km/h) Velocità max raggiungibile
 ds             = 0.2;         % [m] Risoluzione spaziale
 
@@ -30,11 +29,9 @@ s_ref = [0, cumsum(ds_array)];
 curvature = zeros(size(X_ref)) + 1e-4; % Curvatura nulla (rettilineo)
 psi_ref   = zeros(size(X_ref));        % Heading costante = 0 rad (+X)
 
-% Profilo di Accelerazione Massima e Arresto nel Runout
+% Profilo di Accelerazione Massima (invariato rispetto a prima)
 V_fwd = zeros(size(X_ref));
 V_fwd(1) = 0.0; % Partenza da fermo
-
-% Forward Pass (Accelerazione a fondo scala)
 for i = 2:length(X_ref)
     ds_i = s_ref(i) - s_ref(i-1);
     if s_ref(i) <= L_accel
@@ -46,14 +43,11 @@ for i = 2:length(X_ref)
     end
 end
 
-% Backward Pass (Frenata per arresto controllato a fine runout)
+% Oltre il traguardo (L_accel) il target è fisso a zero: il PID longitudinale
+% (Sezione 4.3.1) vedrà un errore negativo e comanderà il freno a fondo scala
+% per tutto il tempo necessario, senza una curva di frenata precalcolata qui.
 V_ref = V_fwd;
-V_ref(end) = 0.0; % Stop a fine area di fuga
-for i = length(X_ref)-1:-1:1
-    ds_i = s_ref(i+1) - s_ref(i);
-    v_brake_limit = sqrt(V_ref(i+1)^2 + 2 * ax_max_brake * ds_i);
-    V_ref(i) = min(V_ref(i), v_brake_limit);
-end
+V_ref(s_ref > L_accel) = 0.0;
 V_ref = movmean(V_ref, 5);
 
 % Struttura Unificata per Simulink
@@ -64,9 +58,10 @@ trackData.psi   = psi_ref';
 trackData.V     = V_ref';
 trackData.kappa = curvature';
 trackData.Ltot  = s_ref(end);
+trackData.is_closed = true;    % giro che si richiude su se stesso
 
 % 4. Render Grafico della Pista di Accelerazione
-figure('Name', 'FSAE Acceleration Track', 'Color', 'w', 'Position', [100, 100, 1050, 450]);
+figure('Name', 'Formula Student Acceleration Track', 'Color', 'w', 'Position', [100, 100, 1050, 450]);
 plot(X_ref, Y_ref, 'k--', 'LineWidth', 1.4); hold on;
 plot(cones_left(:,1),  cones_left(:,2),  'b^', 'MarkerFaceColor', 'b', 'MarkerSize', 5.5);
 plot(cones_right(:,1), cones_right(:,2), 'r^', 'MarkerFaceColor', 'r', 'MarkerSize', 5.5);
@@ -80,7 +75,7 @@ quiver(0, 0, 15, 0, 0, 'g', 'LineWidth', 2.5, 'MaxHeadSize', 0.8);
 axis equal; grid on;
 ylim([-8, 8]);
 xlabel('X [m]'); ylabel('Y [m]');
-title(sprintf('FSAE Acceleration Track (+ %dm Runout)', round(L_runout)));
+title('Formula Student Acceleration Track');
 legend('Trajectory', 'Cones Left (Blu)', 'Cones Right(Red)', ...
        'Start Line (0m)', 'Finish Line (75m)', 'End of Runout', 'Start (+X)', 'Location', 'best');
 drawnow;
@@ -117,5 +112,5 @@ for i = 1:size(cones_right, 1)
     faces_all_R = [faces_all_R; faces + offset_idx];
 end
 stlwrite(triangulation(faces_all_R, verts_all_R), 'cones_right.stl');
-
+xlim([-5 140]);
 disp('Acceleration Track generato: cones_left.stl e cones_right.stl aggiornati!');

@@ -7,9 +7,9 @@
  *
  * Code generated for Simulink model 'driveController'.
  *
- * Model version                  : 1.16
+ * Model version                  : 1.66
  * Simulink Coder version         : 26.1 (R2026a) 20-Nov-2025
- * C/C++ source code generated on : Fri Jul 31 11:03:13 2026
+ * C/C++ source code generated on : Thu Sep  3 10:00:25 2026
  *
  * Target selection: ert.tlc
  * Embedded hardware selection: ARM Compatible->ARM Cortex-M

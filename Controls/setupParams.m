@@ -2,18 +2,34 @@ clear; clc; close all;
 
 %% -- Motore ---------------------------------------------------------------
 T_peak      = 21;    % Coppia di picco    [Nm]
+T_peak_p = Simulink.Parameter(T_peak);
+T_peak_p.StorageClass = 'ExportedGlobal';
+T_peak_p.DataType     = 'single';
 T_rated    = 9.8;     % Coppia in derating [Nm]  [TUNABLE]
 w_engine    = 0.001;    %w motore (1/w_engine*s +1) 
-mot_max_rpm = 20000;   % Giri massimi motore [rpm]
-derating_on_thresh = 19;
-derating_off_thresh = 20;
+mot_max_rpm = 20000;   % Giri massimi motore [rpm] 
+derating_on_thresh = 19.5;
+derating_off_thresh = 11;
 
-V_dc                = 540;       % Tensione nominale DC bus [V]  (bench; race = 540)
+eta_powertrain = 0.85;
+eta_powertrain_p = Simulink.Parameter(eta_powertrain);
+eta_powertrain_p.StorageClass = 'ExportedGlobal';
+eta_powertrain_p.DataType     = 'single';
+
+V_dc                = 540;       % Tensione nominale DC bus [V]  
 V_dc_p                = Simulink.Parameter(V_dc);
 V_dc_p.StorageClass = 'ExportedGlobal';
+V_dc_p.DataType =  "single";
 
-I_discharge_max = 500;       %Ampere
+I_discharge_max = 100;       %Ampere
+I_discharge_max_p                = Simulink.Parameter(I_discharge_max);
+I_discharge_max_p.StorageClass = 'ExportedGlobal';
+I_discharge_max_p.DataType =  "single";
+
 I_charge_max    = 21;       %Ampere
+I_charge_max_p                = Simulink.Parameter(I_charge_max);
+I_charge_max_p.StorageClass = 'ExportedGlobal';
+I_charge_max_p.DataType =  "single";
 
 
 rising_slew_rate_torque = 100;
@@ -23,16 +39,16 @@ falling_slew_rate_torque = -500;
 %% -- Veicolo --------------------------------------------------------------
 n_wheels_f  = 2;
 n_wheels_r  = 2;
-mass        = 300 ;     % Massa vettura + pilota [kg]
-l_f         = 0.775;   % Distanza CG-asse ant.  [m]
-l_r         = 0.775;   % Distanza CG-asse post. [m]
+mass        = 270 ;     % Massa vettura + pilota [kg]
+l_f         = 0.7161;   % Distanza CG-asse ant.  [m]
+l_r         = 0.8539;   % Distanza CG-asse post. [m]
 wheelbase   = l_f + l_r; %Passo del veicolo [m]
-h_o         = 0.35;      %Distanza verticale centro di massa [m]
-track_width_f = 1.2;     % Carreggiata anteriore [m]
-track_width_r = 1.2;     % Carreggiata posteriore [m]
-track_width = (track_width_r + track_width_f)/2;
+h_o         = 0.194;      %Distanza verticale centro di massa [m]
+car_width_f = 1.2;     % Carreggiata anteriore [m]
+car_width_r = 1.2;     % Carreggiata posteriore [m]
+car_width = (car_width_r + car_width_f)/2;
 
-Izz         = 150;      %Yaw polar inerzia [kg*m^2]
+Izz         = 140;      %Yaw polar inerzia [kg*m^2]
 
 Af          = 1.1;      %Area longitudinale drag [m^2] 
 Cd          = 1.3;      
@@ -43,7 +59,7 @@ K_roll_rear = 0.4;      % % di rigidezza a rollio sul posteriore (es. 50%)
 
 
 rid_ratio   = 15;    % Rapporto di riduzione [-]
-rid_eff     = 0.95;    % Efficienza riduttore  [-]
+rid_eff     = 0.8;    % Efficienza riduttore  [-]
 R_wheel     = 0.2032;   % Raggio ruota          [m]
 
 
@@ -57,7 +73,7 @@ camber_front_rad = camber_front * (pi/180);
 pa_rear_wheel = 82700;      %12psi [Pa]
 pa_front_wheel = 82700;      % Pressione anteriore 12psi [Pa]
 
-brake_bias_f = 0.40;         % Ripartizione frenata all'anteriore (es. 60%)
+brake_bias_f = 0.774;         % Ripartizione frenata all'anteriore (es. 60%)
 brake_bias_r = 1 - brake_bias_f; % Ripartizione frenata al posteriore (40%)
 
 
@@ -70,10 +86,28 @@ num_pads = 2;
 
 %% -- TVC 
 % PID Yaw --------------------------------------------------------
-tvc_Kp      = 400;     % [TUNABLE]
-tvc_Ki      = 110;     % [TUNABLE]
-tvc_Kd      = 50;    % [TUNABLE]
-tvc_sat_dMz = 700;    % Saturazione uscita PID [Nm]  (+-)
+
+tvc_Kp      = 320;     % [TUNABLE]
+tvc_Ki      = 20;     % [TUNABLE]
+tvc_Kd      = 5;    % [TUNABLE]
+tvc_sat_dMz = 500;    % Saturazione uscita PID [Nm]  (+-)
+
+%% -- TVC — Preset dei guadagni PID per il confronto su skidpad -------------
+tvc_gain_select = 3;   % 1=Aggressivo (attuale), 2=Ricalibrato, 3=Disattivato
+% 
+% tvc_presets = struct( ...
+%     'nome', {'aggressivo', 'ricalibrato', 'disattivato',"P-diagnostico"}, ...
+%     'Kp',   {80,  60,  0, 80}, ...
+%     'Ki',   {1,  0.7,   0, 0}, ...
+%     'Kd',   {0,   0,    0, 0}, ...
+%     'sat',  {400,  300,  700, 400} ...
+%     );
+
+% tvc_Kp      = tvc_presets(tvc_gain_select).Kp;
+% tvc_Ki      = tvc_presets(tvc_gain_select).Ki;
+% tvc_Kd      = tvc_presets(tvc_gain_select).Kd;
+% tvc_sat_dMz = tvc_presets(tvc_gain_select).sat;
+
 
 % Parametri TVC Ricalibrati per stabilità
 % tvc_Kp       = 120.0;   % Ridotto da 400 a 120 per evitare sovrasterzo indotto
@@ -88,15 +122,31 @@ tvc_tr      =5;
 tvc_bc      = 17;
 tvc_N_filter = 35;
 
-
-
 % Allocator ------------------------------------------------------
 T_headroom_max = 6;  % Headroom massimo coppia per TVC  [Nm]  [TUNABLE]
 T_headroom_k   = 10.0;  % Guadagno proporzionale          [TUNABLE]
 rpm_safe_threshold = 100;
 
 beta_dot_threshold = 0.3;   %TUNABLE - custom anche da dash
+beta_dot_threshold_p = Simulink.Parameter(beta_dot_threshold);
+beta_dot_threshold_p.StorageClass = 'ExportedGlobal';
+beta_dot_threshold_p.DataType     = 'single';
+
 steering_deadband = 1;   % °sterz
+
+%% -- TVC — Parametri Runtime-Tunable (Simulink.Parameter) -----------------
+tvc_Kp_p = Simulink.Parameter(tvc_Kp);
+tvc_Kp_p.StorageClass = 'ExportedGlobal';
+tvc_Kp_p.DataType     = 'single';
+
+tvc_Ki_p = Simulink.Parameter(tvc_Ki);
+tvc_Ki_p.StorageClass = 'ExportedGlobal';
+tvc_Ki_p.DataType     = 'single';
+
+tvc_Kd_p = Simulink.Parameter(tvc_Kd);
+tvc_Kd_p.StorageClass = 'ExportedGlobal';
+tvc_Kd_p.DataType     = 'single';
+
 
 %% -- SLC — PID  --------------------------------------------------------
 % slc_Kp      = 2.057;     % [TUNABLE]
@@ -129,20 +179,48 @@ tvc_yaw_thresh_off  = 0.04;   % [rad/s]
 e_yaw_deadzone      = 0.03;
 
 %% -- Slip Controller (TCS) — Architettura SOTTRATTIVA ---------------------
-slip_Kp         = 15.0;   % 50 [TUNABLE]
-slip_Ki         = 22.0;    % [TUNABLE]
-slip_Kd         = 1.5;    % [TUNABLE] 
+%ENDURANCE
+% slip_Kp         = 15.0;   % 50 [TUNABLE]
+% slip_Ki         = 22.0;    % [TUNABLE]
+% slip_Kd         = 1.5;    % [TUNABLE] 
+
+% ACC - eff=0.8 os=1.08
+slip_Kp         = 80;   % [TUNABLE]
+slip_Ki         = 50;    % [TUNABLE]
+slip_Kd         = 8;    % [TUNABLE] 
+
 % slip_Kp         = 0;   % 50 [TUNABLE]
 % slip_Ki         = 0;    % [TUNABLE]
 % slip_Kd         = 0;    % [TUNABLE] 
-slip_filt_N     = 50;     % Coefficiente filtro derivata (cutoff ≈ N/(2*pi*Ts) ≈ 318 Hz)
-slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  (ottimale ~0.10-0.20)
-overslip_factor = 1.01;   % Fattore di sovraspinta per far innescare lo slip 
-slip_up_sat     = 21; % Saturazione superiore PI [Nm]
+
+mu              = 1.2;      %Coefficiente di attrito strada-ruota
+
+slip_filt_N     = 50;     
+slip_ref        = 0.15;   % Slip ratio di riferimento [-]  [TUNABLE]  
+overslip_factor = 1.07;   % Fattore di sovraspinta per far innescare lo slip 
+
+overslip_factor_p = Simulink.Parameter(overslip_factor);
+overslip_factor_p.StorageClass = 'ExportedGlobal';
+overslip_factor_p.DataType     = 'single';
+
+slip_up_sat     = 27; % Saturazione superiore PI [Nm]
 slip_low_sat    = 0.0;    % Il PI non scende sotto 0 (Delta_T sempre positivo)
 slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
-slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s] 
+slip_V_min      = 2;    % Velocità sotto cui disabilitare TCS [m/s] 
 
+%% -- SRC (TCS) — Parametri Runtime-Tunable ---------------------------------
+slip_Kp_p = Simulink.Parameter(slip_Kp);
+slip_Kp_p.StorageClass = 'ExportedGlobal';
+slip_Kp_p.DataType     = 'single';
+
+slip_Ki_p = Simulink.Parameter(slip_Ki);
+slip_Ki_p.StorageClass = 'ExportedGlobal';
+slip_Ki_p.DataType     = 'single';
+
+slip_Kd_p = Simulink.Parameter(slip_Kd);
+slip_Kd_p.StorageClass = 'ExportedGlobal';
+slip_Kd_p.DataType     = 'single';
+%%
 
 %Acceleration MAP
 % slip_Kp         = 40.0;   % [TUNABLE]
@@ -156,14 +234,23 @@ slip_V_min      = 3;    % Velocità sotto cui disabilitare TCS [m/s]
 % slip_bc_coeff   = 10;    % CoefficienteBack-Calculation PID [TUNABLE]
 % slip_V_min      = 1;    % Velocità sotto cui disabilitare TCS [m/s] 
 %% -- Mappa Pedale (lookup table) ------------------------------------------
-% Input:  throttle grezzo [0..100] %
-% Output: throttle normalizzato [0..1] da moltiplicare per T_peak
-pedal_alpha   = 1;   % Esponente curva (1=lineare, >1=esponenziale)  [TUNABLE]
-pedal_bp      = (0:10:100)';                          % Breakpoints [%]
-pedal_map     = (pedal_bp / 100) .^ pedal_alpha;      % Valori normalizzati [0..1]
-deathzone_APP = 1; % % sul valore 0-100
-% Nel blocco Simulink: usare "1-D Lookup Table" con pedal_bp, pedal_map
+pedal_bp = (0:5:100)';   % Breakpoints [%], 21 punti — invariato
 
+% Coefficiente esponente per ciascuna mappa (0=ECO, 1=NORMAL, 2=GAS,
+% coerente con l'enum Engine Map del frame CAN 0x106)
+pedal_alpha_eco    = 1.6;     % lineare, quello che avevi finora
+pedal_alpha_normal = 1;     % da tarare: valore segnaposto, decidi tu la curva
+pedal_alpha_gas    = 0.6;     % da tarare: valore segnaposto, decidi tu la curva
+
+pedal_map_eco    = (pedal_bp / 100) .^ pedal_alpha_eco;
+pedal_map_normal = (pedal_bp / 100) .^ pedal_alpha_normal;
+pedal_map_gas    = (pedal_bp / 100) .^ pedal_alpha_gas;
+
+% Unico parametro davvero tunable: un indice, non un array
+pedal_map_select = 2;   % default 1: ECO
+pedal_map_select_p = Simulink.Parameter(pedal_map_select);
+pedal_map_select_p.StorageClass = 'ExportedGlobal';
+pedal_map_select_p.DataType     = 'uint8';
 %% -- Launch Control — Torque Ramp Limiter ---------------------------------
 % Limita la derivata di T_req in uscita dalla pedal map.
 
@@ -171,7 +258,7 @@ launch_V_thresh = 5.0; %[m/s]
 launch_ramp_rate = 1000.0;   %[N/s]
 nominal_ramp_rate = 1000.0; 
     
-%% -- Rigenerazione (specchio del codice STM32) ----------------------------
+%% -- Rigenerazione ----------------------------
 % Valori sincronizzati con Config.h e BaseControlMotor.h (bench configuration)
 %
 % Vincolo BMS (TOTALE, non per motore):
@@ -183,16 +270,26 @@ nominal_ramp_rate = 1000.0;
 % Formula coppia limite per potenza:   T_P_lim = (P_batt_max/2)   / omega_mot
 
 % regen_T_max         = T_rated/2;   % Coppia regen massima per motore [Nm] (50% Mn = 4.9)  [TUNABLE]
-regen_T_max         = 9;
-regen_pedal_thr     = 4.0;      % Soglia pedale ingresso regen [%]  — da Config.h
+regen_T_max         = 7;
+regen_T_max_p = Simulink.Parameter(regen_T_max);
+regen_T_max_p.StorageClass = 'ExportedGlobal';
+regen_T_max_p.DataType     = 'single';
+regen_pedal_thr     = 0.0;      % Soglia pedale ingresso regen [%]  — da Config.h
+regen_pedal_thr_p = Simulink.Parameter(regen_pedal_thr);
+regen_pedal_thr_p.StorageClass = 'ExportedGlobal';
+regen_pedal_thr_p.DataType     = 'single';
 regen_pedal_hyst    = 3.0;       % Isteresi pedale [%]               — da Config.h
+regen_pedal_hyst_p = Simulink.Parameter(regen_pedal_hyst);
+regen_pedal_hyst_p.StorageClass = 'ExportedGlobal';
+regen_pedal_hyst_p.DataType     = 'single';
+
 regen_speed_min_rpm = 4000;      % Velocità fade-out regen [rpm]     — da Config.h
 regen_speed_crit_rpm= 1000;      % Velocità no-regen [rpm]           — da Config.h
 regen_I_peak_A      = 21.0;      % Corrente batteria peak  [A] TOTALE — da Config.h
 regen_I_cont_A      = 14.0;      % Corrente batteria cont  [A] TOTALE — da Config.h
 regen_I_peak_dur_s  = 4.0;       % Durata finestra peak    [s]        — da Config.h
 regen_P_batt_max_W  = 35000;     % Potenza regen massima   [W] TOTALE — da Config.h (bench 350V)
-ay_limit = 15.0; % [m/s^2] Inizia a tagliare regen a circa 1.5g
+ay_limit = 1.5;   % [g] Inizia a tagliare regen a circa 1.5g
 
 %% -- Filtri ---------------------------------------------------------------
 tau_yaw_filter  = 0.03;    % Costante filtro LP su yaw_meas [s]  [TUNABLE]
@@ -209,8 +306,16 @@ pressure        = 101325; %[Pa]
 g               = 9.81;     %[m/s^2]
 rho = 1.225;            % Densità aria [kg/m^3]
 
-Kus             = 0.0000;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
-mu              = 1.14;      %Coefficiente di attrito strada-ruota
+Kus             = -0.0000;     %Gradiente di sottosterzo x yaw_th modello Bicycle Dinamico
+
+Kus_p = Simulink.Parameter(Kus);
+Kus_p.StorageClass = 'ExportedGlobal';
+Kus_p.DataType     = 'single';
+
+mu_p = Simulink.Parameter(mu);
+mu_p.StorageClass = 'ExportedGlobal';
+mu_p.DataType     = 'single';
+
 gnd_displ       = 0.0;      %Ground displacement along tire-fixed z-axis [m]
 scale_factor_rear = ones(27, 1);        %da cambiare per simulare altre condizioni
 scale_factor_front = ones(27, 1); % Scale factors per Magic Formula anteriore
